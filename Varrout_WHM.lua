@@ -1,48 +1,9 @@
--- Local Settings, setting the zones prior to use
-toau_zones = 
-S{
-    "Leujaoam Sanctum",             --  Assault
-    "Mamool Ja Training Grounds",   --  Assault
-    "Lebros Cavern",                --  Assault
-    "Periqia",                      --  Assault
-    "Ilrusi Atoll",                 --  Assault
-    "Nyzul Isle",                   --  Assault
-    "Bhaflau Remnants",             --  Salvage
-    "Arrapago Remnants",            --  Salvage
-    "Silver Sea Remnants",          --  Salvage
-    "Zhayolm Remnants"              --  Salvage
-}
+-- -- Local Settings, setting the zones prior to use
+include('common_lists.lua')
+special_ring_equipped = false
 
---  Cursna not included in list because it is a special case
-naSpells = 
+abilityCancel = 
 S{
-    "Poisona",
-    "Paralyna",
-    "Blindna",
-    "Silena",
-    "Stona",
-    "Viruna"
-}
-
-resSpells = 
-S{
-    "Barstonra",
-    "Barwatera",
-    "Baraera",
-    "Barfira",
-    "Barblizzara",
-    "Barthundra",
-    "Barsleepra",
-    "Barpoisonra",
-    "Barparalyzra",
-    "Barblindra",
-    "Barsilencera",
-    "Barpetra",
-    "Barvira",
-    "Baramnesra"
-}
-
-abilityCancel = S{
     "Addendum: White",
 }
 
@@ -64,29 +25,6 @@ abilityNothing = S{
     "Divine Seal",
     "Addendum: Black",
 }
-
-special_ring_equipped = false
-special_rings = S{
-    "Emperor Ring",
-    "Echad Ring",
-    "Capacity  Ring",
-    "Trizek Ring",
-    "Facility Ring",
-    "Caliber Ring",
-    "Warp Ring",
-}
-
-melee_jobs = S{
-    'WAR',
-    'SAM',
-    'NIN',
-    'DNC',
-    'THF',
-    'PLD',
-    'MNK',
-    'DRK',
-}
-
 
 function get_sets()
 
@@ -123,7 +61,8 @@ function get_sets()
         feet    = "Inyanga Crackows +2"
     }
 
-    sets.Resting = {
+    sets.Resting = 
+    {
         main    = "Boonwell Staff",      -- +18
         sub     = "Ariesian Grip",       -- +1
         ammo    = "Mana Ampulla",        -- +2
@@ -506,7 +445,7 @@ function precast(spell,action)
     else
         if string.find(spell.english,'Cure') then
             equip(sets.Precast.Cure)
-        elseif naSpells:contains(spell.english) or spell.name == "Cursna" then
+        elseif naSpellsNoCursna:contains(spell.english) or spell.name == "Cursna" then
             equip(sets.Precast.NASpell)
         elseif spell.name == "Stoneskin" then
             equip(sets.Precast.Stoneskin)
@@ -620,11 +559,11 @@ end
 --  Locks the correct ring slot if a listed ring is equipped
 --  Unlocks the slot if the ring is no longer detected
 function check_special_ring_equipped()
-    if special_rings:contains(player.equipment.ring1) then
+    if exp_rings:contains(player.equipment.ring1) then
         windower.add_to_chat(9, "Ring1 locked")
         special_ring_equipped = true
         disable("ring1")
-    elseif special_rings:contains(player.equipment.ring2) then
+    elseif exp_rings:contains(player.equipment.ring2) then
         windower.add_to_chat(9, "Ring2 locked")
         special_ring_equipped = true
         disable("ring2")
@@ -654,7 +593,7 @@ function status_change(new,tab)
 end
 
 function sub_job_change(new, old)
-    if melee_jobs:contains(player.sub_job) then
+    if melee_sub_jobs:contains(player.sub_job) then
         disable('main')
         disable('sub')
         disable('ranged')
