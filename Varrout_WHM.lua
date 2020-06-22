@@ -397,6 +397,24 @@ function get_sets()
         legs    = { name        = "Chironic Hose", 
                     augments    = {'Pet: DEX+13','Accuracy+3','Accuracy+2 Attack+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
     })
+
+    sets.Melee = {}
+
+    sets.Melee.Engaged = {
+        head="Theophany Cap +3",
+        body="Theo. Briault +3",
+        hands="Theophany Mitts +3",
+        legs="Th. Pant. +3",
+        feet="Theo. Duckbills +3",
+        neck="Asperity Necklace",
+        waist="Cetl Belt",
+        ear1="Steelflash Earring",
+        ear2="Bladeborn Earring",
+        ring1="Rajas Ring",
+        ring2="K'ayres Ring",
+        back={ name="Alaunus's Cape", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
+    }
+
 end
 
 -- --------------------
@@ -587,6 +605,8 @@ function status_change(new,tab)
     check_special_ring_equipped()
     if new == 'Resting' then
         equip(sets.Resting)
+    elseif new == 'Engaged' then
+        equip(sets.Melee.Engaged)
     else
         equip(sets.Idle)
     end
@@ -594,16 +614,26 @@ end
 
 function sub_job_change(new, old)
     if melee_sub_jobs:contains(player.sub_job) then
-        disable('main')
-        disable('sub')
-        disable('ranged')
-        disable('ammo')
+        lock_melee()
     else
-        enable('main')
-        enable('sub')
-        enable('ranged')
-        enable('ammo')
+        unlock_melee()
     end
+end
+
+function lock_melee()
+    windower.add_to_chat(9,'Locking melee eqiupment')
+    disable('main')
+    disable('sub')
+    disable('ranged')
+    disable('ammo')
+end
+
+function unlock_melee()
+    windower.add_to_chat(9,'Unlocking melee eqiupment')
+    enable('main')
+    enable('sub')
+    enable('ranged')
+    enable('ammo')
 end
 
 function select_default_macro_book()
