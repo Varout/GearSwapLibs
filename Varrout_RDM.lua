@@ -17,6 +17,43 @@ S{
     "Zhayolm Remnants"              --  Salvage
 }
 
+enfeebling_int = 
+S{
+    "Blind",
+    "Blind II",
+    "Poison",
+    "Poison II",
+    "Sleep",
+    "SLeep II",
+    "Sleepga",
+    "Break",
+    "Bind",
+    "Dispel",
+    "Gravity",
+    "Gravity II",
+    "Distract",
+    "Distract II",
+    "Distract III",
+    "Frazzle",
+    "Frazzle II",
+    "Frazzle III"
+}
+
+enfeebling_mnd = 
+S{
+    "Slow", 
+    "Slow II",
+    "Paralyze",
+    "Paralyze II",
+    "Dia",
+    "Dia II",
+    "Dia III",
+    "Diaga",
+    "Silence",
+    "Addle",
+    "Inundation"
+}
+
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
@@ -37,10 +74,10 @@ end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
 function user_setup()
-    state.OffenseMode:options('None', 'Normal')
-    state.HybridMode:options('Normal', 'PhysicalDef', 'MagicalDef')
-    state.CastingMode:options('Normal', 'Resistant')
-    state.IdleMode:options('Normal', 'PDT', 'MDT')
+    -- state.OffenseMode:options('None', 'Normal')
+    -- state.HybridMode:options('Normal', 'PhysicalDef', 'MagicalDef')
+    -- state.CastingMode:options('Normal', 'Resistant')
+    -- state.IdleMode:options('Normal', 'PDT', 'MDT')
 
     -- gear.default.obi_waist = "Sekhmet Corset"
     
@@ -72,7 +109,7 @@ function init_gear_sets()
     -- Precast Sets
     -- Precast sets to enhance JAs
     sets.precast.JA['Chainspell'] = {
-        body = "Vitivation Tabard"
+        body = "Vitiation Tabard"
     }
     
 
@@ -83,9 +120,8 @@ function init_gear_sets()
         main        = "Bolelabunga",
         sub         = "Genbu's Shield",
         ammo        = "Homiliary",
-        head        = "Atrophy Chapeau",
-        body        = { name="Vitiation Tabard", 
-                        augments={'Enhances "Chainspell" effect',}},
+        head        = "Atrophy Chapeau +2",
+        body        = "Vitiation Tabard", 
         hands       = { name="Leyline Gloves", 
                         augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
         legs        = { name="Kaykaus Tights", 
@@ -128,56 +164,75 @@ function init_gear_sets()
 
     sets.midcast['Enhancing Magic'] = {
         main        = "Bolelabunga",
-        sub         = "Genbu's Shield",
+        sub         = "Ammurapi Shield",
         ammo        = "Homiliary",
-        head        = "Umuthi Hat",
+        head        = "Befouled Crown",
         body        = { name = "Vitiation Tabard", 
                         augments = {'Enhances "Chainspell" effect',}},
         hands       = { name = "Telchine Gloves", 
                         augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-        legs        = "Atrophy Tights +1",
-        feet        = "Estq. Houseaux +2",
-        neck        = "Colossus's Torque",
+        legs        = { name = "Telchine Braconi", 
+                        augments = {'Enh. Mag. eff. dur. +9',}},
+        feet        = { name = "Telchine Pigaches", 
+                        augments = {'Enh. Mag. eff. dur. +6',}},
+        neck        = "Duelist's Torque", 
         waist       = "Olympus Sash",
         left_ear    = "Augment. Earring",
         right_ear   = "Andoaa Earring",
         left_ring   = "Stikini Ring",
         right_ring  = "Stikini Ring",
-        back        = "Estoqueur's Cape",
+        back        = { name = "Sucellos's Cape", 
+                        augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
     }
 
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
-        legs="Estoqueur's Fuseau +2"
+        legs="Lethargy Fuseau +2"
     })
 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
-        waist="Siegel Sash"
+        neck = "Nodens Gorget",
+        waist = "Siegel Sash",
+        left_ear = "Earthcry Earring"
     })
     
-    sets.midcast['Enfeebling Magic'] = {
-        main        = "Bolelabunga",
-        sub         = "Genbu's Shield",
-        ammo        = "Homiliary",
-        head        = { name="Vitiation Chapeau", 
-                        augments={'Enhances "Dia III" effect','Enhances "Slow II" effect',}},
-        body        = "Atrophy Tabard",
-        hands       = "Jhakri Cuffs +1",
-        legs        = "Jhakri Slops",
-        feet        = "Uk'uxkaj Boots",
-        neck        = "Duelist's Torque",
+    sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
+        main = "Bolelabunga"
+    })
+
+    -- sets.midcast['Enfeebling Magic'] = {
+    sets.midcast.enfeeblingBase = {
+        main        = { name = "Rubicundity", 
+                        augments = {'Mag. Acc.+3','"Mag.Atk.Bns."+3','Dark magic skill +5','"Conserve MP"+2',}},
+        sub         = "Ammurapi Shield",
+        ammo        = "Regal Gem",
+        head        = { name = "Vitiation Chapeau +1", 
+                        augments = {'Enfeebling Magic duration','Magic Accuracy',}},
+        body        = "Jhakri Robe +2",
+        hands       = "Jhakri Cuffs +2",
+        legs        = { name = "Chironic Hose", 
+                        augments = {'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
+        feet        = { name = "Vitiation Boots", 
+                        augments = {'Immunobreak Chance',}},
+        neck        = "Duelist's Torque", 
         waist       = "Casso Sash",
         left_ear    = "Lifestorm Earring",
         right_ear   = "Psystorm Earring",
-        left_ring   = "Sheltered Ring",
-        right_ring  = "Capacity Ring",
-        back        = "Altruistic Cape",
+        left_ring   = "Stikini Ring",
+        right_ring  = "Stikini Ring",
     }
 
+    sets.midcast.enfeeblingMNDCape = {
+        back = { name     = "Sucellos's Cape", 
+                 augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
+    }
+
+    sets.midcast.enfeeblingINTCape = {
+        back = { name     = "Sucellos's Cape", 
+                 augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+    }
+
+
     sets.midcast['Phalanx II']  = set_combine(sets.midcast['Enhancing Magic'],  {hands = "Duelist's Gloves +2"})
-    sets.midcast['Dia III']     = set_combine(sets.midcast['Enfeebling Magic'], {head  = "Vitivation Chapeau"})
-    sets.midcast['Slow II']     = set_combine(sets.midcast['Enfeebling Magic'], {head  = "Vitivation Chapeau"})
-    sets.midcast['Blind II']    = set_combine(sets.midcast['Enfeebling Magic'], {legs  = "Duelist's Tights +2"})
-    sets.midcast['Paralyze II'] = set_combine(sets.midcast['Enfeebling Magic'], {feet  = "Vitiation Boots"})
     
     sets.midcast['Elemental Magic'] = {
         main        = "Lehbrailg +2",
@@ -203,7 +258,7 @@ function init_gear_sets()
         main        = "Lehbrailg +2",
         sub         = "Mephitis Grip",
         ammo        = "Kalboron Stone",
-        head        = "Atrophy Chapeau",
+        head        = "Atrophy Chapeau +2",
         neck        = "Weike Torque",
         ear1        = "Lifestorm Earring",
         ear2        = "Psystorm Earring",
@@ -245,8 +300,7 @@ function init_gear_sets()
         main        = "Boonwell Staff",
         sub         = "Ariesian Grip",
         ammo        = "Mana Ampulla",
-        head        = { name="Vitiation Chapeau", 
-                        augments={'Enhances "Dia III" effect','Enhances "Slow II" effect',}},
+        head        = "Vitiation Chapeau +1",
         body        = "Chelona Blazer",
         hands       = "Nares Cuffs",
         legs        = "Nisse Slacks",
@@ -258,7 +312,7 @@ function init_gear_sets()
         right_ear   = "Infused Earring",
         left_ring   = "Angha Ring",
         right_ring  = "Star Ring",
-        back        = "Felicitas Cape",
+        back        = "Felicitas Cape"
     }
 
     -- Idle sets
@@ -266,8 +320,8 @@ function init_gear_sets()
         main        = "Bolelabunga",
         sub         = "Genbu's Shield",
         ammo        = "Homiliary",
-        head        = { name="Vitiation Chapeau", augments={'Enhances "Dia III" effect','Enhances "Slow II" effect',}},
-        body        = Jhakri Robe +2,
+        head        = "Vitiation Chapeau +1",
+        body        = "Jhakri Robe +2",
         hands       = { name="Chironic Gloves", augments={'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
         legs        = { name="Chironic Hose", augments={'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
         feet        = { name="Chironic Slippers", augments={'Mag. Acc.+12','"Fast Cast"+3','"Refresh"+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
@@ -326,8 +380,22 @@ end
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.skill == 'Enfeebling Magic' and state.Buff.Saboteur then
-        equip(sets.buff.Saboteur)
+    if spell.skill == 'Enfeebling Magic' then
+        outputString = "Enfeebling: "
+        enfeebling_set = sets.midcast.enfeeblingBase
+        if enfeebling_int:contains(spell.name) then
+            outputString = outputString .. "INT Based"
+            enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingINTCape)
+        else
+            outputString = outputString .. "MND Based"
+            enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingMNDCape)
+        end
+        if state.Buff.Saboteur then
+            outputString = outputString .. " :: Saboteur Active"
+            enfeebling_set = set_combine(enfeebling_set, sets.buff.Saboteur)
+        end
+        windower.add_to_chat(8, outputString)
+        equip(enfeebling_set)
     elseif spell.skill == 'Enhancing Magic' then
         equip(sets.midcast.EnhancingDuration)
         if buffactive.composure and spell.target.type == 'PLAYER' then
@@ -343,15 +411,15 @@ end
 -------------------------------------------------------------------------------------------------------------------
 
 -- Handle notifications of general user state change.
-function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if newValue == 'None' then
-            enable('main','sub','range')
-        else
-            disable('main','sub','range')
-        end
-    end
-end
+-- function job_state_change(stateField, newValue, oldValue)
+--     if stateField == 'Offense Mode' then
+--         if newValue == 'None' then
+--             enable('main','sub','range')
+--         else
+--             disable('main','sub','range')
+--         end
+--     end
+-- end
 
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.

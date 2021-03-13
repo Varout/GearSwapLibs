@@ -52,7 +52,7 @@ function job_setup()
     state.Buff["Astral Conduit"] = buffactive["Astral Conduit"] or false
 
     spirits = S{"LightSpirit", "DarkSpirit", "FireSpirit", "EarthSpirit", "WaterSpirit", "AirSpirit", "IceSpirit", "ThunderSpirit"}
-    avatars = S{"Carbuncle", "Fenrir", "Diabolos", "Ifrit", "Titan", "Leviathan", "Garuda", "Shiva", "Ramuh", "Odin", "Alexander", "Cait Sith"}
+    avatars = S{"Carbuncle", "Fenrir", "Diabolos", "Ifrit", "Titan", "Leviathan", "Garuda", "Shiva", "Ramuh", "Odin", "Alexander", "Cait Sith", "Siren"}
 
     magicalRagePacts = S{
         'Inferno','Earthen Fury','Tidal Wave','Aerial Blast','Diamond Dust','Judgment Bolt','Searing Light','Howling Moon','Ruinous Omen',
@@ -60,7 +60,7 @@ function job_setup()
         'Fire IV','Stone IV','Water IV','Aero IV','Blizzard IV','Thunder IV',
         'Thunderspark','Burning Strike','Meteorite','Nether Blast','Flaming Crush',
         'Meteor Strike','Heavenly Strike','Wind Blade','Geocrush','Grand Fall','Thunderstorm',
-        'Holy Mist','Lunar Bay','Night Terror','Level ? Holy', 'Conflag Strike'}
+        'Holy Mist','Lunar Bay','Night Terror','Level ? Holy'}
 
 
     pacts = {}
@@ -85,10 +85,10 @@ function job_setup()
         ['Diabolos']='Nether Blast',['Cait Sith']='Regal Scratch'}
     pacts.bp75 = {['Ifrit']='Meteor Strike', ['Shiva']='Heavenly Strike', ['Garuda']='Wind Blade', ['Titan']='Geocrush',
         ['Ramuh']='Thunderstorm', ['Leviathan']='Grand Fall', ['Carbuncle']='Holy Mist', ['Fenrir']='Lunar Bay',
-        ['Diabolos']='Night Terror', ['Cait Sith']='Level ? Holy'}
+        ['Diabolos']='Night Terror', ['Cait Sith']='Level ? Holy', ['Siren']='Hysteric Assault'}
     pacts.astralflow = {['Ifrit']='Inferno', ['Shiva']='Diamond Dust', ['Garuda']='Aerial Blast', ['Titan']='Earthen Fury',
         ['Ramuh']='Judgment Bolt', ['Leviathan']='Tidal Wave', ['Carbuncle']='Searing Light', ['Fenrir']='Howling Moon',
-        ['Diabolos']='Ruinous Omen', ['Cait Sith']="Altana's Favor"}
+        ['Diabolos']='Ruinous Omen', ['Cait Sith']="Altana's Favor", ['Siren']='Clarsach Call'}
 
     -- Wards table for creating custom timers   
     wards = {}
@@ -131,7 +131,7 @@ function user_setup()
 --    state.CastingMode:options('Normal', 'Resistant')
 --    state.IdleMode:options('Normal', 'PDT')
 
-	gear.perp_staff = {name=""}
+    gear.perp_staff = {name=""}
 
     select_default_macro_book()
 end
@@ -353,22 +353,22 @@ function init_gear_sets()
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
 
     sets.midcast.Pet.MagicalBloodPactRage = {
-		main="Grioavoir",
+        main="Grioavoir",
         sub="Elan Strap",
-		ammo="Sancus Sachet",
+        ammo="Sancus Sachet",
         head="Apogee Crown +1",
-		neck="Deino Collar",
-		ear1="Lugalbanda Earring",
-		ear2="Gelos Earring",
+        neck="Deino Collar",
+        ear1="Lugalbanda Earring",
+        ear2="Gelos Earring",
         body="Convoker's Doublet +2",
         hands={ name="Merlinic Dastanas", augments={'Pet: "Mag.Atk.Bns."+27','Blood Pact Dmg.+4','Pet: DEX+7','Pet: Mag. Acc.+7',}},
-		ring1="Varar Ring",
-		ring2="Varar Ring",
+        ring1="Varar Ring",
+        ring2="Varar Ring",
         back={ name="Campestres's Cape", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Pet: Magic Damage+10',}},
-		waist="Caller's Sash",
-		legs="Helios Spats",
+        waist="Caller's Sash",
+        legs="Helios Spats",
         feet={ name="Apogee Pumps", augments={'MP+60','Pet: "Mag.Atk.Bns."+30','Blood Pact Dmg.+7',}},
-	}
+    }
 
 --    sets.midcast.Pet.MagicalBloodPactRage['Ifrit'] = set_combine(sets.midcast.Pet.MagicalBloodPactRage, {
 --        ring2="Varar Ring"
@@ -388,6 +388,7 @@ function init_gear_sets()
     
     sets.midcast.Trust = {
         main="Bolelabunga",
+        sub="Ammurapi Shield",
         ammo="Sancus Sachet",
         head="Inyanga Tiara +2",
         body="Inyanga Jubbah +2",
@@ -421,23 +422,24 @@ function init_gear_sets()
     
     -- Idle sets
     sets.idle = {
-		main="Bolelabunga",
---		sub="Genbu's Shield",
-		ammo="Sancus Sachet",
+        main="Bolelabunga",
+        sub="Ammurapi Shield",
+        ammo="Sancus Sachet",
         head="Convoker's Horn +2",
-		neck="Bathy Choker +1",
-		ear1="Gifted Earring",
-		ear2="Moonshade Earring",
+        neck="Bathy Choker +1",
+        ear1="Gifted Earring",
+        ear2="Moonshade Earring",
         body="Hagondes Coat +1",
         hands="Inyanga Dastanas +2",
-		ring1="Defending Ring",
+        ring1="Defending Ring",
         ring2="Inyanga Ring",
-        back="Mecistopins Mantle",
+        -- back="Mecistopins Mantle",
+        back="Solemnity Cape",
 --        back={ name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Pet: Attack+5 Pet: Rng.Atk.+5','Pet: "Regen"+10',}},
-		waist="Fucho-no-Obi",
+        waist="Fucho-no-Obi",
         legs="Inyanga Shalwar +2",
         feet="Inyanga Crackows +2"
-	}
+    }
 
     -- perp costs:
     -- spirits: 7
@@ -925,7 +927,7 @@ function create_pact_timer(spell_name)
     end
 end
 
-	
+    
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 --    if reset == 'reset' then

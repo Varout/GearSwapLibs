@@ -128,8 +128,7 @@ function get_sets()
         hands       = { name        = "Chironic Gloves", 
                         augments    = {'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
         legs        = "Assid. Pants +1",
-        feet        = { name        = "Chironic Slippers", 
-                        augments    = {'Mag. Acc.+12','"Fast Cast"+3','"Refresh"+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
+        feet        = "Chironic Slippers",
         neck        = "Loricate Torque +1",
         waist       = "Fucho-no-Obi",
         left_ear    = { name        = "Moonshade Earring", 
@@ -173,9 +172,10 @@ function get_sets()
     sets.Sublimation =  
     {
         head        = "Academic's Mortarboard +2",
-        body        = { name        = "Pedagogy Gown +2", 
+        body        = { name        = "Pedagogy Gown +3", 
                         augments    = {'Enhances "Enlightenment" effect',}},
-        ear2        = "Savant's Earring"
+        ear2        = "Savant's Earring",
+        waist       = "Embla Sash"
     }
 
     sets.SublimationCharging = set_combine(sets.Idle, sets.Sublimation)
@@ -187,7 +187,7 @@ function get_sets()
     sets.Klimaform              = { feet  = "Arbatel Loafers +1" }
     sets.AltruismFocalization   = { head  = "Pedagogy Mortaboard +2" }
     sets.Enlightenment          = { body  = "Pedagogy Gown +2" }
-    sets.TranquilityEquanimity  = { hands = "Pedagogy Bracers +2" }
+    sets.TranquilityEquanimity  = { hands = "Pedagogy Bracers +3" }
     sets.TabulaRasa             = { legs  = "Pedagogy Pants +1" }
     sets.Stormsurge             = { feet  = "Pedagogy Loafers +1" }
 
@@ -262,7 +262,7 @@ function get_sets()
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         body        = { name        = "Kaykaus Bliaut", 
                         augments    = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands       = { name        = "Peda. Bracers +2", 
+        hands       = { name        = "Peda. Bracers +3", 
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Acad. Pants +2",
         feet        = { name        = "Vanya Clogs", 
@@ -292,7 +292,7 @@ function get_sets()
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         body        = { name        = "Pedagogy Gown +2", 
                         augments    = {'Enhances "Enlightenment" effect',}},
-        hands       = { name        = "Pedagogy Bracers +2", 
+        hands       = { name        = "Pedagogy Bracers +3", 
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Academic's Pants +2",
         feet        = { name        = "Vanya Clogs", 
@@ -322,7 +322,7 @@ function get_sets()
         ammo        = "Quartz Tathlum +1",
         head        = "Jhakri Coronal +1",
         body        = "Jhakri Robe +2",
-        hands       = "Jhakri Cuffs +1",
+        hands       = "Jhakri Cuffs +2",
         legs        = "Arbatel Pants +1",
         feet        = "Jhakri Pigaches +1",
         neck        = "Erra Pendant",
@@ -411,9 +411,9 @@ function get_sets()
         ammo        = "Hydrocera",
         head        = "Pedagogy Mortaboard +2",
         body        = "Jhakri Robe +2",
-        hands       = { name        = "Pedagogy Bracers +2", 
+        hands       = { name        = "Pedagogy Bracers +3", 
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
-        legs        = "Jhakri Slops +1",
+        legs        = "Jhakri Slops +2",
         feet        = "Jhakri Pigaches +1",
         neck        = "Argute Sole",
         waist       = "Aswang Sash",
@@ -500,6 +500,10 @@ end
 
 --  MIDCAST
 function midcast(spell, action)
+
+    -- spell_element_match = spell.element == world.weather_element or spell.element == world.day_element
+    -- windower.add_to_chat(10, tostring(spell_element_match))
+    -- windower.add_to_chat(10, spell.element)
 
     ---------------------
     --  Healing Magic  --
