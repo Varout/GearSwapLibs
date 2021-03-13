@@ -1,4 +1,8 @@
-toau_zones = 
+-------------------------------------------------------------------------------------------------------------------
+-- Zones For Special Equipment Effects
+-------------------------------------------------------------------------------------------------------------------
+--  Used for ToAU ring in assault or salvage areas
+zones_toau_ring = 
 S{
     "Leujaoam Sanctum",             --  Assault
     "Mamool Ja Training Grounds",   --  Assault
@@ -12,36 +16,34 @@ S{
     "Zhayolm Remnants"              --  Salvage
 }
 
-resSpells =
+--  Used for SoA body movement speed
+zones_adoulin_body = 
 S{
-    "Barstonra",
-    "Barwatera",
-    "Baraera",
-    "Barfira",
-    "Barblizzara",
-    "Barthundra",
-    "Barsleepra",
-    "Barpoisonra",
-    "Barparalyzra",
-    "Barblindra",
-    "Barsilencera",
-    "Barpetra",
-    "Barvira",
-    "Baramnesra"
+    "Western Adoulin",
+    "Eastern Adoulin"
+}
+-------------------------------------------------------------------------------------------------------------------
+-- Spell Sets
+-------------------------------------------------------------------------------------------------------------------
+spells_resistance =
+S{
+    "Barstone",     "Barstonra",
+    "Barwater",     "Barwatera",
+    "Barareo",      "Baraera",
+    "Barfire",      "Barfira",
+    "Barblizzard",  "Barblizzara",
+    "Barthunder",   "Barthundra",
+    "Barsleep",     "Barsleepra",   --  Base: Light
+    "Barpoison",    "Barpoisonra",  --  Base: Water
+    "Barparalyze",  "Barparalyzra", --  Base: Blizzard
+    "Barblind",     "Barblindra",   --  Base: Light
+    "Barsilence",   "Barsilencera", --  Base: Aero
+    "Barpetrify",   "Barpetra",     --  Base: Stone
+    "Barvirus",     "Barvira",      --  Base: Fire
+    "Baramnesra"                    --  Base: Fire
 }
 
-exp_rings = 
-S{
-    "Emperor Ring",
-    "Echad Ring",
-    "Capacity  Ring",
-    "Trizek Ring",
-    "Facility Ring",
-    "Caliber Ring",
-    "Warp Ring",        --  Not an exp ring, but still don't want to change out of it
-}
-
-naSpellsNoCursna = 
+spells_na = 
 S{
     "Poisona",
     "Paralyna",
@@ -51,19 +53,91 @@ S{
     "Viruna"
 }
 
-cursna = 
+spells_cursna = 
 S{
     "Cursna",
 }
 
-melee_sub_jobs = 
+enfeebling_int = 
 S{
-    'WAR',
-    'SAM',
-    'NIN',
-    'DNC',
-    'THF',
-    'PLD',
-    'MNK',
-    'DRK',
+    "Blind",-- "Blind II",
+    "Poison",-- "Poison II",
+    "Sleep",-- "SLeep II", "Sleepga", "Sleepga II",
+    "Break",
+    "Bind",
+    "Dispel",
+    "Gravity",-- "Gravity II",
+    "Distract",-- "Distract II", "Distract III",
+    "Frazzle",-- "Frazzle II", "Frazzle III"
+}
+
+enfeebling_mnd = 
+S{
+    "Slow",-- "Slow II",
+    "Paralyze",-- "Paralyze II",
+    "Dia",-- "Dia II", "Dia III", "Diaga",
+    "Silence",
+    "Addle",
+    "Inundation"
+}
+
+-------------------------------------------------------------------------------------------------------------------
+-- Equipment Sets By Slot For Locking
+-------------------------------------------------------------------------------------------------------------------
+equip_lock_earrings = 
+S{
+    "Reraise Earring",
+}
+
+equip_lock_rings = 
+S{
+    "Emperor Ring",
+    "Caliber Ring",
+    "Echad Ring",
+    "Capacity  Ring",
+    "Facility Ring",
+    "Trizek Ring",
+    "Endorsement Ring",
+    "Warp Ring",
+    "Dim. Ring (Holla)",
+    "Dim. Ring (Mea)",
+    "Dim. Ring (Dem)",
+}
+
+equip_lock_back = 
+S{
+    "Nexus Cape",
+}
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- Job Sets
+-------------------------------------------------------------------------------------------------------------------
+job_type_melee = 
+S{
+    "WAR",
+    "MNK",
+    "THF",
+    "SAM",
+    "NIN",
+    "DNC",
+    "PLD",
+    "DRK",
+    "DRG",
+    "RUN",
+    "RNG",
+    "BST",
+    "COR"
+}
+
+job_type_mage = 
+S{
+    "WHM",
+    "RDM",
+    "BLM",
+    "BRD",
+    "BLU",
+    "SCH",
+    "GEO",
+    "SMN"
 }
