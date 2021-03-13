@@ -1,13 +1,13 @@
 --[[ *************************************************************
  Wren's SCH gearswap .lua for SuperNova FFXI
  Save as windower/addons/GearSwap/data/SCH.lua
- 
+
   2016-07-24 OC  - First version. Commented to help newbies. :)
   2016-08-01 OC  - Hachirin-no-Obi, Rostrum Pumps
  2016-08-25 OC  - Sea Capes
  2016-12-02 OC  - Loquac. Earring, Stone Gorget
 ************************************************************* --]]
-toau_zones = 
+toau_zones =
 S{
     "Leujaoam Sanctum",             --  Assault
     "Mamool Ja Training Grounds",   --  Assault
@@ -26,7 +26,7 @@ S{
   Gearsets - define the various sets of gear we'll wear.
  Note that I am using Claustrum, so have no main swaps.
 ****************************************************** --]]
-enfeebling_light = 
+enfeebling_light =
 S{
     "Paralyze",
     "Slow",
@@ -36,7 +36,7 @@ S{
     "Diaga"
 }
 
-enfeebling_dark = 
+enfeebling_dark =
 S{
     "Poison",
     "Poison II",
@@ -49,7 +49,7 @@ S{
     "Dispel"
 }
 
-naSpells = 
+naSpells =
 S{
     "Poisona",
     "Paralyna",
@@ -59,7 +59,7 @@ S{
     "Viruna"
 }
 
-barSpells = 
+barSpells =
 S{
     "Barstone",
     "Barstonra",
@@ -91,7 +91,7 @@ S{
     "Baramnesra",
 }
 
-enhancing_dark = 
+enhancing_dark =
 S{
     "Blaze Spikes",
     "Ice Spikes",
@@ -99,9 +99,9 @@ S{
 }
 
 -- function get_sets()
--- 	mote_include_version = 2
-	
--- 	-- Load and initialize the include file.
+--     mote_include_version = 2
+
+--     -- Load and initialize the include file.
 --     include('Mote-Include.lua')
 -- end
 
@@ -111,27 +111,27 @@ S{
 -- end
 
 -- function user_unload()
--- 	send_command('unbind @c')
+--     send_command('unbind @c')
 -- end
 
 -- function init_gear_sets()
 function get_sets()
     --  Use after spells when sublimation isn't charging.
     --  Focuses on auto-refresh, auto-regen, and reducing damage taken
-    sets.Idle = 
+    sets.Idle =
     {
         main        = "Bolelabunga",
         sub         = "Genbu's Shield",
         ammo        = "Homiliary",
         head        = "Befouled Crown",
         body        = "Jhakri Robe +2",
-        hands       = { name        = "Chironic Gloves", 
+        hands       = { name        = "Chironic Gloves",
                         augments    = {'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
         legs        = "Assid. Pants +1",
         feet        = "Chironic Slippers",
         neck        = "Loricate Torque +1",
         waist       = "Fucho-no-Obi",
-        left_ear    = { name        = "Moonshade Earring", 
+        left_ear    = { name        = "Moonshade Earring",
                         augments    = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = "Infused Earring",
         left_ring   = "Defending Ring",
@@ -144,7 +144,7 @@ function get_sets()
         left_ring  = "Balrahn's Ring",
     }
 
-    sets.Resting = 
+    sets.Resting =
     {
         main        = "Boonwell Staff",
         sub         = "Ariesian Grip",
@@ -156,7 +156,7 @@ function get_sets()
         feet        = "Chelona Boots",
         neck        = "Eidolon Pendant +1",
         waist       = "Austerity Belt",
-        left_ear    = { name        = "Moonshade Earring", 
+        left_ear    = { name        = "Moonshade Earring",
                         augments    = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = "Infused Earring",
         left_ring   = "Angha Ring",
@@ -169,10 +169,10 @@ function get_sets()
     --  **************************************************************************************  --
 
     --  Use this set when sublimation is charging.
-    sets.Sublimation =  
+    sets.Sublimation =
     {
         head        = "Academic's Mortarboard +2",
-        body        = { name        = "Pedagogy Gown +3", 
+        body        = { name        = "Pedagogy Gown +3",
                         augments    = {'Enhances "Enlightenment" effect',}},
         ear2        = "Savant's Earring",
         waist       = "Embla Sash"
@@ -197,9 +197,9 @@ function get_sets()
     --                                      PRE-CAST                                            --
     --  **************************************************************************************  --
 
-    sets.FastCast = 
+    sets.FastCast =
     {
-        main        = { name        = "Coeus", 
+        main        = { name        = "Coeus",
                         augments    = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
         sub         = "Clerisy Strap",
         ammo        = "Incantor Stone",
@@ -207,11 +207,11 @@ function get_sets()
         body        = "Anhur Robe",
         hands       = "Academic's Bracers +2",
         legs        = "Kaykaus Tights",
-        feet        = { name        = "Peda. Loafers +1", 
+        feet        = { name        = "Peda. Loafers +1",
                         augments    = {'Enhances "Stormsurge" effect',}},
         neck        = "Loricate Torque +1",
         waist       = "Witful Belt",
-        left_ear    = { name        = "Moonshade Earring", 
+        left_ear    = { name        = "Moonshade Earring",
                         augments    = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = "Loquac. Earring",
         left_ring   = "Kishar Ring",
@@ -231,10 +231,10 @@ function get_sets()
     sets.FastCast.Cure = set_combine( sets.FastCast, {
         main        = "Vadose Rod",
         sub         = "Sors Shield",
-        head        = { name        = "Vanya Hood", 
+        head        = { name        = "Vanya Hood",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         body        = "Heka's Kalasiris",
-        feet        = { name        = "Vanya Clogs", 
+        feet        = { name        = "Vanya Clogs",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         right_ear   = "Mendi. Earring",
         back        = "Pahtli Cape",
@@ -253,19 +253,19 @@ function get_sets()
 
     -- heal set for getting the most of our cures.
     -- Cure Potency, Healing Magic, Haste, Mind.
-    sets.Midcast.Cure = 
+    sets.Midcast.Cure =
     {
         main        = "Vadose Rod",
         sub         = "Sors Shield",
         ammo        = "Quartz Tathlum +1",
-        head        = { name        = "Vanya Hood", 
+        head        = { name        = "Vanya Hood",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body        = { name        = "Kaykaus Bliaut", 
+        body        = { name        = "Kaykaus Bliaut",
                         augments    = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands       = { name        = "Peda. Bracers +3", 
+        hands       = { name        = "Peda. Bracers +3",
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Acad. Pants +2",
-        feet        = { name        = "Vanya Clogs", 
+        feet        = { name        = "Vanya Clogs",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         neck        = "Colossus's Torque",
         waist       = "Bishop's Sash",
@@ -276,26 +276,26 @@ function get_sets()
         back        = "Altruistic Cape",
     }
 
-    sets.Midcast.LightWeather = 
+    sets.Midcast.LightWeather =
     {
         back        = "Twilight Cape",
         waist       = "Hachirin-no-Obi",
     }
 
-    sets.Midcast.NASpell = 
+    sets.Midcast.NASpell =
     {
-        main        = { name        = "Coeus", 
+        main        = { name        = "Coeus",
                         augments    = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
         sub         = "Clerisy Strap",
         ammo        = "Incantor Stone",
-        head        = { name        = "Vanya Hood", 
+        head        = { name        = "Vanya Hood",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body        = { name        = "Pedagogy Gown +2", 
+        body        = { name        = "Pedagogy Gown +2",
                         augments    = {'Enhances "Enlightenment" effect',}},
-        hands       = { name        = "Pedagogy Bracers +3", 
+        hands       = { name        = "Pedagogy Bracers +3",
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Academic's Pants +2",
-        feet        = { name        = "Vanya Clogs", 
+        feet        = { name        = "Vanya Clogs",
                         augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         neck        = "Colossus's Torque",
         waist       = "Bishop's Sash",
@@ -306,17 +306,17 @@ function get_sets()
         back        = "Altruistic Cape",
     }
 
-    sets.Midcast.Cursna = set_combine(sets.Midcast.NASpell, 
+    sets.Midcast.Cursna = set_combine(sets.Midcast.NASpell,
     {
         neck        = "Debilis Medallion",
         left_ring   = "Haoma's Ring",
         right_ring  = "Haoma's Ring",
-        back        = "Oretan. Cape +1",        
+        back        = "Oretan. Cape +1",
     })
 
-    sets.Midcast.Enfeebling = 
+    sets.Midcast.Enfeebling =
     {
-        main        = { name        = "Coeus", 
+        main        = { name        = "Coeus",
                         augments    = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
         sub         = "Enki Strap",
         ammo        = "Quartz Tathlum +1",
@@ -331,33 +331,33 @@ function get_sets()
         right_ear   = "Psystorm Earring",
         left_ring   = "Stikini Ring",
         right_ring  = "Kishar Ring",
-        back        = { name        = "Lugh's Cape", 
+        back        = { name        = "Lugh's Cape",
                         augments    = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
     }
 
-    sets.MidcastEnfeeblingLight = set_combine( sets.Midcast.Enfeebling, 
+    sets.MidcastEnfeeblingLight = set_combine( sets.Midcast.Enfeebling,
     {
         body        = "Academic's Gown +2",
     })
 
-    sets.MidcastEnfeeblingDark = set_combine( sets.Midcast.Enfeebling, 
+    sets.MidcastEnfeeblingDark = set_combine( sets.Midcast.Enfeebling,
     {
         legs        = "Academic's Pants +2"
     })
 
-    sets.Midcast.Enhancing = 
+    sets.Midcast.Enhancing =
     {
         main        = "Bolelabunga",
         sub         = "Ammurapi Shield",
         ammo        = "Savant's Treatise",
         head        = "Befouled Crown",
-        body        = { name        = "Pedagogy Gown +2", 
+        body        = { name        = "Pedagogy Gown +2",
                         augments    = {'Enhances "Enlightenment" effect',}},    --  Enh. Mag. eff. dur. +8%
-        hands       = { name        = "Telchine Gloves", 
+        hands       = { name        = "Telchine Gloves",
                         augments    = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-        legs        = { name        = "Telchine Braconi", 
+        legs        = { name        = "Telchine Braconi",
                         augments    = {'Enh. Mag. eff. dur. +9',}},
-        feet        = { name        = "Telchine Pigaches", 
+        feet        = { name        = "Telchine Pigaches",
                         augments    = {'Enh. Mag. eff. dur. +6',}},
         neck        = "Colossus's Torque",
         waist       = "Olympus Sash",
@@ -370,15 +370,15 @@ function get_sets()
 
     sets.Midcast.BarSpell = set_combine( sets.Midcast.Enhancing,
     {
-        hands       = { name        = "Chironic Gloves", 
+        hands       = { name        = "Chironic Gloves",
                         augments    = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
         legs        = "Acad. Pants +2",
-        --  legs        = limbus legs with barspell +15  
-        feet        = { name        = "Kaykaus Boots", 
+        --  legs        = limbus legs with barspell +15
+        feet        = { name        = "Kaykaus Boots",
                         augments    = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
     })
 
-    sets.Midcast.Stoneskin = set_combine( sets.Midcast.Enhancing, 
+    sets.Midcast.Stoneskin = set_combine( sets.Midcast.Enhancing,
     {
         legs        = "Haven Hose",
         neck        = "Nodens Gorget",
@@ -386,32 +386,32 @@ function get_sets()
         left_ear    = "Earthcry Earring",
     })
 
-    sets.Midcast.Regen = set_combine( sets.Midcast.Enhancing, 
+    sets.Midcast.Regen = set_combine( sets.Midcast.Enhancing,
     {
-        main        = { name        = "Coeus", 
+        main        = { name        = "Coeus",
                         augments    = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
         sub         = "Fulcio Grip",
         head        = "Arbatel Bonnet",
-        legs        = { name        = "Telchine Braconi", 
+        legs        = { name        = "Telchine Braconi",
                         augments    = {'"Regen" potency+3',}},
-        back        = { name        = "Lugh's Cape", 
+        back        = { name        = "Lugh's Cape",
                         augments    = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
     })
 
-    sets.Midcast.Aquaveil = set_combine(sets.Midcast.Enhancing, 
+    sets.Midcast.Aquaveil = set_combine(sets.Midcast.Enhancing,
     {
         main        = "Vadose Rod",
         sub         = "Genbu's Shield",
     })
 
     sets.Midcast.ElementalAttack = {
-        main        = { name        = "Akademos", 
+        main        = { name        = "Akademos",
                         augments    = {'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
         sub         = "Enki Strap",
         ammo        = "Hydrocera",
         head        = "Pedagogy Mortaboard +2",
         body        = "Jhakri Robe +2",
-        hands       = { name        = "Pedagogy Bracers +3", 
+        hands       = { name        = "Pedagogy Bracers +3",
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Jhakri Slops +2",
         feet        = "Jhakri Pigaches +1",
@@ -421,22 +421,22 @@ function get_sets()
         right_ear   = "Hecate's Earring",
         left_ring   = "Mallquis Ring",
         right_ring  = "Jhakri Ring",
-        back        = { name        = "Lugh's Cape", 
+        back        = { name        = "Lugh's Cape",
                         augments    = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
     }
 
     sets.Midcast.ElementalAcc = sets.Midcast.ElementalAttack
 
-    sets.Midcast.DarkMagic = set_combine(sets.Midcast.ElementalAttack, 
+    sets.Midcast.DarkMagic = set_combine(sets.Midcast.ElementalAttack,
     {
-        main        = { name        = "Rubicundity", 
+        main        = { name        = "Rubicundity",
                         augments    = {'Mag. Acc.+3','"Mag.Atk.Bns."+3','Dark magic skill +5','"Conserve MP"+2',}},
         sub         = "",
         neck        = "Erra Pendant",
         left_ring   = "Evanescence Ring",
     })
 
-    sets.Midcast.Draspir = set_combine( sets.Midcast.DarkMagic, 
+    sets.Midcast.Draspir = set_combine( sets.Midcast.DarkMagic,
     {
         head        = "Appetence Crown",
         right_ear   = "Hirudinea Earring",
@@ -545,9 +545,9 @@ function midcast(spell, action)
             equip(sets.Midcast.Regen)
             windower.add_to_chat(8, "Regen Set")
         elseif spell.english == "Aquaveil" then
-        	equip(sets.Midcast.Aquaveil)
+            equip(sets.Midcast.Aquaveil)
             windower.add_to_chat(8, "Aquaveil Set")
-        elseif barSpells:contains(spell.english) then 
+        elseif barSpells:contains(spell.english) then
             equip(sets.Midcast.BarSpell)
             windower.add_to_chat(8, "Barspell Set")
         else
@@ -564,8 +564,8 @@ function midcast(spell, action)
             if "Light" == world.weather_element or "Light" == world.day_element then
                 equip(set_combine(sets.Midcast.Enfeebling,sets.Midcast.LightWeather))
             end
-        -- elseif enfeebling_light:contains(spell.english) then 
-        -- elseif enfeebling_dark:contains(spell.english) then 
+        -- elseif enfeebling_light:contains(spell.english) then
+        -- elseif enfeebling_dark:contains(spell.english) then
         else
             equip(sets.Midcast.Enfeebling)
         end
@@ -619,7 +619,7 @@ function status_change(new,old)
         equip_rest()
     else
         equip_idle()
-    end 
+    end
 end
 
 function lockMain()

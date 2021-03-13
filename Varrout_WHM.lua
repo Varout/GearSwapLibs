@@ -510,10 +510,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equipSet = set_combine(sets.midcast['Enfeebling Magic'], sets.midcast.WeatherBoost)
                 equip(equipSet)
             elseif spell.skill == 'Divine Magic' then
-                add_to_chat(100, tostring(spell))
-                add_to_chat(100, tostring(action))
-                add_to_chat(100, tostring(spellMap))
-                add_to_chat(100, tostring(eventArgs))
+                -- add_to_chat(100, tostring(spell))
+                -- add_to_chat(100, tostring(action))
+                -- add_to_chat(100, tostring(spellMap))
+                -- add_to_chat(100, tostring(eventArgs))
+                equipSet = sets.midcast['Divine Magic']
             end
         elseif spell.skill == 'Healing Magic' and state.Buff.DivineCaress and not cure_names:contains(spell.name) then
         --  Equip if Divine Caress is active
@@ -661,15 +662,15 @@ end
 --  Definition in: common_lists.lua
 function check_special_ring_equipped()
     if equip_lock_rings:contains(player.equipment.left_ring) then
-        -- windower.add_to_chat(9, "left_ring locked")
+        windower.add_to_chat(9, "left_ring locked")
         is_ring_locked = true
         disable("left_ring")
     elseif equip_lock_rings:contains(player.equipment.right_ring) then
-        -- windower.add_to_chat(9, "right_ring locked")
+        windower.add_to_chat(9, "right_ring locked")
         is_ring_locked = true
         disable("right_ring")
     elseif is_ring_locked then
-        -- windower.add_to_chat(9, "Unlocking rings")
+        windower.add_to_chat(9, "Unlocking rings")
         is_ring_locked = false
         enable('left_ring')
         enable('right_ring')

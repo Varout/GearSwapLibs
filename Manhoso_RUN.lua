@@ -145,7 +145,7 @@ function init_gear_sets()
     sets.precast.JA['Liement'] = {body="Futhark Coat"}
     sets.precast.JA['Lunge'] = {ammo="Grenade Core"}
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-    sets.precast.JA['Gambit'] = {hands="Runeist Mitons"}
+    sets.precast.JA['Gambit'] = {hands="Runeist Mitons +2"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat"}
     sets.precast.JA['Swordplay'] = {}
@@ -206,7 +206,7 @@ function init_gear_sets()
     -- sets.midcast.EnhancingMagic = {
     sets.midcast['Enhancing Magic'] = {
         head="Erilaz Galea",
-        hands="Runeist Mitons",
+        hands="Runeist Mitons +2",
         legs={ name="Futhark Trousers", augments={'Enhances "Inspire" effect',}},
         left_ear="Augment. Earring",
         right_ear="Loquac. Earring",
@@ -229,7 +229,7 @@ function init_gear_sets()
 
     sets.midcast['Divine Magic'] = {
         hands="Taeon Gloves",
-        legs="Runeist Trousers",
+        legs="Runeist Trousers +2",
         neck="Sanctity Necklace",
         left_ear="Lifestorm Earring",
         left_ring="Etana Ring",
@@ -281,8 +281,8 @@ function init_gear_sets()
         ammo="Voluspa Tathlum",
         head="Meghanada Visor +2",
         body="Meg. Cuirie +1",
-        hands="Meg. Gloves +1",
-        legs="Meg. Chausses +1",
+        hands="Runeist Mitons +2",
+        legs="Runeist Trousers +2",
         feet="Meg. Jam. +2",
         neck="Loricate Torque",
         waist="Ioskeha Belt",
@@ -346,6 +346,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- end
 end
 
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -356,6 +357,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     --     end
     -- end
 end
+
 
 function user_buff_change(buff, gain, eventArgs)
     check_equipment_special_ring()
@@ -374,9 +376,10 @@ end
 --    end
 -- end
 
-function customize_melee_set(meleeSet)
-    return meleeSet
-end
+
+-- function customize_melee_set(meleeSet)
+-- end
+
 
 function customize_idle_set(idleSet)
 

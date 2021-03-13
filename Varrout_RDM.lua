@@ -3,8 +3,7 @@
 -------------------------------------------------------------------------------------------------------------------
 
 -- Local Settings, setting the zones prior to use
-toau_zones = 
-S{
+toau_zones = S{
     "Leujaoam Sanctum",             --  Assault
     "Mamool Ja Training Grounds",   --  Assault
     "Lebros Cavern",                --  Assault
@@ -17,8 +16,7 @@ S{
     "Zhayolm Remnants"              --  Salvage
 }
 
-enfeebling_int = 
-S{
+enfeebling_int = S{
     "Blind",
     "Blind II",
     "Poison",
@@ -39,9 +37,8 @@ S{
     "Frazzle III"
 }
 
-enfeebling_mnd = 
-S{
-    "Slow", 
+enfeebling_mnd = S{
+    "Slow",
     "Slow II",
     "Paralyze",
     "Paralyze II",
@@ -60,6 +57,7 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
+    include('common_lists.lua')
 end
 
 
@@ -80,13 +78,13 @@ function user_setup()
     -- state.IdleMode:options('Normal', 'PDT', 'MDT')
 
     -- gear.default.obi_waist = "Sekhmet Corset"
-    
+
     select_default_macro_book()
 
     state.CP = M(false, "CP Mode")
     state.Dyna = M(false, "Dyna Mode")
 
-	send_command('bind @c gs c toggle CP')
+    send_command('bind @c gs c toggle CP')
     send_command('bind @x gs c toggle Dyna')
 end
 
@@ -100,9 +98,9 @@ function init_gear_sets()
     --------------------------------------
     -- Start defining the sets
     --------------------------------------
-    
+
     --  Toggle specific gear
-    sets.CP      = { back={ name="Mecisto. Mantle", 
+    sets.CP      = { back={ name="Mecisto. Mantle",
                             augments={'Cap. Point+31%','INT+2','Attack+3','DEF+8',}},}
     sets.JSENeck = { neck="Duelist's Torque"}
 
@@ -111,7 +109,7 @@ function init_gear_sets()
     sets.precast.JA['Chainspell'] = {
         body = "Vitiation Tabard"
     }
-    
+
 
     -- Fast cast sets for spells
     -- 80% Fast Cast (including trait) for all spells, plus 5% quick cast       NEED TO RE-CALCULATE
@@ -121,10 +119,10 @@ function init_gear_sets()
         sub         = "Genbu's Shield",
         ammo        = "Homiliary",
         head        = "Atrophy Chapeau +2",
-        body        = "Vitiation Tabard", 
-        hands       = { name="Leyline Gloves", 
+        body        = "Vitiation Tabard",
+        hands       = { name="Leyline Gloves",
                         augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-        legs        = { name="Kaykaus Tights", 
+        legs        = { name="Kaykaus Tights",
                         augments={'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
         feet        = "Chelona Boots",
         neck        = "Sanctity Necklace",
@@ -137,18 +135,18 @@ function init_gear_sets()
     }
 
     sets.midcast.Cure = {
-        main        = { name="Arka IV", 
+        main        = { name="Arka IV",
                         augments={'"Cure" potency +24%',}},
         sub         = "Enki Strap",
         ammo        = "Quartz Tathlum +1",
-        head        = { name="Vanya Hood", 
+        head        = { name="Vanya Hood",
                         augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body        = { name="Kaykaus Bliaut", 
+        body        = { name="Kaykaus Bliaut",
                         augments={'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands       = { name="Chironic Gloves", 
+        hands       = { name="Chironic Gloves",
                         augments={'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
         legs        = "Atrophy Tights +1",
-        feet        = { name="Vanya Clogs", 
+        feet        = { name="Vanya Clogs",
                         augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         neck        = "Colossus's Torque",
         waist       = "Bishop's Sash",
@@ -158,7 +156,7 @@ function init_gear_sets()
         right_ring  = "Sirona's Ring",
         back        = "Altruistic Cape",
     }
-        
+
     sets.midcast.Curaga = sets.midcast.Cure
     -- sets.midcast.CureSelf = {ring1="Kunaji Ring",ring2="Asklepian Ring"}
 
@@ -167,21 +165,21 @@ function init_gear_sets()
         sub         = "Ammurapi Shield",
         ammo        = "Homiliary",
         head        = "Befouled Crown",
-        body        = { name = "Vitiation Tabard", 
+        body        = { name = "Vitiation Tabard",
                         augments = {'Enhances "Chainspell" effect',}},
-        hands       = { name = "Telchine Gloves", 
+        hands       = { name = "Telchine Gloves",
                         augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-        legs        = { name = "Telchine Braconi", 
+        legs        = { name = "Telchine Braconi",
                         augments = {'Enh. Mag. eff. dur. +9',}},
-        feet        = { name = "Telchine Pigaches", 
+        feet        = { name = "Telchine Pigaches",
                         augments = {'Enh. Mag. eff. dur. +6',}},
-        neck        = "Duelist's Torque", 
+        neck        = "Duelist's Torque",
         waist       = "Olympus Sash",
         left_ear    = "Augment. Earring",
         right_ear   = "Andoaa Earring",
         left_ring   = "Stikini Ring",
         right_ring  = "Stikini Ring",
-        back        = { name = "Sucellos's Cape", 
+        back        = { name = "Sucellos's Cape",
                         augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
     }
 
@@ -194,26 +192,26 @@ function init_gear_sets()
         waist = "Siegel Sash",
         left_ear = "Earthcry Earring"
     })
-    
+
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
         main = "Bolelabunga"
     })
 
     -- sets.midcast['Enfeebling Magic'] = {
     sets.midcast.enfeeblingBase = {
-        main        = { name = "Rubicundity", 
+        main        = { name = "Rubicundity",
                         augments = {'Mag. Acc.+3','"Mag.Atk.Bns."+3','Dark magic skill +5','"Conserve MP"+2',}},
         sub         = "Ammurapi Shield",
         ammo        = "Regal Gem",
-        head        = { name = "Vitiation Chapeau +1", 
+        head        = { name = "Vitiation Chapeau +1",
                         augments = {'Enfeebling Magic duration','Magic Accuracy',}},
         body        = "Jhakri Robe +2",
         hands       = "Jhakri Cuffs +2",
-        legs        = { name = "Chironic Hose", 
+        legs        = { name = "Chironic Hose",
                         augments = {'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
-        feet        = { name = "Vitiation Boots", 
+        feet        = { name = "Vitiation Boots",
                         augments = {'Immunobreak Chance',}},
-        neck        = "Duelist's Torque", 
+        neck        = "Duelist's Torque",
         waist       = "Casso Sash",
         left_ear    = "Lifestorm Earring",
         right_ear   = "Psystorm Earring",
@@ -222,18 +220,18 @@ function init_gear_sets()
     }
 
     sets.midcast.enfeeblingMNDCape = {
-        back = { name     = "Sucellos's Cape", 
+        back = { name     = "Sucellos's Cape",
                  augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
     }
 
     sets.midcast.enfeeblingINTCape = {
-        back = { name     = "Sucellos's Cape", 
+        back = { name     = "Sucellos's Cape",
                  augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
     }
 
 
     sets.midcast['Phalanx II']  = set_combine(sets.midcast['Enhancing Magic'],  {hands = "Duelist's Gloves +2"})
-    
+
     sets.midcast['Elemental Magic'] = {
         main        = "Lehbrailg +2",
         sub         = "Zuuxowu Grip",
@@ -251,7 +249,7 @@ function init_gear_sets()
         legs        = "Hagondes Pants",
         feet        = "Hagondes Sabots"
     }
-        
+
     -- sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {head=empty,body="Twilight Cloak"})
 
     sets.midcast['Dark Magic'] = {
@@ -275,7 +273,7 @@ function init_gear_sets()
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
 
     sets.midcast.Drain = set_combine(sets.midcast['Dark Magic'], {
-        ring1       = "Excelsis Ring", 
+        ring1       = "Excelsis Ring",
         waist       = "Fucho-no-Obi"
     })
 
@@ -283,7 +281,7 @@ function init_gear_sets()
 
     -- Sets for special buff conditions on spells.
     -- sets.midcast.EnhancingDuration = {hands="Atrophy Gloves +1",back="Estoqueur's Cape",feet="Lethargy Houseaux"}
-        
+
     sets.buff.ComposureOther = {
         head        = "Lethargy Chappel",
         body        = "Lethargy Sayon",
@@ -307,7 +305,7 @@ function init_gear_sets()
         feet        = "Chelona Boots",
         neck        = "Eidolon Pendant +1",
         waist       = "Austerity Belt",
-        left_ear    = { name="Moonshade Earring", 
+        left_ear    = { name="Moonshade Earring",
                         augments={'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = "Infused Earring",
         left_ring   = "Angha Ring",
@@ -338,7 +336,7 @@ function init_gear_sets()
     --     head="Atrophy Chapeau +1",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
     --     body="Atrophy Tabard +1",hands="Atrophy Gloves +1",ring1="Sheltered Ring",ring2="Paguroidea Ring",
     --     back="Shadow Mantle",waist="Flume Belt",legs="Crimson Cuisses",feet="Hagondes Sabots"}
-    
+
     -- sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Impatiens",
     --     head="Vitivation Chapeau",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
     --     body="Atrophy Tabard +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
@@ -353,8 +351,8 @@ function init_gear_sets()
     --     head="Gendewitha Caubeen +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
     --     body="Gendewitha Caubeen +1",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Shadow Ring",
     --     back="Engulfer Cape",waist="Flume Belt",legs="Osmium Cuisses",feet="Gendewitha Galoshes"}
-    
-    
+
+
     -- Defense sets
     -- sets.defense.PDT = {
     --     head="Atrophy Chapeau +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
