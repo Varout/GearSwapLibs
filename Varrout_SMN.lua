@@ -6,19 +6,19 @@
 
 --[[
     Custom commands:
-    
+
     gs c petweather
         Automatically casts the storm appropriate for the current avatar, if possible.
-    
+
     gs c siphon
         Automatically run the process to: dismiss the current avatar; cast appropriate
         weather; summon the appropriate spirit; Elemental Siphon; release the spirit;
         and re-summon the avatar.
-        
+
         Will not cast weather you do not have access to.
         Will not re-summon the avatar if one was not out in the first place.
         Will not release the spirit if it was out before the command was issued.
-        
+
     gs c pact [PactType]
         Attempts to use the indicated pact type for the current avatar.
         PactType can be one of:
@@ -90,7 +90,7 @@ function job_setup()
         ['Ramuh']='Judgment Bolt', ['Leviathan']='Tidal Wave', ['Carbuncle']='Searing Light', ['Fenrir']='Howling Moon',
         ['Diabolos']='Ruinous Omen', ['Cait Sith']="Altana's Favor", ['Siren']='Clarsach Call'}
 
-    -- Wards table for creating custom timers   
+    -- Wards table for creating custom timers
     wards = {}
     -- Base duration for ward pacts.
     wards.durations = {
@@ -113,12 +113,12 @@ function job_setup()
 --        ['Frost Armor']     = 'spells/00250.png', -- 00250 for Ice Spikes
 --        ['Lightning Armor'] = 'spells/00251.png', -- 00251 for Shock Spikes
 --        ['Reraise II']      = 'spells/00135.png', -- 00135 for Reraise
---        ['Fleet Wind']      = 'abilities/00074.png', -- 
+--        ['Fleet Wind']      = 'abilities/00074.png', --
 --    }
     -- Flags for code to get around the issue of slow skill updates.
     wards.flag = false
     wards.spell = ''
-    
+
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -142,12 +142,12 @@ function init_gear_sets()
     --------------------------------------
     -- Precast Sets
     --------------------------------------
-    
+
     -- Precast sets to enhance JAs
     sets.precast.JA['Astral Flow'] = {
         head="Glyphic Horn"
     }
-    
+
     sets.precast.JA['Elemental Siphon'] = {
         main="Tumafyrig",
         sub="Vox Grip",
@@ -159,7 +159,7 @@ function init_gear_sets()
         body="Beckoner's Doublet",
         hands={ name="Telchine Gloves", augments={'Pet: "Mag.Atk.Bns."+18','"Elemental Siphon"+35','Enh. Mag. eff. dur. +3',}},
         ring1="Evoker's Ring",
-        ring2="Globidonta Ring",
+        ring2="Stikini Ring",
         back="Conveyance Cape",
         waist="Cimmerian Sash",
         legs="Tatsu. Sitagoromo",
@@ -182,18 +182,18 @@ function init_gear_sets()
     sets.precast.BloodPactRage = sets.precast.BloodPactWard
 
     -- Fast cast sets for spells
-    
+
     sets.precast.FC = {             -- FC +45%
         main="Grioavolr",           -- FC +4%
         sub="Clerisy Strap",        -- FC +2%
         head="Revealer's Crown",    -- FC +5%
         ear1="Loquac. Earring",     -- FC +2%
-        -- ear2="",
+        ear2="Etiolation Earring", -- FC +1%
         body="Inyanga Jubbah +2",   -- FC +14%
         hands="Telchine Gloves",    -- FC +2%
         ring1="Kishar Ring",        -- FC +4%
-        -- ring2="",
-        -- back="",
+        ring2="Lebeche Ring",    -- Quick Magic +2%
+        back="Perimede Cape",    -- Quick Magic +4%
         waist="Witful Belt",        -- FC +3%
         legs="Orvail Pants +1",     -- FC +5%
         feet="Chelona Boots"        -- FC +4%
@@ -203,7 +203,7 @@ function init_gear_sets()
         waist="Siegel Sash"
     })
 
-       
+
     -- Weaponskill sets
     -- Default set for any weaponskill that isn't any more specifically defined
     -- sets.precast.WS = {
@@ -234,7 +234,7 @@ function init_gear_sets()
     --     legs="Nares Trews",
     --     feet="Chelona Boots +1"}
 
-    
+
     --------------------------------------
     -- Midcast sets
     --------------------------------------
@@ -296,7 +296,7 @@ function init_gear_sets()
 --        waist="Fucho-no-Obi",legs="Bokwus Slops",feet="Bokwus Boots"}
 
     -- Avatar pact sets.  All pacts are Ability type.
-    
+
     sets.midcast.Pet.BloodPactWard = {
         main="Soulscourge",
         sub="Vox Grip",
@@ -324,15 +324,15 @@ function init_gear_sets()
         waist="Diabolos's Rope",
         legs="Marduk's Shalwar +1"
     }
-        
+
     sets.midcast.Pet.DebuffBloodPactWard.Acc = sets.midcast.Pet.DebuffBloodPactWard
-    
+
     sets.midcast.Pet.PhysicalBloodPactRage = {
         main="Gridarvor",
         sub="Elan Strap",
         ammo="Sancus Sachet",
         head="Apogee Crown +1",
-        neck="Sacrifice Torque",
+        neck="Shulmanu Collar",
         ear1="Lugalbanda Earring",
         ear2="Gelos Earring",
         body="Convoker's Doublet +2",
@@ -340,14 +340,14 @@ function init_gear_sets()
         ring1="Varar Ring",
         ring2="Varar Ring",
         back={ name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Pet: Attack+10 Pet: Rng.Atk.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},
-        waist="Mujin Obi",
-        legs="Avatara Slops",
+        waist="Regal Belt",
+        legs="Helios Spats",
         feet={ name="Apogee Pumps", augments={'MP+60','Pet: Attack+30','Blood Pact Dmg.+7',}},
     }
 
 --    sets.midcast.Pet.PhysicalBloodPactRage['Garuda'] = set_combine(sets.midcast.Pet.PhysicalBloodPactRage, {
 --        head="Kurara Hachigane",
---        body="Convoker's Doublet +1"    
+--        body="Convoker's Doublet +1"
 --    })
 
     sets.midcast.Pet.PhysicalBloodPactRage.Acc = sets.midcast.Pet.PhysicalBloodPactRage
@@ -379,13 +379,13 @@ function init_gear_sets()
 
 
     -- Spirits cast magic spells, which can be identified in standard ways.
-    
+
     sets.midcast.Pet.WhiteMagic = {legs="Glyphic Spats"}
-    
+
     sets.midcast.Pet['Elemental Magic'] = set_combine(sets.midcast.Pet.BloodPactRage, {legs="Glyphic Spats"})
 
     sets.midcast.Pet['Elemental Magic'].Resistant = {}
-    
+
     sets.midcast.Trust = {
         main="Bolelabunga",
         sub="Ammurapi Shield",
@@ -395,12 +395,12 @@ function init_gear_sets()
         hands="Inyanga Dastanas +2",
         legs="Inyanga Shalwar +2",
         feet="Inyanga Crackows +2"
-    }    
+    }
 
     --------------------------------------
     -- Idle/resting/defense/etc sets
     --------------------------------------
-    
+
     -- Resting sets
     sets.resting = {
 --        main=gear.Staff.HMP,
@@ -419,7 +419,7 @@ function init_gear_sets()
         waist="Austerity Belt",
         legs="Nisse Slacks",
         feet="Chelona Boots"}
-    
+
     -- Idle sets
     sets.idle = {
         main="Bolelabunga",
@@ -447,10 +447,10 @@ function init_gear_sets()
     -- fenrir: 13
     -- others: 15
     -- avatar's favor: -4/tick
-    
+
     -- Max useful -perp gear is 1 less than the perp cost (can't be reduced below 1)
     -- Aim for -14 perp, and refresh in other slots.
-    
+
     -- -perp gear:
     -- Gridarvor: -5
     -- Glyphic Horn: -4
@@ -458,9 +458,9 @@ function init_gear_sets()
     -- Evoker's Ring: -1
     -- Convoker's Pigaches: -4
     -- total: -18
-    
+
     -- Can make due without either the head or the body, and use +refresh items in those slots.
-    
+
     sets.idle.Avatar = {
 --        main=gear.perp_staff.name,
         main="Gridarvor",
@@ -475,7 +475,7 @@ function init_gear_sets()
         ring1="Varar Ring",
         ring2="Varar Ring",
         back={ name="Campestres's Cape", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Pet: Attack+10 Pet: Rng.Atk.+10','Pet: "Regen"+10','Pet: Damage taken -5%',}},
-        waist="Klouskap Sash",
+        waist="Incarnation Sash",
         legs="Assiduity Pants +1",
         feet="Convoker's Pigaches +2"
     }
@@ -503,14 +503,14 @@ function init_gear_sets()
     -- Favor uses Caller's Horn instead of Convoker's Horn +1 for refresh
     sets.idle.Avatar.Favor = {head="Beckoner's Horn"}
 --    sets.idle.Avatar.Melee = {back="Samanisi Cape",waist="Mujin Obi"}
-        
+
     sets.perp = {}
     -- Caller's Bracer's halve the perp cost after other costs are accounted for.
     -- Using -10 (Gridavor, ring, Conv.feet), standard avatars would then cost 5, halved to 2.
     -- We can then use Hagondes Coat and end up with the same net MP cost, but significantly better defense.
     -- Weather is the same, but we can also use the latent on the pendant to negate the last point lost.
-    sets.perp.Day = {hands="Caller's Bracers +2"}
-    sets.perp.Weather = {neck="Caller's Pendant",hands="Caller's Bracers +2"}
+    -- sets.perp.Day = {hands="Caller's Bracers +2"}
+    -- sets.perp.Weather = {neck="Caller's Pendant",hands="Caller's Bracers +2"}
     -- Carby: Mitts+Conv.feet = 1/tick perp.  Everything else should be +refresh
 --    sets.perp.Carbuncle = {main="Bolelabunga",sub="Genbu's Shield",
 --        head="Convoker's Horn +1",body="Hagondes Coat",hands="Carbuncle Mitts",legs="Nares Trews",feet="Convoker's Pigaches"}
@@ -519,7 +519,7 @@ function init_gear_sets()
     sets.perp.Alexander = sets.midcast.Pet.BloodPactWard
 
     sets.perp.staff_and_grip = {main=gear.perp_staff,sub="Vox Grip"}
-    
+
 --     -- Defense sets
 --     sets.defense.PDT = {main=gear.Staff.PDT,
 --         head="Hagondes Hat",neck="Wiglen Gorget",ear1="Gifted Earring",ear2="Loquacious Earring",
@@ -534,14 +534,14 @@ function init_gear_sets()
 --         waist="Fucho-no-Obi",legs="Bokwus Slops",feet="Hagondes Sabots"}
 
     sets.Kiting = {feet="Herald's Gaiters"}
-    
+
     sets.latent_refresh = {waist="Fucho-no-Obi"}
-    
+
 
     --------------------------------------
     -- Engaged sets
     --------------------------------------
-    
+
     -- Normal melee group
     sets.engaged = sets.idle.Avatar
         -- {ammo="Sancus Sachet",
@@ -661,11 +661,11 @@ function customize_idle_set(idleSet)
             idleSet = set_combine(idleSet, sets.idle.Avatar.Melee)
         end
     end
-    
+
     if player.mpp < 51 then
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
-    
+
     return idleSet
 end
 
@@ -721,24 +721,24 @@ function handle_petweather()
         add_to_chat(122, "You can not cast storm spells")
         return
     end
-        
+
     if not pet.isvalid then
         add_to_chat(122, "You do not have an active avatar.")
         return
     end
-    
+
     local element = pet.element
     if element == 'Thunder' then
         element = 'Lightning'
     end
-    
+
     if S{'Light','Dark','Lightning'}:contains(element) then
         add_to_chat(122, 'You do not have access to '..elements.storm_of[element]..'.')
         return
-    end 
-    
+    end
+
     local storm = elements.storm_of[element]
-    
+
     if storm then
         send_command('@input /ma "'..elements.storm_of[element]..'" <me>')
     else
@@ -758,7 +758,7 @@ function handle_siphoning()
     local stormElementToUse
     local releasedAvatar
     local dontRelease
-    
+
     -- If we already have a spirit out, just use that.
     if pet.isvalid and spirits:contains(pet.name) then
         siphonElement = pet.element
@@ -792,7 +792,7 @@ function handle_siphoning()
             end
         end
     end
-    
+
     -- If we decided to use a storm, set that as the spirit element to cast.
     if stormElementToUse then
         siphonElement = stormElementToUse
@@ -801,44 +801,44 @@ function handle_siphoning()
     else
         siphonElement = world.day_element
     end
-    
+
     local command = ''
     local releaseWait = 0
-    
+
     if pet.isvalid and avatars:contains(pet.name) then
         command = command..'input /pet "Release" <me>;wait 1.1;'
         releasedAvatar = pet.name
         releaseWait = 10
     end
-    
+
     if stormElementToUse then
         command = command..'input /ma "'..elements.storm_of[stormElementToUse]..'" <me>;wait 4;'
         releaseWait = releaseWait - 4
     end
-    
+
     if not (pet.isvalid and spirits:contains(pet.name)) then
         command = command..'input /ma "'..elements.spirit_of[siphonElement]..'" <me>;wait 4;'
         releaseWait = releaseWait - 4
     end
-    
+
     command = command..'input /ja "Elemental Siphon" <me>;'
     releaseWait = releaseWait - 1
     releaseWait = releaseWait + 0.1
-    
+
     if not dontRelease then
         if releaseWait > 0 then
             command = command..'wait '..tostring(releaseWait)..';'
         else
             command = command..'wait 1.1;'
         end
-        
+
         command = command..'input /pet "Release" <me>;'
     end
-    
+
     if releasedAvatar then
         command = command..'wait 1.1;input /ma "'..releasedAvatar..'" <me>'
     end
-    
+
     send_command(command)
 end
 
@@ -867,20 +867,20 @@ function handle_pacts(cmdParams)
         add_to_chat(123,'No pact type given.')
         return
     end
-    
+
     local pact = cmdParams[2]:lower()
-    
+
     if not pacts[pact] then
         add_to_chat(123,'Unknown pact type: '..tostring(pact))
         return
     end
-    
+
     if pacts[pact][pet.name] then
         if pact == 'astralflow' and not buffactive['astral flow'] then
             add_to_chat(122,'Cannot use Astral Flow pacts at this time.')
             return
         end
-        
+
         -- Leave out target; let Shortcuts auto-determine it.
         send_command('@input /pet "'..pacts[pact][pet.name]..'"')
     else
@@ -916,9 +916,9 @@ function create_pact_timer(spell_name)
                 ward_duration = ward_duration + skill
             end
         end
-        
+
         local timer_cmd = 'timers c "'..spell_name..'" '..tostring(ward_duration)..' down'
-        
+
 --        if wards.icons[spell_name] then
 --            timer_cmd = timer_cmd..' '..wards.icons[spell_name]
 --        end
@@ -927,13 +927,13 @@ function create_pact_timer(spell_name)
     end
 end
 
-    
+
 -- Select default macro book on initial load or subjob change.
 function select_default_macro_book()
 --    if reset == 'reset' then
         -- lost pet, or tried to use pact when pet is gone
 --    end
-    
+
     -- Default macro set/book
     set_macro_page(3, 3)
 end
