@@ -3,8 +3,7 @@
 -- Last Updated: 05/03/14 7:30 AM *Changed HB Rule* --
 
 
-toau_zones = 
-S{
+toau_zones = S{
     "Leujaoam Sanctum",             --  Assault
     "Mamool Ja Training Grounds",   --  Assault
     "Lebros Cavern",                --  Assault
@@ -52,7 +51,7 @@ function get_sets()
         hands   = "Sulevia's Gauntlets +2",
         ring1   = "Defending Ring",
         ring2   = "Sheltered Ring",
-        back    = { name="Brigantia's Mantle", 
+        back    = { name="Brigantia's Mantle",
                     augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
         waist   = "Ioskeha Belt",
         legs    = "Sulevia's Cuisses +2",
@@ -82,12 +81,12 @@ function get_sets()
         hands   = "Sulevia's Gauntlets +2",
         ring1   = "Niqmaddu Ring",
         ring2   = "Flamma Ring",
-        back    = { name="Brigantia's Mantle", 
+        back    = { name="Brigantia's Mantle",
                     augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
         waist   = "Ioskeha Belt",
         legs    = "Sulevia's Cuisses +2",
         feet    = "Flamma Gambieras +2"}
-    
+
     -- Ryunohige(AM3 Up) TP Sets --
     -- sets.TP.Oathkeeper
     -- sets.TP.Upukirex
@@ -97,8 +96,7 @@ function get_sets()
     sets.WS = {}
 
     -- WS Sets --
-    sets.WS.Drakesbane = 
-    {
+    sets.WS.Drakesbane = {
         ammo="Knobkierrie",
         head="Valorous Mask",
         neck="Light Gorget",
@@ -113,9 +111,8 @@ function get_sets()
         legs="Vishap Brais +2",
         feet="Sulevia's Leggings +2"
     }
-            
-    sets.WS.Stardiver = 
-    {
+
+    sets.WS.Stardiver = {
         ammo="Knobkierrie",
         head="Flamma Zucchetto +2",
         neck="Shadow Gorget",
@@ -130,9 +127,8 @@ function get_sets()
         legs="Vishap Brais +2",
         feet="Sulevia's Leggings +2"
     }
-            
-    sets.WS["Camlann's Torment"] = 
-    {
+
+    sets.WS["Camlann's Torment"] = {
         ammo="Knobkierrie",
         head="Flamma Zucchetto +2",
         neck="Light Gorget",
@@ -180,8 +176,7 @@ function get_sets()
     sets.JA['Call Wyvern'] = {body="Pteroslaver Mail"}
 
     sets.Pet = {}
-    sets.Pet.WyvernHP = 
-    {
+    sets.Pet.WyvernHP = {
         head="Ptero. Armet +1",
         neck="Lancer's Torque",
         ear1="Lancer's Earring",
@@ -194,8 +189,7 @@ function get_sets()
         feet="Ptero. Greaves +1"
     }
 
-    sets.JA["Spirit Link"] = set_combine(sets.Pet.WyvernHP,
-    {
+    sets.JA["Spirit Link"] = set_combine(sets.Pet.WyvernHP, {
         head="Vishap Armet +1",
         hands="Peltast's Vambraces +1"
     })
@@ -204,15 +198,13 @@ function get_sets()
     sets.Pet["Steady Wing"] = set_combine(sets.Pet.WyvernHP)
 
     -- Healing Breath Trigger --
-    sets.HealingBreathTrigger = set_combine(sets.Pet.WyvernHP,
-    {
+    sets.HealingBreathTrigger = set_combine(sets.Pet.WyvernHP, {
         head="Vishap Armet +1"
     })
 
     sets.Precast = {}
     -- Fastcast Set --
-    sets.Precast.FastCast = 
-    {
+    sets.Precast.FastCast = {
         hands="Leyline Gloves",
         ear1="Loquac. Earring",
         ring1="Evanescence Ring",
@@ -220,8 +212,7 @@ function get_sets()
 
     sets.Midcast = {}
     -- Magic Haste Set --
-    sets.Midcast.Haste = set_combine(sets.PDT,
-    {
+    sets.Midcast.Haste = set_combine(sets.PDT, {
         head="Otomi Helm",
         hands="Cizin Mufflers +1",
         waist="Goading Belt",
@@ -229,14 +220,13 @@ function get_sets()
         feet="Huginn Gambieras"
     })
 
-    sets.Midcast.Trust = 
-    {
-    	head="Vishap Armet +1",
-    	body="Vishap Mail +1",
-    	hands="Vishap Finger Gauntlets +1",
-    	legs="vishap brais +2",
-    	feet="Vishap Greaves +1"
-	}
+    sets.Midcast.Trust = {
+        head="Vishap Armet +1",
+        body="Vishap Mail +1",
+        hands="Vishap Finger Gauntlets +1",
+        legs="vishap brais +2",
+        feet="Vishap Greaves +1"
+    }
 end
 
 function pretarget(spell,action)
@@ -348,7 +338,7 @@ function midcast(spell,action)
     if spell.english == 'Ranged' then
         equip({ammo="Pebble"})
     elseif spell.type == "Trust" then
-    	equip(sets.Midcast.Trust)
+        equip(sets.Midcast.Trust)
     elseif spell.action_type == 'Magic' then
         if string.find(spell.english,'Utsusemi') then
             if spell.english == 'Utsusemi: Ichi' and (buffactive['Copy Image'] or buffactive['Copy Image (2)']) then
@@ -356,16 +346,16 @@ function midcast(spell,action)
             end
             equip(sets.Midcast.Haste)
         elseif spell.english == 'Monomi: Ichi' then
-	        if buffactive['Sneak'] then
-	            send_command('@wait 1.7;cancel sneak')
-	        end        
-	    elseif HB_Mage_SubJob:contains(player.sub_job) and pet.isvalid then
-	        equip(sets.HealingBreathTrigger)
-	    elseif HB_DD_SubJob:contains(player.sub_job) and player.hpp < 34 and pet.isvalid then
-	        equip(sets.HealingBreathTrigger)
-	    else
-	       equip(sets.Midcast.Haste)
-	    end
+            if buffactive['Sneak'] then
+                send_command('@wait 1.7;cancel sneak')
+            end
+        elseif HB_Mage_SubJob:contains(player.sub_job) and pet.isvalid then
+            equip(sets.HealingBreathTrigger)
+        elseif HB_DD_SubJob:contains(player.sub_job) and player.hpp < 34 and pet.isvalid then
+            equip(sets.HealingBreathTrigger)
+        else
+           equip(sets.Midcast.Haste)
+        end
      end
 end
 
@@ -424,11 +414,11 @@ function status_change(new,old)
         -- add_to_chat(123, toau_zones:contains(zone))
 
         if toau_zones:contains(world.area) then
-            equip(sets.Idle.ToAU)   
+            equip(sets.Idle.ToAU)
         else
             equip(sets.Idle[IdleArray[IdleIndex]])
         end
-    
+
 
     end
     if Twilight == 'Twilight' then

@@ -674,7 +674,7 @@ function get_precast_set(spell, spellMap)
 
     
     -- Once we have a named base set, do checks for specialized modes (casting mode, weaponskill mode, etc).
-    
+
     if spell.action_type == 'Magic' then
         if equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
@@ -707,7 +707,7 @@ function get_midcast_set(spell, spellMap)
     if not sets.midcast then
         return {}
     end
-    
+
     local equipSet = sets.midcast
 
     mote_vars.set_breadcrumbs:append('sets')
@@ -723,7 +723,7 @@ function get_midcast_set(spell, spellMap)
     elseif spell.action_type == 'Item' then
         cat = 'Item'
     end
-    
+ 
     -- If no proper sub-category is defined in the job file, bail out.
     if cat then
         if equipSet[cat] then

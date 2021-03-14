@@ -41,7 +41,7 @@ melee_jobs = S{
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
-    
+
     -- Load and initialize the include file.
     include('Mote-Include.lua')
     include('common_lists.lua')
@@ -97,8 +97,8 @@ function init_gear_sets()
     sets.CP      = { back = "Mecistopins Mantle" }
 
     --  Timing/Area Specific Sets
-    sets.WeatherBoost = { 
-        waist = "Hachirin-no-Obi", 
+    sets.WeatherBoost = {
+        waist = "Hachirin-no-Obi",
         back  = "Twilight Mantle",
     }
     sets.WSBoost = {
@@ -107,7 +107,7 @@ function init_gear_sets()
     }
 
     --  Idle Sets
-    sets.Idle = 
+    sets.Idle =
     {
         main    = "Bolelabunga",
         sub     = "Ammurapi Shield",
@@ -128,7 +128,7 @@ function init_gear_sets()
     }
     sets.IdleToAU = { ring1 = "Balrahn's Ring" }
 
-    sets.Resting = 
+    sets.Resting =
     {
         main    = "Boonwell Staff",      -- +18
         sub     = "Ariesian Grip",       -- +1
@@ -152,13 +152,13 @@ function init_gear_sets()
     sets.JA.Devotion     = { head  = "Piety Cap +3" }
     sets.JA.Benediction  = { body  = "Piety Briault +3" }
     sets.JA.Martyr       = { hands = "Piety Mitts +3" }
-    sets.JA.DivineCaress = 
-    { 
-        hands = "Ebers Pantaloons +1", 
-        back = "Mending Cape" 
+    sets.JA.DivineCaress =
+    {
+        hands = "Ebers Pantaloons +1",
+        back = "Mending Cape"
     }
 
-    sets.Trust = 
+    sets.Trust =
     {
         main    = "Bolelabunga",
         sub     = "Ammurapi Shield",
@@ -237,10 +237,10 @@ function init_gear_sets()
     sets.Precast.Banish     = set_combine(sets.Precast.Divine, {})
 
     -- Midcast Sets
-    sets.Midcast            = {}    
+    sets.Midcast            = {}
     sets.Midcast.Fastcast   = {}
-    
-    sets.Midcast.Enhancing = 
+
+    sets.Midcast.Enhancing =
     {
         main    = "Beneficus",                  --  Enhancing Maigc +15
         sub     = "Ammurapi Shield",            --  Enhancing magic duration +10%
@@ -258,11 +258,11 @@ function init_gear_sets()
         legs    = "Piety Pantaloons +3",        --  Enhancing Maigc +26
         feet    = "Theophany Duckbills +3"      --  Enhancing Magic +21, Enhancing Magic Duration +10%
     }
-    sets.Midcast.EnhancingDuration = set_combine(sets.Midcast.Enhancing, 
+    sets.Midcast.EnhancingDuration = set_combine(sets.Midcast.Enhancing,
     {
         main    = "Beneficus",                  --  Enhancing Maigc +15
         sub     = "Ammurapi Shield",            --  Enhancing magic duration +10%
-        hands   = { name        = "Telchine Gloves", 
+        hands   = { name        = "Telchine Gloves",
                     augments    = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
         feet    = "Theophany Duckbills +3",     --  Enhancing Magic +21, Enhancing Magic Duration +10%
     })
@@ -328,7 +328,7 @@ function init_gear_sets()
         waist   = "Bishop's Sash",          --  Healing Magic +05
         legs    = "Ebers Pantaloons +1",    --  Healing Magic +00, Divine Benison +2
         feet    = { name        = "Vanya Clogs",        --  Healing Magic +40, Cursna +5
-                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}                 
+                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}
     }
     --  Slot missing: Main - Gambanteinn i119 III: Cursna +100
     --  Totals:
@@ -346,10 +346,10 @@ function init_gear_sets()
                     augments    = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}},
         legs    = "Theophany Pantaloons +3",            --  Healing Magic +00, Cursna +21
         feet    = { name        = "Vanya Clogs",        --  Healing Magic +40, Cursna +5
-                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}        -- Gendewitha Galoshes +1: +10 Cursna.  Not sure if it'll be better than what I already have                     
+                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}        -- Gendewitha Galoshes +1: +10 Cursna.  Not sure if it'll be better than what I already have
     })
 
-    sets.Midcast.Cure = 
+    sets.Midcast.Cure =
     {
         main    = "Queller Rod",                             --  Cure +10%, Cure Pot. II +2%, Healing Magic +15, MND +6, Enmity -10
         sub     = "Sors Shield",                             --  Cure +3%, Cure Cast Time -5%, Enmity -5
@@ -358,7 +358,7 @@ function init_gear_sets()
         neck    = "Colossus's Torque",                       --  Healing Magic +7 (Lightsday +10.  There is a torque which gives +10 to all magic skills)
         ear1    = "Glorious Earring",                        --  Cure Pot. II +2%, MP +30, Enmity -5
         ear2    = "Mendicant's Earring",                     --  Cure +5%, Conserve MP +2
-        -- body    = "Ebers Bliaud +1", 	                 --  Allfatus Solace +14
+        -- body    = "Ebers Bliaud +1",                      --  Allfatus Solace +14
         body    = "Theophany Briault +3",                    --  Cure Pot. II +6%, MND +39, Haste +3%, Enmity -6
         hands   = "Theophany Mitts +3",                      --  Cure Pot. II +4%, Healing Magic +21, MND +48, Haste +3%, Enmity -7
         ring1   = "Janniston Ring",                          --  Cure Pot. II +5%, Enmity -7                        (Nice to have +1)
@@ -371,9 +371,9 @@ function init_gear_sets()
                     augments    = {'MP+50','"Cure" potency +7%','Enmity-6',}}
     }
     sets.Midcast.CureSolace = set_combine(sets.Midcast.Cure, {})
-    sets.Midcast.CureBonus = 
+    sets.Midcast.CureBonus =
     {
-        main        = { name        = "Queller Rod", 
+        main        = { name        = "Queller Rod",
                         augments    = {'Healing magic skill +15','"Cure" potency +10%','"Cure" spellcasting time -7%',}},
         sub         = "Sors Shield",
         ammo        = "Quartz Tathlum +1",
@@ -381,7 +381,7 @@ function init_gear_sets()
         body        = "Theo. Briault +3",
         hands       = "Theophany Mitts +3",
         legs        = "Ebers Pantaloons +1",
-        feet        = { name        = "Kaykaus Boots", 
+        feet        = { name        = "Kaykaus Boots",
                         augments    = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
         neck        = "Cleric's Torque",
         waist       = "Hachirin-no-Obi",
@@ -419,7 +419,7 @@ function init_gear_sets()
         body    = "Theophany Briault +3",
         ring2   = "Kishar Ring",
         waist   = "Casso Sash",
-        legs    = { name        = "Chironic Hose", 
+        legs    = { name        = "Chironic Hose",
                     augments    = {'Pet: DEX+13','Accuracy+3','Accuracy+2 Attack+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
     })
     sets.Midcast.EnfeeblingMND = set_combine(sets.Midcast.Enfeebling, {})
@@ -438,7 +438,7 @@ function init_gear_sets()
         ear2    = "Hecate's Earring",           --  +06 Magic Attack Bonus, +3% Magic Crit. Hit
         back    = "Disperser's Cape",           --  Potency of Banish vs. Undead +7
         waist   = "Aswang Sash",                --  +03 Magic Attack Bonus
-        legs    = { name        = "Chironic Hose", 
+        legs    = { name        = "Chironic Hose",
                     augments    = {'Pet: DEX+13','Accuracy+3','Accuracy+2 Attack+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
     })
 
@@ -455,12 +455,12 @@ function init_gear_sets()
     --     head="Gendewitha Caubeen",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
     --     body="Gendewitha Bliaut",hands="Gendewitha Gages",ring1="Sheltered Ring",ring2="Paguroidea Ring",
     --     back="Umbra Cape",waist="Witful Belt",legs="Nares Trews",feet="Herald's Gaiters"}
-    
+
     -- sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Incantor Stone",
     --     head="Nahtirah Hat",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
     --     body="Gendewitha Bliaut",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Meridian Ring",
     --     back="Umbra Cape",waist="Witful Belt",legs="Nares Trews",feet="Gendewitha Galoshes"}
-    
+
     -- Defense sets
 
     -- sets.defense.PDT = {main=gear.Staff.PDT,sub="Achaq Grip",
@@ -481,7 +481,7 @@ function init_gear_sets()
     -- sets if more refined versions aren't defined.
     -- If you create a set with both offense and defense modes, the offense mode should be first.
     -- EG: sets.engaged.Dagger.Accuracy.Evasion
-    
+
     -- Basic set for if no TP weapon is defined.
     -- sets.engaged = {
     --     head="Nahtirah Hat",neck="Asperity Necklace",ear1="Bladeborn Earring",ear2="Steelflash Earring",
@@ -497,7 +497,7 @@ function init_gear_sets()
     --     head="Nahtirah Hat",neck=gear.ElementalGorget,ear1="Bladeborn Earring",ear2="Steelflash Earring",
     --     body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Rajas Ring",ring2="K'ayres Ring",
     --     back="Refraction Cape",waist=gear.ElementalBelt,legs="Gendewitha Spats",feet="Gendewitha Galoshes"}
-    
+
     -- sets.precast.WS['Flash Nova'] = {
     --     head="Nahtirah Hat",neck="Stoicheion Medal",ear1="Friomisi Earring",ear2="Hecate's Earring",
     --     body="Vanir Cotehardie",hands="Yaoyotl Gloves",ring1="Rajas Ring",ring2="Strendu Ring",
@@ -527,7 +527,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     if spell.english == "Paralyna" and buffactive.Paralyzed then
         eventArgs.handled = true
     end
-    
+
 end
 
 
@@ -595,12 +595,12 @@ function customize_idle_set(idleSet)
 
     --  CP Mode Toggle
     --  Lock in back piece for bonus CP
-	if state.CP.current == 'on' then
-		equip(sets.CP)
-		disable('back')
-	else
-		enable('back')
-	end
+    if state.CP.current == 'on' then
+        equip(sets.CP)
+        disable('back')
+    else
+        enable('back')
+    end
 
     --  Dynamis Mode Toggle
     --  Lock in neck piece for kill counts
@@ -627,13 +627,13 @@ end
 -- Called by the 'update' self-command.
 function job_update(cmdParams, eventArgs)
     if cmdParams[1] == 'user' and not areas.Cities:contains(world.area) then
-        local needsArts = 
+        local needsArts =
             player.sub_job:lower() == 'sch' and
             not buffactive['Light Arts'] and
             not buffactive['Addendum: White'] and
             not buffactive['Dark Arts'] and
             not buffactive['Addendum: Black']
-            
+
         if not buffactive['Afflatus Solace'] and not buffactive['Afflatus Misery'] then
             if needsArts then
                 send_command('@input /ja "Afflatus Solace" <me>;wait 1.2;input /ja "Light Arts" <me>')
