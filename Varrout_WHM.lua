@@ -468,6 +468,12 @@ function job_precast(spell, action, spellMap, eventArgs)
         return
     elseif spell.type == "Trust" then
         equip(sets.Trust)
+    elseif spell.name == 'Dia' then
+        cancel_spell()
+        send_command('input /ma "Dia II" <t>')
+    elseif spell.name == 'Reraise' then
+        cancel_spell()
+        send_command('input /ma "Reraise IV" <me>')
     end
 
     -- if spell.english == 'Lunge' then
@@ -497,31 +503,50 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
 
-    if player.tp > player_tp_lock then
-        melee_equip_lock()
-    end
+    -- if player.tp > player_tp_lock then
+    --     melee_equip_lock()
+    -- end
+
+    local equipSet = {}
 
     if spell.action_type == 'Magic' then
         spell_element_match = spell.element == world.weather_element or spell.element == world.day_element
+        -- add_to_chat(100, tostring(spellMap))
 
-        if spell_element_match then
-        --  Combine sets for matched day and/or weather to spell element
+        if (spell.skill == 'Enfeebling Magic' or spell.skill == 'Divine Magic') then
             if spell.skill == 'Enfeebling Magic' then
-                equipSet = set_combine(sets.midcast['Enfeebling Magic'], sets.midcast.WeatherBoost)
-                equip(equipSet)
+                equipSet = sets.midcast['Enfeebling Magic']
             elseif spell.skill == 'Divine Magic' then
-                -- add_to_chat(100, tostring(spell))
-                -- add_to_chat(100, tostring(action))
-                -- add_to_chat(100, tostring(spellMap))
-                -- add_to_chat(100, tostring(eventArgs))
                 equipSet = sets.midcast['Divine Magic']
             end
-        elseif spell.skill == 'Healing Magic' and state.Buff.DivineCaress and not cure_names:contains(spell.name) then
-        --  Equip if Divine Caress is active
-            equipSet = set_combine( sets.midcast.NASpell, sets.midcast.Caress)
-            equip(equipSet)
+
+            if spell_element_match then
+                equipSet = set_combine(equipSet, sets.midcast>WeatherBoost)
+            end
+
+        elseif (spell.skill == 'Healing Magic' and not cure_names:contains(spellMap)) or spell.name == "Erase" then
+            equipSet = sets.midcast.NASpell
+
+            --  If Divine Caress is active
+            if state.Buff.DivineCaress then
+                equipSet = set_combine(equipSet, sets.midcast.Caress)
+            end
+
+            --  Cursna removal gear is most important. Combine last
+            if spell.name == 'Cursna' then
+                equipSet = set_combine(equipSet, sets.midcast.Cursna)
+            end
+
+        elseif cure_names:contains(spellMap) then
+            if spell_element_match then
+                equipSet = sets.midcast.CureBonus
+            else
+                equipSet = sets.midcast.Cure
+            end
         end
     end
+
+    equip(equipSet)
 
     if spell.type == "Trust" then
         equip(sets.Trust)
@@ -534,9 +559,9 @@ function customize_idle_set(idleSet)
     --    windower.add_to_chat(9, "Currently in: " .. world.area)
     -- end
 
-    if player.tp < player_tp_lock then
-        melee_equip_unlock()
-    end
+    -- if player.tp < player_tp_lock then
+    --     melee_equip_unlock()
+    -- end
     check_special_ring_equipped()
 
     --  Checking special states

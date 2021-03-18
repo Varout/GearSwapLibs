@@ -153,5 +153,5 @@ job_type_mage = S{
     "BLU",
     "SCH",
     "GEO",
-    "SMN",,
+    "SMN",
 }

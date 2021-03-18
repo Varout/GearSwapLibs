@@ -69,7 +69,7 @@ function get_sets()
     sets.TP = {}
 
     -- Ryunohige(AM3 Down) TP Sets --
-    sets.TP["Shining One"] = {
+    sets.TP["Trishula"] = {
         main    = "Kaja Lance",
         sub     = "Utu Grip",
         ammo    = "Vanir Battery",
@@ -159,25 +159,35 @@ function get_sets()
         back    = "Brigantia's Mantle",
         waist   = "Goading Belt",
         legs    = "Flamma Dirs +2",
-        feet    = "Vishap Greaves +1"}
+        feet    = "Vishap Greaves +1"
+    }
 
     sets.JA["High Jump"] = set_combine(sets.JA.Jump,{
-        legs    = "Vishap brais +2"})
+        legs    = "Vishap brais +2"
+    })
 
     sets.JA["Spirit Jump"] = set_combine(sets.JA.Jump,{
         feet    = "Peltast's Schynbalds",
-        legs    = "Peltast's Cuissots +1"})
+        legs    = "Peltast's Cuissots +1"
+    })
 
     sets.JA["Soul Jump"] = set_combine(sets.JA.Jump,{
-        legs    = "Peltast's Cuissots +1"})
+        legs    = "Peltast's Cuissots +1"
+    })
 
-    sets.JA.Angon = {ammo="Angon",ear1="Dragoon's Earring",hands="Pteroslaver Finger Gauntlets"}
-    sets.JA["Ancient Circle"] = {legs="vishap brais +2"}
-    sets.JA['Call Wyvern'] = {body="Pteroslaver Mail"}
+    sets.JA["Deep Breathing"] = {head = "Pteroslaver Armet +3"}
+
+    sets.JA["Ancient Circle"] = {legs = "vishap brais +2"}
+    sets.JA['Call Wyvern'] = {body = "Pteroslaver Mail +1"}
+    sets.JA["Angon"] = {
+        ammo     = "Angon",
+        left_ear = "Dragoon's Earring",
+        hands    = "Pteroslaver Finger Gauntlets +1"
+    }
 
     sets.Pet = {}
     sets.Pet.WyvernHP = {
-        head="Ptero. Armet +1",
+        head="Ptero. Armet +3",
         neck="Lancer's Torque",
         ear1="Lancer's Earring",
         ear2="Dragoon's Earring",
@@ -202,17 +212,17 @@ function get_sets()
         head="Vishap Armet +1"
     })
 
-    sets.Precast = {}
+    sets.precast = {}
     -- Fastcast Set --
-    sets.Precast.FastCast = {
+    sets.precast.FastCast = {
         hands="Leyline Gloves",
         ear1="Loquac. Earring",
         ring1="Evanescence Ring",
     }
 
-    sets.Midcast = {}
+    sets.midcast = {}
     -- Magic Haste Set --
-    sets.Midcast.Haste = set_combine(sets.PDT, {
+    sets.midcast.Haste = set_combine(sets.PDT, {
         head="Otomi Helm",
         hands="Cizin Mufflers +1",
         waist="Goading Belt",
@@ -220,7 +230,7 @@ function get_sets()
         feet="Huginn Gambieras"
     })
 
-    sets.Midcast.Trust = {
+    sets.midcast.Trust = {
         head="Vishap Armet +1",
         body="Vishap Mail +1",
         hands="Vishap Finger Gauntlets +1",
@@ -313,10 +323,10 @@ function precast(spell,action)
                     add_to_chat(123,'Utsusemi Canceled: [3+ Images]')
                     return
                 else
-                    equip(sets.Precast.FastCast)
+                    equip(sets.precast.FastCast)
                 end
             else
-                equip(sets.Precast.FastCast)
+                equip(sets.precast.FastCast)
             end
         end
     elseif spell.type == "Waltz" then
@@ -338,13 +348,13 @@ function midcast(spell,action)
     if spell.english == 'Ranged' then
         equip({ammo="Pebble"})
     elseif spell.type == "Trust" then
-        equip(sets.Midcast.Trust)
+        equip(sets.midcast.Trust)
     elseif spell.action_type == 'Magic' then
         if string.find(spell.english,'Utsusemi') then
             if spell.english == 'Utsusemi: Ichi' and (buffactive['Copy Image'] or buffactive['Copy Image (2)']) then
                 send_command('@wait 1.7;cancel Copy Image*')
             end
-            equip(sets.Midcast.Haste)
+            equip(sets.midcast.Haste)
         elseif spell.english == 'Monomi: Ichi' then
             if buffactive['Sneak'] then
                 send_command('@wait 1.7;cancel sneak')
@@ -354,7 +364,7 @@ function midcast(spell,action)
         elseif HB_DD_SubJob:contains(player.sub_job) and player.hpp < 34 and pet.isvalid then
             equip(sets.HealingBreathTrigger)
         else
-           equip(sets.Midcast.Haste)
+           equip(sets.midcast.Haste)
         end
      end
 end

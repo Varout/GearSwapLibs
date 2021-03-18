@@ -177,7 +177,7 @@ function init_gear_sets()
         neck="Sanctity Necklace",
         waist="Ioskeha Belt",
         left_ear="Mache Earring",
-        right_ear="Bladeborn Earring",
+        right_ear="Odr Earring",
         left_ring="Petrov Ring",
         right_ring="Rajas Ring",
         back="Amemet Mantle +1",
