@@ -2,7 +2,6 @@
 -- ** I Use Some of Motenten's Functions ** --
 -- Last Updated: 05/03/14 7:30 AM *Changed HB Rule* --
 
-
 toau_zones = S{
     "Leujaoam Sanctum",             --  Assault
     "Mamool Ja Training Grounds",   --  Assault
@@ -15,7 +14,6 @@ toau_zones = S{
     "Silver Sea Remnants",          --  Salvage
     "Zhayolm Remnants"              --  Salvage
 }
-
 
 function get_sets()
     AccIndex = 1
@@ -232,7 +230,7 @@ function get_sets()
 
     sets.midcast.Trust = {
         head="Vishap Armet +1",
-        body="Vishap Mail +1",
+        body="Vishap Mail +2",
         hands="Vishap Finger Gauntlets +1",
         legs="vishap brais +2",
         feet="Vishap Greaves +1"
@@ -243,28 +241,26 @@ function pretarget(spell,action)
     if spell.action_type == 'Magic' and buffactive.silence then -- Auto Use Echo Drops If You Are Silenced --
         cancel_spell()
         send_command('input /item "Echo Drops" <me>')
-    elseif spell.english == "Spirit Jump" and not pet.isvalid then -- Change Spirit Jump To Jump If Wyvern Is Not Present --
-        cancel_spell()
-        send_command('input /ja Jump <t>')
-    elseif spell.english == "Soul Jump" and not pet.isvalid then -- Change Soul Jump To High Jump If Wyvern Is Not Present --
-        cancel_spell()
-        send_command('input /ja "High Jump" <t>')
+    -- elseif spell.english == "Soul Jump" and not pet.isvalid then -- Change Soul Jump To High Jump If Wyvern Is Not Present --
+    --     cancel_spell()
+    --     send_command('input /ja "High Jump" <t>')
     elseif spell.english == "Dismiss" and pet.hpp < 100 then -- Cancel Dismiss If Wyvern's HP Is Under 100% --
         cancel_spell()
-        add_to_chat(123, spell.english .. ' Canceled: [' .. pet.hpp .. ']')
+        add_to_chat(123, spell.english .. ' Canceled - [' .. pet.name .. ': ' .. pet.hpp .. ']')
         return
     -- elseif spell.english == "Call Wyvern" and pet.isvalid then -- Change Call Wyvern To Dismiss If Wyvern Is Present --
     --     cancel_spell()
     --     send_command('Dismiss')
-    elseif spell.english == "Berserk" and buffactive.Berserk then -- Change Berserk To Aggressor If Berserk Is On --
-        cancel_spell()
-        send_command('Aggressor')
-    elseif spell.english == "Seigan" and buffactive.Seigan then -- Change Seigan To Third Eye If Seigan Is On --
-        cancel_spell()
-        send_command('ThirdEye')
+    -- elseif spell.english == "Berserk" and buffactive.Berserk then -- Change Berserk To Aggressor If Berserk Is On --
+    --     cancel_spell()
+    --     send_command('Aggressor')
+    -- elseif spell.english == "Seigan" and buffactive.Seigan then -- Change Seigan To Third Eye If Seigan Is On --
+    --     cancel_spell()
+    --     send_command('ThirdEye')
     elseif spell.english == "Meditate" and player.tp > 2000 then -- Cancel Meditate If TP Is Above 2000 --
         cancel_spell()
         add_to_chat(123, spell.name .. ' Canceled: ['..player.tp..' TP]')
+        return
     elseif spell.type == "WeaponSkill" and spell.target.distance > target_distance and player.status == 'Engaged' then -- Cancel WS If You Are Out Of Range --
         cancel_spell()
         add_to_chat(123, spell.name..' Canceled: [Out of Range]')
@@ -273,9 +269,7 @@ function pretarget(spell,action)
 end
 
 function precast(spell,action)
-    if spell.english == 'Ranged' then
-        equip({ammo="Pebble"})
-    elseif spell.type == "WeaponSkill" then
+    if spell.type == "WeaponSkill" then
         if player.status ~= 'Engaged' then -- Cancel WS If You Are Not Engaged. Can Delete It If You Don't Need It --
             cancel_spell()
             add_to_chat(123,'Unable To Use WeaponSkill: [Disengaged]')
@@ -300,6 +294,16 @@ function precast(spell,action)
             equip(equipSet)
         end
     elseif spell.type == "JobAbility" then
+
+        local abil_recasts = windower.ffxi.get_ability_recasts()
+        if spell.english == 'Spirit Jump' and abil_recasts[spell.recast_id] > 0 then
+            cancel_spell()
+            send_command('input /ja "Jump" <t>')
+        elseif spell.english == 'Soul Jump' and abil_recasts[spell.recast_id] > 0 then
+            cancel_spell()
+            send_command('input /ja "High Jump" <t>')
+        end
+
         equipSet = sets.JA
         if equipSet[spell.english] then
             equipSet = equipSet[spell.english]
@@ -345,9 +349,7 @@ function precast(spell,action)
 end
 
 function midcast(spell,action)
-    if spell.english == 'Ranged' then
-        equip({ammo="Pebble"})
-    elseif spell.type == "Trust" then
+    if spell.type == "Trust" then
         equip(sets.midcast.Trust)
     elseif spell.action_type == 'Magic' then
         if string.find(spell.english,'Utsusemi') then
@@ -438,20 +440,20 @@ end
 
 function buff_change(buff,gain)
     buff = string.lower(buff)
-    if buff == "aftermath: lv.3" then -- AM3 Timer/Countdown --
-        if gain then
-            send_command('timers create "Aftermath: Lv.3" 180 down;wait 120;input /echo Aftermath: Lv.3 [WEARING OFF IN 60 SEC.];wait 30;input /echo Aftermath: Lv.3 [WEARING OFF IN 30 SEC.];wait 20;input /echo Aftermath: Lv.3 [WEARING OFF IN 10 SEC.]')
-        else
-            send_command('timers delete "Aftermath: Lv.3"')
-            add_to_chat(123,'AM3: [OFF]')
-        end
-    elseif buff == 'weakness' then -- Weakness Timer --
-        if gain then
-            send_command('timers create "Weakness" 300 up')
-        else
-            send_command('timers delete "Weakness"')
-        end
-    end
+    -- if buff == "aftermath: lv.3" then -- AM3 Timer/Countdown --
+    --     if gain then
+    --         send_command('timers create "Aftermath: Lv.3" 180 down;wait 120;input /echo Aftermath: Lv.3 [WEARING OFF IN 60 SEC.];wait 30;input /echo Aftermath: Lv.3 [WEARING OFF IN 30 SEC.];wait 20;input /echo Aftermath: Lv.3 [WEARING OFF IN 10 SEC.]')
+    --     else
+    --         send_command('timers delete "Aftermath: Lv.3"')
+    --         add_to_chat(123,'AM3: [OFF]')
+    --     end
+    -- elseif buff == 'weakness' then -- Weakness Timer --
+    --     if gain then
+    --         send_command('timers create "Weakness" 300 up')
+    --     else
+    --         send_command('timers delete "Weakness"')
+    --     end
+    -- end
     if buff == "sleep" and gain and player.hp > 200 and player.status == "Engaged" then -- Equip Berserker's Torque When You Are Asleep & Have 200+ HP --
         equip({neck="Berserker's Torque"})
     else
@@ -666,7 +668,7 @@ function find_player_in_alliance(name)
 end
 
 function sub_job_change(newSubjob, oldSubjob)
-    select_default_macro_book()
+    select_default_macro_book(true)
 end
 
 function set_macro_page(set,book)
@@ -694,7 +696,7 @@ function set_macro_page(set,book)
     end
 end
 
-function select_default_macro_book()
+function select_default_macro_book(isSubJobChange)
     -- Default macro set/book
     if player.sub_job == 'SAM' then
         set_macro_page(2, 6)
@@ -705,5 +707,25 @@ function select_default_macro_book()
     else
         set_macro_page(2, 6)
     end
-    send_command('wait 2; input /lockstyleset 004')
+
+    --  Only change stylelock if chaning main job to DRG
+    if not isSubJobChange then
+        randomise_stylelock()
+    end
+end
+
+--  Randomise Stylelock when changing main job to DRG
+--  010: AFv1 with Standard polearm
+--  011: AFv2 with Valkyrie
+--  012: AFv3 with Trishula
+--  013: Sulevia's with Shining One
+--  014: WTF getup with Blurred Lance
+function randomise_stylelock()
+    local random_number = math.floor(math.random()*4)
+    random_number = math.mod(random_number, 4) +10
+
+    local stylelock_string = '0' .. tostring(random_number)
+    -- send_command('@input /echo ' .. stylelock_string)
+
+    send_command('wait 2; input /lockstyleset ' .. stylelock_string)
 end
