@@ -249,7 +249,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.idle = {
-        main="Soulcleaver",
+        main="Montante",
         sub="Pole Grip",
         ammo="Voluspa Tathlum",
         head="Rawhide Mask",
