@@ -43,7 +43,6 @@ function get_sets()
         head    = "Valorous Mask",
         neck    = "Bathy Choker +1",
         ear1    = "Infused Earring",
-        -- ear2    = "Dignitary's Earring",
         ear2    = "Moonshade Earring",
         body    = "Vishap Mail +2",
         hands   = "Sulevia's Gauntlets +2",

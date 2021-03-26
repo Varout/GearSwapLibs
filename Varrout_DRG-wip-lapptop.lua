@@ -49,12 +49,37 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        body = "Visharp Mail +2",
-        hands = "Visharp F. G. +1"
+        ammo="Voluspa Tathlum",
+        head={ name="Valorous Mask", augments={'CHR+8','AGI+13','Crit.hit rate+3','Accuracy+6 Attack+6','Mag. Acc.+17 "Mag.Atk.Bns."+17',}},
+        body="Vishap Mail +2",
+        hands="Sulev. Gauntlets +2",
+        legs="Sulev. Cuisses +2",
+        feet="Sulev. Leggings +2",
+        neck="Bathy Choker +1",
+        waist="Ioskeha Belt",
+        left_ear="Infused Earring",
+        right_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+        left_ring="Defending Ring",
+        right_ring="Sheltered Ring",
+        back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
     }
 
-    sets.idle.Refresh = {
+    sets.idle.Refresh = sets.idle
 
+    sets.engaged = {
+        ammo="Voluspa Tathlum",
+        head="Flam. Zucchetto +2",
+        body="Flamma Korazin +2",
+        hands="Sulev. Gauntlets +2",
+        legs="Sulev. Cuisses +2",
+        feet="Flam. Gambieras +2",
+        neck="Asperity Necklace",
+        waist="Ioskeha Belt",
+        left_ear="Sherida Earring",
+        right_ear="Digni. Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Flamma Ring",
+        back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
     }
 
     --  Initialising Empty Sets
@@ -67,30 +92,87 @@ function init_gear_sets()
 
     --  Precast Weapon Skill Sets
     sets.precast.WS = {
-        left_ear = "Sherida Earring",
-        right_ear = "Ishvara Earring",
-        legs = "Vishap Brais +2"
     }
+
+    sets.precast.WS["Camlann's Torment"] = {
+        ammo="Voluspa Tathlum",
+        head={ name="Ptero. Armet +3", augments={'Enhances "Deep Breathing" effect',}},
+        body="Sulevia's Plate. +2",
+        hands="Sulev. Gauntlets +2",
+        legs="Vishap Brais +2",
+        feet="Sulev. Leggings +2",
+        neck="Light Gorget",
+        waist="Fotia Belt",
+        left_ear="Sherida Earring",
+        right_ear="Ishvara Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Sulevia's Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+    }
+
+    sets.precast.WS["Drakesbane"] = {
+        ammo="Voluspa Tathlum",
+        head="Flam. Zucchetto +2",
+        body="Flamma Korazin +2",
+        hands="Flam. Manopolas +2",
+        legs="Vishap Brais +2",
+        feet="Sulev. Leggings +2",
+        neck="Light Gorget",
+        waist="Fotia Belt",
+        left_ear="Sherida Earring",
+        right_ear="Ishvara Earring",
+        left_ring="Niqmaddu Ring",
+        right_ring="Flamma Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
+    }
+
     sets.precast.WS["Stardiver"] = {}
-    sets.precast.WS["Camlann's Torment"] = {}
-    sets.precast.WS["Drakesbane"] = {}
+
     sets.precast.WS["Impulse Drive"] = {}
-    sets.precast.WS["Sonic Thrust"] = {}
+
     sets.precast.WS["Leg Sweep"] = {}
-    sets.precast.WS["Penta Thrust"] = {}
 
     --  Precast Job Ability Sets
-    sets.precast.JA = {
-        body = "Vishap Mail +2"
-    }
-    sets.precast.JA["Call Wyvern"] = {}
+    sets.precast.JA = {}
+    -- sets.precast.JA["Call Wyvern"] = {}
+    -- sets.precast.JA["Fly High"] = {}
+    -- sets.precast.JA["Spirit Bond"] = {}
+    -- sets.precast.JA["Dragon Breaker"] = {}
+
     sets.precast.JA["Ancient Circle"] = {
         legs = "Vishap Brais +2"
     }
-    sets.precast.JA["Dragon Breaker"] = {}
+
     sets.precast.JA["Spirit Surge"] = {
-        body = "Pteroslaver Mail"
+        body = "Pteroslaver Mail +1"
     }
+
+    sets.precast.JA["Spirit Link"] = {
+        head = "Vishap Armet +2",
+        hands = "Pel. Vambraces +1",
+        feet = "Ptero. Greaves +1"
+    }
+
+    sets.precast.JA["Angon"] = {
+        hands = "Ptero. Fin. G. +1"
+    }
+
+    sets.precast.JA["Deep Breathing"] = {
+        head = "Ptero. Armet +3"
+    }
+
+    sets.precast.WyvernHP = {}
+
+    sets.precast.JA.SmitingBreath = {
+        head = "Ptero. Armet +2",
+        legs = "Ptero. Brais +1"
+    }
+
+    sets.precast.JA.RestoringBreath = {
+        head = "",
+        legs = "Vishap Brais +2"
+    }
+
     sets.precast.JumpBase = {
         ammo       = "Vanir Battery",
         head       = "Flam. Zucchetto +2",
@@ -121,28 +203,6 @@ function init_gear_sets()
         legs = "Pelt. Cuissots +1"
     })
     sets.precast.JA["Super Jump"] = {}
-    sets.precast.JA["Spirit Link"] = {
-        head = "Vishap Armet +1",
-        hands = "Pel. Vambraces +1",
-        feet = "Ptero. Greaves +1"
-    }
-    sets.precast.JA["Angon"] = {
-        hands = "Ptero. Fin. Gaunt."
-    }
-    sets.precast.JA["Deep Breathing"] = {
-        head = "Ptero. Armet +2"
-    }
-    sets.precast.JA["Fly High"] = {}
-    sets.precast.JA["Spirit Bond"] = {}
-    sets.precast.WyvernHP = {}
-    sets.precast.JA.SmitingBreath = {
-        head = "Ptero. Armet +2",
-        legs = "Ptero. Brais +1"
-    }
-    sets.precast.JA.RestoringBreath = {
-        head = "",
-        legs = "Vishap Brais +2"
-    }
 
     --  Precast Fast Cast Sets
     sets.precast.FC = {}
@@ -155,14 +215,13 @@ function init_gear_sets()
     }
 
     sets.midcast.Trust = {
-        head       = "Vishap Armet +1",
+        head       = "Vishap Armet +2",
         body       = "Vishap Mail +2",
-        hands      = "Vishap Finger Gauntlets +1",
+        hands      = "Vishap Finger Gauntlets +2",
         legs       = "vishap brais +2",
-        feet       = "Vishap Greaves +1"
+        feet       = "Vishap Greaves +2"
     }
 
-    --  Engaged Sets
 end
 
 ------------------------------------------------------------------
@@ -187,20 +246,23 @@ function job_precast(spell, action, spellMap, eventArgs)
     --  Substitute Spirit Jump for Jump if Spirit is on recast
     --  Substitute Soul Jump for High Jump if Soul is on recast
     local abil_recasts = windower.ffxi.get_ability_recasts()
+
     if spell.english == 'Spirit Jump' then
         if abil_recasts[spell.recast_id] > 0 then
             send_command('input /jobability "Jump" <t>')
-            add_to_chat(100, '*** Spirit Jump Aborted: Timer on Cooldown -- Downgrading to Jump ***')
+            -- add_to_chat(100, '*** Spirit Jump Aborted: Timer on Cooldown -- Downgrading to Jump ***')
             eventArgs.cancel = true
             return
         end
+
     elseif spell.english == 'Soul Jump' then
         if abil_recasts[spell.recast_id] > 0 then
             send_command('input /jobability "High Jump" <t>')
-            add_to_chat(100, '*** Soul Jump Aborted: Timer on Cooldown -- Downgrading to High Jump ***')
+            -- add_to_chat(100, '*** Soul Jump Aborted: Timer on Cooldown -- Downgrading to High Jump ***')
             eventArgs.cancel = true
             return
         end
+
     elseif spell.action_type == 'Magic' and buffactive['Silence'] then
         -- If silenced, use what's available to remove it, otherwise you're screwed
         cancel_spell()
@@ -250,7 +312,6 @@ function get_idle_set(idleSet)
 end
 
 function select_default_macro_book(isSubJobChange)
-    -- set_macro_page(1, 4)
     if player.sub_job:contains(job_type_mage) then
         set_macro_page(1, 6)
     elseif player.sub_job:contains(job_type_melee) then
@@ -260,7 +321,7 @@ function select_default_macro_book(isSubJobChange)
     end
 
     if not isSubJobChange then
-        send_command('wait 2; input /lockstyleset 004')
+        randomise_stylelock()
     end
 end
 
@@ -302,4 +363,14 @@ function check_status_cp()
     else
         enable('back')
     end
+end
+
+function randomise_stylelock()
+    local random_number = math.floor(math.random()*4)
+    random_number = math.mod(random_number, 4) +10
+
+    local stylelock_string = '0' .. tostring(random_number)
+    -- send_command('@input /echo ' .. stylelock_string)
+
+    send_command('wait 2; input /lockstyleset ' .. stylelock_string)
 end
