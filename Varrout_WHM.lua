@@ -151,15 +151,14 @@ function init_gear_sets()
     sets.precast["Devotion"]    = { head = "Piety Cap +3" }
     sets.precast["Benediction"] = { body = "Piety Briault +3" }
 
-    --  Total fast cast for this set is 63%.  Not sure what the cap is.
     sets.precast.FC = {
-        main       = "Grioavolr",                          -- FC +04%
+        main       = "Oranyan",                            -- FC +10%
         sub        = "Clerisy Strap",                      -- FC +02%
         ammo       = "Incantor Stone",                     -- FC +02%
         head       = "Revealer's Crown",                   -- FC +05%
         neck       = "Cleric's Torque",                    -- FC +06%
         left_ear   = "Loquac. Earring",                    -- FC +02%
-        right_ear  = "Infused Earring",                    -- Regen +1, Evasion +10
+        right_ear  = "Etiolation Earring",                 -- FC +01%
         body       = "Inyanga Jubbah +2",                  -- FC +14%
         hands      = "Fanatic Gloves",                     -- FC +07%
         left_ring  = "Evanescence Ring",                   -- Spell Interruption down 05%
@@ -179,7 +178,8 @@ function init_gear_sets()
 
     sets.precast['Stoneskin'] = set_combine(sets.precast['Enhancing Magic'], {
         head       = "Umuthi Hat",              --  Stoneskin Cast Time -15%
-        hands      = "Carapacho Cuffs"          --  Stoneskin Cast Time -15%
+        hands      = "Carapacho Cuffs",         --  Stoneskin Cast Time -15%
+        legs       = "Querkening Brais"         --  Stoneskin Cast Time -10%
     })
 
     sets.precast['Healing Magic'] = set_combine(sets.precast.FC, {
@@ -289,7 +289,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Enhancing Magic'] = {
-        main       = "Beneficus",                   --  Enhancing Maigc +15
+        main       = "Oranyan",                     --  Enhancing Maigc duration +10%
         sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
         ammo       = "Hydrocera",                   --  Enhancing Maigc +0
         head       = "Befouled Crown",              --  Enhancing Maigc +16
@@ -432,9 +432,9 @@ end
 
 
 function job_precast(spell, action, spellMap, eventArgs)
-    if player.tp > player_tp_lock then
-        melee_equip_lock()
-    end
+    -- if player.tp > player_tp_lock then
+    --     melee_equip_lock()
+    -- end
 
     check_special_ring_equipped()
 
@@ -509,22 +509,28 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
     local equipSet = {}
 
-    if spell.action_type == 'Magic' then
+    if (spell.action_type == 'Magic' and spell.skill ~= 'Enhancing Magic') or spell.name == 'Erase' then
         spell_element_match = spell.element == world.weather_element or spell.element == world.day_element
         -- add_to_chat(100, tostring(spellMap))
+        if spell.name == 'Erase' then
+            equipSet = sets.midcast['Erase']
 
-        if (spell.skill == 'Enfeebling Magic' or spell.skill == 'Divine Magic') then
+        elseif (spell.skill == 'Enfeebling Magic' or spell.skill == 'Divine Magic') then
             if spell.skill == 'Enfeebling Magic' then
                 equipSet = sets.midcast['Enfeebling Magic']
             elseif spell.skill == 'Divine Magic' then
                 equipSet = sets.midcast['Divine Magic']
+
+                if spellMap == 'Banish' or spellMap == 'Holy' then
+                    equipSet = sets.midcast['Banish']
+                end
             end
 
             if spell_element_match then
-                equipSet = set_combine(equipSet, sets.midcast>WeatherBoost)
+                equipSet = set_combine(equipSet, sets.midcast.WeatherBoost)
             end
 
-        elseif (spell.skill == 'Healing Magic' and not cure_names:contains(spellMap)) or spell.name == "Erase" then
+        elseif (spell.skill == 'Healing Magic' and not cure_names:contains(spellMap))then
             equipSet = sets.midcast.NASpell
 
             --  If Divine Caress is active
@@ -543,13 +549,14 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             else
                 equipSet = sets.midcast.Cure
             end
+
+        elseif spell.type == "Trust" then
+            equipSet = sets.Trust
         end
-    end
 
-    equip(equipSet)
-
-    if spell.type == "Trust" then
-        equip(sets.Trust)
+        equip(equipSet)
+        eventArgs.handled = true
+        return
     end
 end
 
