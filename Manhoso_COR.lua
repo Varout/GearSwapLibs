@@ -100,10 +100,10 @@ function user_setup()
     state.CP = M(false, "Capacity Points Mode")
     state.Dyna = M(false, "Dyna Mode")
 
-    gear.RAbullet = "Bullet"
+    gear.RAbullet = "Steel Bullet"
     gear.WSbullet = "Decimating Bullet"
-    gear.MAbullet = "Decimating Bullet"
-    gear.QDbullet = "Decimating Bullet"
+    gear.MAbullet = "Steel Bullet"
+    gear.QDbullet = "Steel Bullet"
     options.ammo_warning_limit = 5
 
 

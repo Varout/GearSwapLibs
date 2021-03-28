@@ -197,7 +197,7 @@ function get_sets()
     }
 
     sets.JA["Spirit Link"] = set_combine(sets.Pet.WyvernHP, {
-        head="Vishap Armet +1",
+        head="Vishap Armet +2",
         hands="Peltast's Vambraces +1"
     })
     sets.Pet["Restoring Breath"] = set_combine(sets.Pet.WyvernHP)
@@ -206,7 +206,7 @@ function get_sets()
 
     -- Healing Breath Trigger --
     sets.HealingBreathTrigger = set_combine(sets.Pet.WyvernHP, {
-        head="Vishap Armet +1"
+        head="Vishap Armet +2"
     })
 
     sets.precast = {}
@@ -575,96 +575,96 @@ function timer_angon()
     send_command('timers create "Angon" '..tostring(duration)..' down')
 end
 
-function refine_waltz(spell,action)
-    if spell.type ~= 'Waltz' then
-        return
-    end
+-- function refine_waltz(spell,action)
+--     if spell.type ~= 'Waltz' then
+--         return
+--     end
 
-    if spell.name == "Healing Waltz" or spell.name == "Divine Waltz" or spell.name == "Divine Waltz II" then
-        return
-    end
+--     if spell.name == "Healing Waltz" or spell.name == "Divine Waltz" or spell.name == "Divine Waltz II" then
+--         return
+--     end
 
-    local newWaltz = spell.english
-    local waltzID
+--     local newWaltz = spell.english
+--     local waltzID
 
-    local missingHP
+--     local missingHP
 
-    if spell.target.type == "SELF" then
-        missingHP = player.max_hp - player.hp
-    elseif spell.target.isallymember then
-        local target = find_player_in_alliance(spell.target.name)
-        local est_max_hp = target.hp / (target.hpp/100)
-        missingHP = math.floor(est_max_hp - target.hp)
-    end
+--     if spell.target.type == "SELF" then
+--         missingHP = player.max_hp - player.hp
+--     elseif spell.target.isallymember then
+--         local target = find_player_in_alliance(spell.target.name)
+--         local est_max_hp = target.hp / (target.hpp/100)
+--         missingHP = math.floor(est_max_hp - target.hp)
+--     end
 
-    if missingHP ~= nil then
-        if player.sub_job == 'DNC' then
-            if missingHP < 40 and spell.target.name == player.name then
-                add_to_chat(123,'Full HP!')
-                cancel_spell()
-                return
-            elseif missingHP < 150 then
-                newWaltz = 'Curing Waltz'
-                waltzID = 190
-            elseif missingHP < 300 then
-                newWaltz = 'Curing Waltz II'
-                waltzID = 191
-            else
-                newWaltz = 'Curing Waltz III'
-                waltzID = 192
-            end
-        else
-            return
-        end
-    end
+--     if missingHP ~= nil then
+--         if player.sub_job == 'DNC' then
+--             if missingHP < 40 and spell.target.name == player.name then
+--                 add_to_chat(123,'Full HP!')
+--                 cancel_spell()
+--                 return
+--             elseif missingHP < 150 then
+--                 newWaltz = 'Curing Waltz'
+--                 waltzID = 190
+--             elseif missingHP < 300 then
+--                 newWaltz = 'Curing Waltz II'
+--                 waltzID = 191
+--             else
+--                 newWaltz = 'Curing Waltz III'
+--                 waltzID = 192
+--             end
+--         else
+--             return
+--         end
+--     end
 
-    local waltzTPCost = {['Curing Waltz'] = 20, ['Curing Waltz II'] = 35, ['Curing Waltz III'] = 50, ['Curing Waltz IV'] = 65, ['Curing Waltz V'] = 80}
-    local tpCost = waltzTPCost[newWaltz]
+--     local waltzTPCost = {['Curing Waltz'] = 20, ['Curing Waltz II'] = 35, ['Curing Waltz III'] = 50, ['Curing Waltz IV'] = 65, ['Curing Waltz V'] = 80}
+--     local tpCost = waltzTPCost[newWaltz]
 
-    local downgrade
+--     local downgrade
 
-    if player.tp < tpCost and not buffactive.trance then
+--     if player.tp < tpCost and not buffactive.trance then
 
-        if player.tp < 20 then
-            add_to_chat(123, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
-            cancel_spell()
-            return
-        elseif player.tp < 35 then
-            newWaltz = 'Curing Waltz'
-        elseif player.tp < 50 then
-            newWaltz = 'Curing Waltz II'
-        elseif player.tp < 65 then
-            newWaltz = 'Curing Waltz III'
-        elseif player.tp < 80 then
-            newWaltz = 'Curing Waltz IV'
-        end
+--         if player.tp < 20 then
+--             add_to_chat(123, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
+--             cancel_spell()
+--             return
+--         elseif player.tp < 35 then
+--             newWaltz = 'Curing Waltz'
+--         elseif player.tp < 50 then
+--             newWaltz = 'Curing Waltz II'
+--         elseif player.tp < 65 then
+--             newWaltz = 'Curing Waltz III'
+--         elseif player.tp < 80 then
+--             newWaltz = 'Curing Waltz IV'
+--         end
 
-        downgrade = 'Insufficient TP ['..tostring(player.tp)..']. Downgrading to '..newWaltz..'.'
-    end
+--         downgrade = 'Insufficient TP ['..tostring(player.tp)..']. Downgrading to '..newWaltz..'.'
+--     end
 
-    if newWaltz ~= spell.english then
-        send_command('@input /ja "'..newWaltz..'" '..tostring(spell.target.raw))
-        if downgrade then
-            add_to_chat(158, downgrade)
-        end
-        cancel_spell()
-        return
-    end
+--     if newWaltz ~= spell.english then
+--         send_command('@input /ja "'..newWaltz..'" '..tostring(spell.target.raw))
+--         if downgrade then
+--             add_to_chat(158, downgrade)
+--         end
+--         cancel_spell()
+--         return
+--     end
 
-    if missingHP > 0 then
-        add_to_chat(158,'Trying to cure '..tostring(missingHP)..' HP using '..newWaltz..'.')
-    end
-end
+--     if missingHP > 0 then
+--         add_to_chat(158,'Trying to cure '..tostring(missingHP)..' HP using '..newWaltz..'.')
+--     end
+-- end
 
-function find_player_in_alliance(name)
-    for i,v in ipairs(alliance) do
-        for k,p in ipairs(v) do
-            if p.name == name then
-                return p
-            end
-        end
-    end
-end
+-- function find_player_in_alliance(name)
+--     for i,v in ipairs(alliance) do
+--         for k,p in ipairs(v) do
+--             if p.name == name then
+--                 return p
+--             end
+--         end
+--     end
+-- end
 
 function sub_job_change(newSubjob, oldSubjob)
     select_default_macro_book(true)

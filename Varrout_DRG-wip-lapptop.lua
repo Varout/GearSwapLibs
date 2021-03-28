@@ -8,6 +8,7 @@ function get_sets()
 end
 
 function job_setup()
+    target_distance = 5.15 -- Set Default Distance Here --
 
 end
 
@@ -161,25 +162,49 @@ function init_gear_sets()
         head = "Ptero. Armet +3"
     }
 
-    sets.precast.WyvernHP = {}
-
-    sets.precast.JA.SmitingBreath = {
-        head = "Ptero. Armet +2",
-        legs = "Ptero. Brais +1"
+    sets.midcast.JA["Healing Breath"] = {
+        head = "Vishap Armet +2",
     }
 
-    sets.precast.JA.RestoringBreath = {
-        head = "",
-        legs = "Vishap Brais +2"
+    sets.precast.JA["Restoring Breath"] = {
+        ammo="Voluspa Tathlum",
+        head={ name="Ptero. Armet +3", augments={'Enhances "Deep Breathing" effect',}},
+        body="Wyvern Mail",
+        hands="Crusher Gauntlets",
+        legs="Vishap Brais +2",
+        feet={ name="Ptero. Greaves +1", augments={'Enhances "Empathy" effect',}},
+        neck="Lancer's Torque",
+        waist="Glassblower's Belt",
+        left_ear="Lancer's Earring",
+        right_ear="Dragoon's Earring",
+        left_ring="Defending Ring",
+        right_ring="Sheltered Ring",
+        back={ name="Updraft Mantle", augments={'STR+4','Pet: Breath+10','Pet: Damage taken -2%','Weapon skill damage +2%',}},
+    }
+
+    sets.precast.JA["Smiting Breath"] = {
+        ammo="Voluspa Tathlum",
+        head = "Vishap Armet +2",
+        body="Sulevia's Plate. +2",
+        hands="Vis. Fng. Gaunt. +2",
+        legs="Sulev. Cuisses +2",
+        feet="Sulev. Leggings +2",
+        neck="Lancer's Torque",
+        waist="Glassblower's Belt",
+        left_ear="Sherida Earring",
+        right_ear="Dragoon's Earring",
+        left_ring="Defending Ring",
+        right_ring="Sheltered Ring",
+        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
     }
 
     sets.precast.JumpBase = {
-        ammo       = "Vanir Battery",
+        ammo       = "Voluspa Tathlum",
         head       = "Flam. Zucchetto +2",
         body       = "Vishap Mail +2",
-        hands      = "Vishap F. G. +1",
+        hands      = "Vis. Fng. Gaunt. +2",
         legs       = "Flamma Dirs +2",
-        feet       = "Vishap Greaves +1",
+        feet       = "Vishap Greaves +2",
         neck       = "Asperity Necklace",
         waist      = "Ioskeha Belt",
         left_ear   = "Sherida Earring",
@@ -189,37 +214,59 @@ function init_gear_sets()
         back       = { name     = "Brigantia's Mantle",
                        augments = {'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
     }
+
     sets.precast.JA["Jump"] = set_combine(sets.precast.JumpBase, {
 
     })
+
     sets.precast.JA["High Jump"] = set_combine(sets.precast.JumpBase, {
         legs = "Vishap Brais +2"
     })
+
     sets.precast.JA["Spirit Jump"] = set_combine(sets.precast.JumpBase, {
         legs = "Pelt. Cuissots +1",
         feet = "Pelt. Schynbalds"
     })
+
     sets.precast.JA["Soul Jump"] = set_combine(sets.precast.JumpBase, {
         legs = "Pelt. Cuissots +1"
     })
-    sets.precast.JA["Super Jump"] = {}
+
+    -- sets.precast.JA["Super Jump"] = {}
 
     --  Precast Fast Cast Sets
-    sets.precast.FC = {}
+    sets.precast.FC = {
+        ammo="Voluspa Tathlum",
+        head="Sulevia's Mask +1",
+        body="Sulevia's Plate. +2",
+        hands={ name="Leyline Gloves", augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+        legs="Sulev. Cuisses +2",
+        feet="Sulev. Leggings +2",
+        neck="Loricate Torque +1",
+        waist="Ioskeha Belt",
+        left_ear="Loquac. Earring",
+        right_ear="Etiolation Earring",
+        left_ring="Defending Ring",
+        right_ring="Evanescence Ring",
+        back="Solemnity Cape",
+    }
 
     --  Midcast Sets
     sets.midcast.JA = {}
-    sets.midcast.JA.SmitingBreath = {
-        head = "Ptero. Armet +2",
-        legs = "Ptero. Brais +1"
-    }
+    sets.midcast.JA["Smiting Breath"] = set_combine({sets.precast.JA["Smiting Breath"],
+        head = "Ptero. Armet +3",
+    })
 
-    sets.midcast.Trust = {
-        head       = "Vishap Armet +2",
-        body       = "Vishap Mail +2",
-        hands      = "Vishap Finger Gauntlets +2",
-        legs       = "vishap brais +2",
-        feet       = "Vishap Greaves +2"
+    sets.midcast.JA["Restoring Breath"] = sets.precast.JA["Restoring Breath"]
+
+    sets.midcast.JA["Healing Breath"] = sets.precast.JA["Restoring Breath"]
+
+    sets.midcast["Trust"] = {
+        head="Vishap Armet +2",
+        body="Vishap Mail +2",
+        hands="Vis. Fng. Gaunt. +2",
+        legs="Vishap Brais +2",
+        feet="Vishap Greaves +2",
     }
 
 end
@@ -231,6 +278,7 @@ function user_buff_change()
     check_equipment_special_ring()
 
 end
+
 
 function job_buff_change()
     check_equipment_special_ring()
@@ -280,6 +328,18 @@ function job_precast(spell, action, spellMap, eventArgs)
         end
         eventArgs.cancel = true
         return
+
+    elseif spell.english == "Dismiss" and pet.hpp < 100 then -- Cancel Dismiss If Wyvern's HP Is Under 100% --
+        cancel_spell()
+        add_to_chat(123, spell.english .. ' Canceled - [' .. pet.name .. ': ' .. pet.hpp .. ']')
+        eventArgs.cancel = true
+        return
+
+    elseif spell.type == "WeaponSkill" and spell.target.distance > target_distance and player.status == 'Engaged' then -- Cancel WS If You Are Out Of Range --
+        cancel_spell()
+        add_to_chat(123, spell.name..' Canceled: [Out of Range]')
+        return
+
     end
 end
 
@@ -310,6 +370,7 @@ function get_idle_set(idleSet)
 
     return idleSet
 end
+
 
 function select_default_macro_book(isSubJobChange)
     if player.sub_job:contains(job_type_mage) then
@@ -347,6 +408,7 @@ function check_equipment_special_ring()
     end
 end
 
+
 function check_status_dynamis()
     if state.Dynamis.current == 'on' then
         equip(sets.JSENeck)
@@ -356,6 +418,7 @@ function check_status_dynamis()
     end
 end
 
+
 function check_status_cp()
     if state.CP.current == 'on' then
         equip(sets.CP)
@@ -364,6 +427,7 @@ function check_status_cp()
         enable('back')
     end
 end
+
 
 function randomise_stylelock()
     local random_number = math.floor(math.random()*4)
