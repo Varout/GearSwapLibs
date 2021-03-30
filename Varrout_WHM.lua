@@ -18,6 +18,10 @@ function get_sets()
     -- Load and initialize the include file.
     include('Mote-Include.lua')
     include('common_lists.lua')
+    include('common_functions.lua')
+
+    --  Make sure all gear is unlocked after we swap
+    equipment_unlock_all()
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -49,19 +53,23 @@ function user_setup()
     state.IdleMode:options('Normal')
 
     --  Which macro book to default to when changing jobs
-    select_default_macro_book()
+    select_default_macro_book(false)
 
     --  Special states to track for White Mage
     state.CP = M(false, "CP Mode")              --  CP Mode: WHM is mastered, so likely won't need this anymore
     state.Dynamis = M(false, "Dynamis Mode")    --  Dynamis Mode: To force the dynamis neck piece to stay equipped
     state.Debug = M(false, "Debug Mode")        --  Debug Mode: Helpful for outputting information in the LUA. Not set up
+    state.OhShi = M(false, "OhShi Mode")
+    state.Weapons = M(false, "Weapons Mode")
 
     --  Where @ is the Windows Key
     send_command('bind @c gs c toggle CP')      --  Windows Key + C: Toggle CP Mode
     send_command('bind @x gs c toggle Dynamis') --  Windows Key + X: Toggle Dynamis Mode
     send_command('bind @m input /map')          --  Windows Key + M: Show map, because I'm lazy af
-    send_command('bind @1 gs c rr4')      --  Windows Key + 1: Reraise 4
+    send_command('bind @1 gs c rr4')            --  Windows Key + 1: Reraise 4
     send_command('bind @z gs c toggle Debug')   --  Windows Key + z: Togger Debug Mode
+    send_command('bind @v gs c toggle OhShi')   --  Windows Key + v: Toggle OhShi Mode. Good for kiting
+    send_command('bind @n gs c toggle Weapons')
 
     --  Set up lockstyle set
     -- randomise_lockstyle()
@@ -73,6 +81,8 @@ function user_unload()
     send_command('unbind @m')
     send_command('unbind @1')
     send_command('unbind @z')
+    send_command('unbind @v')
+    send_command('unbind @n')
 end
 
 function init_gear_sets()
@@ -423,11 +433,31 @@ function init_gear_sets()
     }
 
     sets.melee.WS = {}
-
     sets.melee.WS['Realmrazer'] = {}
     sets.melee.WS['Hexa Strike'] = {}
     sets.melee.WS['Black Halo'] = {}
     sets.melee.WS['Mystic Boon'] = {}
+
+    sets.OhShi = {
+        main       = "Terra's Staff",
+        sub        = "Enki Strap",
+        ammo       = "Homiliary",
+        head       = "Inyanga Tiara +2",
+        body       = "Inyanga Jubbah +2",
+        hands      = "Inyan. Dastanas +2",
+        legs       = "Inyanga Shalwar +2",
+        feet       = "Hippo. Socks +1",
+        neck       = "Loricate Torque +1",
+        waist      = "Isa Belt",
+        left_ear   = "Infused Earring",
+        right_ear  = { name     = "Moonshade Earring",
+                       augments = {'MP+25','Latent effect: "Refresh"+1',}},
+        left_ring  = "Defending Ring",
+        right_ring = "Gelatinous Ring",
+        back       = { name     = "Alaunus's Cape",
+                       augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
+    }
+
 end
 
 
@@ -487,16 +517,16 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- end
 
     --  I'm not likely to have 4+ images on WHM with /NIN, but leave as is
-    if spellMap == 'Utsusemi' then
-        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
-            cancel_spell()
-            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
-            eventArgs.handled = true
-            return
-        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
-            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
-        end
-    end
+    -- if spellMap == 'Utsusemi' then
+    --     if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+    --         cancel_spell()
+    --         add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+    --         eventArgs.handled = true
+    --         return
+    --     elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+    --         send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+    --     end
+    -- end
 end
 
 
@@ -584,6 +614,19 @@ function customize_idle_set(idleSet)
         disable('neck')
     else
         enable('neck')
+    end
+
+    if state.OhShi.current == 'on' then
+        equip(sets.OhShi)
+        equipment_lock_all()
+    else
+        equipment_unlock_all()
+    end
+
+    if state.Weapons.current == 'on' then
+        equipment_lock_specific({'main', 'sub'})
+    else
+        equipment_unlock_specific({'main', 'sub'})
     end
 
     --  Checking player stats
@@ -679,9 +722,18 @@ function job_self_command(cmdParams, eventArgs)
 end
 
 
-function select_default_macro_book()
+function sub_job_change(newSubjob, oldSubjob)
+    select_default_macro_book(true)
+end
+
+
+function select_default_macro_book(isSubJobChange)
     -- Default macro set/book
     set_macro_page(1, 4)
+
+    if not isSubJobChange then
+        -- randomise_lockstyle()
+    end
 end
 
 
@@ -694,30 +746,35 @@ end
 --  Definition in: common_lists.lua
 function check_special_ring_equipped()
     if equip_lock_rings:contains(player.equipment.left_ring) then
-        windower.add_to_chat(9, "left_ring locked")
+        -- windower.add_to_chat(9, "left_ring locked")
         is_ring_locked = true
         disable("left_ring")
     elseif equip_lock_rings:contains(player.equipment.right_ring) then
-        windower.add_to_chat(9, "right_ring locked")
+        -- windower.add_to_chat(9, "right_ring locked")
         is_ring_locked = true
         disable("right_ring")
     elseif is_ring_locked then
-        windower.add_to_chat(9, "Unlocking rings")
+        -- windower.add_to_chat(9, "Unlocking rings")
         is_ring_locked = false
-        enable('left_ring')
-        enable('right_ring')
+        equipment_unlock_specific({'left_ring', 'right_ring'})
+        -- enable('left_ring')
+        -- enable('right_ring')
     end
 end
 
+
 --  Lock weapon and sub slots
 function melee_equip_lock()
-    disable("main")
-    disable("sub")
+    equipment_lock_specific({'main', 'sub'})
+    -- disable("main")
+    -- disable("sub")
 end
+
 
 --  Unlock weapon and sub slots
 function melee_equip_unlock()
     -- add_to_chat(30, 'Unlocking melee')
-    enable("main")
-    enable("sub")
+    equipment_unlock_specific('main', 'sub')
+    -- enable("main")
+    -- enable("sub")
 end
