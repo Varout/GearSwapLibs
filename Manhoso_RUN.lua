@@ -122,12 +122,15 @@ function init_gear_sets()
     sets.JSENeck = {neck="Futhark Torque"}
 
     sets.enmity = {
+        head="Erilaz Galea",
+        body="Erilaz Surcoat",
+        hands={ name="Futhark Mitons", augments={'Enhances "Sleight of Sword" effect',}},
         legs="Erilaz Leg Guards",
-        feet="Erilaz Greaves",
+        feet="Erilaz Greaves +1",
         neck="Futhark Torque",
-        left_ear="Mache Earring",
-        right_ear="Bladeborn Earring",
+        left_ear="Cryptic Earring",
         left_ring="Petrov Ring",
+        back={ name="Ogma's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     --------------------------------------
@@ -140,26 +143,52 @@ function init_gear_sets()
     -- Precast sets to enhance JAs
     sets.precast.JA['Vallation'] = {body="Runeist Coat"}
     sets.precast.JA['Valiance'] = {body="Runeist Coat"}
-    sets.precast.JA['Pflug'] = {}
+    sets.precast.JA['Pflug'] = {feet="Runeist Boots +2"}
     sets.precast.JA['Battuta'] = {head="Futhark Bandeau"}
-    sets.precast.JA['Liement'] = {body="Futhark Coat"}
-    sets.precast.JA['Lunge'] = {ammo="Grenade Core"}
+    sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
+    sets.precast.JA['Lunge'] = {
+        ammo="Seething Bomblet",
+        head="Wayfarer Circlet",
+        body="Wayfarer Robe",
+        hands="Taeon Gloves",
+        legs="Wayfarer Slops",
+        feet="Meg. Jam. +2",
+        neck="Sanctity Necklace",
+        waist="Ioskeha Belt",
+        left_ear="Friomisi Earring",
+        right_ear="Odr Earring",
+        left_ring="Petrov Ring",
+        right_ring="Arvina Ringlet +1",
+        back="Amemet Mantle +1",
+    }
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
     sets.precast.JA['Gambit'] = {hands="Runeist Mitons +2"}
     sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat"}
-    sets.precast.JA['Swordplay'] = {}
+    sets.precast.JA['Swordplay'] = {hands="Futhark Mitons"}
     sets.precast.JA['Embolden'] = {}
     sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea"}
     sets.precast.JA['One For All'] = {}
     sets.precast.JA['Provoke'] = sets.enmity
+    sets.precast.JA["Inquartata"] = {legs="Erilaz Leg Guards"}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
+        ammo="Yamarang",
         head="Runeist Bandeau",
-        right_ear="Loquac. Earring"
+        body={ name="Futhark Coat +1", augments={'Enhances "Elemental Sforzo" effect',}},
+        hands="Meg. Gloves +1",
+        legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
+        feet="Erilaz Greaves +1",
+        neck="Loricate Torque",
+        waist="Ioskeha Belt",
+        left_ear="Loquac. Earring",
+        right_ear="Infused Earring",
+        back={ name="Ogma's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
-    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {})
+    sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
+        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
+    })
     sets.precast.FC['Divine Magic'] = set_combine(sets.precast.FC, {})
 
     -- sets.precast.FC['Utsusemi: Ichi'] = set_combine(sets.precast.FC, {})
@@ -207,7 +236,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'] = {
         head="Erilaz Galea",
         hands="Runeist Mitons +2",
-        legs={ name="Futhark Trousers", augments={'Enhances "Inspire" effect',}},
+        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
         left_ear="Augment. Earring",
         right_ear="Loquac. Earring",
         left_ring="Renaye Ring",
@@ -219,7 +248,7 @@ function init_gear_sets()
     })
 
     sets.midcast['Regen'] = {
-        legs="Futhark Trousers"
+        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
     }
 
     sets.midcast['Refresh'] = {
@@ -249,7 +278,7 @@ function init_gear_sets()
     --------------------------------------
 
     sets.idle = {
-        main="Montante",
+        main="Montante +1",
         sub="Pole Grip",
         ammo="Voluspa Tathlum",
         head="Rawhide Mask",
