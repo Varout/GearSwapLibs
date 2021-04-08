@@ -624,9 +624,9 @@ function customize_idle_set(idleSet)
     end
 
     if state.Weapons.current == 'on' then
-        equipment_lock_specific({'main', 'sub'})
+        equipment_lock_specific({'main', 'sub',})
     else
-        equipment_unlock_specific({'main', 'sub'})
+        equipment_unlock_specific({'main', 'sub',})
     end
 
     --  Checking player stats
@@ -746,35 +746,25 @@ end
 --  Definition in: common_lists.lua
 function check_special_ring_equipped()
     if equip_lock_rings:contains(player.equipment.left_ring) then
-        -- windower.add_to_chat(9, "left_ring locked")
         is_ring_locked = true
         disable("left_ring")
     elseif equip_lock_rings:contains(player.equipment.right_ring) then
-        -- windower.add_to_chat(9, "right_ring locked")
         is_ring_locked = true
         disable("right_ring")
     elseif is_ring_locked then
-        -- windower.add_to_chat(9, "Unlocking rings")
         is_ring_locked = false
-        equipment_unlock_specific({'left_ring', 'right_ring'})
-        -- enable('left_ring')
-        -- enable('right_ring')
+        equipment_unlock_specific({'left_ring', 'right_ring',})
     end
 end
 
 
 --  Lock weapon and sub slots
 function melee_equip_lock()
-    equipment_lock_specific({'main', 'sub'})
-    -- disable("main")
-    -- disable("sub")
+    equipment_lock_specific({'main', 'sub',})
 end
 
 
 --  Unlock weapon and sub slots
 function melee_equip_unlock()
-    -- add_to_chat(30, 'Unlocking melee')
-    equipment_unlock_specific('main', 'sub')
-    -- enable("main")
-    -- enable("sub")
+    equipment_unlock_specific({'main', 'sub',})
 end
