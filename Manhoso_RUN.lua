@@ -21,50 +21,49 @@ end
 --  Setup vars that are user-independent.
 function job_setup()
     --  Icons for custom timers for Runes.
---    runes.icons = {
---        ['Ignis'] = 'spells/00288.png',
---        ['Gelus'] = 'spells/00289.png',
---        ['Flabra'] = 'spells/00290.png',
---        ['Tellus'] = 'spells/00291.png',
---        ['Sulpor'] = 'spells/00292.png',
---         ['Unda'] = 'spells/00293.png',
---         ['Lux'] = 'spells/00294.png',
---         ['Tenebrae'] = 'spells/00295.png'
---    }
+    -- runes.icons = {
+    --     ['Ignis'] = 'spells/00288.png',
+    --     ['Gelus'] = 'spells/00289.png',
+    --     ['Flabra'] = 'spells/00290.png',
+    --     ['Tellus'] = 'spells/00291.png',
+    --     ['Sulpor'] = 'spells/00292.png',
+    --     ['Unda'] = 'spells/00293.png',
+    --     ['Lux'] = 'spells/00294.png',
+    --     ['Tenebrae'] = 'spells/00295.png'
+    -- }
 
     --  Table of entries
---    rune_timers = T{}
---    entry = rune, index, expires
+    -- rune_timers = T{}
+    -- entry = rune, index, expires
 
---    if player.main_job_level >= 65 then
---        max_runes = 3
---    elseif player.main_job_level >= 35 then
---        max_runes = 2
---    elseif player.main_job_level >= 5 then
---        max_runes = 1
---    else
---        max_runes = 0
---    end
+    -- if player.main_job_level >= 65 then
+    --     max_runes = 3
+    -- elseif player.main_job_level >= 35 then
+    --     max_runes = 2
+    -- elseif player.main_job_level >= 5 then
+    --     max_runes = 1
+    -- else
+    --     max_runes = 0
+    -- end
 
---    blue_magic_maps = {}
-
---    blue_magic_maps.Enmity = S{
---        'Blank Gaze', 'Geist Wall', 'Jettatura', 'Soporific', 'Poison Breath', 'Blitzstrahl',
---        'Sheep Song', 'Chaotic Eye'
---    }
---    blue_magic_maps.Cure = S{
---        'Wild Carrot'
---    }
---    blue_magic_maps.Buffs = S{
---        'Cocoon', 'Refueling'
---     }
-
+    --  BLU Specific. Commented for now
+    -- blue_magic_maps = {}
+    -- blue_magic_maps.Enmity = S{
+    --     'Blank Gaze', 'Geist Wall', 'Jettatura', 'Soporific', 'Poison Breath', 'Blitzstrahl',
+    --     'Sheep Song', 'Chaotic Eye'
+    -- }
+    -- blue_magic_maps.Cure = S{
+    --     'Wild Carrot'
+    -- }
+    -- blue_magic_maps.Buffs = S{
+    --     'Cocoon', 'Refueling'
+    -- }
 end
+
 
 -------------------------------------------------------------------------------------------------------------------
 -- User setup functions for this job.  Recommend that these be overridden in a sidecar file.
 -------------------------------------------------------------------------------------------------------------------
-
 function user_setup()
     -- state.OffenseMode:options('Normal', 'DD', 'Acc', 'PDT', 'MDT')
     -- state.WeaponskillMode:options('Normal', 'Acc')
@@ -77,13 +76,12 @@ function user_setup()
     state.IdleMode:options('Normal')
     state.PhysicalDefenseMode:options('Normal', 'PDT', 'MDT')
 
-
-    state.Runes = M{['description']='Runes', "Tellus","Unda","Flabra","Ignis","Gelus","Sulpor","Lux","Tenebrae"}
+    state.Runes = M{['description']='Runes', "Tellus", "Unda", "Flabra", "Ignis", "Gelus", "Sulpor", "Lux", "Tenebrae"}
 
     -- send_command('bind ^` input //gs c cycle Runes')
     -- send_command('bind !` input /ja "Vivacious Pulse" <me>')
     -- send_command('bind @` input //gs c rune')
-    --select_default_macro_book()
+    -- select_default_macro_book()
 
     state.CP = M(false, "CP Mode")
     state.Dynamis = M(false, "Dynamis Mode")
@@ -93,6 +91,7 @@ function user_setup()
     send_command('bind @x gs c toggle Dynamis')
     send_command('bind @z gs c toggle Debug')
 end
+
 
 function user_unload()
     -- send_command('unbind ^`')
@@ -106,25 +105,27 @@ end
 
 function init_gear_sets()
     sets.Adoulin = {
-        body="Councilor's Garb"
+        body       = "Councilor's Garb"
     }
     sets.CP = {
-        back="Mecistopins Mantle"
+        back       = "Mecistopins Mantle"
     }
     sets.JSENeck = {
-        neck="Futhark Torque"
+        neck       = "Futhark Torque"
     }
 
     sets.enmity = {
-        head="Erilaz Galea",
-        body="Erilaz Surcoat",
-        hands={ name="Futhark Mitons", augments={'Enhances "Sleight of Sword" effect',}},
-        legs="Erilaz Leg Guards",
-        feet="Erilaz Greaves +1",
-        neck="Futhark Torque",
-        left_ear="Cryptic Earring",
-        left_ring="Petrov Ring",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        head       = "Erilaz Galea",
+        body       = "Erilaz Surcoat",
+        hands      = { name     = "Futhark Mitons",
+                       augments = {'Enhances "Sleight of Sword" effect',}},
+        legs       = "Erilaz Leg Guards",
+        feet       = "Erilaz Greaves +1",
+        neck       = "Futhark Torque",
+        left_ear   = "Cryptic Earring",
+        left_ring  = "Petrov Ring",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     --------------------------------------
@@ -136,13 +137,15 @@ function init_gear_sets()
     sets.precast.JA = {}
     -- Precast sets to enhance JAs
     sets.precast.JA['Vallation'] = set_combine(sets.emnity, {
-        body="Runeist Coat",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        body       = "Runeist Coat",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     })
 
     sets.precast.JA['Valiance'] = set_combine(sets.emnity, {
-        body="Runeist Coat",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        body       = "Runeist Coat",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     })
 
     sets.precast.JA['Pflug'] = set_combine(sets.emnity, {
@@ -150,63 +153,55 @@ function init_gear_sets()
     })
 
     sets.precast.JA['Lunge'] = {
-        ammo="Seething Bomblet",
-        head="Wayfarer Circlet",
-        body="Wayfarer Robe",
-        hands="Taeon Gloves",
-        legs="Wayfarer Slops",
-        feet="Meg. Jam. +2",
-        neck="Sanctity Necklace",
-        waist="Ioskeha Belt",
-        left_ear="Friomisi Earring",
-        right_ear="Odr Earring",
-        left_ring="Petrov Ring",
-        right_ring="Arvina Ringlet +1",
-        back="Amemet Mantle +1",
+        ammo       = "Seething Bomblet",
+        head       = "Wayfarer Circlet",
+        body       = "Wayfarer Robe",
+        hands      = "Taeon Gloves",
+        legs       = "Wayfarer Slops",
+        feet       = "Meg. Jam. +2",
+        neck       = "Sanctity Necklace",
+        waist      = "Ioskeha Belt",
+        left_ear   = "Friomisi Earring",
+        right_ear  = "Odr Earring",
+        left_ring  = "Petrov Ring",
+        right_ring = "Arvina Ringlet +1",
+        back       = "Amemet Mantle +1",
     }
 
-    sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
-
-    sets.precast.JA['Battuta'] = {head="Futhark Bandeau"}
-
-    sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
-
-    sets.precast.JA['Gambit'] = {hands="Runeist Mitons +2"}
-
-    sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
-
+    sets.precast.JA['Swipe']            = sets.precast.JA['Lunge']
+    sets.precast.JA['Battuta']          = {head="Futhark Bandeau"}
+    sets.precast.JA['Liement']          = {body="Futhark Coat +1"}
+    sets.precast.JA['Gambit']           = {hands="Runeist Mitons +2"}
+    sets.precast.JA['Rayke']            = {feet="Futhark Boots"}
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat"}
-
-    sets.precast.JA['Swordplay'] = {hands="Futhark Mitons"}
-
-    sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea"}
-
-    sets.precast.JA['Provoke'] = sets.enmity
-
-    sets.precast.JA["Inquartata"] = {legs="Erilaz Leg Guards"}
-
-    sets.precast.JA['Embolden'] = {}
-
-    sets.precast.JA['One For All'] = {}
-
+    sets.precast.JA['Swordplay']        = {hands="Futhark Mitons"}
+    sets.precast.JA['Vivacious Pulse']  = {head="Erilaz Galea"}
+    sets.precast.JA['Provoke']          = sets.enmity
+    sets.precast.JA["Inquartata"]       = {legs="Erilaz Leg Guards"}
+    -- sets.precast.JA['Embolden']         = {}
+    -- sets.precast.JA['One For All']      = {}
 
     -- Fast cast sets for spells
     sets.precast.FC = {
-        ammo="Yamarang",
-        head="Runeist Bandeau",
-        body={ name="Futhark Coat +1", augments={'Enhances "Elemental Sforzo" effect',}},
-        hands="Meg. Gloves +1",
-        legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-        feet="Erilaz Greaves +1",
-        neck="Loricate Torque",
-        waist="Ioskeha Belt",
-        left_ear="Loquac. Earring",
-        right_ear="Infused Earring",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        ammo       = "Yamarang",
+        head       = "Runeist Bandeau",
+        body       = { name     = "Futhark Coat +1",
+                       augments = {'Enhances "Elemental Sforzo" effect',}},
+        hands      = "Meg. Gloves +1",
+        legs       = { name     = "Rawhide Trousers",
+                       augments = {'MP+50','"Fast Cast"+5','"Refresh"+1',}},
+        feet       = "Erilaz Greaves +1",
+        neck       = "Loricate Torque",
+        waist      = "Ioskeha Belt",
+        left_ear   ="Loquac. Earring",
+        right_ear  = "Infused Earring",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
-        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
+        legs       = { name     = "Futhark Trousers +1",
+                       augments = {'Enhances "Inspire" effect',}},
     })
 
     sets.precast.FC['Divine Magic'] = set_combine(sets.precast.FC, {})
@@ -216,22 +211,23 @@ function init_gear_sets()
 
     -- Weaponskill sets
     sets.precast.WS = {
-        ammo="Voluspa Tathlum",
-        head="Meghanada Visor +2",
-        body="Meg. Cuirie +1",
-        hands="Meg. Gloves +1",
-        legs="Meg. Chausses +1",
-        feet="Meg. Jam. +2",
-        neck="Sanctity Necklace",
-        waist="Ioskeha Belt",
-        left_ear="Mache Earring",
-        right_ear="Odr Earring",
-        left_ring="Petrov Ring",
-        right_ring="Rajas Ring",
-        back="Amemet Mantle +1",
+        ammo       = "Voluspa Tathlum",
+        head       = "Meghanada Visor +2",
+        body       = "Meg. Cuirie +1",
+        hands      = "Meg. Gloves +1",
+        legs       = "Meg. Chausses +1",
+        feet       = "Meg. Jam. +2",
+        neck       = "Sanctity Necklace",
+        waist      = "Ioskeha Belt",
+        left_ear   = "Mache Earring",
+        right_ear  = "Odr Earring",
+        left_ring  = "Petrov Ring",
+        right_ring = "Rajas Ring",
+        back       = "Amemet Mantle +1",
     }
-    sets.precast.WS['Resolution'] = sets.precast.WS
-    sets.precast.WS['Dimidiation'] = sets.precast.WS
+
+    sets.precast.WS['Resolution']      = sets.precast.WS
+    sets.precast.WS['Dimidiation']     = sets.precast.WS
     sets.precast.WS['Herculean Slash'] = set_combine(sets.precast.WS["Resolution"], {belt="Snow Belt"})
 
     -- sets.precast.WS['Fell Cleave'] = sets.precast.WS['Resolution']
@@ -245,7 +241,6 @@ function init_gear_sets()
     --     body="Carmine Mail",hands="Carmine Finger Gauntlets",ring1="Leviathan Ring",ring2="Epona's Ring",
     --     back="Bleating Mantle",waist="Fotia Belt",legs="Carmine Cuisses +1",feet="Carmine Greaves"}
 
-
     --------------------------------------
     -- Midcast sets
     --------------------------------------
@@ -253,68 +248,79 @@ function init_gear_sets()
     sets.midcast.FC = {}
 
     -- sets.midcast.EnhancingMagic = {
-    sets.midcast['Enhancing Magic'] = {
-        head="Erilaz Galea",
-        hands="Runeist Mitons +2",
-        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
-        left_ear="Augment. Earring",
-        right_ear="Loquac. Earring",
-        left_ring="Renaye Ring",
-        right_ring="Stikini Ring",
-    }
-
-    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
-        head={ name="Futhark Bandeau", augments={'Enhances "Battuta" effect',}},
+    sets.midcast['Enhancing Magic'] = set_combine(sets.midcast.FC, {
+        head       = "Erilaz Galea",
+        hands      = "Runeist Mitons +2",
+        legs       = { name     = "Futhark Trousers +1",
+                       augments = {'Enhances "Inspire" effect',}},
+        left_ear   = "Augment. Earring",
+        right_ear  = "Loquac. Earring",
+        left_ring  = "Renaye Ring",
+        right_ring = "Stikini Ring",
     })
 
-    sets.midcast['Regen'] = {
-        legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
-    }
+    sets.midcast['Phalanx'] = set_combine(sets.midcast['Enhancing Magic'], {
+        head       = { name     = "Futhark Bandeau",
+                       augments = {'Enhances "Battuta" effect',}},
+    })
 
-    sets.midcast['Refresh'] = {
-        head="Erilaz Galea",
-        body="Runeist Coat"
-    }
+    sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {
+        legs       = { name     = "Futhark Trousers +1",
+                       augments = {'Enhances "Inspire" effect',}},
+    })
 
-    sets.midcast['Divine Magic'] = {
-        hands="Taeon Gloves",
-        legs="Runeist Trousers +2",
-        neck="Sanctity Necklace",
-        left_ear="Lifestorm Earring",
-        left_ring="Etana Ring",
-        right_ring="Stikini Ring",
-    }
+    sets.midcast['Refresh'] = set_combine(sets.midcast['Enhancing Magic'], {
+        head       = "Erilaz Galea",
+        body       = "Runeist Coat"
+    })
 
-    sets.midcast['Flash'] = sets.enmity
+    -- sets.midcast['Stoneskin'] = set_combine(sets.midcast['Enhancing Magic'], {})
 
-    -- sets.midcast['Stoneskin'] = {}
-    -- sets.midcast.Cure = {}
+    sets.midcast['Divine Magic'] = set_combine(sets.midcast.FC, {
+        hands      = "Taeon Gloves",
+        legs       = "Runeist Trousers +2",
+        neck       = "Sanctity Necklace",
+        left_ear   = "Lifestorm Earring",
+        left_ring  = "Etana Ring",
+        right_ring = "Stikini Ring",
+    })
+
+    sets.midcast['Flash'] = set_combine(
+        sets.midcast['Divine Magic'],
+        sets.enmity
+    )
+
+    sets.midcast['Healing Magic'] = {}
+    -- sets.midcast.Cure = set_combine(sets.midcast['Healing Magic'], {})
 
     -- sets.midcast['Blue Magic'] = {}
     -- sets.midcast['Blue Magic'].Enmity = sets.enmity
-    -- sets.midcast['Blue Magic'].Cure = sets.midcast.Cure
-    -- sets.midcast['Blue Magic'].Buffs = sets.midcast['Enhancing Magic']
+    -- sets.midcast['Blue Magic'].Cure   = sets.midcast.Cure
+    -- sets.midcast['Blue Magic'].Buffs  = sets.midcast['Enhancing Magic']
 
     --------------------------------------
     -- Idle/resting/defense/etc sets
     --------------------------------------
 
     sets.idle = {
-        main="Montante +1",
-        sub="Pole Grip",
-        ammo="Voluspa Tathlum",
-        head="Rawhide Mask",
-        body={ name="Futhark Coat", augments={'Enhances "Elemental Sforzo" effect',}},
-        hands="Meg. Gloves +1",
-        legs={ name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
-        feet="Meg. Jam. +2",
-        neck="Bathy Choker +1",
-        waist="Ioskeha Belt",
-        left_ear="Mache Earring",
-        right_ear="Infused Earring",
-        left_ring="Meghanada Ring",
-        right_ring="Renaye Ring",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        main       = "Montante +1",
+        sub        = "Pole Grip",
+        ammo       = "Voluspa Tathlum",
+        head       = "Rawhide Mask",
+        body       = { name     = "Futhark Coat",
+                       augments = {'Enhances "Elemental Sforzo" effect',}},
+        hands      = "Meg. Gloves +1",
+        legs       = { name     = "Rawhide Trousers",
+                       augments = {'MP+50','"Fast Cast"+5','"Refresh"+1',}},
+        feet       = "Meg. Jam. +2",
+        neck       = "Bathy Choker +1",
+        waist      = "Ioskeha Belt",
+        left_ear   = "Mache Earring",
+        right_ear  = "Infused Earring",
+        left_ring  = "Meghanada Ring",
+        right_ring = "Renaye Ring",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.defense.PDT = {}
@@ -323,30 +329,30 @@ function init_gear_sets()
 
     sets.Kiting = {feet="Carmine Cuisses +1"}
 
-
     --------------------------------------
     -- Engaged sets
     --------------------------------------
 
     sets.engaged = {
-        ammo="Voluspa Tathlum",
-        head="Meghanada Visor +2",
-        body="Meg. Cuirie +1",
-        hands="Runeist Mitons +2",
-        legs="Runeist Trousers +2",
-        feet="Meg. Jam. +2",
-        neck="Loricate Torque",
-        waist="Ioskeha Belt",
-        left_ear="Mache Earring",
-        right_ear="Infused Earring",
-        left_ring="Petrov Ring",
-        right_ring="Rajas Ring",
-        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        ammo       = "Voluspa Tathlum",
+        head       = "Meghanada Visor +2",
+        body       = "Meg. Cuirie +1",
+        hands      = "Runeist Mitons +2",
+        legs       = "Runeist Trousers +2",
+        feet       = "Meg. Jam. +2",
+        neck       = "Loricate Torque",
+        waist      = "Ioskeha Belt",
+        left_ear   = "Mache Earring",
+        right_ear  = "Infused Earring",
+        left_ring  = "Petrov Ring",
+        right_ring = "Rajas Ring",
+        back       = { name     = "Ogma's Cape",
+                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.engaged.Hybrid = set_combine(sets.engaged, {})
-    sets.engaged.PDT = set_combine(sets.engaged, {})
-    sets.engaged.MDT = set_combine(sets.engaged, {})
+    sets.engaged.PDT    = set_combine(sets.engaged, {})
+    sets.engaged.MDT    = set_combine(sets.engaged, {})
 
     -- sets.engaged.DD = {ammo="Ginsen",
     --     head="Dampening Tam",neck="Lissome Necklace",ear1="Cessance Earring",ear2="Zennaroi Earring",
@@ -363,8 +369,8 @@ function init_gear_sets()
     --         body="Erilaz Surcoat +1", hands="Kurys Gloves", ring1="Defending Ring", ring2="Archon Ring",
     --         back="Solemnity Cape", waist="Flume Belt", legs="Eri. Leg Guards +1", feet="Erilaz Greaves +1"}
     -- sets.engaged.repulse = {back="Repulse Mantle"}
-
 end
+
 
 ------------------------------------------------------------------
 -- Action events
@@ -384,7 +390,7 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 
     if spell.english == 'Provoke' then
-        add_to_chat(100, 'Equipping enmity set')
+        -- add_to_chat(100, 'Equipping enmity set')
         equip(sets.enmity)
     end
 
@@ -401,9 +407,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- end
 end
 
-function job_post_midcast(spell, action, spellMap, eventArgs)
-
-end
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
@@ -445,23 +448,10 @@ function customize_idle_set(idleSet)
        windower.add_to_chat(9, "Currently in: " .. world.area)
     end
 
+    --  Check custom statuses
     check_equipment_special_ring()
-
     check_status_cp()
-    -- if state.CP.current == 'on' then
-    --     equip(sets.CP)
-    --     disable('back')
-    -- else
-    --     enable('back')
-    -- end
-
     check_status_dynamis()
-    -- if state.Dynamis.current == 'on' then
-    --     equip(sets.JSENeck)
-    --     disable('neck')
-    -- else
-    --     enable('neck')
-    -- end
 
     -- if player.mpp < 51 then
     --     idleSet = set_combine(idleSet, sets.latent_refresh)
@@ -493,6 +483,7 @@ end
     -- end
 -- end
 
+
 -------------------------------------------------------------------------------------------------------------------
 -- Customization hooks for idle and melee sets, after they've been automatically constructed.
 -------------------------------------------------------------------------------------------------------------------
@@ -510,6 +501,7 @@ end
 --     end
 -- end
 
+
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements self-commands.
 -------------------------------------------------------------------------------------------------------------------
@@ -525,7 +517,6 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
-
 -- Select default macro book on initial load or subjob change.
 -- Default macro set/book
 function select_default_macro_book()
@@ -537,6 +528,7 @@ function select_default_macro_book()
         set_macro_page(1, 4)
     end
 end
+
 
 -- function get_rune_obi_element()
 --     weather_rune = buffactive[elements.rune_of[world.weather_element] or '']
@@ -569,7 +561,6 @@ end
 ------------------------------------------------------------------
 -- Timer manipulation
 ------------------------------------------------------------------
-
 -- Add a new run to the custom timers, and update index values for existing timers.
 -- function update_timers(spell)
 --    local expires_time = os.time() + 300
@@ -587,6 +578,7 @@ end
 --    send_command(cmd_queue)
 -- end
 
+
 -- Get the command string to create a custom timer for the provided entry.
 -- function create_timer(entry)
 --    local timer_name = '"Rune: ' .. entry.rune .. '-' .. tostring(entry.index) ..'"'
@@ -594,11 +586,13 @@ end
 --    return 'timers c ' .. timer_name .. ' ' .. tostring(duration) .. ' down ' .. runes.icons[entry.rune]
 -- end
 
+
 -- Get the command string to delete a custom timer for the provided entry.
 -- function delete_timer(entry)
 --    local timer_name = '"Rune: ' .. entry.rune .. '-' .. tostring(entry.index) .. '"'
 --    return 'timers d ' .. timer_name .. ''
 -- end
+
 
 -- Reset all timers
 -- function reset_timers()
@@ -609,6 +603,7 @@ end
 --    rune_timers:clear()
 --    send_command(cmd_queue)
 -- end
+
 
 -- Get a count of the number of runes of a given type
 -- function rune_count(rune)
@@ -621,6 +616,7 @@ end
 --    end
 --    return count
 -- end
+
 
 -- Remove the oldest rune(s) from the table, until we're below the max_runes limit.
 -- If given a value n, remove n runes from the table.
@@ -643,6 +639,7 @@ end
 
 --    return cmd_queue
 -- end
+
 
 -- Drop the index of all runes of a given type.
 -- If the index drops to 0, it is removed from the table.
@@ -688,6 +685,7 @@ function check_equipment_special_ring()
     end
 end
 
+
 function check_status_dynamis()
     if state.Dynamis.current == 'on' then
         equip(sets.JSENeck)
@@ -697,6 +695,7 @@ function check_status_dynamis()
     end
 end
 
+
 function check_status_cp()
     if state.CP.current == 'on' then
         equip(sets.CP)
@@ -705,6 +704,7 @@ function check_status_cp()
         enable('back')
     end
 end
+
 
 ------------------------------------------------------------------
 -- Reset events
