@@ -370,11 +370,6 @@ function init_gear_sets()
         feet={ name="Apogee Pumps", augments={'MP+60','Pet: "Mag.Atk.Bns."+30','Blood Pact Dmg.+7',}},
     }
 
---    sets.midcast.Pet.MagicalBloodPactRage['Ifrit'] = set_combine(sets.midcast.Pet.MagicalBloodPactRage, {
---        ring2="Varar Ring"
---        ring2="Fervor Ring"
---    })
-
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
 
 
@@ -403,7 +398,6 @@ function init_gear_sets()
 
     -- Resting sets
     sets.resting = {
---        main=gear.Staff.HMP,
         main="Boonwell Staff",
         sub="Ariesian Grip",
         ammo="Mana Ampulla",
@@ -429,7 +423,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Gifted Earring",
         ear2="Moonshade Earring",
-        body="Hagondes Coat +1",
+        body="Shomojijoe +1",
         hands="Inyanga Dastanas +2",
         ring1="Defending Ring",
         ring2="Inyanga Ring",

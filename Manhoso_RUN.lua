@@ -2,47 +2,39 @@
 -- It is added to the repository to allow people to have a baseline to build from,
 -- and make sure it is up-to-date with the library API.
 
-special_rings = S{
-    "Warp Ring", "Dim. Ring (Holla)",
-    "Emperor Band", "Echad Ring", "Caliber Ring",
-    "Capacity Ring", "Trizek Ring", "Facility Ring"
-}
-
-zones_adoulin = S{
-    "Eastern Adoulin",
-    "Western Adoulin"
-}
 
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
 
--- Initialization function for this job file.
+--  Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
 
-    -- Load and initialize the include file.
+    --  Load and initialize the include file.
     include('Mote-Include.lua')
+    include('common_lists.lua')
+    include('common_functions.lua')
 end
 
 
--- Setup vars that are user-independent.
+--  Setup vars that are user-independent.
 function job_setup()
-    -- Icons for custom timers for Runes.
+    --  Icons for custom timers for Runes.
 --    runes.icons = {
-  --      ['Ignis'] = 'spells/00288.png',
- --       ['Gelus'] = 'spells/00289.png',
-   --     ['Flabra'] = 'spells/00290.png',
-     --   ['Tellus'] = 'spells/00291.png',
-       -- ['Sulpor'] = 'spells/00292.png',
-        --['Unda'] = 'spells/00293.png',
-        --['Lux'] = 'spells/00294.png',
-        --['Tenebrae'] = 'spells/00295.png'
+--        ['Ignis'] = 'spells/00288.png',
+--        ['Gelus'] = 'spells/00289.png',
+--        ['Flabra'] = 'spells/00290.png',
+--        ['Tellus'] = 'spells/00291.png',
+--        ['Sulpor'] = 'spells/00292.png',
+--         ['Unda'] = 'spells/00293.png',
+--         ['Lux'] = 'spells/00294.png',
+--         ['Tenebrae'] = 'spells/00295.png'
 --    }
 
-    -- Table of entries
-    --rune_timers = T{}
-    -- entry = rune, index, expires
+    --  Table of entries
+--    rune_timers = T{}
+--    entry = rune, index, expires
 
 --    if player.main_job_level >= 65 then
 --        max_runes = 3
@@ -54,18 +46,18 @@ function job_setup()
 --        max_runes = 0
 --    end
 
-    -- blue_magic_maps = {}
+--    blue_magic_maps = {}
 
-    -- blue_magic_maps.Enmity = S{
-    --     'Blank Gaze', 'Geist Wall', 'Jettatura', 'Soporific', 'Poison Breath', 'Blitzstrahl',
-    --     'Sheep Song', 'Chaotic Eye'
-    -- }
-    -- blue_magic_maps.Cure = S{
-    --     'Wild Carrot'
-    -- }
-    -- blue_magic_maps.Buffs = S{
-    --     'Cocoon', 'Refueling'
-    -- }
+--    blue_magic_maps.Enmity = S{
+--        'Blank Gaze', 'Geist Wall', 'Jettatura', 'Soporific', 'Poison Breath', 'Blitzstrahl',
+--        'Sheep Song', 'Chaotic Eye'
+--    }
+--    blue_magic_maps.Cure = S{
+--        'Wild Carrot'
+--    }
+--    blue_magic_maps.Buffs = S{
+--        'Cocoon', 'Refueling'
+--     }
 
 end
 
@@ -93,8 +85,6 @@ function user_setup()
     -- send_command('bind @` input //gs c rune')
     --select_default_macro_book()
 
-
-
     state.CP = M(false, "CP Mode")
     state.Dynamis = M(false, "Dynamis Mode")
     state.Debug = M(false, "Debug Mode")
@@ -102,7 +92,6 @@ function user_setup()
     send_command('bind @c gs c toggle CP')
     send_command('bind @x gs c toggle Dynamis')
     send_command('bind @z gs c toggle Debug')
-
 end
 
 function user_unload()
@@ -116,10 +105,15 @@ end
 
 
 function init_gear_sets()
-
-    sets.Adoulin = {body="Councilor's Garb"}
-    sets.CP = {back="Aptitude Mantle"}
-    sets.JSENeck = {neck="Futhark Torque"}
+    sets.Adoulin = {
+        body="Councilor's Garb"
+    }
+    sets.CP = {
+        back="Mecistopins Mantle"
+    }
+    sets.JSENeck = {
+        neck="Futhark Torque"
+    }
 
     sets.enmity = {
         head="Erilaz Galea",
@@ -130,7 +124,7 @@ function init_gear_sets()
         neck="Futhark Torque",
         left_ear="Cryptic Earring",
         left_ring="Petrov Ring",
-        back={ name="Ogma's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     --------------------------------------
@@ -141,11 +135,20 @@ function init_gear_sets()
 
     sets.precast.JA = {}
     -- Precast sets to enhance JAs
-    sets.precast.JA['Vallation'] = {body="Runeist Coat"}
-    sets.precast.JA['Valiance'] = {body="Runeist Coat"}
-    sets.precast.JA['Pflug'] = {feet="Runeist Boots +2"}
-    sets.precast.JA['Battuta'] = {head="Futhark Bandeau"}
-    sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
+    sets.precast.JA['Vallation'] = set_combine(sets.emnity, {
+        body="Runeist Coat",
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+    })
+
+    sets.precast.JA['Valiance'] = set_combine(sets.emnity, {
+        body="Runeist Coat",
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+    })
+
+    sets.precast.JA['Pflug'] = set_combine(sets.emnity, {
+        feet="Runeist Boots +2"
+    })
+
     sets.precast.JA['Lunge'] = {
         ammo="Seething Bomblet",
         head="Wayfarer Circlet",
@@ -161,16 +164,31 @@ function init_gear_sets()
         right_ring="Arvina Ringlet +1",
         back="Amemet Mantle +1",
     }
+
     sets.precast.JA['Swipe'] = sets.precast.JA['Lunge']
+
+    sets.precast.JA['Battuta'] = {head="Futhark Bandeau"}
+
+    sets.precast.JA['Liement'] = {body="Futhark Coat +1"}
+
     sets.precast.JA['Gambit'] = {hands="Runeist Mitons +2"}
+
     sets.precast.JA['Rayke'] = {feet="Futhark Boots"}
+
     sets.precast.JA['Elemental Sforzo'] = {body="Futhark Coat"}
+
     sets.precast.JA['Swordplay'] = {hands="Futhark Mitons"}
-    sets.precast.JA['Embolden'] = {}
+
     sets.precast.JA['Vivacious Pulse'] = {head="Erilaz Galea"}
-    sets.precast.JA['One For All'] = {}
+
     sets.precast.JA['Provoke'] = sets.enmity
+
     sets.precast.JA["Inquartata"] = {legs="Erilaz Leg Guards"}
+
+    sets.precast.JA['Embolden'] = {}
+
+    sets.precast.JA['One For All'] = {}
+
 
     -- Fast cast sets for spells
     sets.precast.FC = {
@@ -184,16 +202,17 @@ function init_gear_sets()
         waist="Ioskeha Belt",
         left_ear="Loquac. Earring",
         right_ear="Infused Earring",
-        back={ name="Ogma's Cape", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
+
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
         legs={ name="Futhark Trousers +1", augments={'Enhances "Inspire" effect',}},
     })
+
     sets.precast.FC['Divine Magic'] = set_combine(sets.precast.FC, {})
 
     -- sets.precast.FC['Utsusemi: Ichi'] = set_combine(sets.precast.FC, {})
     -- sets.precast.FC['Utsusemi: Ni'] = sets.precast.FC['Utsusemi: Ichi']
-
 
     -- Weaponskill sets
     sets.precast.WS = {
@@ -214,6 +233,7 @@ function init_gear_sets()
     sets.precast.WS['Resolution'] = sets.precast.WS
     sets.precast.WS['Dimidiation'] = sets.precast.WS
     sets.precast.WS['Herculean Slash'] = set_combine(sets.precast.WS["Resolution"], {belt="Snow Belt"})
+
     -- sets.precast.WS['Fell Cleave'] = sets.precast.WS['Resolution']
     -- sets.precast.WS['Sanguine Blade'] = {head="Pixie Hairpin +1", neck="Sanctity Necklace", ear1="Hectate's Earring", ear2="Friomisi Earring",
     --         body="Samnhua Coat", hands="Leyline Gloves", ring1="Archon Ring", ring2="Shiva Ring +1",
@@ -265,6 +285,8 @@ function init_gear_sets()
         right_ring="Stikini Ring",
     }
 
+    sets.midcast['Flash'] = sets.enmity
+
     -- sets.midcast['Stoneskin'] = {}
     -- sets.midcast.Cure = {}
 
@@ -292,7 +314,7 @@ function init_gear_sets()
         right_ear="Infused Earring",
         left_ring="Meghanada Ring",
         right_ring="Renaye Ring",
-        back="Amemet Mantle +1",
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.defense.PDT = {}
@@ -319,8 +341,12 @@ function init_gear_sets()
         right_ear="Infused Earring",
         left_ring="Petrov Ring",
         right_ring="Rajas Ring",
-        back="Amemet Mantle +1",
+        back={ name="Ogma's Cape", augments={'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
+
+    sets.engaged.Hybrid = set_combine(sets.engaged, {})
+    sets.engaged.PDT = set_combine(sets.engaged, {})
+    sets.engaged.MDT = set_combine(sets.engaged, {})
 
     -- sets.engaged.DD = {ammo="Ginsen",
     --     head="Dampening Tam",neck="Lissome Necklace",ear1="Cessance Earring",ear2="Zennaroi Earring",
@@ -375,17 +401,20 @@ function job_precast(spell, action, spellMap, eventArgs)
     -- end
 end
 
+function job_post_midcast(spell, action, spellMap, eventArgs)
+
+end
 
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
-function job_post_midcast(spell, action, spellMap, eventArgs)
+-- function job_post_midcast(spell, action, spellMap, eventArgs)
     -- if spell.english == 'Lunge' or spell.english == 'Swipe' then
     --     local obi = get_obi(get_rune_obi_element())
     --     if obi then
     --         equip({waist=obi})
     --     end
     -- end
-end
+-- end
 
 
 function user_buff_change(buff, gain, eventArgs)
@@ -441,7 +470,7 @@ function customize_idle_set(idleSet)
     -- if toau_zones:contains(world.area) then
     --     idleSet = set_combine(idleSet, sets.ToAU)
     -- end
-    if zones_adoulin:contains(world.area) then
+    if zones_adoulin_body:contains(world.area) then
         idleSet = set_combine(idleSet, sets.Adoulin)
     end
 
@@ -500,7 +529,13 @@ end
 -- Select default macro book on initial load or subjob change.
 -- Default macro set/book
 function select_default_macro_book()
-    set_macro_page(1, 4)
+    if subjob == 'WAR' then
+        set_macro_page(1, 4)
+    elseif subjob == 'SAM' then
+        set_macro_page(3, 4)
+    else
+        set_macro_page(1, 4)
+    end
 end
 
 -- function get_rune_obi_element()
@@ -635,23 +670,21 @@ end
 -- end
 
 
-
 --  Locks the correct ring slot if a listed ring is equipped
 --  Unlocks the slot if the ring is no longer detected
 function check_equipment_special_ring()
-    if special_rings:contains(player.equipment.ring1) then
-        windower.add_to_chat(9, "Ring1 locked")
+    if equip_lock_rings:contains(player.equipment.ring1) then
+        windower.add_to_chat(9, 'Ring1 locked')
         special_ring_equipped = true
-        disable("ring1")
-    elseif special_rings:contains(player.equipment.ring2) then
-        windower.add_to_chat(9, "Ring2 locked")
+        equipment_lock_specific({'ring1'})
+    elseif equip_lock_rings:contains(player.equipment.ring2) then
+        windower.add_to_chat(9, 'Ring2 locked')
         special_ring_equipped = true
-        disable("ring2")
+        equipment_lock_specific({"ring2"})
     elseif special_ring_equipped then
-        windower.add_to_chat(9, "Unlocking rings")
+        windower.add_to_chat(9, 'Unlocking rings')
         special_ring_equipped = false
-        enable('ring1')
-        enable('ring2')
+        equipment_unlock_specific({'ring1', 'ring2'})
     end
 end
 
