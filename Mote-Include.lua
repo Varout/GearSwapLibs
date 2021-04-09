@@ -30,7 +30,7 @@ current_mote_include_version = 2
 function init_include()
     -- Used to define various types of data mappings.  These may be used in the initialization, so load it up front.
     include('Mote-Mappings')
-    
+
     -- Modes is the include for a mode-tracking variable class.  Used for state vars, below.
     include('Modes')
 
@@ -227,7 +227,7 @@ end
 function handle_actions(spell, action)
     -- Init an eventArgs that allows cancelling.
     local eventArgs = {handled = false, cancel = false}
-    
+
     mote_vars.set_breadcrumbs:clear()
 
     -- Get the spell mapping, since we'll be passing it to various functions and checks.
@@ -244,27 +244,27 @@ function handle_actions(spell, action)
         -- Global user handling of this action
         if _G['user_'..action] then
             _G['user_'..action](spell, action, spellMap, eventArgs)
-            
+
             if eventArgs.cancel then
                 cancel_spell()
             end
         end
-        
+
         -- Job-specific handling of this action
         if not eventArgs.cancel and not eventArgs.handled and _G['job_'..action] then
             _G['job_'..action](spell, action, spellMap, eventArgs)
-            
+
             if eventArgs.cancel then
                 cancel_spell()
             end
         end
-    
+
         -- Default handling of this action
         if not eventArgs.cancel and not eventArgs.handled and _G['default_'..action] then
             _G['default_'..action](spell, spellMap)
             display_breadcrumbs(spell, spellMap, action)
         end
-        
+
         -- Global post-handling of this action
         if not eventArgs.cancel and _G['user_post_'..action] then
             _G['user_post_'..action](spell, action, spellMap, eventArgs)
@@ -457,7 +457,7 @@ function equip_gear_by_status(playerStatus, petStatus)
     if _global.debug_mode then add_to_chat(123,'Debug: Equip gear for status ['..tostring(status)..'], HP='..tostring(player.hp)) end
 
     playerStatus = playerStatus or player.status or 'Idle'
-    
+
     -- If status not defined, treat as idle.
     -- Be sure to check for positive HP to make sure they're not dead.
     if (playerStatus == 'Idle' or playerStatus == '') and player.hp > 0 then
@@ -482,14 +482,14 @@ end
 -- petStatus - Optional explicit definition of pet status.
 function get_idle_set(petStatus)
     local idleSet = sets.idle
-    
+
     if not idleSet then
         return {}
     end
-    
+
     mote_vars.set_breadcrumbs:append('sets')
     mote_vars.set_breadcrumbs:append('idle')
-    
+
     local idleScope
 
     if buffactive.weakness then
@@ -548,11 +548,11 @@ end
 --   sets.engaged[state.CombatForm][state.CombatWeapon][state.OffenseMode][state.DefenseMode][classes.CustomMeleeGroups (any number)]
 function get_melee_set()
     local meleeSet = sets.engaged
-    
+
     if not meleeSet then
         return {}
     end
-    
+
     mote_vars.set_breadcrumbs:append('sets')
     mote_vars.set_breadcrumbs:append('engaged')
 
@@ -635,11 +635,11 @@ function get_precast_set(spell, spellMap)
 
     mote_vars.set_breadcrumbs:append('sets')
     mote_vars.set_breadcrumbs:append('precast')
-    
+
     -- Determine base sub-table from type of action being performed.
-    
+
     local cat
-    
+
     if spell.action_type == 'Magic' then
         cat = 'FC'
     elseif spell.action_type == 'Ranged Attack' then
@@ -656,7 +656,7 @@ function get_precast_set(spell, spellMap)
     elseif spell.action_type == 'Item' then
         cat = 'Item'
     end
-    
+
     -- If no proper sub-category is defined in the job file, bail out.
     if cat then
         if equipSet[cat] then
@@ -672,7 +672,7 @@ function get_precast_set(spell, spellMap)
     -- Handle automatic selection of set based on spell class/name/map/skill/type.
     equipSet = select_specific_set(equipSet, spell, spellMap)
 
-    
+
     -- Once we have a named base set, do checks for specialized modes (casting mode, weaponskill mode, etc).
 
     if spell.action_type == 'Magic' then
@@ -693,7 +693,7 @@ function get_precast_set(spell, spellMap)
 
     -- Update defintions for element-specific gear that may be used.
     set_elemental_gear(spell)
-    
+
     -- Return whatever we've constructed.
     return equipSet
 end
@@ -712,10 +712,10 @@ function get_midcast_set(spell, spellMap)
 
     mote_vars.set_breadcrumbs:append('sets')
     mote_vars.set_breadcrumbs:append('midcast')
-    
+
     -- Determine base sub-table from type of action being performed.
     -- Only ranged attacks and items get specific sub-categories here.
-    
+
     local cat
 
     if spell.action_type == 'Ranged Attack' then
@@ -723,7 +723,7 @@ function get_midcast_set(spell, spellMap)
     elseif spell.action_type == 'Item' then
         cat = 'Item'
     end
- 
+
     -- If no proper sub-category is defined in the job file, bail out.
     if cat then
         if equipSet[cat] then
@@ -734,13 +734,13 @@ function get_midcast_set(spell, spellMap)
             return {}
         end
     end
-    
+
     classes.SkipSkillCheck = classes.NoSkillSpells:contains(spell.english)
     -- Handle automatic selection of set based on spell class/name/map/skill/type.
     equipSet = select_specific_set(equipSet, spell, spellMap)
-    
+
     -- After the default checks, do checks for specialized modes (casting mode, etc).
-    
+
     if spell.action_type == 'Magic' then
         if equipSet[state.CastingMode.current] then
             equipSet = equipSet[state.CastingMode.current]
@@ -749,7 +749,7 @@ function get_midcast_set(spell, spellMap)
     elseif spell.action_type == 'Ranged Attack' then
         equipSet = get_ranged_set(equipSet, spell, spellMap)
     end
-    
+
     -- Return whatever we've constructed.
     return equipSet
 end
@@ -798,7 +798,7 @@ end
 function get_weaponskill_set(equipSet, spell, spellMap)
     -- Custom handling for weaponskills
     local ws_mode = state.WeaponskillMode.current
-    
+
     if ws_mode == 'Normal' then
         -- If a particular weaponskill mode isn't specified, see if we have a weaponskill mode
         -- corresponding to the current offense mode.  If so, use that.
@@ -829,7 +829,7 @@ function get_weaponskill_set(equipSet, spell, spellMap)
         equipSet = equipSet[ws_mode]
         mote_vars.set_breadcrumbs:append(ws_mode)
     end
-    
+
     return equipSet
 end
 
@@ -913,7 +913,7 @@ end
 function get_spell_map(spell)
     local defaultSpellMap = classes.SpellMaps[spell.english]
     local jobSpellMap
-    
+
     if job_get_spell_map then
         jobSpellMap = job_get_spell_map(spell, defaultSpellMap)
     end
@@ -930,7 +930,7 @@ function select_specific_set(equipSet, spell, spellMap)
     -- Take the determined base equipment set and try to get the simple naming extensions that
     -- may apply to it (class, spell name, spell map).
     local namedSet = get_named_set(equipSet, spell, spellMap)
-    
+
     -- If no simple naming sub-tables were found, and we simply got back the original equip set,
     -- check for spell.skill and spell.type, then check the simple naming extensions again.
     if namedSet == equipSet then
@@ -943,7 +943,7 @@ function select_specific_set(equipSet, spell, spellMap)
         else
             return equipSet
         end
-        
+
         namedSet = get_named_set(namedSet, spell, spellMap)
     end
 
@@ -982,11 +982,11 @@ function sub_job_change(newSubjob, oldSubjob)
     if user_setup then
         user_setup()
     end
-    
+
     if job_sub_job_change then
         job_sub_job_change(newSubjob, oldSubjob)
     end
-    
+
     send_command('gs c update')
 end
 
@@ -1086,20 +1086,20 @@ function display_breadcrumbs(spell, spellMap, action)
     if not _settings.debug_mode then
         return
     end
-    
+
     local msg = 'Default '
-    
+
     if action and spell then
         msg = msg .. action .. ' set selection for ' .. spell.name
     end
-    
+
     if spellMap then
         msg = msg .. ' (' .. spellMap .. ')'
     end
     msg = msg .. ' : '
-    
+
     local cons
-    
+
     for _,name in ipairs(mote_vars.set_breadcrumbs) do
         if not cons then
             cons = name

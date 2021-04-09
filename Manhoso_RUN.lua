@@ -125,7 +125,7 @@ function init_gear_sets()
         left_ear   = "Cryptic Earring",
         left_ring  = "Petrov Ring",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     --------------------------------------
@@ -139,13 +139,13 @@ function init_gear_sets()
     sets.precast.JA['Vallation'] = set_combine(sets.emnity, {
         body       = "Runeist Coat",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     })
 
     sets.precast.JA['Valiance'] = set_combine(sets.emnity, {
         body       = "Runeist Coat",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     })
 
     sets.precast.JA['Pflug'] = set_combine(sets.emnity, {
@@ -196,7 +196,7 @@ function init_gear_sets()
         left_ear   ="Loquac. Earring",
         right_ear  = "Infused Earring",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -223,7 +223,7 @@ function init_gear_sets()
         right_ear  = "Odr Earring",
         left_ring  = "Petrov Ring",
         right_ring = "Rajas Ring",
-        back       = "Amemet Mantle +1",
+        back={ name="Ogma's Cape", augments={'DEX+10','Accuracy+10 Attack+10','"Dbl.Atk."+10',}},
     }
 
     sets.precast.WS['Resolution']      = sets.precast.WS
@@ -307,7 +307,7 @@ function init_gear_sets()
         sub        = "Pole Grip",
         ammo       = "Voluspa Tathlum",
         head       = "Rawhide Mask",
-        body       = { name     = "Futhark Coat",
+        body       = { name     = "Futhark Coat +1",
                        augments = {'Enhances "Elemental Sforzo" effect',}},
         hands      = "Meg. Gloves +1",
         legs       = { name     = "Rawhide Trousers",
@@ -320,7 +320,7 @@ function init_gear_sets()
         left_ring  = "Meghanada Ring",
         right_ring = "Renaye Ring",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
     }
 
     sets.defense.PDT = {}
@@ -347,7 +347,7 @@ function init_gear_sets()
         left_ring  = "Petrov Ring",
         right_ring = "Rajas Ring",
         back       = { name     = "Ogma's Cape",
-                       augments = {'VIT+22','Eva.+20 /Mag. Eva.+20','VIT+2','Enmity+10',}},
+                       augments = {'DEX+10','Accuracy+10 Attack+10','"Dbl.Atk."+10',}},
     }
 
     sets.engaged.Hybrid = set_combine(sets.engaged, {})
@@ -418,6 +418,15 @@ end
     --     end
     -- end
 -- end
+
+
+function customize_melee_set(meleeSet)
+    local slots_domain_set = {'head', 'body', 'hands', 'legs', 'feet',}
+    if buffactive['Vorseal'] then
+        meleeSet = set_combine(meleeSet, get_domain_set(player.main_job))
+    end
+    return meleeSet
+end
 
 
 function user_buff_change(buff, gain, eventArgs)

@@ -45,7 +45,9 @@ domain_job = {
     ['WHM'] = 'mage',  ['BLM'] = 'mage',  ['RDM'] = 'mage',  ['BRD'] = 'mage',  ['SMN'] = 'mage',  ['PUP'] = 'mage',  ['SCH'] = 'mage',  ['GEO'] = 'mage',
 }
 
-domain_set['heavy'] = S{
+domain_set = {}
+
+domain_set['heavy'] = {
     head  = "Hervor Galea",
     body  = "Hervor Haubert",
     hands = "Hervor Mouffles",
@@ -53,7 +55,7 @@ domain_set['heavy'] = S{
     feet  = "Hervor Sollerets",
 }
 
-domain_set['light'] = S{
+domain_set['light'] = {
     head  = "Heidrek Mask",
     body  = "Heidrek Harness",
     hands = "Heidrek Gloves",
@@ -61,7 +63,7 @@ domain_set['light'] = S{
     feet  = "Heidrek Boots",
 }
 
-domain_set['mage'] = S{
+domain_set['mage'] = {
     head  = "Angantyr Beret",
     body  = "Angantyr Robe",
     hands = "Angantyr Mittens",

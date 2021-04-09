@@ -22,12 +22,12 @@ function define_global_sets()
     gear.Staff = {}
     gear.Staff.HMP = 'Chatoyant Staff'
     gear.Staff.PDT = 'Earth Staff'
-    
+
     -- Dark Rings
     gear.DarkRing = {}
     gear.DarkRing.physical = {name="Dark Ring",augments={'Magic dmg. taken -3%','Spell interruption rate down -5%','Phys. dmg. taken -6%'}}
     gear.DarkRing.magical = {name="Dark Ring", augments={'Magic dmg. taken -6%','Breath dmg. taken -5%'}}
-    
+
     -- Default items for utility gear values.
     gear.default.weaponskill_neck = "Asperity Necklace"
     gear.default.weaponskill_waist = "Caudata Belt"

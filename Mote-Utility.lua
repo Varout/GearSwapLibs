@@ -29,7 +29,7 @@ function cancel_conflicting_buffs(spell, action, spellMap, eventArgs)
                 return
             end
         end
-        
+
         if spell.english == 'Spectral Jig' and buffactive.sneak then
             cast_delay(0.2)
             send_command('cancel sneak')
@@ -59,23 +59,23 @@ local special_aftermath_mythics = S{'Tizona', 'Kenkonken', 'Murgleis', 'Yagrush'
 function custom_aftermath_timers_precast(spell)
     if spell.type == 'WeaponSkill' then
         info.aftermath = {}
-        
+
         local relic_ws = data.weaponskills.relic[player.equipment.main] or data.weaponskills.relic[player.equipment.range]
         local mythic_ws = data.weaponskills.mythic[player.equipment.main] or data.weaponskills.mythic[player.equipment.range]
         local empy_ws = data.weaponskills.empyrean[player.equipment.main] or data.weaponskills.empyrean[player.equipment.range]
-        
+
         if not relic_ws and not mythic_ws and not empy_ws then
             return
         end
 
         info.aftermath.weaponskill = spell.english
         info.aftermath.duration = 0
-        
+
         info.aftermath.level = math.floor(player.tp / 1000)
         if info.aftermath.level == 0 then
             info.aftermath.level = 1
         end
-        
+
         if spell.english == relic_ws then
             info.aftermath.duration = math.floor(0.2 * player.tp)
             if info.aftermath.duration < 20 then
@@ -90,7 +90,7 @@ function custom_aftermath_timers_precast(spell)
             if info.aftermath.level ~= 3 and buffactive['Aftermath: Lv.2'] then
                 return
             end
-            
+
             -- duration is based on aftermath level
             info.aftermath.duration = 30 * info.aftermath.level
         elseif spell.english == mythic_ws then
@@ -104,7 +104,7 @@ function custom_aftermath_timers_precast(spell)
             end
 
             -- Assume mythic is lvl 80 or higher, for duration
-                        
+
             if info.aftermath.level == 1 then
                 info.aftermath.duration = (special_aftermath_mythics:contains(player.equipment.main) and 270) or 90
             elseif info.aftermath.level == 2 then
@@ -145,7 +145,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
     if spell.type ~= 'Waltz' then
         return
     end
-    
+
     -- Don't modify anything for Healing Waltz or Divine Waltzes
     if spell.english == "Healing Waltz" or spell.english == "Divine Waltz" or spell.english == "Divine Waltz II" then
         return
@@ -153,9 +153,9 @@ function refine_waltz(spell, action, spellMap, eventArgs)
 
     local newWaltz = spell.english
     local waltzID
-    
+
     local missingHP
-    
+
     -- If curing ourself, get our exact missing HP
     if spell.target.type == "SELF" then
         missingHP = player.max_hp - player.hp
@@ -165,7 +165,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
         local est_max_hp = target.hp / (target.hpp/100)
         missingHP = math.floor(est_max_hp - target.hp)
     end
-    
+
     -- If we have an estimated missing HP value, we can adjust the preferred tier used.
     if missingHP ~= nil then
         if player.main_job == 'DNC' then
@@ -217,7 +217,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
     local tpCost = waltz_tp_cost[newWaltz]
 
     local downgrade
-    
+
     -- Downgrade the spell to what we can afford
     if player.tp < tpCost and not buffactive.trance then
         --[[ Costs:
@@ -229,7 +229,7 @@ function refine_waltz(spell, action, spellMap, eventArgs)
             Divine Waltz:     400 TP
             Divine Waltz II:  800 TP
         --]]
-        
+
         if player.tp < 200 then
             add_to_chat(122, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
             eventArgs.cancel = true
@@ -243,11 +243,11 @@ function refine_waltz(spell, action, spellMap, eventArgs)
         elseif player.tp < 800 then
             newWaltz = 'Curing Waltz IV'
         end
-        
+
         downgrade = 'Insufficient TP ['..tostring(player.tp)..']. Downgrading to '..newWaltz..'.'
     end
 
-    
+
     if newWaltz ~= spell.english then
         send_command('@input /ja "'..newWaltz..'" '..tostring(spell.target.raw))
         if downgrade then
@@ -274,7 +274,7 @@ function auto_change_target(spell, spellMap)
     if spell.target.raw == ('<lastst>') or spell.target.raw == ('<me>') then
         return
     end
-    
+
     -- init a new eventArgs with current values
     local eventArgs = {handled = false, PCTargetMode = state.PCTargetMode.value, SelectNPCTargets = state.SelectNPCTargets.value}
 
@@ -284,23 +284,23 @@ function auto_change_target(spell, spellMap)
     if job_auto_change_target then
         job_auto_change_target(spell, action, spellMap, eventArgs)
     end
-    
+
     -- If the job handled it, we're done.
     if eventArgs.handled then
         return
     end
-    
+
     local pcTargetMode = eventArgs.PCTargetMode
     local selectNPCTargets = eventArgs.SelectNPCTargets
 
-    
+
     local validPlayers = S{'Self', 'Player', 'Party', 'Ally', 'NPC'}
 
     local intersection = spell.targets * validPlayers
     local canUseOnPlayer = not intersection:empty()
-    
+
     local newTarget
-    
+
     -- For spells that we can cast on players:
     if canUseOnPlayer and pcTargetMode ~= 'default' then
         -- Do not adjust targetting for player-targettable spells where the target was <t>
@@ -330,7 +330,7 @@ function auto_change_target(spell, spellMap)
         -- if the flag is set.  It won't change <stnpc> back to <t>.
         newTarget = '<stnpc>'
     end
-    
+
     -- If a new target was selected and is different from the original, call the change function.
     if newTarget and newTarget ~= spell.target.raw then
         change_target(newTarget)
@@ -355,7 +355,7 @@ function is_trust_party()
     if party.count == 1 then
         return false
     end
-    
+
     -- Can call a max of 3 Trust NPCs, so parties larger than that are out.
     if party.count > 4 then
         return false
@@ -365,7 +365,7 @@ function is_trust_party()
     if alliance[2].count > 0 or alliance[3].count > 0 then
         return false
     end
-    
+
     -- Check that, for each party position aside from our own, the party
     -- member has one of the Trust NPC names, and that those party members
     -- are flagged is_npc.
@@ -379,7 +379,7 @@ function is_trust_party()
             end
         end
     end
-    
+
     -- If it didn't fail any of the above checks, return true.
     return true
 end
@@ -395,7 +395,7 @@ function is_encumbered(...)
         check_list = check_list[1]
     end
     local check_set = S(check_list)
-    
+
     for slot_id,slot_name in pairs(gearswap.default_slot_map) do
         if check_set:contains(slot_name) then
             if gearswap.encumbrance_table[slot_id] then
@@ -403,7 +403,7 @@ function is_encumbered(...)
             end
         end
     end
-    
+
     return false
 end
 
@@ -430,7 +430,7 @@ function set_elemental_gorget_belt(spell)
         union(skillchain_elements[spell.skillchain_a]):
         union(skillchain_elements[spell.skillchain_b]):
         union(skillchain_elements[spell.skillchain_c])
-    
+
     gear.ElementalGorget.name = get_elemental_item_name("gorget", weaponskill_elements) or gear.default.weaponskill_neck  or ""
     gear.ElementalBelt.name   = get_elemental_item_name("belt", weaponskill_elements)   or gear.default.weaponskill_waist or ""
 end
@@ -441,7 +441,7 @@ function set_elemental_obi_cape_ring(spell)
     if spell.element == 'None' then
         return
     end
-    
+
     local world_elements = S{world.day_element}
     if world.weather_element ~= 'None' then
         world_elements:add(world.weather_element)
@@ -449,7 +449,7 @@ function set_elemental_obi_cape_ring(spell)
 
     local obi_name = get_elemental_item_name("obi", S{spell.element}, world_elements)
     gear.ElementalObi.name = obi_name or gear.default.obi_waist  or ""
-    
+
     if obi_name then
         if player.inventory['Twilight Cape'] or player.wardrobe['Twilight Cape'] or player.wardrobe2['Twilight Cape'] or player.wardrobe3['Twilight Cape'] or player.wardrobe4['Twilight Cape'] then
             gear.ElementalCape.name = "Twilight Cape"
@@ -495,7 +495,7 @@ end
 function get_elemental_item_name(item_type, valid_elements, restricted_to_elements)
     local potential_elements = restricted_to_elements or elements.list
     local item_map = elements[item_type:lower()..'_of']
-    
+
     for element in (potential_elements.it or it)(potential_elements) do
         if valid_elements:contains(element) and (player.inventory[item_map[element]] or player.wardrobe[item_map[element]] or player.wardrobe2[item_map[element]]) then
             return item_map[element]
@@ -542,7 +542,7 @@ end
 -- Return true if one exists and was loaded.
 function load_sidecar(job)
     if not job then return false end
-    
+
     -- filename format example for user-local files: whm_gear.lua, or playername_whm_gear.lua
     local filenames = {player.name..'_'..job..'_gear.lua', job..'_gear.lua',
         'gear/'..player.name..'_'..job..'_gear.lua', 'gear/'..job..'_gear.lua',
@@ -600,9 +600,9 @@ end
 -- Use this to look up the index value of a given entry.
 function invert_table(t)
     if t == nil then error('Attempting to invert table, received nil.', 2) end
-    
+
     local i={}
-    for k,v in pairs(t) do 
+    for k,v in pairs(t) do
         i[v] = k
     end
     return i
@@ -618,7 +618,7 @@ function get_expanded_set(baseSet, str)
             cur = cur[i]
         end
     end
-    
+
     return cur
 end
 
@@ -638,7 +638,7 @@ end
 function time_change(new_time, old_time)
     local was_daytime = classes.Daytime
     local was_dusktime = classes.DuskToDawn
-    
+
     if new_time >= 6*60 and new_time < 18*60 then
         classes.Daytime = true
     else
@@ -650,7 +650,7 @@ function time_change(new_time, old_time)
     else
         classes.DuskToDawn = false
     end
-    
+
     if was_daytime ~= classes.Daytime or was_dusktime ~= classes.DuskToDawn then
         if job_time_change then
             job_time_change(new_time, old_time)
