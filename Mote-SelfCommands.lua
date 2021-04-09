@@ -48,14 +48,14 @@ function handle_set(cmdParams)
         add_to_chat(123,'Mote-Libs: Set parameter failure: field not specified.')
         return
     end
-    
+
     local state_var = get_state(cmdParams[1])
-    
+
     if state_var then
         local oldVal = state_var.value
         state_var:set(cmdParams[2])
         local newVal = state_var.value
-        
+
         local descrip = state_var.description or cmdParams[1]
         if job_state_change then
             job_state_change(descrip, newVal, oldVal)
@@ -66,7 +66,7 @@ function handle_set(cmdParams)
             msg = msg .. ' (' .. state[newVal .. 'DefenseMode'].current .. ')'
         end
         msg = msg .. '.'
-        
+
         add_to_chat(122, msg)
         handle_update({'auto'})
     else
@@ -84,18 +84,18 @@ function handle_reset(cmdParams)
         if _global.debug_mode then add_to_chat(123,'handle_reset: parameter failure: reset type not specified') end
         return
     end
-    
+
     local state_var = get_state(cmdParams[1])
 
     local oldVal
     local newVal
     local descrip
-    
+
     if state_var then
         oldVal = state_var.value
         state_var:reset()
         newVal = state_var.value
-        
+
         local descrip = state_var.description or cmdParams[1]
         if job_state_change then
             job_state_change(descrip, newVal, oldVal)
@@ -109,7 +109,7 @@ function handle_reset(cmdParams)
                 oldVal = v.value
                 v:reset()
                 newVal = v.value
-                
+
                 descrip = state_var.description
                 if descrip and job_state_change then
                     job_state_change(descrip, newVal, oldVal)
@@ -142,9 +142,9 @@ function handle_cycle(cmdParams)
         add_to_chat(123,'Mote-Libs: Cycle parameter failure: field not specified.')
         return
     end
-    
+
     local state_var = get_state(cmdParams[1])
-    
+
     if state_var then
         local oldVal = state_var.value
         if cmdParams[2] and S{'reverse', 'backwards', 'r'}:contains(cmdParams[2]:lower()) then
@@ -153,7 +153,7 @@ function handle_cycle(cmdParams)
             state_var:cycle()
         end
         local newVal = state_var.value
-        
+
         local descrip = state_var.description or cmdParams[1]
         if job_state_change then
             job_state_change(descrip, newVal, oldVal)
@@ -182,14 +182,14 @@ function handle_toggle(cmdParams)
         add_to_chat(123,'Mote-Libs: Toggle parameter failure: field not specified.')
         return
     end
-    
+
     local state_var = get_state(cmdParams[1])
-    
+
     if state_var then
         local oldVal = state_var.value
         state_var:toggle()
         local newVal = state_var.value
-        
+
         local descrip = state_var.description or cmdParams[1]
         if job_state_change then
             job_state_change(descrip, newVal, oldVal)
@@ -210,14 +210,14 @@ function handle_unset(cmdParams)
         add_to_chat(123,'Mote-Libs: Unset parameter failure: field not specified.')
         return
     end
-    
+
     local state_var = get_state(cmdParams[1])
-    
+
     if state_var then
         local oldVal = state_var.value
         state_var:unset()
         local newVal = state_var.value
-        
+
         local descrip = state_var.description or cmdParams[1]
         if job_state_change then
             job_state_change(descrip, newVal, oldVal)
@@ -331,23 +331,23 @@ function display_current_state()
 
     if not eventArgs.handled then
         local msg = 'Melee'
-        
+
         if state.CombatForm.has_value then
             msg = msg .. ' (' .. state.CombatForm.value .. ')'
         end
-        
+
         msg = msg .. ': '
-        
+
         msg = msg .. state.OffenseMode.value
         if state.HybridMode.value ~= 'Normal' then
             msg = msg .. '/' .. state.HybridMode.value
         end
         msg = msg .. ', WS: ' .. state.WeaponskillMode.value
-        
+
         if state.DefenseMode.value ~= 'None' then
             msg = msg .. ', Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
         end
-        
+
         if state.Kiting.value == true then
             msg = msg .. ', Kiting'
         end
@@ -371,23 +371,23 @@ end
 -- Generic version of this for casters
 function display_current_caster_state()
     local msg = ''
-    
+
     if state.OffenseMode.value ~= 'None' then
         msg = msg .. 'Melee'
 
         if state.CombatForm.has_value then
             msg = msg .. ' (' .. state.CombatForm.value .. ')'
         end
-        
+
         msg = msg .. ', '
     end
-    
+
     msg = msg .. 'Casting ['..state.CastingMode.value..'], Idle ['..state.IdleMode.value..']'
-    
+
     if state.DefenseMode.value ~= 'None' then
         msg = msg .. ', ' .. 'Defense: ' .. state.DefenseMode.value .. ' (' .. state[state.DefenseMode.value .. 'DefenseMode'].value .. ')'
     end
-    
+
     if state.Kiting.value == true then
         msg = msg .. ', Kiting'
     end
