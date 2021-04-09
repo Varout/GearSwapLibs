@@ -462,6 +462,12 @@ function buff_change(buff,gain)
     end
 end
 
+function customize_melee_set(meleeSet)
+    if buffactive['Elvorseal'] then
+        meleeSet = set_combine(meleeSet, get_domain_set(player.main_job))
+    end
+end
+
 function pet_midcast(spell,action)
     if string.find(spell.english,'Breath') then
         equip(sets.Pet["Restoring Breath"])
