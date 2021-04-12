@@ -616,18 +616,18 @@ function customize_idle_set(idleSet)
         enable('neck')
     end
 
-    if state.OhShi.current == 'on' then
-        equip(sets.OhShi)
-        equipment_lock_all()
-    else
-        equipment_unlock_all()
-    end
+    -- if state.OhShi.current == 'on' then
+    --     equip(sets.OhShi)
+    --     equipment_lock_all()
+    -- else
+    --     equipment_unlock_all()
+    -- end
 
-    if state.Weapons.current == 'on' then
-        equipment_lock_specific({'main', 'sub',})
-    else
-        equipment_unlock_specific({'main', 'sub',})
-    end
+    -- if state.Weapons.current == 'on' then
+    --     equipment_lock_specific({'main', 'sub',})
+    -- else
+    --     equipment_unlock_specific({'main', 'sub',})
+    -- end
 
     --  Checking player stats
     if player.mpp < 51 then
