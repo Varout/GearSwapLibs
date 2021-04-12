@@ -423,7 +423,7 @@ function init_gear_sets()
         neck="Bathy Choker +1",
         ear1="Gifted Earring",
         ear2="Moonshade Earring",
-        body="Shomojijoe +1",
+        body="Shomonjijoe +1",
         hands="Inyanga Dastanas +2",
         ring1="Defending Ring",
         ring2="Inyanga Ring",
