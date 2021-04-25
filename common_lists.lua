@@ -111,7 +111,7 @@ equip_lock_rings = S{
     "Emperor Ring",
     "Caliber Ring",
     "Echad Ring",
-    "Capacity  Ring",
+    "Capacity Ring",
     "Facility Ring",
     "Trizek Ring",
     "Endorsement Ring",
