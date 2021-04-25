@@ -377,7 +377,7 @@ end
 ------------------------------------------------------------------
 
 function job_precast(spell, action, spellMap, eventArgs)
-    check_equipment_special_ring()
+    check_special_ring_equipped()
 
     if spell.english == 'Lunge' then
         local abil_recasts = windower.ffxi.get_ability_recasts()
@@ -421,8 +421,7 @@ end
 
 
 function customize_melee_set(meleeSet)
-    local slots_domain_set = {'head', 'body', 'hands', 'legs', 'feet',}
-    if buffactive['Vorseal'] then
+    if buffactive['Elvorseal'] then
         meleeSet = set_combine(meleeSet, get_domain_set(player.main_job))
     end
     return meleeSet
@@ -430,7 +429,7 @@ end
 
 
 function user_buff_change(buff, gain, eventArgs)
-    check_equipment_special_ring()
+    check_special_ring_equipped()
 end
 
 
@@ -458,9 +457,9 @@ function customize_idle_set(idleSet)
     end
 
     --  Check custom statuses
-    check_equipment_special_ring()
-    check_status_cp()
-    check_status_dynamis()
+    check_special_ring_equipped()
+    check_status_cp(state.CP.current == 'on', sets.CP)
+    check_status_dynamis(state.Dynamis.current == 'on', sets.JSENeck)
 
     -- if player.mpp < 51 then
     --     idleSet = set_combine(idleSet, sets.latent_refresh)
@@ -674,46 +673,6 @@ end
 
 --    return cmd_queue
 -- end
-
-
---  Locks the correct ring slot if a listed ring is equipped
---  Unlocks the slot if the ring is no longer detected
-function check_equipment_special_ring()
-    if equip_lock_rings:contains(player.equipment.ring1) then
-        windower.add_to_chat(9, 'Ring1 locked')
-        special_ring_equipped = true
-        equipment_lock_specific({'ring1'})
-    elseif equip_lock_rings:contains(player.equipment.ring2) then
-        windower.add_to_chat(9, 'Ring2 locked')
-        special_ring_equipped = true
-        equipment_lock_specific({"ring2"})
-    elseif special_ring_equipped then
-        windower.add_to_chat(9, 'Unlocking rings')
-        special_ring_equipped = false
-        equipment_unlock_specific({'ring1', 'ring2'})
-    end
-end
-
-
-function check_status_dynamis()
-    if state.Dynamis.current == 'on' then
-        equip(sets.JSENeck)
-        disable('neck')
-    else
-        enable('neck')
-    end
-end
-
-
-function check_status_cp()
-    if state.CP.current == 'on' then
-        equip(sets.CP)
-        disable('back')
-    else
-        enable('back')
-    end
-end
-
 
 ------------------------------------------------------------------
 -- Reset events
