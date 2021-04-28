@@ -22,9 +22,6 @@ function job_setup()
 
     --  Samurai Specific
     -- state.Buff[""] = buffactive[""] or false
-
-    --  Other
-    state.Buff["Commitment"] = buffactive["Commitment"] or false
 end
 
 
@@ -215,16 +212,9 @@ function job_midcast(spell, action, spellMap, eventArgs)
 end
 
 --  Currently used for testing to see what happens with commitment
-function job_buff_change(buff, gain, eventArgs)
-    add_to_chat(300, "$$$$$")
-    add_to_chat(300, buff)
-    add_to_chat(300, "$$$$$")
-    if buff == "Commitment" or buff == "Dedication" then
-        add_to_chat(300, "job_buff_change")
-        add_to_chat(300, toString(gain))
-        add_to_chat(300, "&&&&&&&&&&")
-    end
-end
+-- function job_buff_change(buff, gain, eventArgs)
+
+-- end
 
 -- function job_status_change(newStatus, oldStatus, eventArgs)
 --     add_to_chat(300, newStatus)
