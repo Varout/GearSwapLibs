@@ -175,8 +175,9 @@ function init_gear_sets()
         head="Glyphic Horn",          --BP -7
         body="Glyphic Doublet +1",    --BP2 -2
         hands="Glyphic Bracers",      --BP -5
-        legs="Glyphic Spats",         --BP -5
---        feet="Glyphic Pigaches"     --BP -5
+        legs="Glyphic Spats +1",      --BP -5
+        feet="Glyphic Pigaches +1",   --BP -5
+        back="Conveyance Cape",
     }
 
     sets.precast.BloodPactRage = sets.precast.BloodPactWard
@@ -188,12 +189,12 @@ function init_gear_sets()
         sub="Clerisy Strap",        -- FC +2%
         head="Revealer's Crown",    -- FC +5%
         ear1="Loquac. Earring",     -- FC +2%
-        ear2="Etiolation Earring", -- FC +1%
+        ear2="Etiolation Earring",  -- FC +1%
         body="Inyanga Jubbah +2",   -- FC +14%
         hands="Telchine Gloves",    -- FC +2%
         ring1="Kishar Ring",        -- FC +4%
-        ring2="Lebeche Ring",    -- Quick Magic +2%
-        back="Perimede Cape",    -- Quick Magic +4%
+        ring2="Lebeche Ring",       -- Quick Magic +2%
+        back="Perimede Cape",       -- Quick Magic +4%
         waist="Witful Belt",        -- FC +3%
         legs="Orvail Pants +1",     -- FC +5%
         feet="Chelona Boots"        -- FC +4%

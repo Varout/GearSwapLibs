@@ -17,38 +17,39 @@ toau_zones = S{
 }
 
 enfeebling_int = S{
+    "Bind",
     "Blind",
     "Blind II",
-    "Poison",
-    "Poison II",
-    "Sleep",
-    "SLeep II",
-    "Sleepga",
     "Break",
-    "Bind",
     "Dispel",
-    "Gravity",
-    "Gravity II",
     "Distract",
     "Distract II",
     "Distract III",
     "Frazzle",
     "Frazzle II",
-    "Frazzle III"
+    "Frazzle III",
+    "Gravity",
+    "Gravity II",
+    "Poison",
+    "Poison II",
+    "Poisonga",
+    "Sleep",
+    "Sleep II",
+    "Sleepga",
 }
 
 enfeebling_mnd = S{
-    "Slow",
-    "Slow II",
-    "Paralyze",
-    "Paralyze II",
+    "Addle",
     "Dia",
     "Dia II",
     "Dia III",
     "Diaga",
+    "Inundation",
+    "Paralyze",
+    "Paralyze II",
+    "Slow",
+    "Slow II",
     "Silence",
-    "Addle",
-    "Inundation"
 }
 
 -- Initialization function for this job file.
@@ -58,12 +59,13 @@ function get_sets()
     -- Load and initialize the include file.
     include('Mote-Include.lua')
     include('common_lists.lua')
+    include('common_functions.lua')
 end
 
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
-    state.Buff.Saboteur = buffactive.saboteur or false
+    -- state.Buff.Saboteur = buffactive.saboteur or false
 end
 
 -------------------------------------------------------------------------------------------------------------------
@@ -322,7 +324,7 @@ function init_gear_sets()
         body        = "Jhakri Robe +2",
         hands       = { name="Chironic Gloves", augments={'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
         legs        = { name="Chironic Hose", augments={'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
-        feet        = { name="Chironic Slippers", augments={'Mag. Acc.+12','"Fast Cast"+3','"Refresh"+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
+        feet        = "Chironic Slippers",
         neck        = "Sanctity Necklace",
         waist       = "Fucho-no-Obi",
         left_ear    = { name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},

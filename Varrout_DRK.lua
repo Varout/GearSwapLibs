@@ -263,8 +263,4 @@ end
 function select_default_macro_book(isSubJobChange)
     -- Default macro set/book
     set_macro_page(1, 8)
-
-    if not isSubJobChange then
-        -- randomise_lockstyle()
-    end
 end
