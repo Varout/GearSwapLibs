@@ -123,7 +123,7 @@ function init_gear_sets()
         neck       = "Loricate Torque +1",
         left_ear   = "Infused Earring",
         right_ear  = "Moonshade Earring",
-        body       = "Theophany Briault +3",
+        body       = "Theophany Bliaut +3",
         hands      = "Inyanga Dastanas +2",
         left_ring  = "Defending Ring",
         right_ring = "Inyanga Ring",
@@ -159,7 +159,7 @@ function init_gear_sets()
 --  AF/Relic JA Sets
 --  --------------------
     sets.precast["Devotion"]    = { head = "Piety Cap +3" }
-    sets.precast["Benediction"] = { body = "Piety Briault +3" }
+    sets.precast["Benediction"] = { body = "Piety Bliaut +3" }
 
     sets.precast.FC = {
         main       = "Oranyan",                            -- FC +10%
@@ -229,7 +229,7 @@ function init_gear_sets()
         ammo       = "Quartz Tathlum +1",
         head       = { name     = "Vanya Hood",
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body       = "Theo. Briault +3",
+        body       = "Theo. Bliaut +3",
         hands      = "Theophany Mitts +3",
         legs       = "Ebers Pant. +1",
         feet       = { name     = "Vanya Clogs",
@@ -250,7 +250,7 @@ function init_gear_sets()
         ammo       = "Quartz Tathlum +1",
         head       = { name     = "Vanya Hood",
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body       = "Theo. Briault +3",
+        body       = "Theo. Bliaut +3",
         hands      = "Theophany Mitts +3",
         legs       = "Ebers Pant. +1",
         feet       = { name     = "Vanya Clogs",
@@ -339,7 +339,7 @@ function init_gear_sets()
     sets.midcast['Regen'] = set_combine(sets.midcast['Enhancing Magic'], {
         main       = "Bolelabunga",                 --  Regen Potency +10%
         head       = "Inyanga Tiara +2",            --  Regen Potency +14%
-        body       = "Piety Briault +3",            --  Regen Potency +52%
+        body       = "Piety Bliaut +3",            --  Regen Potency +52%
         hands      = "Ebers Mitts +1",              --  Regen Duration +22
         legs       = "Theophany Pantaloons +3"      --  Regen Duration +24
     })
@@ -388,7 +388,7 @@ function init_gear_sets()
     }
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.MagicAcc, {
-        body       = "Theophany Briault +3",
+        body       = "Theophany Bliaut +3",
         right_ring = "Kishar Ring",
         waist      = "Casso Sash",
         legs       = { name     = "Chironic Hose",
@@ -418,7 +418,7 @@ function init_gear_sets()
 
     sets.melee.Engaged = {
         head       = "Theophany Cap +3",
-        body       = "Theo. Briault +3",
+        body       = "Theo. Bliaut +3",
         hands      = "Theophany Mitts +3",
         legs       = "Th. Pant. +3",
         feet       = "Theo. Duckbills +3",
