@@ -195,7 +195,7 @@ spell_maps = {
     ['Repose'] = 'Repose',
     ['Enlight'] = 'Enlight', ['Enlight II'] = 'Enlight',
     --  Enfeebling Magic: Light
-    ['Addle'] = 'Addle',
+    ['Addle'] = 'Addle', ['Addle II'] = 'Addle',
     ['Dia'] = 'Dia', ['Dia II'] = 'Dia', ['Dia III'] = 'Dia', ['Diaga'] = 'Diaga', ['Diaga II'] = 'Diaga',
     ['Inundation'] = 'Inundation',
     ['Paralyze'] = 'Paralyze', ['Paralyze II'] = 'Paralyze',
@@ -239,6 +239,10 @@ spell_maps = {
     ['Firestorm II'] = 'Storm', ['Hailstorm II'] = 'Storm', ['Windstorm II'] = 'Storm', ['Sandstorm II'] = 'Storm', ['Thunderstorm II'] = 'Storm', ['Rainstorm II'] = 'Storm', ['Aurorastorm II'] = 'Storm', ['Voidstorm II'] = 'Storm',
     ['Enstone'] = 'Enspell',    ['Enwater'] = 'Enspell',    ['Enaero'] = 'Enspell',    ['Enfire'] = 'Enspell',    ['Enblizzard'] = 'Enspell',    ['Enthunder'] = 'Enspell',
     ['Enstone II'] = 'Enspell', ['Enwater II'] = 'Enspell', ['Enaero II'] = 'Enspell', ['Enfire II'] = 'Enspell', ['Enblizzard II'] = 'Enspell', ['Enthunder II'] = 'Enspell',
+    ['Haste'] = 'Haste', ['Haste II'] = 'Haste',
+    ['Flurry'] = 'Flurry', ['Flurry II'] = 'Flurry',
+    ['Temper'] = 'Temper', ['Temper II'] = 'Temper',
+    ['Stoneskin'] = 'Stoneskin', ['Phalanx'] = 'Phalanx', ['Phalanx II'] = 'Phalanx',
     --  Elemental Magic
     ['Burn'] = 'ElementalEnfeeble', ['Frost'] = 'ElementalEnfeeble', ['Choke'] = 'ElementalEnfeeble', ['Rasp'] = 'ElementalEnfeeble', ['Shock'] = 'ElementalEnfeeble', ['Drown'] = 'ElementalEnfeeble',
     ['Pyrohelix'] = 'Helix', ['Cryohelix'] = 'Helix', ['Anemohelix'] = 'Helix', ['Geohelix'] = 'Helix', ['Ionohelix'] = 'Helix', ['Hydrohelix'] = 'Helix', ['Luminohelix'] = 'Helix', ['Noctohelix'] = 'Helix',
