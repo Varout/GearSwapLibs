@@ -79,24 +79,27 @@ spells_cursna = S{
 }
 
 enfeebling_int = S{
-    "Blind",    -- "Blind II",
-    "Poison",   -- "Poison II",
-    "Sleep",    -- "SLeep II", "Sleepga", "Sleepga II",
-    "Break",
     "Bind",
+    "Blind",
+    "Break",
     "Dispel",
-    "Gravity",  -- "Gravity II",
-    "Distract", -- "Distract II", "Distract III",
-    "Frazzle",  -- "Frazzle II", "Frazzle III"
+    "Distract",
+    "Frazzle",
+    "Gravity",
+    "Poison",
+    "Poisonga",
+    "Sleep",
+    "Sleepga",
 }
 
 enfeebling_mnd = S{
-    "Slow",     -- "Slow II",
-    "Paralyze", -- "Paralyze II",
-    "Dia",      -- "Dia II", "Dia III", "Diaga",
-    "Silence",
-    "Addle",    -- Addle II
+    "Addle",
+    "Dia",
+    "Diaga",
     "Inundation",
+    "Paralyze",
+    "Silence",
+    "Slow",
 }
 
 

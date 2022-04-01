@@ -121,14 +121,15 @@ function get_sets()
     sets.Idle =
     {
         main        = "Bolelabunga",
-        sub         = "Genbu's Shield",
+        sub         = "Genmei Shield",
         ammo        = "Homiliary",
         head        = "Befouled Crown",
         body        = "Jhakri Robe +2",
-        hands       = { name        = "Chironic Gloves",
-                        augments    = {'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
+        hands       = { name        = "Chironic Gloves", 
+                        augments    = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
         legs        = "Assid. Pants +1",
-        feet        = "Chironic Slippers",
+        feet        = { name        = "Chironic Slippers", 
+                        augments    = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
         neck        = "Loricate Torque +1",
         waist       = "Fucho-no-Obi",
         left_ear    = { name        = "Moonshade Earring",
@@ -401,7 +402,7 @@ function get_sets()
     sets.Midcast.Aquaveil = set_combine(sets.Midcast.Enhancing,
     {
         main        = "Vadose Rod",
-        sub         = "Genbu's Shield",
+        sub         = "Genmei Shield",
     })
 
     sets.Midcast.ElementalAttack = {
@@ -414,7 +415,7 @@ function get_sets()
         hands       = { name        = "Pedagogy Bracers +3",
                         augments    = {'Enh. "Tranquility" and "Equanimity"',}},
         legs        = "Jhakri Slops +2",
-        feet        = "Jhakri Pigaches +1",
+        feet        = "Jhakri Pigaches +2",
         neck        = "Argute Sole",
         waist       = "Aswang Sash",
         left_ear    = "Barkarole Earring",
@@ -425,13 +426,15 @@ function get_sets()
                         augments    = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}},
     }
 
-    sets.Midcast.ElementalAcc = sets.Midcast.ElementalAttack
+    sets.Midcast.ElementalMB = set_combine(sets.Midcast.ElementalAttack, {
+
+    })
 
     sets.Midcast.DarkMagic = set_combine(sets.Midcast.ElementalAttack,
     {
         main        = { name        = "Rubicundity",
                         augments    = {'Mag. Acc.+3','"Mag.Atk.Bns."+3','Dark magic skill +5','"Conserve MP"+2',}},
-        sub         = "",
+        sub         = "Ammurapi Shield",
         neck        = "Erra Pendant",
         left_ring   = "Evanescence Ring",
     })
@@ -439,7 +442,9 @@ function get_sets()
     sets.Midcast.Draspir = set_combine( sets.Midcast.DarkMagic,
     {
         head        = "Appetence Crown",
+        neck = "Erra Pendant",
         right_ear   = "Hirudinea Earring",
+        feet = "Merlinic Crackows",
     })
 end
 
@@ -504,7 +509,7 @@ function midcast(spell, action)
     -- spell_element_match = spell.element == world.weather_element or spell.element == world.day_element
     -- windower.add_to_chat(10, tostring(spell_element_match))
     -- windower.add_to_chat(10, spell.element)
-
+    check_if_silenced(spell, eventArgs)
     ---------------------
     --  Healing Magic  --
     ---------------------
@@ -619,6 +624,38 @@ function status_change(new,old)
         equip_rest()
     else
         equip_idle()
+    end
+end
+
+-------------------------------------------------------------------------------------------------------------------
+-- Utility functions specific to this job.
+-------------------------------------------------------------------------------------------------------------------
+
+-- Select default macro book on initial load or subjob change.
+function select_default_macro_book()
+    -- Default macro set/book
+    set_macro_page(1, 5)
+    send_command('wait 2.5; input /lockstyleset 001')
+end
+
+function check_if_silenced(spell, eventArgs)
+    if spell.action_type == 'Magic' and buffactive['Silence'] then
+        -- If silenced, use what's available to remove it
+        cancel_spell()
+        if player.inventory['Catholicon'] ~= nil then
+            send_command('input /item "Catholicon" <me>')
+            send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
+        elseif player.inventory['Echo Drops'] ~= nil then
+            send_command('input /item "Echo Drops" <me>')
+            send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
+        elseif player.inventory['Remedy'] ~= nil then
+            send_command('input /item "Remedy" <me>')
+            send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
+        else
+            send_command('input /echo *!! Silenced ~ No items to remove it !!*')
+        end
+        eventArgs.cancel = true
+        return
     end
 end
 

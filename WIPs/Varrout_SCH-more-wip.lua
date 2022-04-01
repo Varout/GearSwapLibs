@@ -24,8 +24,7 @@ function get_sets()
 
     --  Make sure all gear is unlocked after we swap
     equipment_unlock_all()
-    -- send_command('wait 4; input /lockstyleset 4')
-    randomise_lockstyle()
+    send_command('wait 4; input /lockstyleset 4')
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -119,29 +118,23 @@ function init_gear_sets()
         feet       = "Inyanga Crackows +2"
     }
 
-    --  13MP Refresch / tick
     sets.idle = {
-        main       = { name     = "Mpaca's Staff", 
-                       augments = {'Path: A',}},
-        sub        = "Enki Strap",
+        main       = "Bolelabunga",
+        sub        = "Genmei Shield",
         ammo       = "Homiliary",
         head       = "Inyanga Tiara +2",
-        body       = "Theo. Bliaut +3",
-        hands      = { name     = "Chironic Gloves", 
-                       augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-        legs       = "Inyanga Shalwar +2",
-        feet       = { name     = "Chironic Slippers", 
-                       augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
-        neck       = { name     = "Loricate Torque +1", 
-                       augments = {'Path: A',}},
-        waist      = "Embla Sash",
+        neck       = "Loricate Torque +1",
         left_ear   = "Infused Earring",
-        right_ear  = { name     = "Moonshade Earring", 
-                       augments = {'MP+25','Latent effect: "Refresh"+1',}},
+        right_ear  = "Moonshade Earring",
+        body       = "Theophany Bliaut +3",
+        hands      = "Inyanga Dastanas +2",
         left_ring  = "Defending Ring",
         right_ring = "Inyanga Ring",
-        back       = { name     = "Alaunus's Cape", 
+        back       = { name     = "Alaunus's Cape",
                        augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
+        waist      = "Fucho-no-obi",
+        legs       = "Inyanga Shalwar +2",
+        feet       = "Inyanga Crackows +2"
     }
 
     sets.resting = {
@@ -168,9 +161,6 @@ function init_gear_sets()
 --  --------------------
 --  AF/Relic JA Sets
 --  --------------------
-    sets.precast["Devotion"]    = { head = "Piety Cap +3" }
-    sets.precast["Benediction"] = { body = "Piety Bliaut +3" }
-
     sets.precast.FC = {
         main       = "Oranyan",                            -- FC +10%
         sub        = "Clerisy Strap",                      -- FC +02%
@@ -280,7 +270,7 @@ function init_gear_sets()
     }
 
     --  Healing Magic: 615
-    sets.midcast.NASpell = {
+    ets.midcast['StatusRemoval'] = {
         main       = "Yagrush",                     --  AoE Status Removal
         sub        = "Sors Shield",                 --  Nothing special, just some extra defense and evasion
         ammo       = "Incantor Stone",              --  Healing Magic +00
@@ -299,9 +289,7 @@ function init_gear_sets()
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}
     }
 
-    sets.midcast['StatusRemoval'] = sets.midcast.NASpell
-
-    sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
+    sets.midcast['Cursna'] = {
         main       = "Gambanteinn",                 --  Cursna +100
         sub        = "Genmei Shield",
         neck       = "Debilis Medallion",           --  Healing Magic +00, Cursna +15
@@ -313,9 +301,7 @@ function init_gear_sets()
         legs       = "Theophany Pantaloons +3",     --  Healing Magic +00, Cursna +21
         feet       = { name     = "Vanya Clogs",    --  Healing Magic +40, Cursna +5
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}        -- Gendewitha Galoshes +1: +10 Cursna.  Not sure if it'll be better than what I already have
-    })
-
-    sets.midcast['Cursna'] = sets.midcast.Cursna
+    }
 
     sets.midcast['Enhancing Magic'] = {
         main       = "Oranyan",                     --  Enhancing Maigc duration +10%, FC +7%
@@ -379,15 +365,14 @@ function init_gear_sets()
     })
 
     sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {
-        main       = "Vadose Rod",                  --  Aquaveil +1
+        main       = "Vadose Rod",                   --  Aquaveil +1
         sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
-        head       = "Chironic Hat",                --  Aquaveil +1
-        legs       = "Shedir Seraweels",            --  Enhances Aquaveil
+        head       = "Chironic Hat" -- Aquaveil +1
+        -- legs    = "Shedir Seraweels",         --  Enhances Aquaveil
     })
 
     sets.midcast['Erase'] = set_combine(sets.midcast['Enhancing Magic'], {
-        main       = "Yagrush",
-        sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
+        -- sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
         neck       = "Cleric's Torque"              --  Erase +1        (Nice to have +1 or 2)
     })
 
@@ -437,50 +422,6 @@ function init_gear_sets()
 
     sets.midcast['Holy'] = sets.midcast['Banish']
 
-    --  Melee sets
-    sets.melee = {}
-
-    sets.melee.Engaged = {
-        head       = "Theophany Cap +3",
-        body       = "Theo. Bliaut +3",
-        hands      = "Theophany Mitts +3",
-        legs       = "Th. Pant. +3",
-        feet       = "Theo. Duckbills +3",
-        neck       = "Asperity Necklace",
-        waist      = "Cetl Belt",
-        left_ear   = "Steelflash Earring",
-        right_ear  = "Bladeborn Earring",
-        left_ring  = "Rajas Ring",
-        right_ring = "K'ayres Ring",
-        back       = { name     = "Alaunus's Cape",
-                       augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
-    }
-
-    sets.melee.WS = {}
-    sets.melee.WS['Realmrazer'] = {}
-    sets.melee.WS['Hexa Strike'] = {}
-    sets.melee.WS['Black Halo'] = {}
-    sets.melee.WS['Mystic Boon'] = {}
-
-    sets.OhShi = {
-        main       = "Terra's Staff",
-        sub        = "Enki Strap",
-        ammo       = "Homiliary",
-        head       = "Inyanga Tiara +2",
-        body       = "Inyanga Jubbah +2",
-        hands      = "Inyan. Dastanas +2",
-        legs       = "Inyanga Shalwar +2",
-        feet       = "Hippo. Socks +1",
-        neck       = "Loricate Torque +1",
-        waist      = "Isa Belt",
-        left_ear   = "Infused Earring",
-        right_ear  = { name     = "Moonshade Earring",
-                       augments = {'MP+25','Latent effect: "Refresh"+1',}},
-        left_ring  = "Defending Ring",
-        right_ring = "Gelatinous Ring",
-        back       = { name     = "Alaunus's Cape",
-                       augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
-    }
 end
 
 
@@ -555,6 +496,8 @@ end
 
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
+
+
     local equipSet = {}
 
     if state.Buff["Divine Caress"] and spellMap == 'StatusRemoval' then
@@ -619,16 +562,7 @@ function customize_idle_set(idleSet)
     --    windower.add_to_chat(9, "Currently in: " .. world.area)
     -- end
 
-    -- if player.tp < player_tp_lock then
-    --     melee_equip_unlock()
-    -- end
     check_special_ring_equipped()
-
-    --  Re-enabling hands if they were locked for Divine Caress
-    if DivineCaress.status then
-        DivineCaress.toggle(false)
-        add_to_chat('unlocking hands')
-    end
 
     --  Checking special states
     if state.CP.current == 'on' then
@@ -668,13 +602,8 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
-function user_status_change(newStatus, oldStatus)
-    if newStatus == 'Engaged' then
-        melee_equip_lock()
-    elseif oldStatus == 'Engaged' then
-        melee_equip_unlock()
-    end
-end
+-- function user_status_change(newStatus, oldStatus)
+-- end
 
 --  Job specific ability changes, mostly here to handy Sublimation
 function job_buff_change(buff, gain, eventArgs)
@@ -686,56 +615,8 @@ function job_buff_change(buff, gain, eventArgs)
 end
 
 
-function job_self_command(cmdParams, eventArgs)
-
-    -- if cmdParams[1]:lower() == 'test' then
-    --     add_to_chat(100, reraiseIV)
-    -- end
-
-    --  Make Reraise easy to handle
-    if (string.find(cmdParams[1]:lower(), 'rr')) and (not buffactive["Reraise"]) then
-        local reraise_level = cmdParams[1]:gsub('rr', '')
-        if reraise_level == '0' then
-            send_command('@input /echo *** Cancelling: No reraise level stated. ***')
-        elseif reraise_level == '1' then
-            send_command('@input /ma "Reraise" <me>')
-        elseif reraise_level == '2' then
-            send_command('@input /ma "Reraise II" <me>')
-        elseif reraise_level == '3' then
-            send_command('@input /ma "Reraise III" <me>')
-        elseif reraise_level == '4' then
-            send_command('@input /ma "Reraise IV" <me>')
-        else
-            send_command('@input /echo *** Cancelling: Something weird happened. ***')
-        end
-        eventArgs.handled = true
-        return
-    elseif cmdParams[1]:lower() == 'reraise' then
-        send_command('@input /echo *** Cancelling: Reraise already active. ***')
-        eventArgs.handled = true
-        return
-    end
-
-    --  Make Raise easy to handle
-    if cmdParams[1]:lower() == 'raise' then
-        local raise_level = cmdParams[2]
-        if reraise_level == 'nil' then
-            send_command('@input /echo *** Cancelling. No Raise Level Stated. ***')
-        elseif reraise_level == '1' then
-            send_command('@input /ma "Raise" <me>')
-        elseif reraise_level == '2' then
-            send_command('@input /ma "Raise II" <me>')
-        elseif reraise_level == '3' then
-            send_command('@input /ma "Raise III" <me>')
-        elseif reraise_level == '4' then
-            send_command('@input /ma "Arise" <me>')
-        else
-            send_command('@input /echo *** What are you even doing? ***')
-        end
-        eventArgs.handled = true
-        return
-    end
-end
+-- function job_self_command(cmdParams, eventArgs)
+-- end
 
 
 function sub_job_change(newSubjob, oldSubjob)
@@ -745,7 +626,7 @@ end
 
 function select_default_macro_book(isSubJobChange)
     -- Default macro set/book
-    set_macro_page(1, 4)
+    set_macro_page(1, 5)
 
     -- if not isSubJobChange then
     --     randomise_lockstyle()
@@ -757,6 +638,23 @@ end
 --                      User defined functions
 --  ----------------------------------------------------------------------------------------------------
 
+--  Checks to see if a special ring is equipped in either ring slot.
+--  Locks the slot while the ring is in there until it is changed.
+--  Definition in: common_lists.lua
+-- function check_special_ring_equipped()
+--     if equip_lock_rings:contains(player.equipment.left_ring) then
+--         is_ring_locked = true
+--         disable("left_ring")
+--     elseif equip_lock_rings:contains(player.equipment.right_ring) then
+--         is_ring_locked = true
+--         disable("right_ring")
+--     elseif is_ring_locked then
+--         is_ring_locked = false
+--         equipment_unlock_specific({'left_ring', 'right_ring',})
+--     end
+-- end
+
+
 --  Lock weapon and sub slots
 function melee_equip_lock()
     equipment_lock_specific({'main', 'sub',})
@@ -766,12 +664,4 @@ end
 --  Unlock weapon and sub slots
 function melee_equip_unlock()
     equipment_unlock_specific({'main', 'sub',})
-end
-
-function randomise_lockstyle()
-    local randomNumber = (os.date("%S") % 3) + 2
-    local asString = tostring(randomNumber)
-    -- add_to_chat(100, "The number is: " .. asString)
-
-    send_command('wait 4; input /lockstyleset ' .. asString)
 end

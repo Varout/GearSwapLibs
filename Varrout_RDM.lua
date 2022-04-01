@@ -1,57 +1,6 @@
 -------------------------------------------------------------------------------------------------------------------
 -- Setup functions for this job.  Generally should not be modified.
 -------------------------------------------------------------------------------------------------------------------
-
--- Local Settings, setting the zones prior to use
-toau_zones = S{
-    "Leujaoam Sanctum",             --  Assault
-    "Mamool Ja Training Grounds",   --  Assault
-    "Lebros Cavern",                --  Assault
-    "Periqia",                      --  Assault
-    "Ilrusi Atoll",                 --  Assault
-    "Nyzul Isle",                   --  Assault
-    "Bhaflau Remnants",             --  Salvage
-    "Arrapago Remnants",            --  Salvage
-    "Silver Sea Remnants",          --  Salvage
-    "Zhayolm Remnants"              --  Salvage
-}
-
-enfeebling_int = S{
-    "Bind",
-    "Blind",
-    "Blind II",
-    "Break",
-    "Dispel",
-    "Distract",
-    "Distract II",
-    "Distract III",
-    "Frazzle",
-    "Frazzle II",
-    "Frazzle III",
-    "Gravity",
-    "Gravity II",
-    "Poison",
-    "Poison II",
-    "Poisonga",
-    "Sleep",
-    "Sleep II",
-    "Sleepga",
-}
-
-enfeebling_mnd = S{
-    "Addle",
-    "Dia",
-    "Dia II",
-    "Dia III",
-    "Diaga",
-    "Inundation",
-    "Paralyze",
-    "Paralyze II",
-    "Slow",
-    "Slow II",
-    "Silence",
-}
-
 -- Initialization function for this job file.
 function get_sets()
     mote_include_version = 2
@@ -65,6 +14,14 @@ end
 
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked.
 function job_setup()
+    state.Buff["Saboteur"] = buffactive["Saboteur"] or false
+    state.Buff["Composure"] = buffactive["Composure"] or false
+    state.Buff["Chainspell"] = buffactive["Chainspell"] or false
+    state.Buff["Spontaneity"] = buffactive["Spontaneity"] or false
+    state.Buff["Stymie"] = buffactive["Stymie"] or false
+
+    state.Buff["Divine Seal"] = buffactive["Divine Seal"] or false
+
     -- state.Buff.Saboteur = buffactive.saboteur or false
 end
 
@@ -102,9 +59,9 @@ function init_gear_sets()
     --------------------------------------
 
     --  Toggle specific gear
-    sets.CP      = { back={ name="Mecisto. Mantle",
-                            augments={'Cap. Point+31%','INT+2','Attack+3','DEF+8',}},}
-    sets.JSENeck = { neck="Duelist's Torque"}
+    sets.CP      = { back = { name     = "Mecisto. Mantle",
+                              augments = {'Cap. Point+31%','INT+2','Attack+3','DEF+8',}},}
+    sets.JSENeck = { neck = "Duelist's Torque"}
 
     -- Precast Sets
     -- Precast sets to enhance JAs
@@ -118,14 +75,14 @@ function init_gear_sets()
     -- No other FC sets necessary.
     sets.precast.FC = {
         main        = "Bolelabunga",
-        sub         = "Genbu's Shield",
+        sub         = "Genmei Shield",
         ammo        = "Homiliary",
         head        = "Atrophy Chapeau +2",
         body        = "Vitiation Tabard",
-        hands       = { name="Leyline Gloves",
-                        augments={'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
-        legs        = { name="Kaykaus Tights",
-                        augments={'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
+        hands       = { name     = "Leyline Gloves",
+                        augments = {'Accuracy+14','Mag. Acc.+13','"Mag.Atk.Bns."+13','"Fast Cast"+2',}},
+        legs        = { name     = "Kaykaus Tights",
+                        augments = {'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
         feet        = "Chelona Boots",
         neck        = "Sanctity Necklace",
         waist       = "Witful Belt",
@@ -137,22 +94,22 @@ function init_gear_sets()
     }
 
     sets.midcast.Cure = {
-        main        = { name="Arka IV",
-                        augments={'"Cure" potency +24%',}},
+        main        = { name     = "Arka IV",
+                        augments = {'"Cure" potency +24%',}},
         sub         = "Enki Strap",
         ammo        = "Quartz Tathlum +1",
-        head        = { name="Vanya Hood",
-                        augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body        = { name="Kaykaus Bliaut",
-                        augments={'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands       = { name="Chironic Gloves",
-                        augments={'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
+        head        = { name     = "Vanya Hood",
+                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        body        = { name     = "Kaykaus Bliaut",
+                        augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+        hands       = { name     = "Chironic Gloves",
+                        augments = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
         legs        = "Atrophy Tights +1",
-        feet        = { name="Vanya Clogs",
-                        augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        feet        = { name     = "Vanya Clogs",
+                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         neck        = "Colossus's Torque",
         waist       = "Bishop's Sash",
-        left_ear    = "Beatific Earring",
+        left_ear    = "Meili Earring",
         right_ear   = "Mendi. Earring",
         left_ring   = "Janniston Ring",
         right_ring  = "Sirona's Ring",
@@ -160,65 +117,121 @@ function init_gear_sets()
     }
 
     sets.midcast.Curaga = sets.midcast.Cure
-    -- sets.midcast.CureSelf = {ring1="Kunaji Ring",ring2="Asklepian Ring"}
+    -- sets.midcast.CureSelf = {ring1 = "Kunaji Ring",ring2 = "Asklepian Ring"}
+
+    sets.midcast.NASpell = {
+        main       = "Oranyan",
+        sub        = "Clerisy Strap",
+        ammo       = "Regal Gem",
+        head       = { name     = "Vanya Hood",
+                       augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        body       = { name     = "Vitiation Tabard",
+                       augments = {'Enhances "Chainspell" effect',}},
+        hands      = "Shrieker's Cuffs",
+        legs       = "Atrophy Tights +2",
+        feet       = { name     = "Vanya Clogs",
+                       augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        neck       = "Colossus's Torque",
+        waist      = "Bishop's Sash",
+        left_ear   = "Meili Earring",
+        right_ear  = "Beatific Earring",
+        left_ring  = "Menelaus's Ring",
+        right_ring = "Sirona's Ring",
+        back       = "Merciful Cape",
+    }
+
+    sets.midcast["Cursna"] = set_combine(sets.midcast.NASpell, {
+        hands = "Leyline Gloves",
+        neck = "Debilis Medallion",
+        right_ring = "Haoma's Ring",
+        back = "Oretania's Cape +1",
+    })
 
     sets.midcast['Enhancing Magic'] = {
-        main        = "Bolelabunga",
-        sub         = "Ammurapi Shield",
+        main        = "Oranyan",
+        sub         = "Clerisy Strap",
         ammo        = "Homiliary",
         head        = "Befouled Crown",
-        body        = { name = "Vitiation Tabard",
+        body        = { name     = "Vitiation Tabard",
                         augments = {'Enhances "Chainspell" effect',}},
-        hands       = { name = "Telchine Gloves",
-                        augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-        legs        = { name = "Telchine Braconi",
+        hands       = "Atrophy Gloves +2",
+        legs        = { name     = "Telchine Braconi",
                         augments = {'Enh. Mag. eff. dur. +9',}},
-        feet        = { name = "Telchine Pigaches",
-                        augments = {'Enh. Mag. eff. dur. +6',}},
-        neck        = "Duelist's Torque",
-        waist       = "Olympus Sash",
-        left_ear    = "Augment. Earring",
-        right_ear   = "Andoaa Earring",
+        feet        = "Lethargy Houseaux +1",       --  +30% enhancing magic duration
+        neck        = { name     = "Duelist's Torque",
+                        augments = {'Path: A',}},
+        waist       = "Embla Sash",
+        left_ear    = "Mimir Earring",
+        right_ear   = "Snotra Earring",
         left_ring   = "Stikini Ring",
-        right_ring  = "Stikini Ring",
-        back        = { name = "Sucellos's Cape",
+        right_ring  = "Kishar Ring",
+        back        = { name     = "Sucellos's Cape",
                         augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
     }
 
     sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {
-        legs="Lethargy Fuseau +2"
+        body = "Atrophy Tabard +2",
+        legs = "Lethargy Fuseau +1"
     })
 
     sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {
         neck = "Nodens Gorget",
         waist = "Siegel Sash",
-        left_ear = "Earthcry Earring"
+        right_ear = "Earthcry Earring",
+        legs = "Shedir Seraweels",
     })
 
     sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {
-        main = "Bolelabunga"
+        main = "Bolelabunga",
+        sub  = "Ammurapi Shield",
+    })
+
+    sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {
+        main       = "Oranyan",                  --  Enhancing Magic durtion +10%
+        sub        = "Fulcio Grip",                 --  Enhancing magic +3
+        head       = "Chironic Hat",                --  Aquaveil +1
+        legs       = "Shedir Seraweels",            --  Enhances Aquaveil
+    })
+
+    sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
+        main = "Oranyan",   --  Enhancing Magic durtion +10%
+        sub        = "Fulcio Grip",                 --  Enhancing magic +3
+        ammo = "Regal Gem",
+        head = "Befouled Crown",
+        neck = "Colossus's Torque",
+        left_ear = "Mimir Earring",
+        right_ear = "Etiolation Earring",
+        body = "Vitiation Tabard",
+        hands = "Vitiation Gloves",
+        left_ring = "Stikini Ring",
+        right_ring = "Stikini Ring",
+        back = "Fi Follet Cape",
+        wasit = "Olympus Sash",
+        legs = "Shedir Seraweels",
+        feet = "Lethargy Houseaux +1",
     })
 
     -- sets.midcast['Enfeebling Magic'] = {
     sets.midcast.enfeeblingBase = {
-        main        = { name = "Rubicundity",
-                        augments = {'Mag. Acc.+3','"Mag.Atk.Bns."+3','Dark magic skill +5','"Conserve MP"+2',}},
-        sub         = "Ammurapi Shield",
+        main        = "Oranyan",
+        sub         = "Enki Strap",
         ammo        = "Regal Gem",
         head        = { name = "Vitiation Chapeau +1",
                         augments = {'Enfeebling Magic duration','Magic Accuracy',}},
-        body        = "Jhakri Robe +2",
+        body        = "Atrophy Tabard +2",
         hands       = "Jhakri Cuffs +2",
-        legs        = { name = "Chironic Hose",
-                        augments = {'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
+        legs        = "Jhakri Slops +2",
         feet        = { name = "Vitiation Boots",
                         augments = {'Immunobreak Chance',}},
-        neck        = "Duelist's Torque",
-        waist       = "Casso Sash",
-        left_ear    = "Lifestorm Earring",
-        right_ear   = "Psystorm Earring",
+        neck        = { name     = "Duelist's Torque",
+                        augments = {'Path: A',}},
+        waist       = "Luminary Sash",
+        left_ear    = "Digni. Earring",
+        right_ear   = "Snotra Earring",
         left_ring   = "Stikini Ring",
-        right_ring  = "Stikini Ring",
+        right_ring  = "Kishar Ring",
+        back        = { name     = "Sucellos's Cape",
+                        augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
     }
 
     sets.midcast.enfeeblingMNDCape = {
@@ -235,24 +248,24 @@ function init_gear_sets()
     sets.midcast['Phalanx II']  = set_combine(sets.midcast['Enhancing Magic'],  {hands = "Duelist's Gloves +2"})
 
     sets.midcast['Elemental Magic'] = {
-        main        = "Lehbrailg +2",
-        sub         = "Zuuxowu Grip",
-        ammo        = "Dosis Tathlum",
-        head        = "Hagondes Hat",
-        neck        = "Eddy Necklace",
-        ear1        = "Friomisi Earring",
-        ear2        = "Hecate's Earring",
-        body        = "Hagondes Coat",
-        hands       = "Yaoyotl Gloves",
-        ring1       = "Icesoul Ring",
-        ring2       = "Acumen Ring",
-        back        = "Toro Cape",
-        waist       = gear.ElementalObi,
-        legs        = "Hagondes Pants",
-        feet        = "Hagondes Sabots"
+        main="Oranyan",
+        sub="Thrace Strap",
+        ammo="Regal Gem",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        legs="Jhakri Slops +2",
+        feet="Jhakri Pigaches +2",
+        neck="Mizu. Kubikazari",
+        waist="Aswang Sash",
+        left_ear="Lifestorm Earring",
+        right_ear="Psystorm Earring",
+        left_ring="Freke Ring",
+        right_ring="Jhakri Ring",
+        back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
     }
 
-    -- sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {head=empty,body="Twilight Cloak"})
+    -- sets.midcast.Impact = set_combine(sets.midcast['Elemental Magic'], {head=empty,body = "Twilight Cloak"})
 
     sets.midcast['Dark Magic'] = {
         main        = "Lehbrailg +2",
@@ -267,10 +280,29 @@ function init_gear_sets()
         ring1       = "Prolix Ring",
         ring2       = "Sangoma Ring",
         back        = "Refraction Cape",
-        waist       = "Goading Belt",
+        waist       = "Luminary Sash",
         legs        = "Bokwus Slops",
         feet        = "Bokwus Boots"
     }
+
+    sets.midcast["Stun"] = {
+        main="Oranyan",
+        sub="Enki Strap",
+        ammo="Regal Gem",
+        head="Atro. Chapeau +2",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        legs="Jhakri Slops +2",
+        feet="Jhakri Pigaches +2",
+        neck="Erra Pendant",
+        waist="Casso Sash",
+        left_ear="Lifestorm Earring",
+        right_ear="Psystorm Earring",
+        left_ring="Evanescence Ring",
+        right_ring="Stikini Ring",
+        back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+    }
+
 
     --sets.midcast.Stun = set_combine(sets.midcast['Dark Magic'], {})
 
@@ -282,17 +314,17 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 
     -- Sets for special buff conditions on spells.
-    -- sets.midcast.EnhancingDuration = {hands="Atrophy Gloves +1",back="Estoqueur's Cape",feet="Lethargy Houseaux"}
+    -- sets.midcast.EnhancingDuration = {hands = "Atrophy Gloves +1",back = "Estoqueur's Cape",feet = "Lethargy Houseaux"}
 
     sets.buff.ComposureOther = {
-        head        = "Lethargy Chappel",
+        head        = "Lethargy Chappel +1",
         body        = "Lethargy Sayon",
         hands       = "Lethargy Gantherots",
-        legs        = "Estoqueur's Fuseau +2",
-        feet        = "Lethargy Houseaux"
+        legs        = "Lethargy Fuseau +1",
+        feet        = "Lethargy Houseaux +1"
     }
 
-    sets.buff.Saboteur = {hands="Lethargy Gantherots"}
+    sets.buff["Saboteur"] = {hands = "Lethargy Gantherots"}
 
     -- Sets to return to when not performing an action.
     -- Resting sets
@@ -307,8 +339,8 @@ function init_gear_sets()
         feet        = "Chelona Boots",
         neck        = "Eidolon Pendant +1",
         waist       = "Austerity Belt",
-        left_ear    = { name="Moonshade Earring",
-                        augments={'MP+25','Latent effect: "Refresh"+1',}},
+        left_ear    = { name     = "Moonshade Earring",
+                        augments = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = "Infused Earring",
         left_ring   = "Angha Ring",
         right_ring  = "Star Ring",
@@ -317,59 +349,75 @@ function init_gear_sets()
 
     -- Idle sets
     sets.idle = {
-        main        = "Bolelabunga",
-        sub         = "Genbu's Shield",
-        ammo        = "Homiliary",
-        head        = "Vitiation Chapeau +1",
-        body        = "Jhakri Robe +2",
-        hands       = { name="Chironic Gloves", augments={'"Mag.Atk.Bns."+9','Attack+1','"Refresh"+1','Accuracy+13 Attack+13','Mag. Acc.+7 "Mag.Atk.Bns."+7',}},
-        legs        = { name="Chironic Hose", augments={'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
-        feet        = "Chironic Slippers",
-        neck        = "Sanctity Necklace",
-        waist       = "Fucho-no-Obi",
-        left_ear    = { name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
-        right_ear   = "Infused Earring",
-        left_ring   = "Sheltered Ring",
-        right_ring  = "Defending Ring",
-        back        = "Solemnity Cape",
+        main={ name="Mpaca's Staff", augments={'Path: A',}},
+        sub="Enki Strap",
+        ammo="Homiliary",
+        head={ name="Viti. Chapeau +1", augments={'Enfeebling Magic duration','Magic Accuracy',}},
+        body="Jhakri Robe +2",
+        hands={ name="Chironic Gloves", augments={'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
+        legs={ name="Chironic Hose", augments={'INT+5','Enmity-3','"Refresh"+1','Accuracy+11 Attack+11',}},
+        feet={ name="Chironic Slippers", augments={'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
+        neck={ name="Loricate Torque +1", augments={'Path: A',}},
+        waist="Fucho-no-Obi",
+        left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+        right_ear="Infused Earring",
+        left_ring="Sheltered Ring",
+        right_ring="Defending Ring",
+        back="Solemnity Cape",
     }
 
-    -- sets.idle.Town = {main="Bolelabunga",sub="Genbu's Shield",ammo="Impatiens",
-    --     head="Atrophy Chapeau +1",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Atrophy Tabard +1",hands="Atrophy Gloves +1",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-    --     back="Shadow Mantle",waist="Flume Belt",legs="Crimson Cuisses",feet="Hagondes Sabots"}
+    sets.engaged = {
+        ammo="Voluspa Tathlum",
+        head="Jhakri Coronal +1",
+        body="Jhakri Robe +2",
+        hands="Jhakri Cuffs +2",
+        legs="Jhakri Slops +2",
+        feet="Jhakri Pigaches +2",
+        neck="Asperity Necklace",
+        waist="Fucho-no-Obi",
+        left_ear="Sherida Earring",
+        right_ear="Digni. Earring",
+        left_ring="Jhakri Ring",
+        right_ring="Rajas Ring",
+        -- back="",
+    }
 
-    -- sets.idle.Weak = {main="Bolelabunga",sub="Genbu's Shield",ammo="Impatiens",
-    --     head="Vitivation Chapeau",neck="Wiglen Gorget",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Atrophy Tabard +1",hands="Serpentes Cuffs",ring1="Sheltered Ring",ring2="Paguroidea Ring",
-    --     back="Shadow Mantle",waist="Flume Belt",legs="Crimson Cuisses",feet="Hagondes Sabots"}
+    -- sets.idle.Town = {main = "Bolelabunga",sub = "Genmei Shield",ammo = "Impatiens",
+    --     head = "Atrophy Chapeau +1",neck = "Wiglen Gorget",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Atrophy Tabard +1",hands = "Atrophy Gloves +1",ring1 = "Sheltered Ring",ring2 = "Paguroidea Ring",
+    --     back = "Shadow Mantle",waist = "Flume Belt",legs = "Crimson Cuisses",feet = "Hagondes Sabots"}
 
-    -- sets.idle.PDT = {main="Bolelabunga",sub="Genbu's Shield",ammo="Demonry Stone",
-    --     head="Gendewitha Caubeen +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Gendewitha Bliaut +1",hands="Gendewitha Gages",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-    --     back="Shadow Mantle",waist="Flume Belt",legs="Osmium Cuisses",feet="Gendewitha Galoshes"}
+    -- sets.idle.Weak = {main = "Bolelabunga",sub = "Genmei Shield",ammo = "Impatiens",
+    --     head = "Vitivation Chapeau",neck = "Wiglen Gorget",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Atrophy Tabard +1",hands = "Serpentes Cuffs",ring1 = "Sheltered Ring",ring2 = "Paguroidea Ring",
+    --     back = "Shadow Mantle",waist = "Flume Belt",legs = "Crimson Cuisses",feet = "Hagondes Sabots"}
 
-    -- sets.idle.MDT = {main="Bolelabunga",sub="Genbu's Shield",ammo="Demonry Stone",
-    --     head="Gendewitha Caubeen +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Gendewitha Caubeen +1",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Shadow Ring",
-    --     back="Engulfer Cape",waist="Flume Belt",legs="Osmium Cuisses",feet="Gendewitha Galoshes"}
+    -- sets.idle.PDT = {main = "Bolelabunga",sub = "Genmei Shield",ammo = "Demonry Stone",
+    --     head = "Gendewitha Caubeen +1",neck = "Twilight Torque",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Gendewitha Bliaut +1",hands = "Gendewitha Gages",ring1 = "Defending Ring",ring2=gear.DarkRing.physical,
+    --     back = "Shadow Mantle",waist = "Flume Belt",legs = "Osmium Cuisses",feet = "Gendewitha Galoshes"}
+
+    -- sets.idle.MDT = {main = "Bolelabunga",sub = "Genmei Shield",ammo = "Demonry Stone",
+    --     head = "Gendewitha Caubeen +1",neck = "Twilight Torque",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Gendewitha Caubeen +1",hands = "Yaoyotl Gloves",ring1 = "Defending Ring",ring2 = "Shadow Ring",
+    --     back = "Engulfer Cape",waist = "Flume Belt",legs = "Osmium Cuisses",feet = "Gendewitha Galoshes"}
 
 
     -- Defense sets
     -- sets.defense.PDT = {
-    --     head="Atrophy Chapeau +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Hagondes Coat",hands="Gendewitha Gages",ring1="Defending Ring",ring2=gear.DarkRing.physical,
-    --     back="Shadow Mantle",waist="Flume Belt",legs="Hagondes Pants",feet="Gendewitha Galoshes"}
+    --     head = "Atrophy Chapeau +1",neck = "Twilight Torque",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Hagondes Coat",hands = "Gendewitha Gages",ring1 = "Defending Ring",ring2=gear.DarkRing.physical,
+    --     back = "Shadow Mantle",waist = "Flume Belt",legs = "Hagondes Pants",feet = "Gendewitha Galoshes"}
 
-    -- sets.defense.MDT = {ammo="Demonry Stone",
-    --     head="Atrophy Chapeau +1",neck="Twilight Torque",ear1="Bloodgem Earring",ear2="Loquacious Earring",
-    --     body="Atrophy Tabard +1",hands="Yaoyotl Gloves",ring1="Defending Ring",ring2="Shadow Ring",
-    --     back="Engulfer Cape",waist="Flume Belt",legs="Bokwus Slops",feet="Gendewitha Galoshes"}
+    -- sets.defense.MDT = {ammo = "Demonry Stone",
+    --     head = "Atrophy Chapeau +1",neck = "Twilight Torque",ear1 = "Bloodgem Earring",ear2 = "Loquacious Earring",
+    --     body = "Atrophy Tabard +1",hands = "Yaoyotl Gloves",ring1 = "Defending Ring",ring2 = "Shadow Ring",
+    --     back = "Engulfer Cape",waist = "Flume Belt",legs = "Bokwus Slops",feet = "Gendewitha Galoshes"}
 
-    -- sets.Kiting = {legs="Crimson Cuisses"}
+    -- sets.Kiting = {legs = "Crimson Cuisses"}
 
-    sets.latent_refresh = {waist="Fucho-no-obi"}
-    sets.ToAU = {right_ring="Balrahn's Ring"}
+    sets.latent_refresh = {waist = "Fucho-no-obi"}
+    sets.ToAU = {right_ring = "Balrahn's Ring"}
 
 end
 
@@ -377,30 +425,70 @@ end
 -- Job-specific hooks for standard casting events.
 -------------------------------------------------------------------------------------------------------------------
 
+function job_precast(spell, action, spellMap, eventArgs)
+    check_special_ring_equipped()
+    check_if_silenced(spell, eventArgs)
+
+    -- if spell.action_type == 'Magic' and buffactive['Silence'] then
+    --     -- If silenced, use what's available to remove it
+    --     cancel_spell()
+    --     if player.inventory['Catholicon'] ~= nil then
+    --         send_command('input /item "Catholicon" <me>')
+    --         send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
+    --     elseif player.inventory['Echo Drops'] ~= nil then
+    --         send_command('input /item "Echo Drops" <me>')
+    --         send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
+    --     elseif player.inventory['Remedy'] ~= nil then
+    --         send_command('input /item "Remedy" <me>')
+    --         send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
+    --     else
+    --         send_command('input /echo *!! Silenced ~ No items to remove it !!*')
+    --     end
+    --     eventArgs.cancel = true
+    --     return
+    -- elseif
+
+    if spell.type == "Trust" then
+        equip(sets.Trust)
+    end
+end
+
 -- Run after the default midcast() is done.
 -- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enfeebling Magic' then
-        outputString = "Enfeebling: "
+        -- outputString = "Enfeebling: "
         enfeebling_set = sets.midcast.enfeeblingBase
-        if enfeebling_int:contains(spell.name) then
-            outputString = outputString .. "INT Based"
+        if enfeebling_int:contains(spellMap) then
+            -- outputString = outputString .. "INT Based"
             enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingINTCape)
         else
-            outputString = outputString .. "MND Based"
+            -- outputString = outputString .. "MND Based"
             enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingMNDCape)
         end
-        if state.Buff.Saboteur then
+        if state.Buff["Saboteur"] then
             outputString = outputString .. " :: Saboteur Active"
-            enfeebling_set = set_combine(enfeebling_set, sets.buff.Saboteur)
+            enfeebling_set = set_combine(enfeebling_set, sets.buff["Saboteur"])
         end
-        windower.add_to_chat(8, outputString)
+        -- windower.add_to_chat(8, outputString)
         equip(enfeebling_set)
     elseif spell.skill == 'Enhancing Magic' then
-        equip(sets.midcast.EnhancingDuration)
+        local enhancing_set = sets.midcast.EnhancingDuration
+        -- equip(sets.midcast.EnhancingDuration)
         if buffactive.composure and spell.target.type == 'PLAYER' then
-            equip(sets.buff.ComposureOther)
+            enhancing_set = set_combine(enhancing_set, sets.buff.ComposureOther)
+        elseif spellMap == "BarElement" then
+            enhancing_set = sets.midcast["BarElement"]
         end
+        if spellMap == "Refresh" then
+            enhancing_set = sets.midcast.Refresh
+            if spell.target.type == 'SELF' then
+                enhancing_set = set_combine(enhancing_set, {
+                    feet = "Inspirited Boots"
+                })
+            end
+        end
+        equip(enhancing_set)
     -- elseif spellMap == 'Cure' and spell.target.type == 'SELF' then
     --     equip(sets.midcast.CureSelf)
     end
@@ -427,6 +515,8 @@ end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
+    check_special_ring_equipped()
+
     if state.CP.current == 'on' then
         equip(sets.CP)
         disable('back')
@@ -445,7 +535,7 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.latent_refresh)
     end
 
-    if toau_zones:contains(world.area) then
+    if zones_toau_ring:contains(world.area) then
         idleSet = set_combine(idleSet, sets.ToAU)
     end
 
@@ -458,6 +548,12 @@ function display_current_job_state(eventArgs)
     eventArgs.handled = true
 end
 
+function status_change(new,old)
+    if new == 'Engaged' then
+        equip(sets.engaged)
+    end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 -- Utility functions specific to this job.
 -------------------------------------------------------------------------------------------------------------------
@@ -466,4 +562,26 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 9)
+    send_command('wait 2.5; input /lockstyleset 005')
+end
+
+function check_if_silenced(spell, eventArgs)
+    if spell.action_type == 'Magic' and buffactive['Silence'] then
+        -- If silenced, use what's available to remove it
+        cancel_spell()
+        if player.inventory['Catholicon'] ~= nil then
+            send_command('input /item "Catholicon" <me>')
+            send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
+        elseif player.inventory['Echo Drops'] ~= nil then
+            send_command('input /item "Echo Drops" <me>')
+            send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
+        elseif player.inventory['Remedy'] ~= nil then
+            send_command('input /item "Remedy" <me>')
+            send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
+        else
+            send_command('input /echo *!! Silenced ~ No items to remove it !!*')
+        end
+        eventArgs.cancel = true
+        return
+    end
 end

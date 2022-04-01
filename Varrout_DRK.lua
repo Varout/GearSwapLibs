@@ -70,7 +70,7 @@ function init_gear_sets()
 
     sets.idle = {
         sub="Utu Grip",
-        ammo="Jukukik Feather",
+        ammo="Coiste Bodhar",
         head={ name="Valorous Mask", augments={'CHR+8','AGI+13','Crit.hit rate+3','Accuracy+6 Attack+6','Mag. Acc.+17 "Mag.Atk.Bns."+17',}},
         body="Sulevia's Plate. +2",
         hands="Sulev. Gauntlets +2",
@@ -92,13 +92,13 @@ function init_gear_sets()
     sets.engaged = {}
     sets.engaged["Acc"] = {
         sub="Utu Grip",
-        ammo="Jukukik Feather",
+        ammo="Coiste Bodhar",
         head="Flam. Zucchetto +2",
         body="Flamma Korazin +2",
         hands="Sulev. Gauntlets +2",
         legs="Sulev. Cuisses +2",
         feet="Flam. Gambieras +2",
-        neck="Asperity Necklace",
+        neck="Abyssal Bead Necklace +1",
         waist="Ioskeha Belt",
         left_ear="Digni. Earring",
         right_ear="Steelflash Earring",
@@ -129,7 +129,7 @@ function init_gear_sets()
         right_ear="Ishvara Earring",
         left_ring="Niqmaddu Ring",
         right_ring="Flamma Ring",
-        back={ name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
+        back={ name="Ankou's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
     }
 
     sets.midcast = {}
@@ -187,7 +187,7 @@ function job_precast(spell, action, spellMap, eventArgs)
 
     end
 
-    local abil_recasts = windower.ffxi.get_ability_recasts()
+    -- local abil_recasts = windower.ffxi.get_ability_recasts()
 
 
 end
@@ -238,6 +238,8 @@ end
 
 
 function customize_idle_set(idleSet)
+    idleSet = sets.idle
+
     --  Gear Specific
     check_special_ring_equipped()
     check_status_cp(state.CP.current == 'on', sets.CP)
@@ -253,6 +255,8 @@ function customize_idle_set(idleSet)
     if zones_adoulin_body:contains(world.area) then
         idleSet = set_combine(idleSet, sets.Adoulin)
     end
+
+    return idleSet
 end
 
 function sub_job_change(newSubjob, oldSubjob)
