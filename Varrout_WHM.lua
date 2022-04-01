@@ -23,7 +23,7 @@ function get_sets()
     include('common_functions.lua')
 
     --  Make sure all gear is unlocked after we swap
-    equipment_unlock_all()
+    --equipment_unlock_all()
     -- send_command('wait 4; input /lockstyleset 4')
     randomise_lockstyle()
 end
@@ -60,33 +60,44 @@ function user_setup()
     select_default_macro_book(false)
 
     --  Special states to track for White Mage
-    state.CP = M(false, "CP Mode")              --  CP Mode: WHM is mastered, so likely won't need this anymore
-    state.Dynamis = M(false, "Dynamis Mode")    --  Dynamis Mode: To force the dynamis neck piece to stay equipped
-    state.Debug = M(false, "Debug Mode")        --  Debug Mode: Helpful for outputting information in the LUA. Not set up
-    state.OhShi = M(false, "OhShi Mode")
-    state.Weapons = M(false, "Weapons Mode")
+    -- state.CP = M(false, "CP Mode")                           --  CP Mode: WHM is mastered, so likely won't need this anymore
+    state.Dynamis = M(false, "Dynamis Mode")                    --  Dynamis Mode: To force the dynamis neck piece to stay equipped
+    -- state.Debug = M(false, "Debug Mode")                     --  Debug Mode: Helpful for outputting information in the LUA. Not set up
+    -- state.OhShi = M(false, "OhShi Mode")
+    -- state.Weapons = M(false, "Weapons Mode")
+    state.CursnaSingle = M(false, "Cursna Single Target Mode")  --  If true, Cursna will use Gambanteinn for added potency
 
     --  Where @ is the Windows Key
-    send_command('bind @c gs c toggle CP')      --  Windows Key + C: Toggle CP Mode
-    send_command('bind @x gs c toggle Dynamis') --  Windows Key + X: Toggle Dynamis Mode
-    send_command('bind @m input /map')          --  Windows Key + M: Show map, because I'm lazy af
-    send_command('bind @1 gs c rr4')            --  Windows Key + 1: Reraise 4
-    send_command('bind @z gs c toggle Debug')   --  Windows Key + z: Togger Debug Mode
-    send_command('bind @v gs c toggle OhShi')   --  Windows Key + v: Toggle OhShi Mode. Good for kiting
-    send_command('bind @n gs c toggle Weapons')
+    -- send_command('bind @c gs c toggle CP')           --  Windows Key + C: Toggle CP Mode
+    send_command('bind @x gs c toggle Dynamis')         --  Windows Key + X: Toggle Dynamis Mode
+    send_command('bind @m input /map')                  --  Windows Key + M: Show map, because I'm lazy af
+    -- send_command('bind @1 gs c rr4')                 --  Windows Key + 1: Reraise 4
+    -- send_command('bind @z gs c toggle Debug')        --  Windows Key + z: Togger Debug Mode
+    -- send_command('bind @v gs c toggle OhShi')        --  Windows Key + v: Toggle OhShi Mode. Good for kiting
+    -- send_command('bind @n gs c toggle Weapons')
+    send_command('bind @c gs c toggle CursnaSingle')    --  Windows Key + C: Toggle Cursna Mode
 
     --  Set up lockstyle set
-    -- randomise_lockstyle()
+    randomise_lockstyle()
+
+    custom_instructions()
+end
+
+function custom_instructions()
+    add_to_chat(200, "Varrout's White Mage Lua. Available commands:")
+    add_to_chat(200, "* Windows Key + C: Toggle Cursna AoE Mode (Default on)")
+    add_to_chat(200, "* Windows Key + X: Toggle Dynamis Mode (Neck lock)")
+    add_to_chat(200, "* Windows Key + M: Show Map")
 end
 
 function user_unload()
     send_command('unbind @c')
     send_command('unbind @x')
     send_command('unbind @m')
-    send_command('unbind @1')
-    send_command('unbind @z')
-    send_command('unbind @v')
-    send_command('unbind @n')
+    -- send_command('unbind @1')
+    -- send_command('unbind @z')
+    -- send_command('unbind @v')
+    -- send_command('unbind @n')
 end
 
 function init_gear_sets()
@@ -94,7 +105,7 @@ function init_gear_sets()
     --  Gear sets for specific conditions and commands
     --  Neck equipment to lock in while in dynamis
     sets.JSENeck = {
-        neck       = "Cleric's Torque"
+        neck       = "Cleric's Torque +2"
     }
 
     --  Equipment that enhances the charge rate of Sublimation
@@ -105,6 +116,16 @@ function init_gear_sets()
     --  Equipment only active during reives
     sets.Reives = {
         neck       = "Arciela's Grace +1"
+    }
+
+    --  Cursna AoE
+    sets.CursnaAoE = {
+        main = "Yagrush",
+    }
+
+    --  Cursna Potency
+    sets.CursnaSingle = {
+        main = "Gambanteinn",
     }
 
     --  Set for summoning Trusts. All iLevel 119
@@ -121,26 +142,26 @@ function init_gear_sets()
 
     --  13MP Refresch / tick
     sets.idle = {
-        main       = { name     = "Mpaca's Staff", 
+        main       = { name     = "Mpaca's Staff",
                        augments = {'Path: A',}},
         sub        = "Enki Strap",
         ammo       = "Homiliary",
         head       = "Inyanga Tiara +2",
         body       = "Theo. Bliaut +3",
-        hands      = { name     = "Chironic Gloves", 
+        hands      = { name     = "Chironic Gloves",
                        augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
         legs       = "Inyanga Shalwar +2",
-        feet       = { name     = "Chironic Slippers", 
+        feet       = { name     = "Chironic Slippers",
                        augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
-        neck       = { name     = "Loricate Torque +1", 
+        neck       = { name     = "Loricate Torque +1",
                        augments = {'Path: A',}},
         waist      = "Embla Sash",
         left_ear   = "Infused Earring",
-        right_ear  = { name     = "Moonshade Earring", 
+        right_ear  = { name     = "Moonshade Earring",
                        augments = {'MP+25','Latent effect: "Refresh"+1',}},
         left_ring  = "Defending Ring",
         right_ring = "Inyanga Ring",
-        back       = { name     = "Alaunus's Cape", 
+        back       = { name     = "Alaunus's Cape",
                        augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
     }
 
@@ -176,9 +197,9 @@ function init_gear_sets()
         sub        = "Clerisy Strap",                      -- FC +02%
         ammo       = "Incantor Stone",                     -- FC +02%
         head       = "Revealer's Crown",                   -- FC +05%
-        neck       = "Cleric's Torque",                    -- FC +06%
+        neck       = "Cleric's Torque +2",                 -- FC +10%
         left_ear   = "Loquac. Earring",                    -- FC +02%
-        right_ear  = "Etiolation Earring",                 -- FC +01%
+        right_ear  = "Malignance Earring",                 -- FC +04%
         body       = "Inyanga Jubbah +2",                  -- FC +14%
         hands      = "Fanatic Gloves",                     -- FC +07%
         left_ring  = "Evanescence Ring",                   -- Spell Interruption down 05%
@@ -188,7 +209,7 @@ function init_gear_sets()
         waist      = "Embla Sash",                         -- FC +05%
         legs       = { name     = "Kaykaus Tights",        -- FC +06%, Spell Interruption down 10%
                        augments = {'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
-        feet       = "Regal Pumps +1"                      -- FC +04% - +06%       (Nice to have +1)
+        feet       = "Regal Pumps +1"                      -- FC +05% - +07%
     }
 
     sets.precast['Enhancing Magic'] = set_combine(sets.precast.FC, {
@@ -221,14 +242,6 @@ function init_gear_sets()
     --------------------
     sets.midcast = {}
 
-    -- sets.midcast.Caress = {
-    --     hands      = "Ebers Mitts +1"              --  Divine Caress +1
-    -- }
-
-    -- sets.midcast['Divine Caress'] = {
-    --     hands      = "Ebers Mitts +1"              --  Divine Caress +1
-    -- }
-
     --  The Twilight Cape gives an extra 5% on matched day/weather effect
     --  Hachirin-no-Obi gives 10% on matched day/weather effect
     sets.midcast.WeatherBoost = {
@@ -248,7 +261,7 @@ function init_gear_sets()
         legs       = "Ebers Pant. +1",
         feet       = { name     = "Vanya Clogs",
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        neck       = "Colossus's Torque",
+        neck       = "Incantor's Torque",
         waist      = "Bishop's Sash",
         left_ear   = "Glorious Earring",
         right_ear  = "Beatific Earring",
@@ -264,7 +277,7 @@ function init_gear_sets()
         ammo       = "Quartz Tathlum +1",
         head       = { name     = "Vanya Hood",
                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        neck       = { name     = "Cleric's Torque",
+        neck       = { name     = "Cleric's Torque +2",
                        augments = {'Path: A',}},
         left_ear   = "Mendicant's Earring",
         right_ear  = "Glorious Earring",
@@ -285,7 +298,7 @@ function init_gear_sets()
         sub        = "Sors Shield",                 --  Nothing special, just some extra defense and evasion
         ammo       = "Incantor Stone",              --  Healing Magic +00
         head       = "Vanya Hood",                  --  Healing Magic +20, Cursna +0
-        neck       = "Colossus's Torque",           --  Healing Magic +07 (Lightsday +10.  There is a torque which gives +10 to all magic skills)
+        neck       = "Incanter's Torque",           --  All Skills +10
         left_ear   = "Beatific Earring",            --  Healing Magic +04
         right_ear  = "Healing Earring",             --  Healing Magic +03
         body       = "Ebers Bliaud +1",             --  Healing Magic +24
@@ -302,7 +315,7 @@ function init_gear_sets()
     sets.midcast['StatusRemoval'] = sets.midcast.NASpell
 
     sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
-        main       = "Gambanteinn",                 --  Cursna +100
+        main       = "Yagrush",                 --  Gambanteinn
         sub        = "Genmei Shield",
         neck       = "Debilis Medallion",           --  Healing Magic +00, Cursna +15
         hands      = "Fanatic Gloves",              --  Healing Magic +10, Cursna +15
@@ -322,8 +335,8 @@ function init_gear_sets()
         sub        = "Fulcio Grip",                 --  Enhancing Magic +2
         ammo       = "Hydrocera",                   --  Enhancing Maigc +0
         head       = "Befouled Crown",              --  Enhancing Maigc +16
-        neck       = "Colossus's Torque",           --  Enhancing Maigc +7
-        left_ear   = "Mimir Earring",          --  Enhancing Maigc +3
+        neck       = "Incanter's Torque",           --  All Skill +10
+        left_ear   = "Mimir Earring",         		--  Enhancing Maigc +3
         right_ear  = "Andoaa Earring",              --  Enhancing Maigc +5
         body       = "Anhur Robe",                  --  Enhancing Maigc +12
         hands      = { name     = "Telchine Gloves",
@@ -350,8 +363,7 @@ function init_gear_sets()
         neck       = "Nodens Gorget",               --  Stoneskin +30
         left_ear   = "Earthcry Earring",            --  Stoneskin +10
         waist      = "Siegel Sash",                 --  Stoneskin +20
-        legs       = "Haven Hose"                   --  Stoneskin +20
-        -- legs    = "Shedir Seraweels"         --  Stoneskin +35
+        legs    = "Shedir Seraweels"                --  Stoneskin +35
     })
 
     --  Regen Potency/Duration set
@@ -361,7 +373,7 @@ function init_gear_sets()
         main       = "Bolelabunga",                 --  Regen Potency +10%
         sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
         head       = "Inyanga Tiara +2",            --  Regen Potency +14%
-        body       = "Piety Bliaut +3",            --  Regen Potency +52%
+        body       = "Piety Bliaut +3",             --  Regen Potency +52%
         hands      = "Ebers Mitts +1",              --  Regen Duration +22
         legs       = "Theophany Pantaloons +3"      --  Regen Duration +24
     })
@@ -393,30 +405,30 @@ function init_gear_sets()
 
     --  Base set for magic accuracy for Divine and Enfeebling
     sets.midcast.MagicAcc = {
-        main       = "Blurred Staff",               --  +20 Magic Accuracy, +228 Magic Accuracy Skill
-        sub        = "Enki Strap",                  --  +10 Magic Accuracy
+        main       = "Yagrush",                     --  +25 Magic Accuracy, +228 Magic Accuracy Skill
+        sub        = "Ammurapi Shield",             --  +38 Magic Accuracy
         ammo       = "Hydrocera",                   --  +06 Magic Accuracy
         head       = "Inyanga Tiara +2",            --  +44 Magic Accuracy
         neck       = "Erra Pendant",                --  +17 Magic Accuracy
-        left_ear   = "Psystorm Earring",            --  +12 Magic Accuracy: Set
-        right_ear  = "Lifestorm Earring",           --  +12 Magic Accuracy: Set
+        left_ear   = "Malignance Earring",          --  +10 Magic Accuracy
+        right_ear  = "Dignitary Earring",           --  +10 Magic Accuracy
         body       = "Inyanga Jubbah +2",           --  +46 Magic Accuracy
         hands      = "Inyanga Dastanas +2",         --  +43 Magic Accuracy, +20 All magic
         left_ring  = "Stikini Ring",                --  +08 Magic Accuracy, +05 All magic
         right_ring = "Stikini Ring",                --  +08 Magic Accuracy, +05 All magic
-        back       = { name     = "Alaunus's Cape", --  +20 Magic Accuracy
-                       augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}},
+        back       = "Aurist's Cape +1",            --  +32 Magic Accuracy
         waist      = "Luminary Sash",               --  +10 Magic Accuracy
         legs       = "Inyanga Shalwar +2",          --  +45 Magic Accuracy
         feet       = "Piety Duckbills +3"           --  +36 Magic Accuracy
     }
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.MagicAcc, {
-        body       = "Theophany Bliaut +3",
+        head       = "Theophany Cap +3",
+		body       = "Theophany Bliaut +3",
         right_ring = "Kishar Ring",
-        waist      = "Casso Sash",
         legs       = { name     = "Chironic Hose",
                        augments = {'Pet: DEX+13','Accuracy+3','Accuracy+2 Attack+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+		feet       = "Theophany Duckbills +3",
     })
 
     sets.midcast['Divine Magic'] = set_combine(sets.midcast.MagicAcc, {
@@ -553,7 +565,6 @@ function job_precast(spell, action, spellMap, eventArgs)
 end
 
 
-
 function job_post_midcast(spell, action, spellMap, eventArgs)
     local equipSet = {}
 
@@ -593,6 +604,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             --  Cursna removal gear is most important. Combine last
             if spell.name == 'Cursna' then
                 equipSet = set_combine(equipSet, sets.midcast.Cursna)
+                --  By default single target is off
+                if state.CursnaSingle.current == 'on' then
+                    equipSet = set_combine(equipSet, sets.CursnaSingle)
+                else
+                    equipSet = set_combine(equipSet, sets.CursnaAoe)
+                end
             end
 
         elseif cure_names:contains(spellMap) then
@@ -745,11 +762,8 @@ end
 
 function select_default_macro_book(isSubJobChange)
     -- Default macro set/book
-    set_macro_page(1, 4)
-
-    -- if not isSubJobChange then
-    --     randomise_lockstyle()
-    -- end
+    set_macro_page(1, 1)        --  Patrick
+    -- set_macro_page(1, 4)     --  Jason
 end
 
 
@@ -767,6 +781,7 @@ end
 function melee_equip_unlock()
     equipment_unlock_specific({'main', 'sub',})
 end
+
 
 function randomise_lockstyle()
     local randomNumber = (os.date("%S") % 3) + 2
