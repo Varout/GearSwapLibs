@@ -218,8 +218,10 @@ spell_maps = {
     ['Curaga'] = 'Curaga', ['Curaga II'] = 'Curaga', ['Curaga III'] = 'Curaga', ['Curaga IV'] = 'Curaga', ['Curaga V'] = 'Curaga',
     ['Raise'] = 'Raise', ['Raise II'] = 'Raise', ['Raise III'] = 'Raise', ['Arise'] = 'Raise',
     --  Status Removal doesn't include Esuna or Sacrifice, since they work differently than the rest
-    ['Poisona'] = 'StatusRemoval', ['Paralyna'] = 'StatusRemoval', ['Silena'] = 'StatusRemoval', ['Blindna'] = 'StatusRemoval', ['Cursna'] = 'StatusRemoval',
-    ['Stona'] = 'StatusRemoval', ['Viruna'] = 'StatusRemoval', ['Erase'] = 'StatusRemoval',
+    ['Poisona'] = 'StatusRemoval', ['Paralyna'] = 'StatusRemoval', ['Silena'] = 'StatusRemoval', ['Blindna'] = 'StatusRemoval',
+    ['Stona'] = 'StatusRemoval', ['Viruna'] = 'StatusRemoval',
+    ['Erase'] = 'Erase',
+    ['Cursna'] = 'Cursna',
     --  Enhancing Magic
     ['Barfire'] = 'BarElement', ['Barstone'] = 'BarElement',  ['Barwater'] = 'BarElement',  ['Baraero'] = 'BarElement', ['Barblizzard'] = 'BarElement', ['Barthunder'] = 'BarElement',
     ['Barfira'] = 'BarElement', ['Barstonra'] = 'BarElement', ['Barwatera'] = 'BarElement', ['Baraera'] = 'BarElement', ['Barblizzara'] = 'BarElement', ['Barthundra'] = 'BarElement',
@@ -242,7 +244,7 @@ spell_maps = {
     ['Haste'] = 'Haste', ['Haste II'] = 'Haste',
     ['Flurry'] = 'Flurry', ['Flurry II'] = 'Flurry',
     ['Temper'] = 'Temper', ['Temper II'] = 'Temper',
-    ['Stoneskin'] = 'Stoneskin', ['Phalanx'] = 'Phalanx', ['Phalanx II'] = 'Phalanx',
+    ['Stoneskin'] = 'Stoneskin', ['Phalanx'] = 'Phalanx', ['Phalanx II'] = 'Phalanx', ['Blink'] = 'Blink',
     --  Elemental Magic
     ['Burn'] = 'ElementalEnfeeble', ['Frost'] = 'ElementalEnfeeble', ['Choke'] = 'ElementalEnfeeble', ['Rasp'] = 'ElementalEnfeeble', ['Shock'] = 'ElementalEnfeeble', ['Drown'] = 'ElementalEnfeeble',
     ['Pyrohelix'] = 'Helix', ['Cryohelix'] = 'Helix', ['Anemohelix'] = 'Helix', ['Geohelix'] = 'Helix', ['Ionohelix'] = 'Helix', ['Hydrohelix'] = 'Helix', ['Luminohelix'] = 'Helix', ['Noctohelix'] = 'Helix',
@@ -277,7 +279,55 @@ spell_maps = {
     --  Puppetmaster Maneuvers
     ['Fire Maneuver'] = 'Maneuver', ['Ice Maneuver'] = 'Maneuver', ['Wind Maneuver'] = 'Maneuver', ['Earth Maneuver'] = 'Maneuver', ['Thunder Maneuver'] = 'Maneuver',
     ['Water Maneuver'] = 'Maneuver', ['Light Maneuver'] = 'Maneuver', ['Dark Maneuver'] = 'Maneuver',
-}
+    --  Geomancy - Indicolure
+    ['Indi-Regen'] = 'IndiSpell', ['Indi-Poison'] = 'IndiSpell',
+    ['Indi-Refresh'] = 'IndiSpell', ['Indi-Haste'] = 'IndiSpell',
+    ['Indi-STR'] = 'IndiSpell', ['Indi-DEX'] = 'IndiSpell',
+    ['Indi-VIT'] = 'IndiSpell', ['Indi-AGI'] = 'IndiSpell',
+    ['Indi-INT'] = 'IndiSpell', ['Indi-MND'] = 'IndiSpell',
+    ['Indi-CHR'] = 'IndiSpell', ['Indi-Slow'] = 'IndiSpell',
+    ['Indi-Paralysis'] = 'IndiSpell', ['Indi-Gravity'] = 'IndiSpell',
+    ['Indi-Fury'] = 'IndiSpell',       -- Attack Up
+    ['Indi-Barrier'] = 'IndiSpell',    -- Defense Up
+    ['Indi-Acumen'] = 'IndiSpell',     -- Magic Attack Up
+    ['Indi-Fend'] = 'IndiSpell',       -- Magic Defense Up
+    ['Indi-Precision'] = 'IndiSpell',  -- Accuracy Up
+    ['Indi-Voidance'] = 'IndiSpell',   -- Evasion Up
+    ['Indi-Focus'] = 'IndiSpell',      -- Magic Accuracy Up
+    ['Indi-Attunement'] = 'IndiSpell', -- Magic Evasion Up
+    ['Indi-Wilt'] = 'IndiSpell',       -- Attack Down
+    ['Indi-Frailty'] = 'IndiSpell',    -- Defense Down
+    ['Indi-Fade'] = 'IndiSpell',       -- Magic Attack Down
+    ['Indi-Malaise'] = 'IndiSpell',    -- Magic Defense Down
+    ['Indi-Slip'] = 'IndiSpell',       -- Accuracy Down
+    ['Indi-Torpor'] = 'IndiSpell',     -- Evasion Down
+    ['Indi-Vex'] = 'IndiSpell',        -- Magic Accuracy Down
+    ['Indi-Languor'] = 'IndiSpell',    -- Magic Evasion Down
+    --  Geomancy - Geo
+    ['Geo-Regen'] = 'GeoSpell', ['Geo-Poison'] = 'GeoSpell',
+    ['Geo-Refresh'] = 'GeoSpell', ['Geo-Haste'] = 'GeoSpell',
+    ['Geo-STR'] = 'GeoSpell', ['Geo-DEX'] = 'GeoSpell',
+    ['Geo-VIT'] = 'GeoSpell', ['Geo-AGI'] = 'GeoSpell',
+    ['Geo-INT'] = 'GeoSpell', ['Geo-MND'] = 'GeoSpell',
+    ['Geo-CHR'] = 'GeoSpell', ['Geo-Slow'] = 'GeoSpell',
+    ['Geo-Paralysis'] = 'GeoSpell', ['Geo-Gravity'] = 'GeoSpell',
+    ['Geo-Fury'] = 'GeoSpell',       -- Attack Up
+    ['Geo-Barrier'] = 'GeoSpell',    -- Defense Up
+    ['Geo-Acumen'] = 'GeoSpell',     -- Magic Attack Up
+    ['Geo-Fend'] = 'GeoSpell',       -- Magic Defense Up
+    ['Geo-Precision'] = 'GeoSpell',  -- Accuracy Up
+    ['Geo-Voidance'] = 'GeoSpell',   -- Evasion Up
+    ['Geo-Focus'] = 'GeoSpell',      -- Magic Accuracy Up
+    ['Geo-Attunement'] = 'GeoSpell', -- Magic Evasion Up
+    ['Geo-Wilt'] = 'GeoSpell',       -- Attack Down
+    ['Geo-Frailty'] = 'GeoSpell',    -- Defense Down
+    ['Geo-Fade'] = 'GeoSpell',       -- Magic Attack Down
+    ['Geo-Malaise'] = 'GeoSpell',    -- Magic Defense Down
+    ['Geo-Slip'] = 'GeoSpell',       -- Accuracy Down
+    ['Geo-Torpor'] = 'GeoSpell',     -- Evasion Down
+    ['Geo-Vex'] = 'GeoSpell',        -- Magic Accuracy Down
+    ['Geo-Languor'] = 'GeoSpell',    -- Magic Evasion Down
+    }
 
 no_skill_spells_list = S{
     'Haste', 'Refresh', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',

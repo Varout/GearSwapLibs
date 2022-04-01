@@ -39,7 +39,7 @@ function get_sets()
     sets.Idle = {}
     -- Idle/Town Sets --
     sets.Idle.Regen = {
-        ammo    = "Vanir Battery",
+        ammo    = "Coiste Bodhar",
         head    = "Valorous Mask",
         neck    = "Bathy Choker +1",
         ear1    = "Infused Earring",
@@ -69,7 +69,7 @@ function get_sets()
     sets.TP["Trishula"] = {
         main    = "Kaja Lance",
         sub     = "Utu Grip",
-        ammo    = "Vanir Battery",
+        ammo    = "Coiste Bodhar",
         head    = "Flamma Zucchetto +2",
         neck    = "Asperity Necklace",
         ear1    = "Sherida Earring",
@@ -160,11 +160,11 @@ function get_sets()
     }
 
     sets.JA["High Jump"] = set_combine(sets.JA.Jump,{
-        legs    = "Vishap brais +2"
+        legs    = "Pteroslaver Brais +2"
     })
 
     sets.JA["Spirit Jump"] = set_combine(sets.JA.Jump,{
-        feet    = "Peltast's Schynbalds",
+        feet    = "Peltast's Schynbalds +1",
         legs    = "Peltast's Cuissots +1"
     })
 
@@ -174,7 +174,7 @@ function get_sets()
 
     sets.JA["Deep Breathing"] = {head = "Pteroslaver Armet +3"}
 
-    sets.JA["Ancient Circle"] = {legs = "vishap brais +2"}
+    sets.JA["Ancient Circle"] = {legs = "Vishap Brais +2"}
     sets.JA['Call Wyvern'] = {body = "Pteroslaver Mail +1"}
     sets.JA["Angon"] = {
         ammo     = "Angon",
@@ -184,7 +184,7 @@ function get_sets()
 
     sets.Pet = {}
     sets.Pet.WyvernHP = {
-        head="Ptero. Armet +3",
+        head="Pteroslaver Armet +3",
         neck="Lancer's Torque",
         ear1="Lancer's Earring",
         ear2="Dragoon's Earring",
@@ -192,8 +192,8 @@ function get_sets()
         hands="Crusher's Gauntlets",
         back="Updraft Mantle",
         waist="Glassblower's Belt",
-        legs="vishap brais +2",
-        feet="Ptero. Greaves +1"
+        legs="Vishap brais +2",
+        feet="Pteroslaver Greaves +3"
     }
 
     sets.JA["Spirit Link"] = set_combine(sets.Pet.WyvernHP, {
@@ -228,12 +228,14 @@ function get_sets()
     })
 
     sets.midcast.Trust = {
-        head="Vishap Armet +1",
+        head="Vishap Armet +2",
         body="Vishap Mail +2",
-        hands="Vishap Finger Gauntlets +1",
+        hands="Vishap Finger Gauntlets +2",
         legs="vishap brais +2",
-        feet="Vishap Greaves +1"
+        feet="Vishap Greaves +2"
     }
+
+    -- sets.midcast.WS = {}
 end
 
 function pretarget(spell,action)
@@ -311,7 +313,7 @@ function precast(spell,action)
             equipSet = equipSet[AccArray[AccIndex]]
         end
         if spell.english == "High Jump" and NM_For_Brais:contains(spell.target.name) and Brais == 'ON' then -- Use vishap brais +2 Toggle To Equip vishap brais +2 For High Jump --
-            equipSet = set_combine(equipSet,{legs="vishap brais +2"})
+            equipSet = set_combine(equipSet,{legs="Vishap Brais +2"})
         end
         equip(equipSet)
     elseif spell.action_type == 'Magic' then

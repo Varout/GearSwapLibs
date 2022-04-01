@@ -507,7 +507,7 @@ function init_gear_sets()
     -- sets.perp.Day = {hands="Caller's Bracers +2"}
     -- sets.perp.Weather = {neck="Caller's Pendant",hands="Caller's Bracers +2"}
     -- Carby: Mitts+Conv.feet = 1/tick perp.  Everything else should be +refresh
---    sets.perp.Carbuncle = {main="Bolelabunga",sub="Genbu's Shield",
+--    sets.perp.Carbuncle = {main="Bolelabunga",sub="Genmei Shield",
 --        head="Convoker's Horn +1",body="Hagondes Coat",hands="Carbuncle Mitts",legs="Nares Trews",feet="Convoker's Pigaches"}
     -- Diabolos's Rope doesn't gain us anything at this time
     --sets.perp.Diabolos = {waist="Diabolos's Rope"}
