@@ -336,7 +336,7 @@ function init_gear_sets()
         ammo       = "Hydrocera",                   --  Enhancing Maigc +0
         head       = "Befouled Crown",              --  Enhancing Maigc +16
         neck       = "Incanter's Torque",           --  All Skill +10
-        left_ear   = "Mimir Earring",         		--  Enhancing Maigc +3
+        left_ear   = "Mimir Earring",               --  Enhancing Maigc +3
         right_ear  = "Andoaa Earring",              --  Enhancing Maigc +5
         body       = "Anhur Robe",                  --  Enhancing Maigc +12
         hands      = { name     = "Telchine Gloves",
@@ -400,7 +400,7 @@ function init_gear_sets()
     sets.midcast['Erase'] = set_combine(sets.midcast['Enhancing Magic'], {
         main       = "Yagrush",
         sub        = "Ammurapi Shield",             --  Enhancing magic duration +10%
-        neck       = "Cleric's Torque"              --  Erase +1        (Nice to have +1 or 2)
+        neck       = "Cleric's Torque +2"           --  Erase +1
     })
 
     --  Base set for magic accuracy for Divine and Enfeebling
@@ -424,11 +424,11 @@ function init_gear_sets()
 
     sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.MagicAcc, {
         head       = "Theophany Cap +3",
-		body       = "Theophany Bliaut +3",
+        body       = "Theophany Bliaut +3",
         right_ring = "Kishar Ring",
         legs       = { name     = "Chironic Hose",
                        augments = {'Pet: DEX+13','Accuracy+3','Accuracy+2 Attack+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-		feet       = "Theophany Duckbills +3",
+        feet       = "Theophany Duckbills +3",
     })
 
     sets.midcast['Divine Magic'] = set_combine(sets.midcast.MagicAcc, {
