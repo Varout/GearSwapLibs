@@ -44,6 +44,7 @@ zones_windy_body = S{
     "Heavens Tower",
 }
 
+non_combat_zones = S{}
 
 -------------------------------------------------------------------------------------------------------------------
 --  Spell Sets
@@ -78,30 +79,33 @@ spells_cursna = S{
     "Cursna",
 }
 
+spells_cure = S{
+    'Cure', 'Curaga', 'Cura'
+}
+
 enfeebling_int = S{
     "Bind",
-    "Blind",
+    "Blind",    -- "Blind II"
     "Break",
     "Dispel",
-    "Distract",
-    "Frazzle",
-    "Gravity",
-    "Poison",
+    "Distract", -- "Distract II", "Distract III"
+    "Frazzle",  -- "Frazzle II", "Frazzle III"
+    "Gravity",  -- "Gravity II"
+    "Poison",   -- "Poison II"
     "Poisonga",
-    "Sleep",
-    "Sleepga",
+    "Sleep",    -- "SLeep II"
+    "Sleepga",  -- "Sleepga II"
 }
 
 enfeebling_mnd = S{
-    "Addle",
-    "Dia",
+    "Addle",    -- Addle II
+    "Dia",      -- "Dia II", "Dia III"
     "Diaga",
     "Inundation",
-    "Paralyze",
+    "Paralyze", -- "Paralyze II"
     "Silence",
-    "Slow",
+    "Slow",     -- "Slow II"
 }
-
 
 -------------------------------------------------------------------------------------------------------------------
 --  Equipment Sets By Slot For Locking
@@ -128,6 +132,11 @@ equip_lock_back = S{
     "Nexus Cape",
 }
 
+sets.Capacity = {}
+sets.Capacity['Varrout'] = { back = { name     = "Mecisto. Mantle",
+                                      augments = {'Cap. Point+31%','INT+2','Attack+3','DEF+8',}},}
+sets.Capacity['Manhoso'] = { back = { name     = "Mecisto. Manle",
+                                      augments = {}},}
 
 -------------------------------------------------------------------------------------------------------------------
 --  Job Sets for Subjobs (For my playstyle)
