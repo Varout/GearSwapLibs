@@ -1,738 +1,803 @@
--- *** Credit goes to Flippant & Martel for helping me with this Gearswap *** --
--- ** I Use Some of Motenten's Functions ** --
--- Last Updated: 05/03/14 7:30 AM *Changed HB Rule* --
+-------------------------------------------------------------------------------------------------------------------
+-- Initialization function that defines sets and variables to be used.
+-------------------------------------------------------------------------------------------------------------------
 
-toau_zones = S{
-    "Leujaoam Sanctum",             --  Assault
-    "Mamool Ja Training Grounds",   --  Assault
-    "Lebros Cavern",                --  Assault
-    "Periqia",                      --  Assault
-    "Ilrusi Atoll",                 --  Assault
-    "Nyzul Isle",                   --  Assault
-    "Bhaflau Remnants",             --  Salvage
-    "Arrapago Remnants",            --  Salvage
-    "Silver Sea Remnants",          --  Salvage
-    "Zhayolm Remnants"              --  Salvage
-}
+-- IMPORTANT: Make sure to also get the Mote-Include.lua file (and its supplementary files) to go with this.
 
+-- Initialization function for this job file.
 function get_sets()
-    AccIndex = 1
-    AccArray = {"LowACC","MidACC","HighACC"} -- 3 Levels Of Accuracy Sets For TP/WS/Hybrid. First Set Is LowACC. Add More ACC Sets If Needed Then Create Your New ACC Below. Most of These Sets Are Empty So You Need To Edit Them On Your Own. Remember To Check What The Combined Set Is For Each Sets. --
-    AttIndex = 1
-    AttArray = {"LowATT","HighATT","LowContent"} -- LowATT Is The Same As LowACC Set. MidACC & HighACC Take Priority Over These 2 Sets(HighATT & LowContent). --
-    IdleIndex = 2
-    IdleArray = {"Movement","Regen","Refresh"} -- Default Idle Set Is Movement --
-    Armor = 'None'
-    Twilight = 'None'
-    Rancor = 'OFF' -- Set Default Rancor ON or OFF Here --
-    Brais = 'ON' -- Set Default Brais ON or OFF Here --
-    Samurai_Roll = 'OFF' -- Set Default SAM Roll ON or OFF Here --
-    target_distance = 5.15 -- Set Default Distance Here --
-    select_default_macro_book() -- Change Default Macro Book At The End --
+    mote_include_version = 2
+	-- Load and initialize the include file.
+	include('Mote-Include.lua')
+	include('organizer-lib')
+		organizer_items = {
+  MABfood="Pear Crepe",
+  Remedy="Remedy",
+  echos="Echo Drops",
+  shihei="Shihei",
+  sushi="Sublime sushi",
+  sushii="Sublime sushi +1",
+  bun="Red curry bun",
+  water="Holy water",
+  Ring="Dim. Ring (holla)",
+  Warpring="Warp ring",
+  Card="Trump Card",
+  bullet="Chrono Bullet",
+  bullett="Living Bullet",
+  }
+end
 
-    NM_For_Brais = S{} -- Add More NM Here For High Jump --
 
-    HB_Mage_SubJob = S{"WHM","RDM","BLM","BLU","SCH"} -- 50% Healing Breath Trigger SubJob --
-    HB_DD_SubJob = S{"PLD","DRK","BRD","NIN"} -- 33% Healing Breath Trigger SubJob --
-    sc_map = {SC1="Drakesbane", SC2="SpiritJump", SC3="SoulJump"} -- 3 Additional Binds. Can Change Whatever JA/WS/Spells You Like Here. Remember Not To Use Spaces. --
 
-    sets.Idle = {}
-    -- Idle/Town Sets --
-    sets.Idle.Regen = {
-        ammo    = "Coiste Bodhar",
-        head    = "Valorous Mask",
-        neck    = "Bathy Choker +1",
-        ear1    = "Infused Earring",
-        ear2    = "Moonshade Earring",
-        body    = "Vishap Mail +2",
-        hands   = "Sulevia's Gauntlets +2",
-        ring1   = "Defending Ring",
-        ring2   = "Sheltered Ring",
-        back    = { name="Brigantia's Mantle",
-                    augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
-        waist   = "Ioskeha Belt",
-        legs    = "Sulevia's Cuisses +2",
-        feet    = "Sulevia's Leggings +2"
+-- Setup vars that are user-dependent.  Can override this function in a sidecar file.
+function user_setup()
+	-- Options: Override default values
+	state.OffenseMode:options('Normal', 'Mid', 'Acc')
+	state.HybridMode:options('Normal', 'PDT', 'Reraise')
+	state.WeaponskillMode:options('Normal', 'Mid', 'Acc')
+	state.PhysicalDefenseMode:options('PDT', 'Reraise')
+	state.MagicalDefenseMode:options('MDT')
+    
+    war_sj = player.sub_job == 'WAR' or false
+
+	select_default_macro_book(7, 5)
+    send_command('bind != gs c toggle CapacityMode')
+
+	set_lockstyle()
+
+	
+	moonshade_WS = S{"Stardiver","Savage Blade","Camlanns Torment",}
+	
+end
+
+
+-- Called when this job file is unloaded (eg: job change)
+function file_unload()
+	
+	send_command('unbind !=')
+end
+
+
+-- Define sets and vars used by this job file.
+function init_gear_sets()
+	--------------------------------------
+	-- Start defining the sets
+	--------------------------------------
+   
+	
+	-- Precast Sets
+	-- Precast sets to enhance JAs
+	sets.precast.JA.Angon = {ammo="Angon",hands="Pteroslaver Finger Gauntlets +3"}
+    sets.CapacityMantle = {back="Mecistopins Mantle"}
+     sets.WSDayBonus = (set_combine(equipSet,{head="Gavialis Helm"}))
+
+
+	sets.precast.JA.Jump = {
+
+	    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +2",
+    body={ name="Valorous Mail", augments={'"Store TP"+8','Accuracy+13','Attack+2',}},
+    hands="Iktomi Dastanas",
+    legs={ name="Valor. Hose", augments={'Accuracy+19','"Dbl.Atk."+5','VIT+6','Attack+5',}},
+    feet="Flam. Gambieras +2",
+    neck="Anu Torque",
+    waist="Ioskeha Belt +1",
+    left_ear="Telos Earring",
+    right_ear="Sherida earring",
+    left_ring="Petrov Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+	
     }
-    sets.Idle.Refresh = set_combine( sets.Idle.Regen, {
-        ear2    = "Moonshade Earring"
+
+	sets.precast.JA['Ancient Circle'] = { legs="Vishap Brais +3" }
+	
+
+	sets.precast.JA['High Jump'] = set_combine(sets.precast.JA.Jump, {legs="Vishap Brais +3",
+    }) 
+	sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA.Jump, {
+        legs="Peltast's Cuissots +1"
     })
-    sets.Idle.ToAU = set_combine(sets.Idle.Refresh, {
-        ring1   = "Balrahn's Ring"
+	sets.precast.JA['Spirit Jump'] = set_combine(sets.precast.JA.Jump, {
+        legs="Peltast's Cuissots +1"
+        --feet="Lancer's Schynbalds +2"
     })
-    -- sets.Twilight = {head="Twilight Helm",body="Twilight Mail"}
+	sets.precast.JA['Super Jump'] = sets.precast.JA.Jump
 
-    -- TP Base Set --
-    sets.TP = {}
-
-    -- Ryunohige(AM3 Down) TP Sets --
-    sets.TP["Trishula"] = {
-        main    = "Kaja Lance",
-        sub     = "Utu Grip",
-        ammo    = "Coiste Bodhar",
-        head    = "Flamma Zucchetto +2",
-        neck    = "Asperity Necklace",
-        ear1    = "Sherida Earring",
-        ear2    = "Dignitary's Earring",
-        body    = "Flamma Korazin +2",
-        hands   = "Sulevia's Gauntlets +2",
-        ring1   = "Niqmaddu Ring",
-        ring2   = "Flamma Ring",
-        back    = { name="Brigantia's Mantle",
-                    augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
-        waist   = "Ioskeha Belt",
-        legs    = "Sulevia's Cuisses +2",
-        feet    = "Flamma Gambieras +2"}
-
-    -- Ryunohige(AM3 Up) TP Sets --
-    -- sets.TP.Oathkeeper
-    -- sets.TP.Upukirex
-    -- sets.TP.Ryunohige
-
-    -- WS Base Set --
-    sets.WS = {}
-
-    -- WS Sets --
-    sets.WS.Drakesbane = {
-        ammo="Knobkierrie",
-        head="Valorous Mask",
-        neck="Light Gorget",
-        ear1="Sherida Earring",
-        ear2="Dignitary's Earring",
-        body="Flamma Korazin +2",
-        hands="Flamma Manopolas +2",
-        ring1="Niqmaddu Ring",
-        ring2="Rajas Ring",
-        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
-        waist="Fotia Belt",
-        legs="Vishap Brais +2",
-        feet="Sulevia's Leggings +2"
-    }
-
-    sets.WS.Stardiver = {
-        ammo="Knobkierrie",
-        head="Flamma Zucchetto +2",
-        neck="Shadow Gorget",
-        ear1="Sherida Earring",
-        ear2="Dignitary's Earring",
-        body="Flamma Korazin +2",
-        hands="Flamma Manopolas +2",
-        ring1="Niqmaddu Ring",
-        ring2="Pyrosoul Ring",
-        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
-        waist="Fotia Belt",
-        legs="Vishap Brais +2",
-        feet="Sulevia's Leggings +2"
-    }
-
-    sets.WS["Camlann's Torment"] = {
-        ammo="Knobkierrie",
-        head="Flamma Zucchetto +2",
-        neck="Light Gorget",
-        ear1="Sherida Earring",
-        ear2="Ishvara Earring",
-        body="Flamma Korazin +2",
-        hands="Sulevia's Gauntlets +2",
-        ring1="Niqmaddu Ring",
-        ring2="Pyrosoul Ring",
-        back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}},
-        waist="Fotia Belt",
-        legs="Vishap Brais +2",
-        feet="Sulevia's Leggings +2"
-    }
-
-    -- JA Sets --
-    sets.JA = {}
-    sets.JA.Jump = {
-        ammo    = "Knobkierrie",
-        head    = "Sulevia's Mask +1",
-        neck    = "Asperity Necklace",
-        ear1    = "Steelflash Earring",
-        ear2    = "Bladeborn Earring",
-        body    = "Vishap Mail +2",
-        hands   = "Vishap Finger Gauntlets +1",
-        ring1   = "Flamma Ring",
-        ring2   = "Rajas Ring",
-        back    = "Brigantia's Mantle",
-        waist   = "Goading Belt",
-        legs    = "Flamma Dirs +2",
-        feet    = "Vishap Greaves +1"
-    }
-
-    sets.JA["High Jump"] = set_combine(sets.JA.Jump,{
-        legs    = "Pteroslaver Brais +2"
-    })
-
-    sets.JA["Spirit Jump"] = set_combine(sets.JA.Jump,{
-        feet    = "Peltast's Schynbalds +1",
-        legs    = "Peltast's Cuissots +1"
-    })
-
-    sets.JA["Soul Jump"] = set_combine(sets.JA.Jump,{
-        legs    = "Peltast's Cuissots +1"
-    })
-
-    sets.JA["Deep Breathing"] = {head = "Pteroslaver Armet +3"}
-
-    sets.JA["Ancient Circle"] = {legs = "Vishap Brais +2"}
-    sets.JA['Call Wyvern'] = {body = "Pteroslaver Mail +1"}
-    sets.JA["Angon"] = {
-        ammo     = "Angon",
-        left_ear = "Dragoon's Earring",
-        hands    = "Pteroslaver Finger Gauntlets +1"
-    }
-
-    sets.Pet = {}
-    sets.Pet.WyvernHP = {
-        head="Pteroslaver Armet +3",
-        neck="Lancer's Torque",
-        ear1="Lancer's Earring",
-        ear2="Dragoon's Earring",
-        body="Wyvern Mail",
-        hands="Crusher's Gauntlets",
-        back="Updraft Mantle",
-        waist="Glassblower's Belt",
-        legs="Vishap brais +2",
-        feet="Pteroslaver Greaves +3"
-    }
-
-    sets.JA["Spirit Link"] = set_combine(sets.Pet.WyvernHP, {
-        head="Vishap Armet +2",
-        hands="Peltast's Vambraces +1"
-    })
-    sets.Pet["Restoring Breath"] = set_combine(sets.Pet.WyvernHP)
-    sets.Pet["Smiting Breath"] = set_combine(sets.Pet.WyvernHP)
-    sets.Pet["Steady Wing"] = set_combine(sets.Pet.WyvernHP)
-
-    -- Healing Breath Trigger --
-    sets.HealingBreathTrigger = set_combine(sets.Pet.WyvernHP, {
+	sets.precast.JA['Spirit Link'] = {
+        hands="Peltast's Vambraces +1", 
         head="Vishap Armet +2"
-    })
-
-    sets.precast = {}
-    -- Fastcast Set --
-    sets.precast.FastCast = {
-        hands="Leyline Gloves",
-        ear1="Loquac. Earring",
-        ring1="Evanescence Ring",
     }
-
-    sets.midcast = {}
-    -- Magic Haste Set --
-    sets.midcast.Haste = set_combine(sets.PDT, {
-        head="Otomi Helm",
-        hands="Cizin Mufflers +1",
-        waist="Goading Belt",
-        legs="Ares' Flanchard +1",
-        feet="Huginn Gambieras"
-    })
-
-    sets.midcast.Trust = {
+	sets.precast.JA['Call Wyvern'] = {body="Pteroslaver Mail +1"}
+	sets.precast.JA['Deep Breathing'] = {--head="Wyrm Armet +1" or Petroslaver Armet +1
+    }
+	sets.precast.JA['Spirit Surge'] = {body="Pteroslaver Mail +1"}
+	
+	-- Healing Breath sets
+	sets.HB = {
+        ammo="Ginsen",
         head="Vishap Armet +2",
-        body="Vishap Mail +2",
-        hands="Vishap Finger Gauntlets +2",
-        legs="vishap brais +2",
-        feet="Vishap Greaves +2"
+        legs="Vishap Brais +3",
+    
     }
 
-    -- sets.midcast.WS = {}
+	-- Waltz set (chr and vit)
+	sets.precast.Waltz = {
+
+    }
+		
+	-- Don't need any special gear for Healing Waltz.
+	sets.precast.Waltz['Healing Waltz'] = {}
+
+	-- Fast cast sets for spells
+	sets.precast.FC = {
+      
+        ear1="Loquacious Earring", 
+        hands="Leyline Gloves",
+    
+    }
+    
+	-- Midcast Sets
+	sets.midcast.FastRecast = {
+		
+    }	
+		
+	sets.midcast.Breath = set_combine(sets.midcast.FastRecast, { head="Vishap Armet +2" })
+	
+
+	-- Weaponskill sets
+	-- Default set for any weaponskill that isn't any more specifically defined
+	sets.precast.WS = {  
+	ammo="Knobkierrie",
+    head="Gleti's Mask",
+    body="Gleti's Guirass",
+    hands="Gleti's Gauntlets",
+    legs="Vishap Brais +2",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Thrud earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
+	}
+
+	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
+	head="Ynglinga sallet",
+    body="Sulevia's platemail +2",
+    })
+	
+	-- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
+	sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS, {  
+	ammo="Knobkierrie",
+    head="Gleti's Mask",
+    body="Gleti's Guirass",
+    hands="Gleti's Gauntlets",
+    legs="Vishap Brais +2",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Thrud earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
+    })
+	
+	sets.precast.WS['Stardiver'].Mid = set_combine(sets.precast.WS['Stardiver'], {
+   ammo="Knobkierrie",
+    head="Flamma zucchetto +2",
+    body={ name="Valorous Mail", augments={'Accuracy+29','"Dbl.Atk."+3',}},
+    hands="Sulev. Gauntlets +2",
+    legs="Sulevia's cuisses +2",
+   feet="Flamma Gambieras +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+   left_ear="Cessance Earring",
+    right_ear="Sherida earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+   back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+
+	})
+	
+	sets.precast.WS['Stardiver'].Acc = set_combine(sets.precast.WS.Acc, { 
+	
+	    ammo="Knobkierrie",
+    head="Ynglinga Sallet",
+    body="Sulevia's Plate. +2",
+    hands="Pteroslaver Finger Gauntlets +3",
+    legs="Vishap Brais +3",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+	 
+	})
+
+    sets.precast.WS["Camlann's Torment"] = set_combine(sets.precast.WS, {  
+	ammo="Knobkierrie",
+     head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','INT+8','Attack+13',}},
+    body={ name="Valorous Mail", augments={'Accuracy+22 Attack+22','Weapon skill damage +2%','STR+7','Accuracy+8',}},
+    hands="Pteroslaver Finger Gauntlets +3",
+    legs="Vishap Brais +3",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Sherida earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+   back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Accuracy+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
+
+    })
+	sets.precast.WS["Camlann's Torment"].Mid = set_combine(sets.precast.WS["Camlann's Torment"], {
+    ammo="Knobkierrie",
+    head="Hjarrandi Helm",
+    body="Sulevia's Platemail +2",
+    hands="Sulevia's Gauntlets +2",
+    legs="Vishap Brais +2",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Thrud earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
+    })
+	sets.precast.WS["Camlann's Torment"].Acc = set_combine(sets.precast.WS["Camlann's Torment"].Mid, {})
+
+	sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS, {       ammo="Knobkierrie",
+    ammo="Knobkierrie",
+    head="Hjarrandi Helm",
+    body="Sulevia's Platemail +2",
+    hands="Sulevia's Gauntlets +2",
+    legs="Vishap Brais +2",
+    feet="Sulev. Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Thrud earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
+
+    })
+	sets.precast.WS['Drakesbane'].Mid = set_combine(sets.precast.WS['Drakesbane'], {       ammo="Knobkierrie",
+    head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','INT+8','Attack+13',}},
+    body="Sulevia's Plate. +2",
+    hands="Flam. Manopolas +2",
+    legs="Sulev. Cuisses +2",
+    feet="Flam. Gambieras +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Mache Earring",
+    right_ear="Sherida earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},
+
+    })
+	sets.precast.WS['Drakesbane'].Acc = set_combine(sets.precast.WS['Drakesbane'].Mid, {  head="Ynglinga sallet",     })
+
+	sets.precast.WS['Leg Sweep'] =  {   ammo="Pemphredo Tathlum",
+    head="Flam. Zucchetto +2",
+    body="Flamma Korazin +2",
+    hands="Flam. Manopolas +2",
+    legs="Flamma Dirs +2",
+    feet="Flam. Gambieras +2",
+    neck="Sanctity Necklace",
+    waist="Eschan Stone",
+    left_ear="Gwati Earring",
+    right_ear="Digni. Earring",
+    left_ring="Flamma Ring",
+    right_ring="Sangoma Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','"Dbl.Atk."+10',}},   }
+	
+	sets.precast.WS['Savage Blade'] = {
+	       ammo="Knobkierrie",
+    head="Hjarrandi Helm",
+    body="Gleti's cuirass",
+    hands="Flam. Manopolas +2",
+    legs="Sulev. Cuisses +2",
+    feet="Sulevia's Leggings +2",
+    neck="Fotia Gorget",
+    waist="Fotia Belt",
+    left_ear="Ishvara Earring",
+    right_ear="Thrud earring",
+    left_ring="Regal Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}},
+
+    }
+	-- Sets to return to when not performing an action.
+	
+	-- Resting sets
+	sets.resting = {
+    ammo="Staunch Tathlum +1",
+     head={ name="Valorous Mask", augments={'Accuracy+18 Attack+18','Weapon skill damage +4%','INT+8','Attack+13',}},
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet={ name="Amm Greaves", augments={'HP+50','VIT+10','Accuracy+15','Damage taken-2%',}},
+    neck="Sanctity Necklace",
+    waist="Gishdubar sash",
+    left_ear="Odnowa Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    }
+	
+
+	-- Idle sets
+	sets.idle = {  
+	ammo="Coiste Bodhar",
+    head="Hjarrandi Helm",
+    body="Gleti's Cuirass",
+    hands="Gleti's Gauntlets",
+    legs="Gleti's Breeches",
+    feet="Gleti's Boots",
+    neck="Bathy Choker +1",
+    waist="Ioskeha Belt +1",
+    left_ear="Infused Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Sheltered Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
+	}
+
+	-- Idle sets (default idle set not needed since the other three are defined, but leaving for testing purposes)
+	sets.idle.Town = {
+    ammo="Coiste Bodhar",
+    head="Hjarrandi Helm",
+    body="Gleti's Cuirass",
+    hands="Gleti's Gauntlets",
+    legs="Gleti's Breeches",
+    feet="Gleti's Boots",
+    neck="Bathy Choker +1",
+    waist="Ioskeha Belt +1",
+    left_ear="Infused Earring",
+    right_ear="Odnowa Earring +1",
+    left_ring="Defending Ring",
+    right_ring="Sheltered Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
+    }
+	
+	sets.idle.Field = set_combine(sets.idle.Town, {
+
+    })
+
+    sets.idle.Regen = set_combine(sets.idle.Field, {
+
+    })
+
+	sets.idle.Weak = set_combine(sets.idle.Field, {
+		head="Twilight Helm",
+		body="Twilight Mail",
+    })
+	
+	-- Defense sets
+	sets.defense.PDT = {
+    ammo="Ginsen",
+    head="Hjarrandi Helm",
+    body="Hjarrandi Breast.",
+    hands={ name="Emi. Gauntlets +1", augments={'HP+65','DEX+12','Accuracy+20',}},
+    legs={ name="Valor. Hose", augments={'Accuracy+19','"Dbl.Atk."+5','VIT+6','Attack+5',}},
+    feet="Flam. Gambieras +2",
+    neck="Shulmanu Collar",
+    waist="Tempus Fugit",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Defending Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    }
+
+	sets.defense.Reraise = set_combine(sets.defense.PDT, {
+		head="Twilight Helm",
+		body="Twilight Mail"
+    })
+
+	sets.defense.MDT = set_combine(sets.defense.PDT, {
+         ammo="Staunch Tathlum +1",
+    head="Sulevia's Mask +2",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet="Sulev. Leggings +2",
+    neck="Lissome Necklace",
+    waist="Tempus Fugit",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Defending Ring",
+    right_ring="Cacoethic Ring +1",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+
+	sets.Kiting = {
+        legs="Carmine Cuisses +1",
+    }
+
+	sets.Reraise = {head="Twilight Helm",body="Twilight Mail"}
+
+	-- Engaged sets
+
+	-- Variations for TP weapon and (optional) offense/defense modes.  Code will fall back on previous
+	-- sets if more refined versions aren't defined.
+	-- If you create a set with both offense and defense modes, the offense mode should be first.
+	-- EG: sets.engaged.Dagger.Accuracy.Evasion
+	
+	-- Normal melee group
+	sets.engaged = {    sub="Utu Grip",
+    ammo="Coiste Bodhar",
+    head="Hjarrandi Helm",
+    body="Gleti's Cuirass",
+    hands="Gleti's Gauntlets",
+    legs="Gleti's Breeches",
+    feet="Gleti's Boots",
+    neck="Asperity Necklace",
+    waist="Ioskeha Belt +1",
+    left_ear="Dignitary's Earring",
+    right_ear="Sherida earring",
+    left_ring="Petrov Ring",
+    right_ring="Niqmaddu Ring",
+     back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+
+    }
+
+	sets.engaged.Mid = set_combine(sets.engaged, {
+    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +2",
+    body={ name="Valorous Mail", augments={'"Store TP"+8','Accuracy+13','Attack+2',}},
+    hands={ name="Emi. Gauntlets +1", augments={'HP+65','DEX+12','Accuracy+20',}},
+    legs="Flamma dirs +2",
+    feet="Flam. Gambieras +2",
+    neck="Shulmanu Collar",
+    waist="Ioskeha Belt +1",
+    left_ear="Telos Earring",
+    right_ear="Sherida earring",
+    left_ring="Flamma Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+
+	sets.engaged.Acc = set_combine(sets.engaged.Mid, {
+	  ammo="Amar Cluster",
+    head="Flam. Zucchetto +2",
+    body={ name="Valorous Mail", augments={'"Store TP"+8','Accuracy+13','Attack+2',}},
+    hands={ name="Emi. Gauntlets +1", augments={'HP+65','DEX+12','Accuracy+20',}},
+    legs="Flamma dirs +2",
+    feet="Flam. Gambieras +2",
+    neck="Shulmanu Collar",
+    waist="Ioskeha Belt +1",
+    left_ear="Telos Earring",
+    right_ear="Sherida earring",
+    left_ring="Flamma Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+
+    sets.engaged.PDT = set_combine(sets.engaged, {
+         ammo="Ginsen",
+    head="Sulevia's Mask +2",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet="Sulev. Leggings +2",
+    neck="Anu Torque",
+    waist="Tempus Fugit",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Defending Ring",
+    right_ring="Niqmaddu ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+	
+	sets.engaged.Mid.PDT = set_combine(sets.engaged.Mid, {
+     ammo="Staunch Tathlum +1",
+    head="Sulevia's Mask +2",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet="Sulev. Leggings +2",
+    neck="Lissome Necklace",
+    waist="Tempus Fugit",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Defending Ring",
+    right_ring="Cacoethic Ring +1",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+	
+	sets.engaged.Acc.PDT = set_combine(sets.engaged.Acc, {
+     ammo="Ginsen",
+    head="Sulevia's Mask +2",
+    body="Sulevia's Plate. +2",
+    hands="Sulev. Gauntlets +2",
+    legs="Sulev. Cuisses +2",
+    feet="Sulev. Leggings +2",
+    neck="Lissome Necklace",
+    waist="Tempus Fugit",
+    left_ear="Telos Earring",
+    right_ear="Sherida Earring",
+    left_ring="Defending Ring",
+    right_ring="Cacoethic Ring +1",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    })
+
+    sets.engaged.War = set_combine(sets.engaged, {    sub="Utu Grip",
+    ammo="Ginsen",
+    head="Flam. Zucchetto +2",
+    body={ name="Valorous Mail", augments={'"Store TP"+8','Accuracy+13','Attack+2',}},
+    hands="Flam. Manopolas +2",
+    legs={ name="Valor. Hose", augments={'Accuracy+19','"Dbl.Atk."+5','VIT+6','Attack+5',}},
+    feet="Flam. Gambieras +2",
+    neck="Shulmanu Collar",
+    waist="Ioskeha Belt +1",
+    left_ear="Cessance Earring",
+    right_ear="Brutal Earring",
+    left_ring="Flamma Ring",
+    right_ring="Niqmaddu Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+
+    })
+    sets.engaged.War.Mid = set_combine(sets.engaged.Mid, {
+
+    })
+
+	sets.engaged.Reraise = set_combine(sets.engaged, {
+		head="Twilight Helm",
+		body="Twilight Mail"
+    })
+
+	sets.engaged.Acc.Reraise = sets.engaged.Reraise
+
 end
 
-function pretarget(spell,action)
-    if spell.action_type == 'Magic' and buffactive.silence then -- Auto Use Echo Drops If You Are Silenced --
-        cancel_spell()
-        send_command('input /item "Echo Drops" <me>')
-    -- elseif spell.english == "Soul Jump" and not pet.isvalid then -- Change Soul Jump To High Jump If Wyvern Is Not Present --
-    --     cancel_spell()
-    --     send_command('input /ja "High Jump" <t>')
-    elseif spell.english == "Dismiss" and pet.hpp < 100 then -- Cancel Dismiss If Wyvern's HP Is Under 100% --
-        cancel_spell()
-        add_to_chat(123, spell.english .. ' Canceled - [' .. pet.name .. ': ' .. pet.hpp .. ']')
-        return
-    -- elseif spell.english == "Call Wyvern" and pet.isvalid then -- Change Call Wyvern To Dismiss If Wyvern Is Present --
-    --     cancel_spell()
-    --     send_command('Dismiss')
-    -- elseif spell.english == "Berserk" and buffactive.Berserk then -- Change Berserk To Aggressor If Berserk Is On --
-    --     cancel_spell()
-    --     send_command('Aggressor')
-    -- elseif spell.english == "Seigan" and buffactive.Seigan then -- Change Seigan To Third Eye If Seigan Is On --
-    --     cancel_spell()
-    --     send_command('ThirdEye')
-    elseif spell.english == "Meditate" and player.tp > 2000 then -- Cancel Meditate If TP Is Above 2000 --
-        cancel_spell()
-        add_to_chat(123, spell.name .. ' Canceled: ['..player.tp..' TP]')
-        return
-    elseif spell.type == "WeaponSkill" and spell.target.distance > target_distance and player.status == 'Engaged' then -- Cancel WS If You Are Out Of Range --
-        cancel_spell()
-        add_to_chat(123, spell.name..' Canceled: [Out of Range]')
-        return
-    end
-end
 
-function precast(spell,action)
-    if spell.type == "WeaponSkill" then
-        if player.status ~= 'Engaged' then -- Cancel WS If You Are Not Engaged. Can Delete It If You Don't Need It --
+-------------------------------------------------------------------------------------------------------------------
+-- Job-specific hooks that are called to process player actions at specific points in time.
+-------------------------------------------------------------------------------------------------------------------
+
+-- Set eventArgs.handled to true if we don't want any automatic target handling to be done.
+function job_pretarget(spell, action, spellMap, eventArgs)
+    if spell.english == "Spirit Jump" then
+        if not pet.isvalid then
             cancel_spell()
-            add_to_chat(123,'Unable To Use WeaponSkill: [Disengaged]')
-            return
-        else
-            equipSet = sets.WS
-            if equipSet[spell.english] then
-                equipSet = equipSet[spell.english]
-            end
-            if equipSet[AccArray[AccIndex]] then
-                equipSet = equipSet[AccArray[AccIndex]]
-            end
-            if equipSet[AttArray[AttIndex]] then
-                equipSet = equipSet[AttArray[AttIndex]]
-            end
-            if player.tp > 299 or buffactive.Sekkanoki then -- Equip Kokou's Earring When You Have 300 TP or Sekkanoki --
-                equipSet = set_combine(equipSet,{ear1="Kokou's Earring"})
-            end
-            if spell.english == "Drakesbane" and string.find(spell.target.name,'Dynamis Lord') then -- Equip Phorcys Korazin When You Use Drakesbane On DL & ADL --
-                equipSet = set_combine(equipSet,{body="Phorcys Korazin"})
-            end
-            equip(equipSet)
+            send_command('Jump')
         end
-    elseif spell.type == "JobAbility" then
-
-        local abil_recasts = windower.ffxi.get_ability_recasts()
-        if spell.english == 'Spirit Jump' and abil_recasts[spell.recast_id] > 0 then
+    elseif spell.english == "Soul Jump" then
+        if not pet.isvalid then
             cancel_spell()
-            send_command('input /ja "Jump" <t>')
-        elseif spell.english == 'Soul Jump' and abil_recasts[spell.recast_id] > 0 then
-            cancel_spell()
-            send_command('input /ja "High Jump" <t>')
-        end
-
-        equipSet = sets.JA
-        if equipSet[spell.english] then
-            equipSet = equipSet[spell.english]
-        end
-        if equipSet[AccArray[AccIndex]] then
-            equipSet = equipSet[AccArray[AccIndex]]
-        end
-        if spell.english == "High Jump" and NM_For_Brais:contains(spell.target.name) and Brais == 'ON' then -- Use vishap brais +2 Toggle To Equip vishap brais +2 For High Jump --
-            equipSet = set_combine(equipSet,{legs="Vishap Brais +2"})
-        end
-        equip(equipSet)
-    elseif spell.action_type == 'Magic' then
-        if buffactive.silence or spell.target.distance > 16+target_distance then
-            cancel_spell()
-            add_to_chat(123, spell.name..' Canceled: [Silenced or Out of Casting Range]')
-            return
-        else
-            if string.find(spell.english,'Utsusemi') then
-                if buffactive['Copy Image (3)'] or buffactive['Copy Image (4)'] then
-                    cancel_spell()
-                    add_to_chat(123,'Utsusemi Canceled: [3+ Images]')
-                    return
-                else
-                    equip(sets.precast.FastCast)
-                end
-            else
-                equip(sets.precast.FastCast)
-            end
-        end
-    elseif spell.type == "Waltz" then
-        refine_waltz(spell,action)
-        equip(sets.Waltz)
-    elseif spell.english == 'Spectral Jig' and buffactive.Sneak then
-        cast_delay(0.2)
-        send_command('cancel Sneak')
-    elseif spell.type == "PetCommand" then
-        equip(sets.Pet[spell.english])
-    end
-
-    if Twilight == 'Twilight' then
-        equip(sets.Twilight)
-    end
-end
-
-function midcast(spell,action)
-    if spell.type == "Trust" then
-        equip(sets.midcast.Trust)
-    elseif spell.action_type == 'Magic' then
-        if string.find(spell.english,'Utsusemi') then
-            if spell.english == 'Utsusemi: Ichi' and (buffactive['Copy Image'] or buffactive['Copy Image (2)']) then
-                send_command('@wait 1.7;cancel Copy Image*')
-            end
-            equip(sets.midcast.Haste)
-        elseif spell.english == 'Monomi: Ichi' then
-            if buffactive['Sneak'] then
-                send_command('@wait 1.7;cancel sneak')
-            end
-        elseif HB_Mage_SubJob:contains(player.sub_job) and pet.isvalid then
-            equip(sets.HealingBreathTrigger)
-        elseif HB_DD_SubJob:contains(player.sub_job) and player.hpp < 34 and pet.isvalid then
-            equip(sets.HealingBreathTrigger)
-        else
-           equip(sets.midcast.Haste)
-        end
-     end
-end
-
-function aftercast(spell,action)
-    if not string.find(spell.english,'Breath') then
-        status_change(player.status)
-    elseif not spell.interrupted then
-        if spell.type == "WeaponSkill" then
-            send_command('wait 0.2;gs c TP')
-        elseif string.find(spell.english,'Jump') then
-            send_command('wait 0.2;gs c TP')
-        elseif spell.english == "Angon" then -- Angon Timer/Countdown --
-            timer_angon()
-            send_command('wait 80;input /echo '..spell.name..': [WEARING OFF IN 10 SEC.];wait 10;timers delete "Angon";input /p '..spell.name..': [OFF]')
-        elseif spell.english == "Ancient Circle" then -- Ancient Circle Countdown --
-            send_command('wait 260;input /echo '..spell.name..': [WEARING OFF IN 10 SEC.];wait 10;input /echo '..spell.name..': [OFF]')
+            send_command("High Jump")
         end
     end
 end
 
-function status_change(new,old)
-    -- if Armor == 'PDT' then
-    --     equip(sets.PDT)
-    -- elseif Armor == 'MDT' then
-    --     equip(sets.MDT)
-    -- else
-    if new == 'Engaged' then
-        equipSet = sets.TP
-        if Armor == 'Hybrid' and equipSet["Hybrid"] then
-            equipSet = equipSet["Hybrid"]
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+-- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
+function job_precast(spell, action, spellMap, eventArgs)
+end
+
+-- Run after the default precast() is done.
+-- eventArgs is the same one used in job_precast, in case information needs to be persisted.
+function job_post_precast(spell, action, spellMap, eventArgs)
+	if player.hpp < 51 then
+		classes.CustomClass = "Breath" 
+	end
+end
+-- Run after the default midcast() is done.
+-- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
+function job_post_midcast(spell, action, spellMap, eventArgs)
+    if spell.skill == 'Elemental Magic' then
+        if spell.element == world.day_element or spell.element == world.weather_element then
+            equip(sets.midcast['Elemental Magic'], {waist="Hachirin-No-Obi"})
         end
-        if equipSet[player.equipment.main] then
-            equipSet = equipSet[player.equipment.main]
+    end
+end
+------------------------------------------------------------------------------
+
+
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_midcast(spell, action, spellMap, eventArgs)
+	if spell.action_type == 'Magic' then
+	    equip(sets.midcast.FastRecast)
+	    if player.hpp < 51 then
+		    classes.CustomClass = "Breath" 
+	    end
+	end
+end
+
+-- Run after the default midcast() is done.
+-- eventArgs is the same one used in job_midcast, in case information needs to be persisted.
+function job_post_midcast(spell, action, spellMap, eventArgs)
+end
+
+function job_pet_precast(spell, action, spellMap, eventArgs)
+end
+-- Runs when a pet initiates an action.
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_pet_midcast(spell, action, spellMap, eventArgs)
+    if spell.english:startswith('Healing Breath') or spell.english == 'Restoring Breath' or spell.english == 'Steady Wing' or spell.english == 'Smiting Breath' then
+		equip(sets.HB)
+	end
+end
+
+-- Run after the default pet midcast() is done.
+-- eventArgs is the same one used in job_pet_midcast, in case information needs to be persisted.
+function job_pet_post_midcast(spell, action, spellMap, eventArgs)
+	
+end
+
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_aftercast(spell, action, spellMap, eventArgs)
+	if state.HybridMode.value == 'Reraise' or
+    (state.HybridMode.value == 'Physical' and state.PhysicalDefenseMode.value == 'Reraise') then
+		equip(sets.Reraise)
+	end
+end
+
+-- Run after the default aftercast() is done.
+-- eventArgs is the same one used in job_aftercast, in case information needs to be persisted.
+function job_post_aftercast(spell, action, spellMap, eventArgs)
+
+end
+
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_pet_aftercast(spell, action, spellMap, eventArgs)
+
+end
+
+-- Run after the default pet aftercast() is done.
+-- eventArgs is the same one used in job_pet_aftercast, in case information needs to be persisted.
+function job_pet_post_aftercast(spell, action, spellMap, eventArgs)
+
+end
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+  
+    if spell.action_type=="Magic" and buffactive.Silence then
+        eventArgs.cancel = true
+        send_command('input /item "Remedy" <me>')
+    end
+    if spell.type=='WeaponSkill' then
+        if moonshade_WS:contains(spell.english) and player.tp<2850 then
+            equip({left_ear="Moonshade Earring"})
         end
-        if equipSet[AccArray[AccIndex]] then
-            equipSet = equipSet[AccArray[AccIndex]]
-        end
-        if buffactive["Aftermath: Lv.3"] and equipSet["AM3"] then
-            if Rancor == 'ON' then -- Default Rancor Toggle Is Rancorous Mantle --
-                equipSet = set_combine(equipSet["AM3"],sets.TP.Rancor)
-            else -- Use Rancor Toggle For Brigantia's Mantle --
-                equipSet = equipSet["AM3"]
-            end
-        end
-        if buffactive.Ionis and equipSet["Ionis"] then
-            equipSet = equipSet["Ionis"]
-        end
-        if buffactive["Samurai Roll"] and equipSet["STP"] and Samurai_Roll == 'ON' then
-            equipSet = equipSet["STP"]
-        end
-        equip(equipSet)
+    end
+end
+
+
+--Gav helm
+
+-------------------------------
+--   WS Chart For Gavialis   --
+-------------------------------
+ 
+check_ws_day = {
+Firesday = S {'Liquefaction','Fusion','Light'},
+Earthsday= S {'Scission','Gravitation','Darkness'},
+Watersday = S {'Reverberation','Distortion','Darkness'},
+Windsday = S {'Detonation','Fragmentation','Light'},
+Iceday = S {'Induration','Distortion','Darkness'},
+Lightningsday = S {'Impaction','Fragmentation','Light'},
+Lightsday = S {'Transfixion','Fusion','Light'},
+Darksday = S {'Compression','Gravitation','Darkness'},}
+
+function job_post_precast(spell, action, spellMap, eventArgs)
+   if spell.english == 'Stardiver' and Stardiver_ind ~= 1 and (check_ws_day[world.day]:contains(spell.skillchain_a) -- Remove the and _ind ~=1 (not equal) for Gavialis if you don't have Ptero +2/3.
+    or check_ws_day[world.day]:contains(spell.skillchain_b)
+    or check_ws_day[world.day]:contains(spell.skillchain_c)) then
+    equip(sets.WSDayBonus)
+  end
+end
+-------------------------------------------------------------------------------------------------------------------
+-- Customization hooks for idle and melee sets, after they've been automatically constructed.
+-------------------------------------------------------------------------------------------------------------------
+
+-- Called before the Include starts constructing melee/idle/resting sets.
+-- Can customize state or custom melee class values at this point.
+-- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
+function job_handle_equipping_gear(status, eventArgs)
+
+end
+
+-- Return a customized weaponskill mode to use for weaponskill sets.
+-- Don't return anything if you're not overriding the default value.
+function get_custom_wsmode(spell, action, spellMap)
+
+end
+
+-- Modify the default idle set after it was constructed.
+function customize_idle_set(idleSet)
+    if player.hpp < 90 then
+        idleSet = set_combine(idleSet, sets.idle.Regen)
+    end
+	return idleSet
+end
+
+-- Modify the default melee set after it was constructed.
+
+-------------------------------------------------------------------------------------------------------------------
+-- General hooks for other events.
+-------------------------------------------------------------------------------------------------------------------
+
+-- Called when the player's status changes.
+function job_status_change(newStatus, oldStatus, eventArgs)
+
+end
+
+-- Called when the player's pet's status changes.
+function job_pet_status_change(newStatus, oldStatus, eventArgs)
+
+end
+
+-- Called when a player gains or loses a buff.
+-- buff == buff gained or lost
+-- gain == true if the buff was gained, false if it was lost.
+function job_buff_change(buff, gain)
+    if string.lower(buff) == "sleep" and gain and player.hp > 200 then
+        equip(sets.Berserker)
     else
-        -- equip(sets.Idle[IdleArray[IdleIndex]])
-
-        -- add_to_chat(123, world.area)
-        -- add_to_chat(123, toau_zones:contains(zone))
-
-        if toau_zones:contains(world.area) then
-            equip(sets.Idle.ToAU)
-        else
-            equip(sets.Idle[IdleArray[IdleIndex]])
+        if not midaction() then
+            handle_equipping_gear(player.status)
         end
-
-
-    end
-    if Twilight == 'Twilight' then
-        equip(sets.Twilight)
     end
 end
 
-function buff_change(buff,gain)
-    buff = string.lower(buff)
-    -- if buff == "aftermath: lv.3" then -- AM3 Timer/Countdown --
-    --     if gain then
-    --         send_command('timers create "Aftermath: Lv.3" 180 down;wait 120;input /echo Aftermath: Lv.3 [WEARING OFF IN 60 SEC.];wait 30;input /echo Aftermath: Lv.3 [WEARING OFF IN 30 SEC.];wait 20;input /echo Aftermath: Lv.3 [WEARING OFF IN 10 SEC.]')
-    --     else
-    --         send_command('timers delete "Aftermath: Lv.3"')
-    --         add_to_chat(123,'AM3: [OFF]')
-    --     end
-    -- elseif buff == 'weakness' then -- Weakness Timer --
-    --     if gain then
-    --         send_command('timers create "Weakness" 300 up')
-    --     else
-    --         send_command('timers delete "Weakness"')
-    --     end
-    -- end
-    if buff == "sleep" and gain and player.hp > 200 and player.status == "Engaged" then -- Equip Berserker's Torque When You Are Asleep & Have 200+ HP --
-        equip({neck="Berserker's Torque"})
+
+-------------------------------------------------------------------------------------------------------------------
+-- User code that supplements self-commands.
+-------------------------------------------------------------------------------------------------------------------
+
+-- Called for custom player commands.
+function job_self_command(cmdParams, eventArgs)
+
+end
+
+function get_combat_form()
+	--if areas.Adoulin:contains(world.area) and buffactive.ionis then
+	--	state.CombatForm:set('Adoulin')
+	--end
+
+    if war_sj then
+        state.CombatForm:set("War")
     else
-        if not midaction() and not pet_midaction() then
-            status_change(player.status)
-        end
+        state.CombatForm:reset()
     end
 end
 
-function customize_melee_set(meleeSet)
-    if buffactive['Elvorseal'] then
-        meleeSet = set_combine(meleeSet, get_domain_set(player.main_job))
-    end
+
+-- Job-specific toggles.
+function job_toggle(field)
+
 end
 
-function pet_midcast(spell,action)
-    if string.find(spell.english,'Breath') then
-        equip(sets.Pet["Restoring Breath"])
-    end
+-- Handle auto-targetting based on local setup.
+function job_auto_change_target(spell, action, spellMap, eventArgs)
+
 end
 
-function pet_aftercast(spell,action)
-    status_change(player.status)
+-- Set eventArgs.handled to true if we don't want the automatic display to be run.
+function display_current_job_state(eventArgs)
+
 end
 
-function pet_change(pet,gain)
-    status_change(player.status)
+
+-- Select default macro book on initial load or subjob change.
+function select_default_macro_book()
+	set_macro_page(7,5)
 end
 
--- In Game: //gs c (command), Macro: /console gs c (command), Bind: gs c (command) --
-function self_command(command)
-    if command == 'C1' then -- Accuracy Level Toggle --
-        AccIndex = (AccIndex % #AccArray) + 1
-        add_to_chat(158,'Accuracy Level: ' .. AccArray[AccIndex])
-        status_change(player.status)
-    elseif command == 'C9' then -- Attack Toggle --
-        AttIndex = (AttIndex % #AttArray) + 1
-        add_to_chat(158,'Attack Level: '..AttArray[AttIndex])
-        status_change(player.status)
-    elseif command == 'C5' then -- Auto Update Gear Toggle --
-        status_change(player.status)
-        add_to_chat(158,'Auto Update Gear')
-    elseif command == 'C2' then -- Hybrid Toggle --
-        if Armor == 'Hybrid' then
-            Armor = 'None'
-            add_to_chat(123,'Hybrid Set: [Unlocked]')
-        else
-            Armor = 'Hybrid'
-            add_to_chat(158,'Hybrid Set: '..AccArray[AccIndex])
-        end
-        status_change(player.status)
-    elseif command == 'C7' then -- PDT Toggle --
-        if Armor == 'PDT' then
-            Armor = 'None'
-            add_to_chat(123,'PDT Set: [Unlocked]')
-        else
-            Armor = 'PDT'
-            add_to_chat(158,'PDT Set: [Locked]')
-        end
-        status_change(player.status)
-    elseif command == 'C15' then -- MDT Toggle --
-        if Armor == 'MDT' then
-            Armor = 'None'
-            add_to_chat(123,'MDT Set: [Unlocked]')
-        else
-            Armor = 'MDT'
-            add_to_chat(158,'MDT Set: [Locked]')
-        end
-        status_change(player.status)
-    elseif command == 'C16' then -- Rancor Toggle --
-        if Rancor == 'ON' then
-            Rancor = 'OFF'
-            add_to_chat(123,'Rancor: [OFF]')
-        else
-            Rancor = 'ON'
-            add_to_chat(158,'Rancor: [ON]')
-        end
-        status_change(player.status)
-    elseif command == 'C10' then -- vishap brais +2 Toggle --
-        if Brais == 'ON' then
-            Brais = 'OFF'
-            add_to_chat(123,'vishap brais +2: [OFF]')
-        else
-            Brais = 'ON'
-            add_to_chat(158,'vishap brais +2: [ON]')
-        end
-        status_change(player.status)
-    elseif command == 'C17' then -- SAM Roll Toggle --
-        if Samurai_Roll == 'ON' then
-            Samurai_Roll = 'OFF'
-            add_to_chat(123,'SAM Roll: [OFF]')
-        else
-            Samurai_Roll = 'ON'
-            add_to_chat(158,'SAM Roll: [ON]')
-        end
-        status_change(player.status)
-    elseif command == 'C3' then -- Twilight Toggle --
-        if Twilight == 'Twilight' then
-            Twilight = 'None'
-            add_to_chat(123,'Twilight Set: [Unlocked]')
-        else
-            Twilight = 'Twilight'
-            add_to_chat(158,'Twilight Set: [locked]')
-        end
-        status_change(player.status)
-    elseif command == 'C8' then -- Distance Toggle --
-        if player.target.distance then
-            target_distance = math.floor(player.target.distance*10)/10
-            add_to_chat(158,'Distance: '..target_distance)
-        else
-            add_to_chat(123,'No Target Selected')
-        end
-    elseif command == 'C6' then -- Idle Toggle --
-        IdleIndex = (IdleIndex % #IdleArray) + 1
-        add_to_chat(158,'Idle Set: ' .. IdleArray[IdleIndex])
-        status_change(player.status)
-    elseif command == 'TP' then
-        add_to_chat(158,'TP Return: ['..tostring(player.tp)..']')
-    elseif command:match('^SC%d$') then
-        send_command('//' .. sc_map[command])
-    end
-end
-
-function timer_angon()
-    local duration = 90
-    send_command('timers create "Angon" '..tostring(duration)..' down')
-end
-
--- function refine_waltz(spell,action)
---     if spell.type ~= 'Waltz' then
---         return
---     end
-
---     if spell.name == "Healing Waltz" or spell.name == "Divine Waltz" or spell.name == "Divine Waltz II" then
---         return
---     end
-
---     local newWaltz = spell.english
---     local waltzID
-
---     local missingHP
-
---     if spell.target.type == "SELF" then
---         missingHP = player.max_hp - player.hp
---     elseif spell.target.isallymember then
---         local target = find_player_in_alliance(spell.target.name)
---         local est_max_hp = target.hp / (target.hpp/100)
---         missingHP = math.floor(est_max_hp - target.hp)
---     end
-
---     if missingHP ~= nil then
---         if player.sub_job == 'DNC' then
---             if missingHP < 40 and spell.target.name == player.name then
---                 add_to_chat(123,'Full HP!')
---                 cancel_spell()
---                 return
---             elseif missingHP < 150 then
---                 newWaltz = 'Curing Waltz'
---                 waltzID = 190
---             elseif missingHP < 300 then
---                 newWaltz = 'Curing Waltz II'
---                 waltzID = 191
---             else
---                 newWaltz = 'Curing Waltz III'
---                 waltzID = 192
---             end
---         else
---             return
---         end
---     end
-
---     local waltzTPCost = {['Curing Waltz'] = 20, ['Curing Waltz II'] = 35, ['Curing Waltz III'] = 50, ['Curing Waltz IV'] = 65, ['Curing Waltz V'] = 80}
---     local tpCost = waltzTPCost[newWaltz]
-
---     local downgrade
-
---     if player.tp < tpCost and not buffactive.trance then
-
---         if player.tp < 20 then
---             add_to_chat(123, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
---             cancel_spell()
---             return
---         elseif player.tp < 35 then
---             newWaltz = 'Curing Waltz'
---         elseif player.tp < 50 then
---             newWaltz = 'Curing Waltz II'
---         elseif player.tp < 65 then
---             newWaltz = 'Curing Waltz III'
---         elseif player.tp < 80 then
---             newWaltz = 'Curing Waltz IV'
---         end
-
---         downgrade = 'Insufficient TP ['..tostring(player.tp)..']. Downgrading to '..newWaltz..'.'
---     end
-
---     if newWaltz ~= spell.english then
---         send_command('@input /ja "'..newWaltz..'" '..tostring(spell.target.raw))
---         if downgrade then
---             add_to_chat(158, downgrade)
---         end
---         cancel_spell()
---         return
---     end
-
---     if missingHP > 0 then
---         add_to_chat(158,'Trying to cure '..tostring(missingHP)..' HP using '..newWaltz..'.')
---     end
--- end
-
--- function find_player_in_alliance(name)
---     for i,v in ipairs(alliance) do
---         for k,p in ipairs(v) do
---             if p.name == name then
---                 return p
---             end
---         end
---     end
--- end
-
-function sub_job_change(newSubjob, oldSubjob)
-    select_default_macro_book(true)
-end
-
-function set_macro_page(set,book)
-    if not tonumber(set) then
-        add_to_chat(123,'Error setting macro page: Set is not a valid number ('..tostring(set)..').')
-        return
-    end
-    if set < 1 or set > 10 then
-        add_to_chat(123,'Error setting macro page: Macro set ('..tostring(set)..') must be between 1 and 10.')
-        return
-    end
-
-    if book then
-        if not tonumber(book) then
-            add_to_chat(123,'Error setting macro page: book is not a valid number ('..tostring(book)..').')
-            return
-        end
-        if book < 1 or book > 20 then
-            add_to_chat(123,'Error setting macro page: Macro book ('..tostring(book)..') must be between 1 and 20.')
-            return
-        end
-        send_command('@input /macro book '..tostring(book)..';wait .1;input /macro set '..tostring(set))
-    else
-        send_command('@input /macro set '..tostring(set))
-    end
-end
-
-function select_default_macro_book(isSubJobChange)
-    -- Default macro set/book
-    if player.sub_job == 'SAM' then
-        set_macro_page(2, 6)
-    elseif player.sub_job == 'WHM' then
-        set_macro_page(1, 6)
-    elseif player.sub_job == 'NIN' then
-        set_macro_page(1, 6)
-    else
-        set_macro_page(2, 6)
-    end
-
-    --  Only change stylelock if chaning main job to DRG
-    if not isSubJobChange then
-        randomise_stylelock()
-    end
-end
-
---  Randomise Stylelock when changing main job to DRG
---  010: AFv1 with Standard polearm
---  011: AFv2 with Valkyrie
---  012: AFv3 with Trishula
---  013: Sulevia's with Shining One
---  014: WTF getup with Blurred Lance
-function randomise_stylelock()
-    local random_number = math.floor(math.random()*4)
-    random_number = math.mod(random_number, 4) +10
-
-    local stylelock_string = '0' .. tostring(random_number)
-    -- send_command('@input /echo ' .. stylelock_string)
-
-    send_command('wait 2; input /lockstyleset ' .. stylelock_string)
+function set_lockstyle()
+	send_command('wait 2; input /lockstyleset 4')
 end
