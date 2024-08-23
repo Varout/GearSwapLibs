@@ -59,16 +59,16 @@ function user_setup()
     select_default_macro_book()
 
     --  Special states to track for White Mage
-    state.CP = M(false, "CP Mode")              --  CP Mode: SCH is mastered, so likely won"t need this anymore
+    -- state.CP = M(false, "CP Mode")              --  CP Mode: SCH is mastered, so likely won"t need this anymore
     state.Dynamis = M(false, "Dynamis Mode")    --  Dynamis Mode: To force the dynamis neck piece to stay equipped
-    state.Debug = M(false, "Debug Mode")        --  Debug Mode: Helpful for outputting information in the LUA. Not set up
+    -- state.Debug = M(false, "Debug Mode")        --  Debug Mode: Helpful for outputting information in the LUA. Not set up
     state.MB = M(false, "MB Mode")              --  MB Mode: Focusing nukes to be magic bursts
 
     --  Where @ is the Windows Key
-    send_command("bind @c gs c toggle CP")      --  Windows Key + C: Toggle CP Mode
+    -- send_command("bind @c gs c toggle CP")      --  Windows Key + C: Toggle CP Mode
     send_command("bind @x gs c toggle Dynamis") --  Windows Key + X: Toggle Dynamis Mode
     send_command("bind @m input /map")          --  Windows Key + M: Show map, because I"m lazy af
-    send_command("bind @z gs c toggle Debug")   --  Windows Key + Z: Toggle Debug Mode
+    -- send_command("bind @z gs c toggle Debug")   --  Windows Key + Z: Toggle Debug Mode
     send_command("bind @b gs c toggle MB")      --  Windows Key + B: Toggle MB Mode
 
     --  Set up lockstyle set
@@ -79,10 +79,10 @@ function user_setup()
 end
 
 function user_unload()
-    send_command("unbind @c")
+    -- send_command("unbind @c")
     send_command("unbind @x")
     send_command("unbind @m")
-    send_command("unbind @z")
+    -- send_command("unbind @z")
     send_command("unbind @b")
 end
 
@@ -91,19 +91,18 @@ function init_gear_sets()
     --                                    JOB SPECIFIC                                          --
     --  **************************************************************************************  --
     --  Artifact: Academic's Attire Set. Enhances: Acc, Rng Acc, & Magic Acc
-    gear.Artifact.Head  = "Academic's Mortarboard +2"   --  Enhances "Sublimation" effect
-    gear.Artifact.Body  = "Academic's Gown +1"          --  Enhances "Dark Arts"
-    gear.Artifact.Hands = "Academic's Bracers +1"       --
-    gear.Artifact.Legs  = "Academic's Pants +1"         --  Enhances "Light Arts"
-    gear.Artifact.Feet  = "Academic's Loafers +1"       --
+    gear.Artifact.Head  = "Academic's Mortarboard +3"   --  Enhances "Sublimation" effect
+    gear.Artifact.Body  = "Academic's Gown +2"          --  Enhances "Dark Arts"
+    gear.Artifact.Hands = "Academic's Bracers +2"       --
+    gear.Artifact.Legs  = "Academic's Pants +2"         --  Enhances "Light Arts"
+    gear.Artifact.Feet  = "Academic's Loafers +2"       --
 
     --  Relic: Pedagogy Attire Set
-    gear.Relic.Head  = "Pedagogy Mortarboard +1"    --  Enhances "Altruism" and "Focalization"
-    gear.Relic.Body  = { name     = "Pedagogy Gown +3",
-                         augments = {"Enhances "Enlightenment" effect"}}              --  Enhances "Enlightenment" effect. Enhances "Sublimation" effect
-    gear.Relic.Hands = "Pedagogy Bracers"           --  Enhances "Tranquility" and "Equanimity"
-    gear.Relic.Legs  = "Pedagogy Pants"             --  Enhances "Tabula Rasa" effect
-    gear.Relic.Feet  = "Pedagogy Loafers +1"           --  Enhances "Stormsurge" effect. Weather: "Celerity" and "Alacrity" effect +16
+    gear.Relic.Head  = "Pedagogy Mortarboard +2"    --  Enhances "Altruism" and "Focalization"
+    gear.Relic.Body  = "Pedagogy Gown +3"           --  Enhances "Enlightenment" effect. Enhances "Sublimation" effect
+    gear.Relic.Hands = "Pedagogy Bracers +3"        --  Enhances "Tranquility" and "Equanimity"
+    gear.Relic.Legs  = "Pedagogy Pants +2"          --  Enhances "Tabula Rasa" effect
+    gear.Relic.Feet  = "Pedagogy Loafers +2"        --  Enhances "Stormsurge" effect. Weather: "Celerity" and "Alacrity" effect +16
 
     --  Empyrean: Arbatel Attire Set. Augments Grimoire
     gear.Empyrean.Head  = "Arbatel Bonnet +1"   --  “Rapture”+15 “Ebullience”+15 “Regen” potency +15%
@@ -156,24 +155,21 @@ function init_gear_sets()
     }
 
     sets.idle = {
-        main       = "Bolelabunga",
-        sub        = "Genmei Shield",
-        ammo       = "Homiliary",
-        head       = "Befouled Crown",
-        body       = "Jhakri Robe +2",
-        hands      = { name     = "Chironic Gloves",
-                       augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-        legs       = "Assid. Pants +1",
-        feet       = { name     = "Chironic Slippers",
-                       augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
-        neck       = "Loricate Torque +1",
-        waist      = "Fucho-no-Obi",
-        left_ear   = { name     = "Moonshade Earring",
-                       augments = {'MP+25','Latent effect: "Refresh"+1',}},
-        right_ear  = "Infused Earring",
-        left_ring  = "Defending Ring",
-        right_ring = "Sheltered Ring",
-        back       = "Solemnity Cape",
+        main={ name="Mpaca's Staff", augments={'Path: A',}},
+        sub="Enki Strap",
+        ammo="Homiliary",
+        head={ name="Chironic Hat", augments={'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
+        body="Jhakri Robe +2",
+        hands={ name="Chironic Gloves", augments={'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
+        legs="Assid. Pants +1",
+        feet={ name="Chironic Slippers", augments={'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
+        neck={ name="Loricate Torque +1", augments={'Path: A',}},
+        waist="Hachirin-no-Obi",
+        left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+        right_ear="Etiolation Earring",
+        left_ring="Defending Ring",
+        right_ring="Sheltered Ring",
+        back="Solemnity Cape",
     }
 
     sets.idleRefresh = {
@@ -218,24 +214,21 @@ function init_gear_sets()
     --                                      PRE-CAST                                            --
     --  **************************************************************************************  --
     sets.precast.FC = {
-        main       = { name     = "Coeus",
-                       augments = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
-        sub        = "Clerisy Strap",
-        ammo       = "Incantor Stone",
-        head       = "Revealer's Crown",
-        body       = "Anhur Robe",
-        hands      = "Academic's Bracers +2",
-        legs       = "Kaykaus Tights",
-        feet       = { name     = "Peda. Loafers +1",
-                       augments = {'Enhances "Stormsurge" effect',}},
-        neck       = "Loricate Torque +1",
-        waist      = "Witful Belt",
-        left_ear   = { name     = "Moonshade Earring",
-                       augments = {'MP+25','Latent effect: "Refresh"+1',}},
-        right_ear  = "Loquac. Earring",
-        left_ring  = "Kishar Ring",
-        right_ring = "Lebeche Ring",
-        back       = "Perimede Cape",
+        main="Oranyan",
+        sub="Clerisy Strap",
+        ammo="Incantor Stone",
+        head=gear.Artifact.Head,
+        body="Merlinic Jubbah",
+        hands="Acad. Bracers +2",
+        legs={ name="Kaykaus Tights", augments={'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
+        feet={ name="Peda. Loafers +2", augments={'Enhances "Stormsurge" effect',}},
+        neck="Baetyl Pendant",
+        waist="Embla Sash",
+        left_ear="Loquac. Earring",
+        right_ear="Malignance Earring",
+        left_ring="Evanescence Ring",
+        right_ring="Kishar Ring",
+        back="Solemnity Cape",
     }
 
     sets.precast["Healing Magic"] = set_combine(sets.precast.FC, {
@@ -278,13 +271,13 @@ function init_gear_sets()
     --                                      MID-CAST                                            --
     --  **************************************************************************************  --
     sets.midcast["Trust"] = {
-        main = "",
-        sub = "",
-        head = "",
-        body = "",
-        hands = ""
-        legs = "",
-        feet = "",
+        main = "Mpaca's Staff",
+        sub = "Enki Strap",
+        head = gear.Artifact.Head,
+        body = gear.Artifact.Body,
+        hands = gear.Artifact.Hands,
+        legs = gear.Artifact.Legs,
+        feet = gear.Artifact.Feet,
     }
 
     sets.midcast.WeattherDayBoost = {
@@ -296,86 +289,77 @@ function init_gear_sets()
     sets.midcast.FC = {}
 
     sets.midcast["Healing Magic"] = set_combine(sets.midcast.FC, {
-        main       = { name     = "Coeus",
-                augments = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
-        sub        = "Clerisy Strap",
-        ammo       = "Incantor Stone",
-        head       = { name     = "Vanya Hood",
-                augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body       = { name     = "Pedagogy Gown +2",
-                augments = {'Enhances "Enlightenment" effect',}},
-        hands      = { name     = "Pedagogy Bracers +3",
-                augments = {'Enh. "Tranquility" and "Equanimity"',}},
-        legs       = "Academic's Pants +2",
-        feet       = { name     = "Vanya Clogs",
-                augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        neck       = "Colossus's Torque",
-        waist      = "Bishop's Sash",
-        left_ear   = "Beatific Earring",
-        right_ear  = "Healing Earring",
-        left_ring  = "Sirona's Ring",
-        right_ring = "Haoma's Ring",
-        back       = "Altruistic Cape",
+        main="Oranyan",
+        sub="Enki Strap",
+        ammo="Quartz Tathlum +1",
+        head={ name="Vanya Hood", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
+        hands={ name="Peda. Bracers +3", augments={'Enh. "Tranquility" and "Equanimity"',}},
+        legs="Acad. Pants +2",
+        feet={ name="Vanya Clogs", augments={'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        neck="Incanter's Torque",
+        waist="Bishop's Sash",
+        left_ear="Beatific Earring",
+        right_ear="Meili Earring",
+        left_ring="Sirona's Ring",
+        right_ring="Haoma's Ring",
+        back="Altruistic Cape",
     })
 
     sets.midcast["Cursna"] = set_combine(sets.midcast["Healing Magic"], {
         neck       = "Debilis Medallion",
-        left_ring  = "Haoma's Ring",
+        left_ring  = "Menelaus's Ring",
         right_ring = "Haoma's Ring",
         back       = "Oretan. Cape +1",
     })
 
 
     sets.midcast["Cure"] = set_combine(sets.midcast["Healing Magic"], {
-        main       = "Vadose Rod",
-        sub        = "Sors Shield",
-        ammo       = "Quartz Tathlum +1",
-        head       = { name     = "Vanya Hood",
-                       augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body       = { name     = "Kaykaus Bliaut",
-                       augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
-        hands      = { name     = "Peda. Bracers +3",
-                       augments = {'Enh. "Tranquility" and "Equanimity"',}},
-        legs       = "Acad. Pants +2",
-        feet       = { name     = "Vanya Clogs",
-                       augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        neck       = "Colossus's Torque",
-        waist      = "Bishop's Sash",
-        left_ear   = "Beatific Earring",
-        right_ear  = "Mendi. Earring",
-        left_ring  = "Janniston Ring",
-        right_ring = "Sirona's Ring",
-        back       = "Altruistic Cape",
+        -- main       = "Vadose Rod",
+        -- sub        = "Sors Shield",
+        -- ammo       = "Quartz Tathlum +1",
+        -- head       = { name     = "Vanya Hood",
+        --                augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        -- body       = { name     = "Kaykaus Bliaut",
+        --                augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+        -- hands      = { name     = "Peda. Bracers +3",
+        --                augments = {'Enh. "Tranquility" and "Equanimity"',}},
+        -- legs       = "Acad. Pants +2",
+        -- feet       = { name     = "Vanya Clogs",
+        --                augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        -- neck       = "Colossus's Torque",
+        -- waist      = "Bishop's Sash",
+        -- left_ear   = "Beatific Earring",
+        -- right_ear  = "Mendi. Earring",
+        -- left_ring  = "Janniston Ring",
+        -- right_ring = "Sirona's Ring",
+        -- back       = "Altruistic Cape",
     })
 
     sets.midcast["Enhancing Magic"] = set_combine(sets.midcast.FC, {
-        main       = "Bolelabunga",
-        sub        = "Ammurapi Shield",
-        ammo       = "Savant's Treatise",
-        head       = "Befouled Crown",
-        body       = { name     = "Pedagogy Gown +2",
-                       augments = {'Enhances "Enlightenment" effect',}},    --  Enh. Mag. eff. dur. +8%
-        hands      = { name     = "Telchine Gloves",
-                       augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-        legs       = { name     = "Telchine Braconi",
-                       augments = {'Enh. Mag. eff. dur. +9',}},
-        feet       = { name     = "Telchine Pigaches",
-                       augments = {'Enh. Mag. eff. dur. +6',}},
-        neck       = "Colossus's Torque",
-        waist      = "Olympus Sash",
-        left_ear   = "Augment. Earring",
-        right_ear  = "Andoaa Earring",
-        left_ring  = "Stikini Ring",
-        right_ring = "Stikini Ring",
-        back       = "Fi Follet Cape",
+        main="Oranyan",
+        sub="Fulcio Grip",
+        ammo="Savant's Treatise",
+        head="Befouled Crown",
+        body={ name="Peda. Gown +3", augments={'Enhances "Enlightenment" effect',}},
+        hands={ name="Telchine Gloves", augments={'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
+        legs={ name="Telchine Braconi", augments={'Enh. Mag. eff. dur. +9',}},
+        feet={ name="Telchine Pigaches", augments={'Enh. Mag. eff. dur. +8',}},
+        neck="Incanter's Torque",
+        waist="Embla Sash",
+        left_ear="Mimir Earring",
+        right_ear="Andoaa Earring",
+        left_ring="Stikini Ring",
+        right_ring="Stikini Ring",
+        back="Fi Follet Cape",
     })
+
     sets.midcast["BarElement"] = set_combine(sets.midcast["Enhancing Magic"], {
-        hands      = { name     = "Chironic Gloves",
-                       augments = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
-        legs = "Shedir Seraweels",
-        feet       = { name     = "Kaykaus Boots",
-                       augments = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+        legs="Shedir Seraweels",
+        feet={ name="Kaykaus Boots", augments={'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+        waist="Olympus Sash",
     })
+
     sets.midcast["Stoneskin"] = set_combine(sets.midcast["Enhancing Magic"], {})
     sets.midcast["Regen"] = set_combine(sets.midcast["Enhancing Magic"], {})
     sets.midcast["Aquaveil"] = set_combine(sets.midcast["Enhancing Magic"], {})

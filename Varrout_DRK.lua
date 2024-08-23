@@ -486,7 +486,7 @@ function init_gear_sets()
 		back={ name="Ankou's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
 		neck="Abyssal Beads +1",
 		hands="Sakpata's Gauntlets", 
-		waist="Ioskeha Belt",
+		waist="Ioskeha Belt +1",
 		legs="Sakpata's Cuisses", 
 		feet="Sakpata's Leggings",
 		ring1="Petrov Ring", 

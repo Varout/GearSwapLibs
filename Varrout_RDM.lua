@@ -230,19 +230,18 @@ function init_gear_sets()
         right_ear   = "Snotra Earring",
         left_ring   = "Stikini Ring",
         right_ring  = "Kishar Ring",
-        back        = { name     = "Sucellos's Cape",
-                        augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
+        back       = "Aurist's Cape +1",            --  +32 Magic Accuracy
     }
 
-    sets.midcast.enfeeblingMNDCape = {
-        back = { name     = "Sucellos's Cape",
-                 augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
-    }
+    -- sets.midcast.enfeeblingMNDCape = {
+    --     back = { name     = "Sucellos's Cape",
+    --              augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Fast Cast"+10',}},
+    -- }
 
-    sets.midcast.enfeeblingINTCape = {
-        back = { name     = "Sucellos's Cape",
-                 augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
-    }
+    -- sets.midcast.enfeeblingINTCape = {
+    --     back = { name     = "Sucellos's Cape",
+    --              augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+    -- }
 
 
     sets.midcast['Phalanx II']  = set_combine(sets.midcast['Enhancing Magic'],  {hands = "Duelist's Gloves +2"})
@@ -279,7 +278,7 @@ function init_gear_sets()
         hands       = "Gendewitha Gages",
         ring1       = "Prolix Ring",
         ring2       = "Sangoma Ring",
-        back        = "Refraction Cape",
+        back       = "Aurist's Cape +1",            --  +32 Magic Accuracy
         waist       = "Luminary Sash",
         legs        = "Bokwus Slops",
         feet        = "Bokwus Boots"
@@ -295,12 +294,12 @@ function init_gear_sets()
         legs="Jhakri Slops +2",
         feet="Jhakri Pigaches +2",
         neck="Erra Pendant",
-        waist="Casso Sash",
+        waist="Luminary Sash",
         left_ear="Lifestorm Earring",
-        right_ear="Psystorm Earring",
-        left_ring="Evanescence Ring",
+        left_ear   = "Malignance Earring",          --  +10 Magic Accuracy
+        right_ear  = "Snotra Earring",           --  +10 Magic Accuracy
         right_ring="Stikini Ring",
-        back={ name="Sucellos's Cape", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','"Mag.Atk.Bns."+10',}},
+        back       = "Aurist's Cape +1",            --  +32 Magic Accuracy
     }
 
 
@@ -459,13 +458,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == 'Enfeebling Magic' then
         -- outputString = "Enfeebling: "
         enfeebling_set = sets.midcast.enfeeblingBase
-        if enfeebling_int:contains(spellMap) then
-            -- outputString = outputString .. "INT Based"
-            enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingINTCape)
-        else
-            -- outputString = outputString .. "MND Based"
-            enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingMNDCape)
-        end
+        -- if enfeebling_int:contains(spellMap) then
+        --     -- outputString = outputString .. "INT Based"
+        --     enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingINTCape)
+        -- else
+        --     -- outputString = outputString .. "MND Based"
+        --     enfeebling_set = set_combine(enfeebling_set, sets.midcast.enfeeblingMNDCape)
+        -- end
         if state.Buff["Saboteur"] then
             outputString = outputString .. " :: Saboteur Active"
             enfeebling_set = set_combine(enfeebling_set, sets.buff["Saboteur"])

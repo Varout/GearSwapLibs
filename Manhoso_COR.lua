@@ -476,7 +476,7 @@ function init_gear_sets()
     -- * DNC Subjob DW Trait: 15% DW
 
     -- No Magic Haste (72% DW to cap)
-    sets.engaged = {
+    sets.engaged.Normal = {
         head="Adhemar Bonnet +1",
         body="Adhemar Jacket +1",
         hands="Adhemar Wrist. +1",
@@ -558,6 +558,32 @@ end
 
 -- Set eventArgs.handled to true if we don't want any automatic gear equipping to be done.
 -- Set eventArgs.useMidcastGear to true if we want midcast gear equipped on precast.
+function aftercast(spell,action)
+	if not spell.interrupted then
+		if spell.type == "WeaponSkill" then
+			send_command('wait 0.2;gs c TP')
+		end
+	end
+	status_change(player.status)
+end
+
+function status_change(new,old)
+	if Armor == 'PDT' then
+		equip(sets.PDT)
+	elseif Armor == 'MDT' then
+		equip(sets.MDT)
+	elseif Armor == 'Kiting' then
+		equip(sets.Kiting)
+--[[	elseif Armor == 'CP' then
+		send_command('gs disable back')]]--
+	elseif new == 'Engaged' then
+		equipSet = sets.TP
+		if Armor == 'Hybrid' and equipSet["Hybrid"] then
+			equipSet = equipSet["Hybrid"]
+		end
+	end	
+end	
+
 function job_precast(spell, action, spellMap, eventArgs)
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
