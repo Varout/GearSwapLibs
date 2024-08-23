@@ -99,27 +99,8 @@ end
 
 
 -------------------------------------------------------------------------------------------------------------------
---  Common Shared Functions - Locking Items - Can be used in job_self_command(cmdParams, eventArgs)
+--  Common Shared Functions - Locking Items
 -------------------------------------------------------------------------------------------------------------------
--- SETUP
--- * In user_setup() create a variable attached to 'state' as a mapped variable.
---   e.g. for Capacity Point Mode you could create something like this:
---        state.CapacityMode = M(false, 'Capacity Point Mode')
---   Where false is the default value and 'Capacity Point Mode' is the text that
---   will come up when toggling the mode value
--- * In user_setup() set the shortcut to be used by using send_command('bind <1> gs c toggle <2>')
---   Where 1: The shortcut that will be used. The '@' symbol is the Windows Key
---         2: The value that comes after 'state.' in the first step
---   e.g. for our Capacity Point Mode we could use
---        send_command('bind @c gs c toggle CapacityMode')
---   This will bind the Windows Key + C to toggle CapacityMode
--- * In user_unload() make sure to unload the shortcut that was bound in the previous step by
---   using send_comment('unbind <1>'). Where 1: is the shortcut to unbind.
---   e.g. for our Capacity Point Mode we would use
---        send_command('unbund @c')
--- *
--------------------------------------------------------------------------------------------------------------------
-
 --  Check if player has CP Mode enabled
 --  Locks in the back piece that is included in the set_to_equip
 function check_status_cp(statusOn, set_to_equip)
@@ -164,6 +145,7 @@ function check_debuff_silenced(spell, eventArgs)
         else
             send_command('input /echo *!! Silenced ~ No items to remove it !!*')
         end
+
         eventArgs.cancel = true
         return
     end
@@ -180,6 +162,7 @@ function check_weakened_sublimation(spell, eventArgs)
         --  If weakend, don't waste your Sublimation
         cancel_spell()
         send_command('input /echo *!! Weakend ~ Cancelling Sublimation !!*')
+
         eventArgs.cancel = true
         return
     end
