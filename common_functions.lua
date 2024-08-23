@@ -3,15 +3,15 @@
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Domain Invasion
 -------------------------------------------------------------------------------------------------------------------
-local domain_job = {
+domain_job = {
     ["WAR"] = "heavy", ["PLD"] = "heavy", ["DRK"] = "heavy", ["BST"] = "heavy", ["SAM"] = "heavy", ["DRG"] = "heavy",
     ["MNK"] = "light", ["THF"] = "light", ["RNG"] = "light", ["NIN"] = "light", ["BLU"] = "light", ["COR"] = "light", ["DNC"] = "light", ["RUN"] = "light",
     ["WHM"] = "mage",  ["BLM"] = "mage",  ["RDM"] = "mage",  ["BRD"] = "mage",  ["SMN"] = "mage",  ["PUP"] = "mage",  ["SCH"] = "mage",  ["GEO"] = "mage",
 }
 
-local domain_set = {}
+domain_set = {}
 
-local domain_set["heavy"] = {
+domain_set["heavy"] = {
     head  = "Hervor Galea",
     body  = "Hervor Haubert",
     hands = "Hervor Mouffles",
@@ -19,7 +19,7 @@ local domain_set["heavy"] = {
     feet  = "Hervor Sollerets",
 }
 
-local domain_set["light"] = {
+domain_set["light"] = {
     head  = "Heidrek Mask",
     body  = "Heidrek Harness",
     hands = "Heidrek Gloves",
@@ -27,7 +27,7 @@ local domain_set["light"] = {
     feet  = "Heidrek Boots",
 }
 
-local domain_set["mage"] = {
+domain_set["mage"] = {
     head  = "Angantyr Beret",
     body  = "Angantyr Robe",
     hands = "Angantyr Mittens",
@@ -97,7 +97,31 @@ function check_special_ring_equipped()
     end
 end
 
+
+-------------------------------------------------------------------------------------------------------------------
+--  Common Shared Functions - Locking Items - Can be used in job_self_command(cmdParams, eventArgs)
+-------------------------------------------------------------------------------------------------------------------
+-- SETUP
+-- * In user_setup() create a variable attached to 'state' as a mapped variable.
+--   e.g. for Capacity Point Mode you could create something like this:
+--        state.CapacityMode = M(false, 'Capacity Point Mode')
+--   Where false is the default value and 'Capacity Point Mode' is the text that
+--   will come up when toggling the mode value
+-- * In user_setup() set the shortcut to be used by using send_command('bind <1> gs c toggle <2>')
+--   Where 1: The shortcut that will be used. The '@' symbol is the Windows Key
+--         2: The value that comes after 'state.' in the first step
+--   e.g. for our Capacity Point Mode we could use
+--        send_command('bind @c gs c toggle CapacityMode')
+--   This will bind the Windows Key + C to toggle CapacityMode
+-- * In user_unload() make sure to unload the shortcut that was bound in the previous step by
+--   using send_comment('unbind <1>'). Where 1: is the shortcut to unbind.
+--   e.g. for our Capacity Point Mode we would use
+--        send_command('unbund @c')
+-- *
+-------------------------------------------------------------------------------------------------------------------
+
 --  Check if player has CP Mode enabled
+--  Locks in the back piece that is included in the set_to_equip
 function check_status_cp(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
@@ -108,6 +132,7 @@ function check_status_cp(statusOn, set_to_equip)
 end
 
 --  Check if player has Dynamis Mode enabled
+--  Locks in the neck piece that is included in the set_to_equip
 function check_status_dynamis(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
