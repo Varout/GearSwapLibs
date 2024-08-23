@@ -143,43 +143,43 @@ function init_gear_sets()
     ------------------------------------------------------------------------------------------------
 
     HercHead = {}
-        HercHead.Refresh = {name="Herculean Helm", augments={'INT+7','"Store TP"+2','"Refresh"+1','Accuracy+16 Attack+16'}}
-        HercHead.TH = {name="Herculean Helm", augments={'Pet: INT+11','CHR+7','"Treasure Hunter"+2','Accuracy+12 Attack+12','Mag. Acc.+13 "Mag.Atk.Bns."+13'}}
+    HercHead.Refresh = {name="Herculean Helm", augments={'INT+7','"Store TP"+2','"Refresh"+1','Accuracy+16 Attack+16'}}
+    HercHead.TH = {name="Herculean Helm", augments={'Pet: INT+11','CHR+7','"Treasure Hunter"+2','Accuracy+12 Attack+12','Mag. Acc.+13 "Mag.Atk.Bns."+13'}}
 
     HercHands = {}
-        HercHands.Refresh = {name="Herculean Gloves", augments={'AGI+6','Attack+19','"Refresh"+1','Accuracy+16 Attack+16'}}
-        HercHands.TH = {name="Herculean Gloves", augments={'Attack+8','"Blood Pact" ability delay -1','"Treasure Hunter"+1','Accuracy+15 Attack+15','Mag. Acc.+11 "Mag.Atk.Bns."+11'}}
-        HercHands.WS = {name="Herculean Gloves", augments={'"Mag.Atk.Bns."+24','Weapon skill damage +4%','Mag. Acc.+14'}}
+    HercHands.Refresh = {name="Herculean Gloves", augments={'AGI+6','Attack+19','"Refresh"+1','Accuracy+16 Attack+16'}}
+    HercHands.TH = {name="Herculean Gloves", augments={'Attack+8','"Blood Pact" ability delay -1','"Treasure Hunter"+1','Accuracy+15 Attack+15','Mag. Acc.+11 "Mag.Atk.Bns."+11'}}
+    HercHands.WS = {name="Herculean Gloves", augments={'"Mag.Atk.Bns."+24','Weapon skill damage +4%','Mag. Acc.+14'}}
 
     HercLegs = {}
-        HercLegs.PH = {name="Herculean Trousers", augments={'Pet: Attack+26 Pet: Rng.Atk.+26','Phys. dmg. taken -2%','Phalanx +4','Accuracy+12 Attack+12'}}
-        HercLegs.MAB = {name="Herculean Trousers", augments={'Weapon skill damage +4%','STR+5','"Mag.Atk.Bns."+12'}}
-        HercLegs.WS = {name="Herculean Trousers", augments={'Weapon skill damage +4%','STR+5','"Mag.Atk.Bns."+12'}}
+    HercLegs.PH = {name="Herculean Trousers", augments={'Pet: Attack+26 Pet: Rng.Atk.+26','Phys. dmg. taken -2%','Phalanx +4','Accuracy+12 Attack+12'}}
+    HercLegs.MAB = {name="Herculean Trousers", augments={'Weapon skill damage +4%','STR+5','"Mag.Atk.Bns."+12'}}
+    HercLegs.WS = {name="Herculean Trousers", augments={'Weapon skill damage +4%','STR+5','"Mag.Atk.Bns."+12'}}
 
     HercFeet = {}
-        HercFeet.TH = {name="Herculean Boots", augments={'Attack+5','"Mag.Atk.Bns."+7','"Treasure Hunter"+2','Accuracy+5 Attack+5',}}
-        HercFeet.WS = {name="Herculean Boots", augments={'"Mag.Atk.Bns."+11','"Conserve MP"+1','Weapon skill damage +6%','Accuracy+16 Attack+16'}}
+    HercFeet.TH = {name="Herculean Boots", augments={'Attack+5','"Mag.Atk.Bns."+7','"Treasure Hunter"+2','Accuracy+5 Attack+5',}}
+    HercFeet.WS = {name="Herculean Boots", augments={'"Mag.Atk.Bns."+11','"Conserve MP"+1','Weapon skill damage +6%','Accuracy+16 Attack+16'}}
 
     COR_Back = {}
-        COR_Back.MAB = {name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','"Mag.Atk.Bns."+10'}}
-        COR_Back.RA = {name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+5','"Store TP"+10','Phys. dmg. taken-10%'}}
-        COR_Back.MABWS = {name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Occ. inc. resist. to stat. ailments+10'}}
-        COR_Back.Snap = {name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Snapshot"+10','Mag. Evasion+15'}}
+    COR_Back.MAB = {name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','"Mag.Atk.Bns."+10'}}
+    COR_Back.RA = {name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+5','"Store TP"+10','Phys. dmg. taken-10%'}}
+    COR_Back.MABWS = {name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Occ. inc. resist. to stat. ailments+10'}}
+    COR_Back.Snap = {name="Camulus's Mantle", augments={'INT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Snapshot"+10','Mag. Evasion+15'}}
 
     TaeonHead = {}
-        TaeonHead.PH = {name="Taeon Chapeau", augments={'Spell interruption rate down -9%','Phalanx +3'}}
+    TaeonHead.PH = {name="Taeon Chapeau", augments={'Spell interruption rate down -9%','Phalanx +3'}}
 
     TaeonBody = {}
-        TaeonBody.Snap = {name="Taeon Tabard", augments={'Phalanx +3'}}
+    TaeonBody.Snap = {name="Taeon Tabard", augments={'Phalanx +3'}}
 
     TaeonHands = {}
-        TaeonHands.PH = {name="Taeon Gloves", augments={'Phalanx +3'}}
+    TaeonHands.PH = {name="Taeon Gloves", augments={'Phalanx +3'}}
 
     TaeonLegs = {}
-        TaeonLegs.PH = {name="Taeon Tights", augments={'Phalanx +3'}}
+    TaeonLegs.PH = {name="Taeon Tights", augments={'Phalanx +3'}}
 
     TaeonFeet = {}
-        TaeonFeet.PH = {name="Taeon Boots", augments={'"Cure" potency +3%','Phalanx +3'}}
+    TaeonFeet.PH = {name="Taeon Boots", augments={'"Cure" potency +3%','Phalanx +3'}}
 
 
     --------------------------------------
