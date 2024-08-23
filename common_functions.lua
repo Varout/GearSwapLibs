@@ -3,15 +3,15 @@
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Domain Invasion
 -------------------------------------------------------------------------------------------------------------------
-local domain_job = {
+domain_job = {
     ["WAR"] = "heavy", ["PLD"] = "heavy", ["DRK"] = "heavy", ["BST"] = "heavy", ["SAM"] = "heavy", ["DRG"] = "heavy",
     ["MNK"] = "light", ["THF"] = "light", ["RNG"] = "light", ["NIN"] = "light", ["BLU"] = "light", ["COR"] = "light", ["DNC"] = "light", ["RUN"] = "light",
     ["WHM"] = "mage",  ["BLM"] = "mage",  ["RDM"] = "mage",  ["BRD"] = "mage",  ["SMN"] = "mage",  ["PUP"] = "mage",  ["SCH"] = "mage",  ["GEO"] = "mage",
 }
 
-local domain_set = {}
+domain_set = {}
 
-local domain_set["heavy"] = {
+domain_set["heavy"] = {
     head  = "Hervor Galea",
     body  = "Hervor Haubert",
     hands = "Hervor Mouffles",
@@ -19,7 +19,7 @@ local domain_set["heavy"] = {
     feet  = "Hervor Sollerets",
 }
 
-local domain_set["light"] = {
+domain_set["light"] = {
     head  = "Heidrek Mask",
     body  = "Heidrek Harness",
     hands = "Heidrek Gloves",
@@ -27,7 +27,7 @@ local domain_set["light"] = {
     feet  = "Heidrek Boots",
 }
 
-local domain_set["mage"] = {
+domain_set["mage"] = {
     head  = "Angantyr Beret",
     body  = "Angantyr Robe",
     hands = "Angantyr Mittens",
@@ -97,7 +97,12 @@ function check_special_ring_equipped()
     end
 end
 
+
+-------------------------------------------------------------------------------------------------------------------
+--  Common Shared Functions - Locking Items
+-------------------------------------------------------------------------------------------------------------------
 --  Check if player has CP Mode enabled
+--  Locks in the back piece that is included in the set_to_equip
 function check_status_cp(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
@@ -108,6 +113,7 @@ function check_status_cp(statusOn, set_to_equip)
 end
 
 --  Check if player has Dynamis Mode enabled
+--  Locks in the neck piece that is included in the set_to_equip
 function check_status_dynamis(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
@@ -139,6 +145,7 @@ function check_debuff_silenced(spell, eventArgs)
         else
             send_command('input /echo *!! Silenced ~ No items to remove it !!*')
         end
+
         eventArgs.cancel = true
         return
     end
@@ -155,6 +162,7 @@ function check_weakened_sublimation(spell, eventArgs)
         --  If weakend, don't waste your Sublimation
         cancel_spell()
         send_command('input /echo *!! Weakend ~ Cancelling Sublimation !!*')
+
         eventArgs.cancel = true
         return
     end
