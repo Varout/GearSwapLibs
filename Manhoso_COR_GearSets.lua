@@ -229,8 +229,8 @@ sets.precast.WS['Requiescat'] = set_combine(sets.precast.WS, {})
 
 sets.precast.WS.Ranged = {}
 --  Ranged: Marksmanship
-sets.precast.WS['Last Stand'] = set_combine(sets.precast.WS,
-{
+--  Elemental info: Light/Fire Belt, Light/Flame Gorget
+sets.precast.WS['Last Stand'] = set_combine(sets.precast.WS, {
     ammo= gear.WSbullet,
     head="Lanun Tricorne +2",
     body="Laksa. Frac +3",
@@ -246,6 +246,7 @@ sets.precast.WS['Last Stand'] = set_combine(sets.precast.WS,
     back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
 })
 
+--  Elemental info:
 sets.precast.WS['Wildfire'] = {
     ammo= gear.WSbullet,  --Orichalcum or Living Bullet
     head={ name="Herculean Helm", augments={'Attack+12','Weapon skill damage +5%',}},

@@ -176,6 +176,7 @@ function init_gear_sets()
     sets.precast.JA['Snake Eye']   = { legs = "Lanun Trews +2" }
     sets.precast.JA['Wild Card']   = { feet = "Lanun Bottes +3" }
     sets.precast.JA['Random Deal'] = { body = "Lanun Frac +3" }
+    sets.precast.FoldDoubleBust    = { hands = "Lanun Gants +2" }
 
     sets.precast.CorsairRoll = {
         head={ name="Lanun Tricorne +2", augments={'Enhances "Winning Streak" effect',}},
@@ -192,14 +193,11 @@ function init_gear_sets()
         back={ name="Gunslinger's Cape", augments={'Enmity-3','"Mag.Atk.Bns."+1','"Phantom Roll" ability delay -5','Weapon skill damage +1%',}},
     }
 
-    sets.precast.CorsairRoll["Blitzer's Roll"]   = set_combine(sets.precast.CorsairRoll, { head    = "Chasseur's Tricorne +2" })
-    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, { body    = "Chasseur's Frac +2" })
-    sets.precast.CorsairRoll["Allies' Roll"]     = set_combine(sets.precast.CorsairRoll, { hand    = "Chasseur's Gants +2" })
-    sets.precast.CorsairRoll["Caster's Roll"]    = set_combine(sets.precast.CorsairRoll, { legs    = "Chasseur's Culottes +2" })
-    sets.precast.CorsairRoll["Courser's Roll"]   = set_combine(sets.precast.CorsairRoll, { feet    = "Chasseur's Bottes +2" })
-
-    -- sets.precast.LuzafRing         = { ring1 = "Luzaf's Ring" }
-    sets.precast.FoldDoubleBust = { hands = "Lanun Gants +2" }
+    sets.precast.CorsairRoll["Blitzer's Roll"]   = set_combine(sets.precast.CorsairRoll, { head = "Chasseur's Tricorne +2" })
+    sets.precast.CorsairRoll["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, { body = "Chasseur's Frac +2" })
+    sets.precast.CorsairRoll["Allies' Roll"]     = set_combine(sets.precast.CorsairRoll, { hand = "Chasseur's Gants +2" })
+    sets.precast.CorsairRoll["Caster's Roll"]    = set_combine(sets.precast.CorsairRoll, { legs = "Chasseur's Culottes +2" })
+    sets.precast.CorsairRoll["Courser's Roll"]   = set_combine(sets.precast.CorsairRoll, { feet = "Chasseur's Bottes +2" })
 
     sets.precast.CorsairShot = {
         head="Laksa. Tricorne +2",
@@ -216,7 +214,21 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
     }
 
-    sets.precast.Waltz = {} -- CHR and VIT
+    sets.precast.Waltz = {  -- CHR and VIT
+        head="Mummu Bonnet +2",
+        body="Laksa. Frac +3",
+        hands="Laksa. Gants +2",
+        legs={ name="Lanun Trews +3", augments={'Enhances "Snake Eye" effect',}},
+        feet={ name="Rawhide Boots", augments={'STR+8','Attack+11','"Store TP"+4',}},
+        neck="Elite Royal Collar",
+        waist="Chaac Belt",
+        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear="Tuisto Earring",
+        left_ring="Defending Ring",
+        right_ring="Petrov Ring",
+        back={ name="Camulus's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Damage taken-5%',}},
+    }
+
     sets.precast.Waltz['Healing Waltz'] = {}
 
     sets.precast.FC = {
@@ -231,7 +243,7 @@ function init_gear_sets()
         right_ear="Loquac. Earring",
         left_ring="Defending Ring",
         right_ring="Kishar Ring",
-        back={ name="Camulus's Mantle", augments={'"Fast Cast"+10','Damage taken-5%',}},
+        back={ name="Camulus's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Damage taken-5%',}},
     }
 
     sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {})
@@ -273,8 +285,7 @@ function init_gear_sets()
 
     -- Specific weaponskill sets.  Uses the base set if an appropriate WSMod version isn't found.
 
-    sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS,
-    {
+    sets.precast.WS["Last Stand"] = set_combine(sets.precast.WS, {
         ammo= gear.WSbullet,
         head="Lanun Tricorne +2",
         body="Laksa. Frac +3",
@@ -290,12 +301,9 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}},
     })
 
-    sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'],
-    {
-    })
+    sets.precast.WS['Last Stand'].Acc = set_combine(sets.precast.WS['Last Stand'], {})
 
-    sets.precast.WS['Wildfire'] = set_combine(sets.precast.WS,
-    {
+    sets.precast.WS['Wildfire'] = set_combine(sets.precast.WS, {
         ammo= gear.WSbullet,  --Orichalcum or Living Bullet
         head={ name="Herculean Helm", augments={'Attack+12','Weapon skill damage +5%',}},
         body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
@@ -311,8 +319,7 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
     })
 
-    sets.precast.WS['Leaden Salute'] = set_combine(sets.precast.WS,
-    {
+    sets.precast.WS['Leaden Salute'] = set_combine(sets.precast.WS, {
         head="Pixie Hairpin +1",
         body={ name="Lanun Frac +3", augments={'Enhances "Loaded Deck" effect',}},
         hands="Chasseur's Gants +2",
@@ -327,8 +334,7 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
     })
 
-    sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS,
-    {
+    sets.precast.WS['Evisceration'] = set_combine(sets.precast.WS, {
         -- body="Meg. Cuirie +2",
         -- hands="Meg. Gloves +2",
         -- legs="Samnuha Tights",
@@ -337,7 +343,7 @@ function init_gear_sets()
     })
 
     sets.precast.WS['Savage Blade'] = set_combine(sets.precast.WS,
-    {
+ {
         head={ name="Herculean Helm", augments={'Attack+12','Weapon skill damage +5%',}},
         body="Laksa. Frac +3",
         hands="Chasseur's Gants +2",
@@ -380,8 +386,7 @@ function init_gear_sets()
     }
 
     -- Ranged gear
-    -- sets.midcast.RA =
-    -- {
+    -- sets.midcast.RA = {
     --     head="Meghanada Visor +2", --?/0
     --     body="Meg. Cuirie +2", --7/0
     --     hands="Meg. Gloves +2", --3/0
@@ -397,8 +402,7 @@ function init_gear_sets()
     sets.resting = {}
 
     -- Idle sets
-    sets.idle =
-    {
+    sets.idle = {
         ammo= gear.RAbullet,
         head="Malignance Chapeau",
         body="Malignance Tabard",
@@ -414,14 +418,12 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
     }
 
-    sets.idle.refresh = set_combine(sets.idle,
-    {
+    sets.idle.refresh = set_combine(sets.idle, {
         head="Rawhide Mask",
         legs= { name="Rawhide Trousers", augments={'MP+50','"Fast Cast"+5','"Refresh"+1',}},
     })
 
-    sets.idle.DT = set_combine(sets.idle,
-    {
+    sets.idle.DT = set_combine(sets.idle, {
         -- head        = "Rawhide Mask",
         -- body        = "Meg. Cuirie +2",
         -- hands    = { name="Herculean gloves", augments={'"Refresh"+1'}},
@@ -434,8 +436,7 @@ function init_gear_sets()
         waist="Flume Belt +1",
     })
 
-    sets.idle.Town = set_combine(sets.idle,
-    {
+    sets.idle.Town = set_combine(sets.idle, {
         head="Malignance Chapeau",
         body="Malignance Tabard",
         hands="Malignance Gloves",
@@ -452,8 +453,7 @@ function init_gear_sets()
 
 
     -- Defense sets
-    sets.defense.PDT =
-    {
+    sets.defense.PDT = {
         -- head="Meghanada Visor +2", --?/0
         -- body="Meg. Cuirie +2", --7/0
         -- hands="Meg. Gloves +2", --3/0
@@ -511,8 +511,7 @@ function init_gear_sets()
         back={ name="Camulus's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}},
     }
 
-    sets.engaged.Triple =
-    {
+    sets.engaged.Triple = {
         body="Chasseur's Frac+1",
     }
 
