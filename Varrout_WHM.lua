@@ -230,14 +230,16 @@ function job_self_command(cmdParams, eventArgs)
     if (cmdParams[1]:lower() == 'reraise') then
         cast_highest_available_reraise()
 
-    --  Make Raise easy to handle
+        eventArgs.handled = true
+        return
+
+        --  Make Raise easy to handle
     elseif cmdParams[1]:lower() == 'raise' then
         cast_highest_available_raise()
 
+        eventArgs.handled = true
+        return
     end
-
-    eventArgs.handled = true
-    return
 end
 
 
