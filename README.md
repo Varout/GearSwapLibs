@@ -17,6 +17,7 @@ The character I've been playing on and off since 2004.  Mains are White Mage and
 
 #### Dependencies
 - `Mote-Include.lua`
+- `Varrout_WHM_GearSets.lua`
 - `common_lists.lua`
 - `common_functions.lua`
 
@@ -32,11 +33,19 @@ Rework in progress
 
 ### Corsair (COR)
 
-Rework in progress
+#### Custom GearSwap Commands
+- `Ctrl + ,`: (DNC) Does 'Spectral Jig'
+
+#### Dependencies
+- `Mote-Include.lua`
+- `Manhoso_COR_GearSets.lua`
+- `COR_Roll_Values.lua`
+- `common_lists.lua`
+- `common_functions.lua`
 
 ## Custom LUA filess
 
-### Custom Functions
+### COR Roll Values
 **File:** `COR_Roll_Values.lua`<br />
 **About:** Contains a list of all Corsair Phantom Rolls with information about their luck and unlucky numbers.<br />
 **Use:** Import using `include('COR_Roll_Values.lua)` in your `get_sets()`. In `job_aftercast(spell, action, spellMap, eventAgrs)` you can include something along the lines of:
@@ -46,9 +55,10 @@ if spell.type == 'CorsairRoll' and not spell.interrupted then
 end
 ```
 
+### Custom Functions
 **File:** `custom_functions.lua`<br />
 **About:** Contains custom functions which are used throughout many lua scripts. Extracted for easy reusability.
 
-
+### Custom Lists
 **File:** `custom_lists.lua`<br />
 **About:** Contains custom lists like areas and spell maps, extending what is already included in the default `Mote-Include.lua` suite.

@@ -78,6 +78,7 @@ function job_setup()
 
     include('COR_Roll_Values.lua')
     include('common_functions.lua')
+    include('common_lists.lua')
     determine_haste_group()
 end
 
