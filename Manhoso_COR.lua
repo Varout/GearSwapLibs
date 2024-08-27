@@ -96,7 +96,7 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function custom_instructions()
     add_to_chat(200, "Manhoso's COR Custom commands:")
-    add_to_chat(200, "* Ctrl + , - Spectral Jig")
+    add_to_chat(200, "* Ctrl + , | Spectral Jig")
 end
 
 -- Setup vars that are user-dependent.  Can override this function in a sidecar file.
