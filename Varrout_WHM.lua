@@ -6,11 +6,6 @@ function get_sets()
 
     -- Load and initialize the include file.
     include('Mote-Include.lua')
-    include('common_lists.lua')
-    include('common_functions.lua')
-
-    --  Make sure all equipment can be changed/updated
-    equipment_unlock_all()
 end
 
 
@@ -18,6 +13,13 @@ end
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked
 --  ----------------------------------------------------------------------------------------------------
 function job_setup()
+    --  Load common lua lists and functions
+    include('common_lists.lua')
+    include('common_functions.lua')
+
+    --  Make sure all equipment can be changed/updated
+    equipment_unlock_all()
+
     --  White mage specific
     state.Buff["Divine Seal"]     = buffactive["Divine Seal"]     or false
     state.Buff["Divine Caress"]   = buffactive["Divine Caress"]   or false
