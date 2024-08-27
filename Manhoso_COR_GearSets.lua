@@ -53,17 +53,17 @@ gear.AmbuscadeFC            = { name     = "Camulus's Mantle",
 gear.AmbuscadeDT            = gear.AmbuscadeFC
 
 --  Elemental Obis
-gear.ObiDark = "Anrin Obi"
-gear.ObiFire = "Karin Obi"
-gear.ObiAll  = "Hachirin-no-Obi"
+gear.ObiDark = { waist = "Anrin Obi" }
+gear.ObiFire = { waist = "Karin Obi" }
+gear.ObiAll  = { waist = "Hachirin-no-Obi" }
 
 -- Elemental Belts
-gear.BeltFire = "Flame Belt"
-gear.BeltAll  = "Fotia Belt"
+gear.BeltFire = { waist = "Flame Belt" }
+gear.BeltAll  = { waist = "Fotia Belt" }
 
 --  Elemental Gorgets
-gear.GorgetFire = "Flame Gorget"
-gear.GorgetAll  = "Fotia Gorget"
+gear.GorgetFire = { neck = "Flame Gorget" }
+gear.GorgetAll  = { neck = "Fotia Gorget" }
 
 --  ----------------------------------------------------------------------------------------------------
 --   Town Sets
