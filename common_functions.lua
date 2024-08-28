@@ -97,12 +97,11 @@ function check_special_ring_equipped()
     end
 end
 
-
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Locking Items
 -------------------------------------------------------------------------------------------------------------------
 --  Check if player has CP Mode enabled
---  Locks in the back piece that is included in the set_to_equip
+--  Locks back piece for extra capacity points
 function check_status_cp(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
@@ -113,7 +112,7 @@ function check_status_cp(statusOn, set_to_equip)
 end
 
 --  Check if player has Dynamis Mode enabled
---  Locks in the neck piece that is included in the set_to_equip
+--  Locks neck piece for kills to count
 function check_status_dynamis(statusOn, set_to_equip)
     if statusOn then
         equip(set_to_equip)
@@ -289,6 +288,93 @@ function determine_haste_group()
         elseif buffactive[33] or buffactive[604] or buffactive.march == 1 then
             --add_to_chat(007, '---------- <<<< | Magic Haste Level: 15% | >>>> ----------')
             classes.CustomMeleeGroups:append('LowHaste')
+        end
+    end
+end
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Common Shared Functions - Refine Waltz
+-------------------------------------------------------------------------------------------------------------------
+function refine_waltz(spell, action)
+    local accepted_waltz = S{'Curing Waltz', 'Curing Waltz II', 'Curing Waltz III'}
+    if not accepted_waltz:contains(spell.name) then
+        return
+    end
+
+    local newWaltz = spell.english
+    local waltzID
+    local missingHP
+
+    if spell.target.type == "SELF" then
+        missingHP = player.max_hp - player.hp
+    elseif spell.target.isallymember then
+        local target = find_player_in_alliance(spell.target.name)
+        local est_max_hp = target.hp / (target.hpp/100)
+        missingHP = math.floor(est_max_hp - target.hp)
+    end
+
+    if missingHP ~= nil then
+        if missingHP < 40 and spell.target.name == player.name then
+            add_to_chat(123,'Full HP!')
+            cancel_spell()
+            return
+        elseif missingHP < 150 then
+            newWaltz = 'Curing Waltz'
+            waltzID = 190
+        elseif missingHP < 300 then
+            newWaltz = 'Curing Waltz II'
+            waltzID = 191
+        else
+            newWaltz = 'Curing Waltz III'
+            waltzID = 192
+        end
+    end
+
+    local waltzTPCost = {['Curing Waltz'] = 20, ['Curing Waltz II'] = 35, ['Curing Waltz III'] = 50, ['Curing Waltz IV'] = 65, ['Curing Waltz V'] = 80}
+    local tpCost = waltzTPCost[newWaltz]
+
+    local downgrade
+
+    if player.tp < tpCost and not buffactive.trance then
+
+        if player.tp < 20 then
+            add_to_chat(123, 'Insufficient TP ['..tostring(player.tp)..']. Cancelling.')
+            cancel_spell()
+            return
+        elseif player.tp < 35 then
+            newWaltz = 'Curing Waltz'
+        elseif player.tp < 50 then
+            newWaltz = 'Curing Waltz II'
+        elseif player.tp < 65 then
+            newWaltz = 'Curing Waltz III'
+        elseif player.tp < 80 then
+            newWaltz = 'Curing Waltz IV'
+        end
+
+        downgrade = 'Insufficient TP ['..tostring(player.tp)..']. Downgrading to '..newWaltz..'.'
+    end
+
+    if newWaltz ~= spell.english then
+        send_command('@input /ja "'..newWaltz..'" '..tostring(spell.target.raw))
+        if downgrade then
+            add_to_chat(158, downgrade)
+        end
+        cancel_spell()
+        return
+    end
+
+    if missingHP > 0 then
+        add_to_chat(158,'Trying to cure '..tostring(missingHP)..' HP using '..newWaltz..'.')
+    end
+end
+
+function find_player_in_alliance(name)
+    for i,v in ipairs(alliance) do
+        for k,p in ipairs(v) do
+            if p.name == name then
+                return p
+            end
         end
     end
 end
