@@ -139,7 +139,7 @@ sets.Capacity['Manhoso'] = { back = { name     = "Mecisto. Manle",
                                       augments = {}},}
 
 -------------------------------------------------------------------------------------------------------------------
---  Job Sets for Subjobs (For my playstyle)
+--  Job Sets for Subjobs
 -------------------------------------------------------------------------------------------------------------------
 job_type_melee = S{
     "WAR",
@@ -167,3 +167,14 @@ job_type_mage = S{
     "GEO",
     "SMN",
 }
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Healing Breath Sets for Subjobs
+-------------------------------------------------------------------------------------------------------------------
+HB_Mage_SubJob = S{"WHM","RDM","BLM","BLU","SCH"} -- 50% Healing Breath Trigger SubJob --
+HB_DD_SubJob = S{"PLD","DRK","BRD","NIN"} -- 33% Healing Breath Trigger SubJob --
+DRG_MP_SubJob = S{"WHM", "RDM", "BLM", "BLU", "SCH", "PLD", "DRK"}
+
+wyv_breath_spells = S{'Dia', 'Poison', 'Sprout Smack', 'Head Butt', 'Cocoon'}
+wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
