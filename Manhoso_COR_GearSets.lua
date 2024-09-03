@@ -1,13 +1,13 @@
 --  ----------------------------------------------------------------------------------------------------
 --   Job Specific Armour
 --  ----------------------------------------------------------------------------------------------------
-gear.ArtefactHead  = "Laksamana's Tricorne +2"
+gear.ArtefactHead  = "Laksamana's Tricorne +3"
 gear.ArtefactBody  = "Laksamana's Frac +3"
 gear.ArtefactHands = "Laksamana's Gants +2"
 gear.ArtefactLegs  = "Laksamana's Trews +2"
 gear.ArtefactFeet  = "Laksamana's Bottes +2"
 
-gear.RelicHead  = "Launun Tricorne +2"
+gear.RelicHead  = "Launun Tricorne +3"
 gear.RelicBody  = "Launun Frac +3"
 gear.RelicHands = "Launun Gants +2"
 gear.RelicLegs  = "Launun Trews +3"
@@ -20,7 +20,7 @@ gear.EmpyreanLegs  = "Chasseur's Culottes +2"
 gear.EmpyreanFeet  = "Chasseur's Bottes +2"
 
 gear.EmpyreanEarring = "Chasseur's Earring"
-gear.DynamisNeck     = "Commodore Charm"
+gear.DynamisNeck     = "Commodore Charm"    --  Have +2, needs to be upgraded
 
 --  REMA Weapons
 gear.WeaponMythic   = "Death Penalty"   -- Not yet
@@ -122,58 +122,58 @@ sets.engaged = {
     right_ring  = "Epona's Ring",
     back        = gear.AmbuscadeMeleeAcc,
 }
-sets.engaged.Normal = sets.engaged
+-- sets.engaged.Normal = sets.engaged
 
-sets.engaged.Hybrid = {
-    ammo        =  gear.RAbullet,
-    head        = "Malignance Chapeau",
-    body        = "Malignance Tabard",
-    hands       = "Malignance Gloves",
-    legs        = "Malignance Tights",
-    feet        = "Malignance Boots",
-    neck        = { name     = "Loricate Torque +1",
-                    augments = {'Path: A',}},
-    waist       = { name     = "Sailfi Belt +1",
-                    augments = {'Path: A',}},
-    left_ear    = "Cessance Earring",
-    right_ear   = { name     = "Odnowa Earring +1",
-                    augments = {'Path: A',}},
-    left_ring   = "Defending Ring",
-    right_ring  = "Epona's Ring",
-    back        = gear.AmbuscadeMeleeAcc,
-}
+-- sets.engaged.Hybrid = {
+--     ammo        =  gear.RAbullet,
+--     head        = "Malignance Chapeau",
+--     body        = "Malignance Tabard",
+--     hands       = "Malignance Gloves",
+--     legs        = "Malignance Tights",
+--     feet        = "Malignance Boots",
+--     neck        = { name     = "Loricate Torque +1",
+--                     augments = {'Path: A',}},
+--     waist       = { name     = "Sailfi Belt +1",
+--                     augments = {'Path: A',}},
+--     left_ear    = "Cessance Earring",
+--     right_ear   = { name     = "Odnowa Earring +1",
+--                     augments = {'Path: A',}},
+--     left_ring   = "Defending Ring",
+--     right_ring  = "Epona's Ring",
+--     back        = gear.AmbuscadeMeleeAcc,
+-- }
 
-sets.engaged.LowAcc = set_combine(sets.engaged, {})
-sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {})
-sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {})
+-- sets.engaged.LowAcc = set_combine(sets.engaged, {})
+-- sets.engaged.MidAcc = set_combine(sets.engaged.LowAcc, {})
+-- sets.engaged.HighAcc = set_combine(sets.engaged.MidAcc, {})
 
--- 15% Magic Haste (66% DW to cap)
-sets.engaged.LowHaste = set_combine(sets.engaged, {}) -- 55-65% (40% Gear)
-sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {})
-sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {})
-sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {})
-sets.engaged.LowHaste.Fodder = set_combine(sets.engaged.LowHaste, {})
+-- -- 15% Magic Haste (66% DW to cap)
+-- sets.engaged.LowHaste = set_combine(sets.engaged, {}) -- 55-65% (40% Gear)
+-- sets.engaged.LowHaste.LowAcc = set_combine(sets.engaged.LowHaste, {})
+-- sets.engaged.LowHaste.MidAcc = set_combine(sets.engaged.LowHaste.LowAcc, {})
+-- sets.engaged.LowHaste.HighAcc = set_combine(sets.engaged.LowHaste.MidAcc, {})
+-- sets.engaged.LowHaste.Fodder = set_combine(sets.engaged.LowHaste, {})
 
--- 30% Magic Haste (55% DW to cap)
-sets.engaged.MidHaste = set_combine(sets.engaged, {}) -- 49-59% (34% Gear)
-sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {})
-sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {})
-sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {})
-sets.engaged.MidHaste.Fodder = set_combine(sets.engaged.MidHaste, {})
+-- -- 30% Magic Haste (55% DW to cap)
+-- sets.engaged.MidHaste = set_combine(sets.engaged, {}) -- 49-59% (34% Gear)
+-- sets.engaged.MidHaste.LowAcc = set_combine(sets.engaged.MidHaste, {})
+-- sets.engaged.MidHaste.MidAcc = set_combine(sets.engaged.MidHaste.LowAcc, {})
+-- sets.engaged.MidHaste.HighAcc = set_combine(sets.engaged.MidHaste.MidAcc, {})
+-- sets.engaged.MidHaste.Fodder = set_combine(sets.engaged.MidHaste, {})
 
--- 35% Magic Haste (50% DW to cap)
-sets.engaged.HighHaste = set_combine(set.engaged, {}) -- 38-48% (23% Gear)
-sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {})
-sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {})
-sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {})
-sets.engaged.HighHaste.Fodder = set_combine(sets.engaged.HighHaste, {})
+-- -- 35% Magic Haste (50% DW to cap)
+-- sets.engaged.HighHaste = set_combine(set.engaged, {}) -- 38-48% (23% Gear)
+-- sets.engaged.HighHaste.LowAcc = set_combine(sets.engaged.HighHaste, {})
+-- sets.engaged.HighHaste.MidAcc = set_combine(sets.engaged.HighHaste.LowAcc, {})
+-- sets.engaged.HighHaste.HighAcc = set_combine(sets.engaged.HighHaste.MidAcc, {})
+-- sets.engaged.HighHaste.Fodder = set_combine(sets.engaged.HighHaste, {})
 
--- 47% Magic Haste (36% DW to cap)
-sets.engaged.MaxHaste = set_combine(set.engaged, {}) -- 24-34% (9% Gear)
-sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {})
-sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {})
-sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {})
-sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {})
+-- -- 47% Magic Haste (36% DW to cap)
+-- sets.engaged.MaxHaste = set_combine(set.engaged, {}) -- 24-34% (9% Gear)
+-- sets.engaged.MaxHaste.LowAcc = set_combine(sets.engaged.HighHaste, {})
+-- sets.engaged.MaxHaste.MidAcc = set_combine(sets.engaged.MaxHaste.LowAcc, {})
+-- sets.engaged.MaxHaste.HighAcc = set_combine(sets.engaged.MaxHaste.MidAcc, {})
+-- sets.engaged.MaxHaste.Fodder = set_combine(sets.engaged.MaxHaste, {})
 
 
 --  ----------------------------------------------------------------------------------------------------

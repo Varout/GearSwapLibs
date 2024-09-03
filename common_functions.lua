@@ -97,9 +97,6 @@ function check_special_ring_equipped()
     end
 end
 
--------------------------------------------------------------------------------------------------------------------
---  Common Shared Functions - Locking Items
--------------------------------------------------------------------------------------------------------------------
 --  Check if player has CP Mode enabled
 --  Locks back piece for extra capacity points
 function check_status_cp(statusOn, set_to_equip)
@@ -123,12 +120,22 @@ function check_status_dynamis(statusOn, set_to_equip)
 end
 
 
+function check_ammo_pouch_equipped()
+    if equip_lock_ammo_pouches:contains(player.equipment.waist) then
+        equipment_lock_specific({'waist',})
+        is_waist_locked = true
+    elseif is_waist_locked then
+        equipment_unlock_specific({'waist',})
+    end
+end
+
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Ailment Removal
 -------------------------------------------------------------------------------------------------------------------
 --  Checks if the player is silenced and trying to cast a spell
 --  Remove silence using Catholicon, Echo Drops, then Remedy in that order
 function check_debuff_silenced(spell, eventArgs)
+    -- add_to_chat(060, spell.type .. ' | ' .. spell.action_type)
     if spell.action_type == 'Magic' and buffactive['Silence'] then
         -- If silenced, use what's available to remove it
         cancel_spell()
@@ -219,15 +226,17 @@ end
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Utsusemi Recast
 -------------------------------------------------------------------------------------------------------------------
-if spellMap == 'Utsusemi' then
-    if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
-        cancel_spell()
-        add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
+function check_utsusemi_images()
+    if spellMap == 'Utsusemi' then
+        if buffactive['Copy Image (3)'] or buffactive['Copy Image (4+)'] then
+            cancel_spell()
+            add_to_chat(123, '**!! '..spell.english..' Canceled: [3+ IMAGES] !!**')
 
-        eventArgs.handled = true
-        return
-    elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
-        send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+            eventArgs.handled = true
+            return
+        elseif buffactive['Copy Image'] or buffactive['Copy Image (2)'] then
+            send_command('cancel 66; cancel 444; cancel Copy Image; cancel Copy Image (2)')
+        end
     end
 end
 
@@ -377,4 +386,13 @@ function find_player_in_alliance(name)
             end
         end
     end
+end
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Common Shared Functions - Checking if the element of the spell matches the element of
+--                            the day or weather (includes SCH storms)
+-------------------------------------------------------------------------------------------------------------------
+function check_spell_weather_day_match(spell)
+    return spell.element == world.weather_element or spell.element == world.day_element
 end

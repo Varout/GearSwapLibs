@@ -112,8 +112,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     local equipSet = {}
 
     if spell.action_type == 'Magic' then
-        spell_element_match = spell.element == world.weather_element or spell.element == world.day_element
-        -- add_to_chat(100, tostring(spellMap))
+        local spell_element_match = check_spell_weather_day_match(spell)
 
         if (spell.skill == 'Enfeebling Magic' or spell.skill == 'Divine Magic') then
             if spell.skill == 'Enfeebling Magic' then
@@ -155,13 +154,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equipSet = sets.midcast.Cure
             end
         end
+    elseif spell.type == "Trust" then
+        equipSet = sets.Trust
     end
 
     equip(equipSet)
-
-    if spell.type == "Trust" then
-        equip(sets.Trust)
-    end
 end
 
 
@@ -226,19 +223,16 @@ end
 --  JOB SELF COMMAND / CUSTOM COMMANDS
 --  ----------------------------------------------------------------------------------------------------
 function job_self_command(cmdParams, eventArgs)
-    windower.add_to_chat(9, cmdParams[1])
 
     --  Make Reraise easy to handle
     if (cmdParams[1]:lower() == 'reraise') then
         cast_highest_available_reraise()
-
         eventArgs.handled = true
         return
 
-        --  Make Raise easy to handle
+    --  Make Raise easy to handle
     elseif cmdParams[1]:lower() == 'raise' then
         cast_highest_available_raise()
-
         eventArgs.handled = true
         return
     end
@@ -251,6 +245,7 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 4)    -- Jason
+    send_command('wait 2; input /lockstyleset 004')
 end
 
 
@@ -266,3 +261,10 @@ end
 function melee_equip_unlock()
     equipment_unlock_specific({'main', 'sub',})
 end
+
+windower.register_event('zone change',
+    function()
+        equipment_unlock_specific({"left_ring", "right_ring",})
+        equip(sets.idle)
+    end
+)

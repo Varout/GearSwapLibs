@@ -73,6 +73,7 @@ spells_na = S{
     "Silena",
     "Stona",
     "Viruna",
+    "Cursna",
 }
 
 spells_cursna = S{
@@ -107,6 +108,13 @@ enfeebling_mnd = S{
     "Slow",     -- "Slow II"
 }
 
+enhancing_dark = S{
+    "Blaze Spikes",
+    "Ice Spikes",
+    "Shock Spikes",
+    "Dread Spikes",
+}
+
 -------------------------------------------------------------------------------------------------------------------
 --  Equipment Sets By Slot For Locking
 -------------------------------------------------------------------------------------------------------------------
@@ -130,6 +138,11 @@ equip_lock_rings = S{
 
 equip_lock_back = S{
     "Nexus Cape",
+}
+
+equip_lock_ammo_pouches = S{
+    'Chrono Bullet Pouch',
+    'Chr. Bul. Pouch'
 }
 
 sets.Capacity = {}
@@ -166,6 +179,20 @@ job_type_mage = S{
     "SCH",
     "GEO",
     "SMN",
+}
+
+job_type_magic_user = S{
+    "NIN",
+    "PLD",
+    "DRK",
+    "RUN",
+    "WHM",
+    "RDM",
+    "BLM",
+    "BRD",
+    "SCH",
+    "GEO",
+    "SMN"
 }
 
 

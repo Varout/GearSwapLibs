@@ -101,7 +101,7 @@ sets.resting = {
     left_ring  = "Star Ring",           -- +1
     right_ring = "Angha Ring",          -- +2
     back       = "Felicitas Cape",      -- +3
-    waist      = "Austerity Belt",      -- +4
+    waist      = "Shinjutsu-no-Obi +1", -- +5
     legs       = "Nisse Slacks",        -- +4
     feet       = "Chelona Boots"        -- +5 (Nice to have +1)
 }
