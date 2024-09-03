@@ -184,22 +184,25 @@ function aftercast(spell,action)
 end
 
 function status_change(new,old)
-    if Armor == 'PDT' then
-        equip(sets.PDT)
-    elseif Armor == 'MDT' then
-        equip(sets.MDT)
-    elseif Armor == 'Kiting' then
-        equip(sets.Kiting)
-    elseif new == 'Engaged' then
-        equipSet = sets.TP
-        if Armor == 'Hybrid' and equipSet["Hybrid"] then
-            equipSet = equipSet["Hybrid"]
-        end
-    end
+    -- if Armor == 'PDT' then
+    --     equip(sets.PDT)
+    -- elseif Armor == 'MDT' then
+    --     equip(sets.MDT)
+    -- elseif Armor == 'Kiting' then
+    --     equip(sets.Kiting)
+    -- elseif new == 'Engaged' then
+    --     equipSet = sets.engaged
+    --     if Armor == 'Hybrid' and equipSet["Hybrid"] then
+    --         equipSet = equipSet["Hybrid"]
+    --     end
+    -- end
 end
 
 function job_precast(spell, action, spellMap, eventArgs)
-    check_debuff_silenced()
+    -- add_to_chat(060, spell.type .. ' | ' .. spell.action_type)
+    if job_type_magic_user:contains(player.sub_job) then
+        check_debuff_silenced(spell, eventArgs)
+    end
 
     -- Check that proper ammo is available if we're using ranged attacks or similar.
     if spell.action_type == 'Ranged Attack' or spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
@@ -208,7 +211,12 @@ function job_precast(spell, action, spellMap, eventArgs)
 
     -- Gear sets
     if (spell.type == 'CorsairRoll' or spell.english == "Double-Up") then
-        equip(sets.precast.LuzafRing)
+        local equipSet
+        equipSet = sets.precast.CorsairRoll
+        if buffactive['Snake Eye'] then
+            equipSet = set_combine(equipSet, sets.precast.JA['Snake Eye'])
+        end
+        equip(equipSet)
     elseif spell.type == 'CorsairShot' and state.CastingMode.value == 'Resistant' then
         classes.CustomClass = 'Acc'
     elseif spell.english == 'Fold' and buffactive['Bust'] == 2 then
@@ -258,6 +266,10 @@ end
 -------------------------------------------------------------------------------------------------------------------
 -- User code that supplements standard library decisions.
 -------------------------------------------------------------------------------------------------------------------
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_special_ring_equipped()
+    check_ammo_pouch_equipped()
+end
 
 -- Modify the default idle set after it was constructed.
 function customize_idle_set(idleSet)
@@ -428,3 +440,13 @@ function select_default_macro_book()
     set_macro_page(1, 2)    --  Jason
     send_command('wait 2; input /lockstyleset 003')
 end
+
+--  ----------------------------------------------------------------------------------------------------
+--                      User defined functions
+--  ----------------------------------------------------------------------------------------------------
+windower.register_event('zone change',
+    function()
+        equipment_unlock_specific({"left_ring", "right_ring",})
+        equip(sets.idle)
+    end
+)
