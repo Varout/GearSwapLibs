@@ -76,10 +76,11 @@ function job_precast(spell, action, spellMap, eventArgs)
     if spell.english == "Dismiss" and pet.hpp < 100 then -- Cancel Dismiss If Wyvern's HP Is Under 100% --
         cancel_spell()
         add_to_chat(123, spell.english .. ' Canceled: [' .. pet.hpp .. ']')
+        eventArgs.handled = true
         return
     end
 
-    local equipSet = {}
+    local equipSet
     if spell.english == 'Spectral Jig' and buffactive.Sneak then
         cast_delay(0.2)
         send_command('cancel Sneak')
@@ -92,8 +93,6 @@ function job_precast(spell, action, spellMap, eventArgs)
         elseif HB_DD_SubJob:contains(player.sub_job) and player.hpp < 34 then
             equip(sets.Pet.HealingBreathTrigger)
         end
-    elseif spell.type == 'Trust' then
-        equipSet = sets.precast.Trust
     elseif spell.type == 'WeaponSkill' then
         equipSet = sets.precast.WS
         if equipSet[spell.english] then
@@ -110,6 +109,7 @@ function job_precast(spell, action, spellMap, eventArgs)
             equipSet = equipSet[spell.english]
         end
     elseif spell.action_type == 'Magic' then
+        add_to_chat(200, 'Magic')
         equipSet = sets.precast.FC
     end
     equip(equipSet)
@@ -121,6 +121,9 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function job_post_midcast(spell, action, spellMap, eventArgs)
     -- add_to_chat(123, spell.action_type .. ' | ' .. spell.english)
+    if spell.type == 'Trust' then
+        return
+    end
 
     if spell.action_type == 'Magic' and pet.isvalid then
         if HB_Mage_SubJob:contains(player.sub_job) then
@@ -207,7 +210,10 @@ function select_default_macro_book()
     else
         set_macro_page(2, 6)
     end
-    send_command('wait 2; input /lockstyleset 006')
+
+    equip(sets.lockstyle)
+    send_command('wait 2; input /lockstyle on')
+    -- send_command('wait 2; input /lockstyleset 006')
 end
 
 
