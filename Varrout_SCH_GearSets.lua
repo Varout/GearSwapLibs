@@ -29,7 +29,10 @@ gear.DynamisNeck      = ""
 -- gear.WeaponPrime    = ""
 
 --  Ambuscade Capes
+gear.AmbuscadeCapeIdle = gear.AmbuscadeCapeMAB
+gear.AmbuscadeCapeMagicAccINT = gear.AmbuscadeCapeMAB
 gear.AmbuscadeCapeMAB = { name = "Lugh's Cape", augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+gear.AmbuscadeCapeMagicAccMND = gear.AmbuscadeCapeMAB
 
 --  ----------------------------------------------------------------------------------------------------
 --   Town Sets
@@ -56,15 +59,19 @@ sets.idle = {
     back="Solemnity Cape",
 }
 
-sets.idle.refreshLatent = {
+sets.idle.RefreshLatent = {
     waist="Fucho-no-Obi",
 }
 
-sets.idle.sublimation = {
+sets.idle.Sublimation = {
     head = gear.ArtefactHead,
     body = gear.RelicBody,
     waist = "Embla Sash",
     right_ear = "Savant's Earring",
+}
+
+sets.idle.ToAU = {
+    right_ring  = "Balrahn's Ring"
 }
 
 sets.resting = {
@@ -77,12 +84,12 @@ sets.resting = {
     legs        = "Nisse Slacks",
     feet        = "Chelona Boots",
     neck        = "Eidolon Pendant +1",
-    waist       = "Shinjutsu-no-Obi",
-    left_ear    = { name        = "Moonshade Earring",
-                    augments    = {'MP+25','Latent effect: "Refresh"+1',}},
+    waist       = "Shinjutsu-no-Obi +1",
+    left_ear    = { name     = "Moonshade Earring",
+                    augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = "Infused Earring",
-    left_ring   = "Angha Ring",
-    right_ring  = "Star Ring",
+    left_ring   = "Stikini Ring +1",
+    right_ring  = "Angha Ring",
     back        = "Felicitas Cape",
 }
 
@@ -133,6 +140,7 @@ sets.precast["Cure"] = set_combine(sets.precast.FC, {
     right_ear   = "Mendi. Earring",
     back        = "Pahtli Cape",
 })
+sets.precast["Curaga"] = sets.precast["Cure"]
 
 sets.precast["Enhancing Magic"] = set_combine(sets.precast.FC, {
     waist = "Siegel Sash",
@@ -147,6 +155,17 @@ sets.precast["Enfeebling Magic"] = set_combine(sets.precast.FC, {})
 sets.precast["Elemental Magic"]  = set_combine(sets.precast.FC, {})
 sets.precast["Dark Magic"]       = set_combine(sets.precast.FC, {})
 
+sets.precast["Trust"] = {
+    main        = { name     = "Mpaca's Staff",
+                    augments = {'Path: A',}},
+    sub         = "Clerisy Strap",
+    head        = gear.ArtefactHead,
+    body        = gear.ArtefactBody,
+    hands       = gear.ArtefactHands,
+    legs        = gear.ArtefactLegs,
+    feet        = gear.ArtefactFeet,
+}
+
 --  ----------------------------------------------------------------------------------------------------
 --   Midcast Sets
 --  ----------------------------------------------------------------------------------------------------
@@ -156,6 +175,8 @@ sets.midcast.Potency = {
     back        = "Twilight Cape",
     waist       = "Hachirin-no-Obi",
 }
+
+sets.midcast.MagicBurst = {}
 
 sets.midcast["Enhancing Magic"] = {
     main        = "Bolelabunga",
@@ -238,6 +259,10 @@ sets.midcast["Cursna"] = set_combine(sets.midcast["Healing Magic"], {
     back        = "Oretan. Cape +1",
 })
 
+sets.midcast.Cure = {}
+
+sets.midcast.CurePotency = {}
+
 sets.midcast["Enfeebling Magic"] = {
     main        = { name     = "Coeus",
                     augments = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
@@ -257,8 +282,8 @@ sets.midcast["Enfeebling Magic"] = {
     back        = gear.AmbuscadeCapeMAB,
 }
 
-sets.midcast.EnfeeblingLight = set_combine(sets.midcast["Enfeebling Magic"], {})
-sets.midcast.EnfeeblingDark = set_combine(sets.midcast["Enfeebling Magic"], {})
+sets.midcast.EnfeeblingMnd = set_combine(sets.midcast["Enfeebling Magic"], {})
+sets.midcast.EnfeeblingInt = set_combine(sets.midcast["Enfeebling Magic"], {})
 
 sets.midcast["Elemental Magic"] = {
     main        = { name     = "Akademos",
@@ -294,16 +319,19 @@ sets.midcast["Drain"] = set_combine(sets.midcast["Dark Magic"], {
 
 sets.midcast["Aspir"] = sets.midcast["Drain"]
 
+sets.midcast["Trust"] = sets.precast["Trust"]
+
 
 --  ----------------------------------------------------------------------------------------------------
 --   Misc Sets
 --  ----------------------------------------------------------------------------------------------------
-sets.RaptureEbullience      = { head  = gear.EmpyreanHead }
-sets.PerpetuanceImmanence   = { hands = gear.EmpyreanHands }
-sets.PenuryParsimony        = { legs  = gear.EmpyreanLegs }
-sets.Klimaform              = { feet  = gear.EmpyreanFeet }
-sets.AltruismFocalization   = { head  = gear.RelicHead }
-sets.Enlightenment          = { body  = gear.RelicBody }
-sets.TranquilityEquanimity  = { hands = gear.RelicHands }
-sets.TabulaRasa             = { legs  = gear.RelicLegs }
-sets.Stormsurge             = { feet  = gear.RelicFeet }
+sets.RaptureEbullience        = { head  = gear.EmpyreanHead }
+sets.PerpetuanceImmanence     = { hands = gear.EmpyreanHands }
+sets.PenuryParsimony          = { legs  = gear.EmpyreanLegs }
+sets.Klimaform                = { feet  = gear.EmpyreanFeet }
+sets.AltruismFocalization     = { head  = gear.RelicHead }
+sets.precast["Enlightenment"] = { body  = gear.RelicBody }
+sets.TranquilityEquanimity    = { hands = gear.RelicHands }
+sets.precast["Tabula Rasa"]   = { legs  = gear.RelicLegs }
+sets.Stormsurge               = { feet  = gear.RelicFeet }
+
