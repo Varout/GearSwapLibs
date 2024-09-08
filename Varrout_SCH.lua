@@ -296,8 +296,8 @@ end
 --  MIDCAST
 --  ----------------------------------------------------------------------------------------------------
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    local midcastSet
-    local elementMatch
+    local midcastSet = {}
+    local elementMatch = false
 
     if spell.action_type == 'Magic' then
         elementMatch = check_spell_weather_day_match(spell)
@@ -380,8 +380,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     equip(midcastSet)
-    eventArgs.handled = true
-    return
 end
 
 
@@ -389,7 +387,6 @@ end
 --  IDLE
 --  ----------------------------------------------------------------------------------------------------
 function customize_idle_set(idleSet)
-    add_to_chat(200, "customize_idle_set")
     idleSet = sets.idle
 
     --  If Player MP is less than 50%, equip latent refresh
@@ -520,20 +517,72 @@ end
 
 --  Fragmentation (Aero/Thunder)
 function self_skillchain_fragmentation()
+    local input_str = '' ..
 
+    'input /p Self-skillchain: Fragmentation (Aero & Thunder);' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Blizzard" <t>;' ..
+    'wait 4;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Hydrohelix" <t>;' ..
+    'input /p Closing Fragmentation;' ..
+    'timer create "Skillchain Window Open" 8 down;'
+
+    send_command(input_str)
 end
 
 --  Fusion (Light/Fire)
 function self_skillchain_fusion()
+    local input_str = '' ..
 
+    'input /p Self-skillchain: Fusion (Fire & Light);' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Fire" <t>;' ..
+    'wait 4;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Ionohelix" <t>;' ..
+    'input /p Closing Fusion;' ..
+    'timer create "Skillchain Window Open" 8 down;'
+
+    send_command(input_str)
 end
 
---  Distortion (Water/Blizard)
+--  Distortion (Water/Blizzard)
 function self_skillchain_distortion()
+    local input_str = '' ..
 
+    'input /p Self-skillchain: Distortion (Blizzard & Water);' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Luminohelix" <t>;' ..
+    'wait 6.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Geohelix" <t>;' ..
+    'input /p Closing Distortion;' ..
+    'timer create "Skillchain Window Open" 8 down;'
+
+    send_command(input_str)
 end
 
 --  Gravitation (Dark/Stone)
 function self_skillchain_gravitation()
+    local input_str = '' ..
 
+    'input /p Self-skillchain: Gravitation (Darkness & Stone);' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Aero" <t>;' ..
+    'wait 4;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 1.2;' ..
+    'input /ma "Noctohelix" <t>;' ..
+    'input /p Closing Gravitation;' ..
+    'timer create "Skillchain Window Open" 8 down;'
+
+        send_command(input_str)
 end
