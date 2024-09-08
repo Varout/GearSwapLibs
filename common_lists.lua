@@ -113,7 +113,9 @@ enhancing_dark = S{
     "Ice Spikes",
     "Shock Spikes",
     "Dread Spikes",
+    -- "Klimaform", -- ???
 }
+
 
 -------------------------------------------------------------------------------------------------------------------
 --  Equipment Sets By Slot For Locking
@@ -205,3 +207,23 @@ DRG_MP_SubJob = S{"WHM", "RDM", "BLM", "BLU", "SCH", "PLD", "DRK"}
 
 wyv_breath_spells = S{'Dia', 'Poison', 'Sprout Smack', 'Head Butt', 'Cocoon'}
 wyv_elem_breath = S{'Flame Breath', 'Frost Breath', 'Sand Breath', 'Hydro Breath', 'Gust Breath', 'Lightning Breath'}
+
+
+-------------------------------------------------------------------------------------------------------------------
+--  Skillchain Names
+-------------------------------------------------------------------------------------------------------------------
+level_1_skillchains = S{}
+level_2_skillchains = S{
+    'distortion',       --  Blizard / Water
+    'fragmentation',    --  Aero / Thunder
+    'fusion',           --  Fire / Light
+    'gravitation',      --  Dark / Stone
+}
+level_3_skillchains = S{
+    'darkness',         --  Blizard / Dark / Stone / Water
+    'light',            --  Aero / Fire / Light / Thunder
+}
+level_4_skillchains = S{
+    'radiance',         --  Aero / Fire / Light / Thunder
+    'umbra',            --  Blizard / Dark / Stone / Water
+}
