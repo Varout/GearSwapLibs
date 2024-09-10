@@ -304,7 +304,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     if (spell.skill == "Healing Magic") then
-        add_to_chat(123, tostring(spellMap))
         if (spells_cure:contains(spellMap)) then
             if elementMatch then
                 midcastSet = sets.midcast.CurePotency
