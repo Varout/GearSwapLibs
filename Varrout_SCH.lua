@@ -304,28 +304,31 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     if (spell.skill == "Healing Magic") then
+        add_to_chat(123, tostring(spellMap))
         if (spells_cure:contains(spellMap)) then
             if elementMatch then
                 midcastSet = sets.midcast.CurePotency
             else
                 midcastSet = sets.midcast.Cure
             end
-        elseif (spell.name == "Cursna") then
-            midcastSet = sets.midcast["Cursna"]
+        elseif (sets.midcast[spell.name]) then
+            midcastSet = sets.midcast[spell.name]
+        elseif (sets.midcast[spellMap]) then
+            midcastSet = sets.midcast[spellMap]
         else
             midcastSet = sets.midcast["Healing Magic"]
         end
 
-
     elseif (spell.skill == "Enhancing Magic") then
         if (spells_resistance:contains(spell.name)) then
             midcastSet = sets.midcast["Barspell"]
+        elseif (sets.midcast[spell.name]) then
+            midcastSet = sets.midcast[spell.name]
         elseif (sets.midcast[spellMap]) then
             midcastSet = sets.midcast[spellMap]
         else
             midcastSet = sets.midcast["Enhancing Magic"]
         end
-
 
     elseif (spell.skill == "Enfeebling Magic") then
         if (enfeebling_int:contains(spellMap)) then
@@ -335,7 +338,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         else
             midcastSet = set.midcast["Enfeebling Magic"]
         end
-
 
     elseif (spell.skill == "Elemental Magic") then
         midcastSet = sets.midcast["Elemental Magic"]
@@ -357,7 +359,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 
     elseif (spell.skill == "Dark Magic") then
-        if (sets.midcast[spellMap]) then
+        if (sets.midcast[spell.name]) then
+            midcastSet = sets.midcast[spell.name]
+        elseif (sets.midcast[spellMap]) then
             midcastSet = sets.midcast[spellMap]
         else
             midcastSet = sets.midcast["Dark Magic"]
