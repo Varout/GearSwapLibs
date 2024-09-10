@@ -255,12 +255,12 @@ function job_buff_change(buff,gain)
             handle_equipping_gear(player.status)
         end
     end
-    if buffactive['Reive Mark'] then
-        equip(sets.Reive)
-        disable('neck')
-    else
-        enable('neck')
-    end
+    -- if buffactive['Reive Mark'] then
+    --     equip(sets.Reive)
+    --     disable('neck')
+    -- else
+    --     enable('neck')
+    -- end
 end
 
 -------------------------------------------------------------------------------------------------------------------

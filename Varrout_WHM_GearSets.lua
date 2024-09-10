@@ -12,20 +12,20 @@ gear.RelicLegs  = "Piety Pantaloons +3"
 gear.RelicFeet  = "Piety Duckbills +3"
 
 gear.EmpyreanHead  = "Ebers Cap +2"
-gear.EmpyreanBody  = "Ebers Bliaut +2"
+gear.EmpyreanBody  = "Ebers Bliaut +3"
 gear.EmpyreanHands = "Ebers Mitts +2"
 gear.EmpyreanLegs  = "Ebers Pantaloons +2"
 gear.EmpyreanFeet  = "Ebers Duckbills +2"
 
-gear.EmpyreanEarring = "Ebers Earring"
+gear.EmpyreanEarring = "Ebers Earring +1"
 gear.DynamisNeck     = "Cleric's Torque +2"
 
 --  REMA Weapons
 -- gear.ClubRelic = "Mjollnir"
-gear.ClubMythic = "Yagrush"
+gear.ClubMythic   = "Yagrush"
 gear.ClubEmpyrean = "Gambanteinn"
-gear.ClubAeonic = "Tishtrya"
--- gear.ClubPrime = "Lorg Mor"
+gear.ClubAeonic   = "Tishtrya"
+gear.ClubPrime    = "Lorg Mor"
 
 --  Gear sets for specific conditions and commands
 --  Neck equipment to lock in while in dynamis
@@ -79,9 +79,9 @@ sets.idle = {
     neck        = { name     = "Loricate Torque +1",
                     augments = {'Path: A',}},
     waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1
-    left_ear    = "Infused Earring",                -- Regen +1
-    right_ear   = { name     = "Moonshade Earring", -- Latent: Refresh +1
+    left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
+    right_ear   = gear.EmpyreanEarring
     left_ring   = "Stikini Ring +1",                -- Refresh +1
     right_ring  = "Defending Ring",
     back        = { name = "Alaunus's Cape",
@@ -89,21 +89,22 @@ sets.idle = {
 }
 
 sets.resting = {
-    main       = "Boonwell Staff",      -- +18
-    sub        = "Ariesian Grip",       -- +1
-    ammo       = "Mana Ampulla",        -- +2
-    head       = "Orvail Corona +1",    -- +4
-    neck       = "Eidolon Pendant +1",  -- +6
-    left_ear   = "Infused Earring",     -- +0, Regen +1
-    right_ear  = "Moonshade Earring",   -- +0, Latent: Refresh +1
-    body       = "Chelona Blazer",      -- +8 (Nice to have +1)
-    hands      = "Nares Cuffs",         -- +4
-    left_ring  = "Star Ring",           -- +1
-    right_ring = "Angha Ring",          -- +2
-    back       = "Felicitas Cape",      -- +3
-    waist      = "Shinjutsu-no-Obi +1", -- +5
-    legs       = "Nisse Slacks",        -- +4
-    feet       = "Chelona Boots"        -- +5 (Nice to have +1)
+    main        = "Boonwell Staff",      -- +18
+    sub         = "Ariesian Grip",       -- +1
+    ammo        = "Mana Ampulla",        -- +2
+    head        = "Orvail Corona +1",    -- +4
+    neck        = "Eidolon Pendant +1",  -- +6
+    left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
+                    augments = {'MP+25','Latent effect: "Refresh"+1',}},
+    right_ear   = "Infused Earring",     -- +0, Regen +1
+    body        = "Chelona Blazer",      -- +8 (Nice to have +1)
+    hands       = "Nares Cuffs",         -- +4
+    left_ring   = "Star Ring",           -- +1
+    right_ring  = "Angha Ring",          -- +2
+    back        = "Felicitas Cape",      -- +3
+    waist       = "Shinjutsu-no-Obi +1", -- +5
+    legs        = "Nisse Slacks",        -- +4
+    feet        = "Chelona Boots"        -- +5 (Nice to have +1)
 }
 
 --  Setting the base set: precast
@@ -155,13 +156,13 @@ sets.precast['Healing Magic'] = set_combine(sets.precast.FC, {
 })
 
 sets.precast['Cure'] = set_combine(sets.precast['Healing Magic'], {
-    main       = "Ababinili +1",                    -- Cure Cast Time -11%
-    sub        = "Clerisy Strap",                   -- FC +02%
-    head       = gear.RelicHead,                    -- Cure Cast Time -15%, Haste +6%
-    left_ear   = "Nourishing Earring +1",           -- Cure Cast Time -4%
-    right_ear  = "Mendicant's Earring",             -- Cure Cast Time -5%, Conserve MP +3
-    body       = "Heka's Kalasiris",                -- Cure Cast Time -15%
-    feet       = "Hygieia Clogs +1"                 -- Cure Cast Time -18%, Haste +3%, Conserve MP +5
+    main        = "Ababinili +1",                    -- Cure Cast Time -11%
+    sub         = "Clerisy Strap",                   -- FC +02%
+    head        = gear.RelicHead,                    -- Cure Cast Time -15%, Haste +6%
+    left_ear    = "Nourishing Earring +1",           -- Cure Cast Time -4%
+    right_ear   = "Mendicant's Earring",             -- Cure Cast Time -5%, Conserve MP +3
+    body        = "Heka's Kalasiris",                -- Cure Cast Time -15%
+    feet        = "Hygieia Clogs +1"                 -- Cure Cast Time -18%, Haste +3%, Conserve MP +5
 })
 
 --------------------
@@ -170,7 +171,7 @@ sets.precast['Cure'] = set_combine(sets.precast['Healing Magic'], {
 sets.midcast = {}
 
 sets.midcast.Caress = {
-    hands      = gear.EmpyreanHands                 -- Divine Caress +4
+    hands       = gear.EmpyreanHands                 -- Divine Caress +4
 }
 
 --  Equipment which increases spell potency when the day or weather match the spell element
@@ -396,19 +397,19 @@ sets.melee = {}
 sets.melee.Acc = {}
 
 sets.melee.Engaged = {
-    head       = gear.ArtefactHead,
-    body       = "Theo. Bliaut +3",
-    hands      = gear.ArtefactHands,
-    legs       = "Th. Pant. +3",
-    feet       = "Theo. Duckbills +3",
-    neck       = "Asperity Necklace",
-    waist      = "Cetl Belt",
-    left_ear   = "Steelflash Earring",
-    right_ear  = "Bladeborn Earring",
-    left_ring  = "Rajas Ring",
-    right_ring = "K'ayres Ring",
-    back       = { name     = "Alaunus's Cape",
-                   augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
+    head        = gear.ArtefactHead,
+    body        = "Theo. Bliaut +3",
+    hands       = gear.ArtefactHands,
+    legs        = "Th. Pant. +3",
+    feet        = "Theo. Duckbills +3",
+    neck        = "Asperity Necklace",
+    waist       = "Cetl Belt",
+    left_ear    = "Steelflash Earring",
+    right_ear   = "Bladeborn Earring",
+    left_ring   = "Rajas Ring",
+    right_ring  = "K'ayres Ring",
+    back        = { name     = "Alaunus's Cape",
+                    augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
 }
 
 sets.melee.WS = {}
