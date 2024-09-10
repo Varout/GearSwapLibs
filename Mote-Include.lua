@@ -616,6 +616,10 @@ function get_resting_set()
         mote_vars.set_breadcrumbs:append(state.RestingMode.current)
     end
 
+    if customize_resting_set then
+        restingSet = customize_resting_set(restingSet)
+    end
+
     return restingSet
 end
 
