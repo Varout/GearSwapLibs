@@ -87,10 +87,16 @@ end
 
 
 --  ----------------------------------------------------------------------------------------------------
+--  Check before changing any equipment
+--  ----------------------------------------------------------------------------------------------------
+function job_handle_equipping_gear(playerStatus, eventArgs)
+    check_special_ring_equipped()
+end
+
+--  ----------------------------------------------------------------------------------------------------
 --  PRECAST
 --  ----------------------------------------------------------------------------------------------------
 function job_precast(spell, action, spellMap, eventArgs)
-    check_special_ring_equipped()
     check_debuff_silenced(spell, eventArgs)
     check_weakened_sublimation(spell, eventArgs)
 
@@ -223,7 +229,6 @@ end
 --  JOB SELF COMMAND / CUSTOM COMMANDS
 --  ----------------------------------------------------------------------------------------------------
 function job_self_command(cmdParams, eventArgs)
-
     --  Make Reraise easy to handle
     if (cmdParams[1]:lower() == 'reraise') then
         cast_highest_available_reraise()
