@@ -20,7 +20,8 @@ gear.EmpyreanLegs  = "Arbatel Pants +1"
 gear.EmpyreanFeet  = "Arbatel Loavers +1"
 
 gear.EmpyreanRightEar = "Arbatel Earring"
-gear.DynamisNeck      = ""
+gear.DynamisNeck      = { name     = "Argute Stole",
+                          augments = {'Path: A',}}
 
 --  REMA Weapons
 -- gear.WeaponMythic   = ""
@@ -42,32 +43,39 @@ gear.AmbuscadeCapeMagicAccMND = gear.AmbuscadeCapeMAB
 --   Idle Sets
 --  ----------------------------------------------------------------------------------------------------
 sets.idle = {
-    main={ name="Mpaca's Staff", augments={'Path: A',}},
-    sub="Enki Strap",
-    ammo="Homiliary",
-    head={ name="Chironic Hat", augments={'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-    body="Jhakri Robe +2",
-    hands={ name="Chironic Gloves", augments={'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-    legs={ name="Chironic Hose", augments={'Accuracy+7','CHR+5','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}},
-    feet={ name="Chironic Slippers", augments={'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
-    neck={ name="Loricate Torque +1", augments={'Path: A',}},
-    waist="Plat. Mog. Belt",
-    left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
-    right_ear="Infused Earring",
-    left_ring="Stikini Ring +1",
-    right_ring="Defending Ring",
-    back="Solemnity Cape",
+    main        = { name     = "Mpaca's Staff",
+                    augments={'Path: A',}},
+    sub         = "Enki Strap",
+    ammo        = "Homiliary",
+    head        = { name     = "Chironic Hat",
+                    augments = {'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
+    body        = "Jhakri Robe +2",
+    hands       = { name     = "Chironic Gloves",
+                    augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
+    legs        = { name     = "Chironic Hose",
+                    augments = {'Accuracy+7','CHR+5','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}},
+    feet        = { name     = "Chironic Slippers",
+                    augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
+    neck        = { name     = "Loricate Torque +1",
+                    augments = {'Path: A',}},
+    waist       = "Plat. Mog. Belt",
+    left_ear    = { name     = "Moonshade Earring",
+                    augments = {'MP+25','Latent effect: "Refresh"+1',}},
+    right_ear   = "Infused Earring",
+    left_ring   = "Stikini Ring +1",
+    right_ring  = "Defending Ring",
+    back        = "Solemnity Cape",
 }
 
 sets.idle.RefreshLatent = {
-    waist="Fucho-no-Obi",
+    waist       = "Fucho-no-Obi",
 }
 
 sets.idle.Sublimation = {
-    head = gear.ArtefactHead,
-    body = gear.RelicBody,
-    waist = "Embla Sash",
-    right_ear = "Savant's Earring",
+    head        = gear.ArtefactHead,
+    body        = gear.RelicBody,
+    waist       = "Embla Sash",
+    right_ear   = "Savant's Earring",
 }
 
 sets.idle.ToAU = {
@@ -109,7 +117,7 @@ sets.precast.FC = {
     ammo        = "Incantor Stone",
     head        = gear.ArtefactHead,
     body        = "Merlinic Jubbah",
-    hands       = "Acad. Bracers +2",
+    hands       = gear.ArtefactHands,
     legs        = { name     = "Kaykaus Tights",
                     augments = {'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
     feet        = gear.RelicFeet,
@@ -175,8 +183,6 @@ sets.midcast.Potency = {
     back        = "Twilight Cape",
     waist       = "Hachirin-no-Obi",
 }
-
-sets.midcast.MagicBurst = {}
 
 sets.midcast["Enhancing Magic"] = {
     main        = "Bolelabunga",
@@ -252,7 +258,9 @@ sets.midcast["Healing Magic"] = {
     back        = "Altruistic Cape",
 }
 
-sets.midcast["Cursna"] = set_combine(sets.midcast["Healing Magic"], {
+sets.midcast["StatusRemoval"] = sets.midcast["Healing Magic"]
+
+sets.midcast["Cursna"] = set_combine(sets.midcast["StatusRemoval"], {
     neck        = "Debilis Medallion",
     left_ring   = "Haoma's Ring",
     right_ring  = "Haoma's Ring",
@@ -290,19 +298,31 @@ sets.midcast["Elemental Magic"] = {
                     augments = {'INT+15','"Mag.Atk.Bns."+15','Mag. Acc.+15',}},
     sub         = "Enki Strap",
     ammo        = "Hydrocera",
-    head        = gear.ArtefactHead,
-    body        = "Jhakri Robe +2",
+    head        = gear.RelicHead,
+    body        = gear.RelicBody,
     hands       = gear.RelicHands,
-    legs        = "Jhakri Slops +2",
-    feet        = "Jhakri Pigaches +1",
-    neck        = "Argute Sole",
+    legs        = gear.RelicLegs,
+    feet        = gear.RelicFeet,
+    neck        = "Baetyl Pendant",
     waist       = "Aswang Sash",
     left_ear    = "Barkarole Earring",
-    right_ear   = "Hecate's Earring",
-    left_ring   = "Mallquis Ring",
-    right_ring  = "Jhakri Ring",
+    right_ear   = gear.EmpyreanRightEar,
+    left_ring   = "Medada's Ring",
+    right_ring  = "Freke Ring",
     back        = gear.AmbuscadeCapeMAB,
 }
+
+sets.midcast["Helix"] = set_combine(sets.midcast["Elemental Magic"], {
+    neck=gear.DynamisNeck,
+    -- back=""
+})
+
+sets.midcast.MagicBurst = set_combine(sets.midcast["Elemental Magic"], {
+    body        = gear.ArtefactBody,
+    feet        = "Jhakri Pigaches +2",
+    neck        = gear.DynamisNeck,
+    right_ring  = "Jhakri Ring",
+})
 
 sets.midcast["Dark Magic"] = set_combine(sets.midcast["Elemental Magic"], {
     main        = { name     = "Rubicundity",
