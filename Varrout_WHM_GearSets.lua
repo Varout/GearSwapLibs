@@ -14,14 +14,14 @@ gear.RelicFeet  = "Piety Duckbills +3"
 gear.EmpyreanHead  = "Ebers Cap +2"
 gear.EmpyreanBody  = "Ebers Bliaut +3"
 gear.EmpyreanHands = "Ebers Mitts +2"
-gear.EmpyreanLegs  = "Ebers Pantaloons +2"
+gear.EmpyreanLegs  = "Ebers Pantaloons +3"
 gear.EmpyreanFeet  = "Ebers Duckbills +2"
 
 gear.EmpyreanEarring = "Ebers Earring +1"
 gear.DynamisNeck     = "Cleric's Torque +2"
 
 --  REMA Weapons
--- gear.ClubRelic = "Mjollnir"
+gear.ClubRelic    = "Mjollnir"
 gear.ClubMythic   = "Yagrush"
 gear.ClubEmpyrean = "Gambanteinn"
 gear.ClubAeonic   = "Tishtrya"
@@ -81,7 +81,7 @@ sets.idle = {
     waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1
     left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
-    right_ear   = gear.EmpyreanEarring
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Stikini Ring +1",                -- Refresh +1
     right_ring  = "Defending Ring",
     back        = { name = "Alaunus's Cape",
@@ -198,7 +198,7 @@ sets.midcast.Cure = {
     left_ear    = "Glorious Earring",
     right_ear   = { name     = gear.EmpyreanEarring,
                     augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
-    left_ring   = "Janniston Ring",
+    left_ring   = "Janniston Ring +1",
     right_ring  = "Menelaus's Ring",
     back        = { name     = "Alaunus's Cape",
                     augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
@@ -220,7 +220,7 @@ sets.midcast.CureBonus = {
     left_ear    = "Glorious Earring",
     right_ear   = { name     = gear.EmpyreanEarring,
                     augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
-    left_ring   = "Janniston Ring",
+    left_ring   = "Janniston Ring +1",
     right_ring  = "Menelaus's Ring",
     back        = { name     = "Alaunus's Cape",
                     augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
@@ -247,7 +247,6 @@ sets.midcast.NASpell = {
     right_ring  = "Menelaus's Ring",                -- Cure +5%, Healing Magic +15, Cursna +20
     back        = "Altruistic Cape",                -- Healing Magic +05
 }
-
 
 --  Cursna AoE
 sets.CursnaAoE = {
@@ -392,30 +391,27 @@ sets.midcast['Banish'] = set_combine(sets.midcast['Divine Magic'], {
 sets.midcast['Holy'] = sets.midcast['Banish']
 
 --  Melee sets
-sets.melee = {}
-
-sets.melee.Acc = {}
-
-sets.melee.Engaged = {
+sets.engaged = {
+    ammo        = "Oshasha's Treatise",
     head        = gear.ArtefactHead,
-    body        = "Theo. Bliaut +3",
+    body        = gear.ArtefactBody,
     hands       = gear.ArtefactHands,
-    legs        = "Th. Pant. +3",
-    feet        = "Theo. Duckbills +3",
+    legs        = gear.ArtefactLegs,
+    feet        = gear.ArtefactFeet,
     neck        = "Asperity Necklace",
-    waist       = "Cetl Belt",
-    left_ear    = "Steelflash Earring",
-    right_ear   = "Bladeborn Earring",
+    waist       = "Cornelia's Belt",
+    left_ear    = "Dignitary's Earring",
+    right_ear   = "Brutal Earring",
     left_ring   = "Rajas Ring",
     right_ring  = "K'ayres Ring",
     back        = { name     = "Alaunus's Cape",
                     augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
 }
 
-sets.melee.WS = {}
-sets.melee.WS['Black Halo'] = set_combine(sets.melee.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
-sets.melee.WS['Dagan'] = set_combine(sets.melee.WS, {})         -- Empyrean WS: Max HP & MP [None]
-sets.melee.WS['Hexa Strike'] = set_combine(sets.melee.WS, {})   -- Dope WS:     30% STR & MND [Fusion]
-sets.melee.WS['Mystic Boon'] = set_combine(sets.melee.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
-sets.melee.WS['Randgrith'] = set_combine(sets.melee.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
-sets.melee.WS['Realmrazer'] = set_combine(sets.melee.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
+sets.precast.WS = {}
+sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
+sets.precast.WS['Dagan'] = set_combine(sets.precast.WS, {})         -- Empyrean WS: Max HP & MP [None]
+sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Dope WS:     30% STR & MND [Fusion]
+sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
+sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
+sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]

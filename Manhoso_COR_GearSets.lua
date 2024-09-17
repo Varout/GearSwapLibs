@@ -3,24 +3,24 @@
 --  ----------------------------------------------------------------------------------------------------
 gear.ArtefactHead  = "Laksamana's Tricorne +3"
 gear.ArtefactBody  = "Laksamana's Frac +3"
-gear.ArtefactHands = "Laksamana's Gants +2"
+gear.ArtefactHands = "Laksamana's Gants +3"
 gear.ArtefactLegs  = "Laksamana's Trews +2"
-gear.ArtefactFeet  = "Laksamana's Bottes +2"
+gear.ArtefactFeet  = "Laksamana's Bottes +3"
 
 gear.RelicHead  = "Launun Tricorne +3"
 gear.RelicBody  = "Launun Frac +3"
-gear.RelicHands = "Launun Gants +2"
+gear.RelicHands = "Launun Gants +3"
 gear.RelicLegs  = "Launun Trews +3"
 gear.RelicFeet  = "Launun Bottes +3"
 
 gear.EmpyreanHead  = "Chasseur's Tricorne +2"
-gear.EmpyreanBody  = "Chasseur's Frac +2"
+gear.EmpyreanBody  = "Chasseur's Frac +3"
 gear.EmpyreanHands = "Chasseur's Gants +3"
 gear.EmpyreanLegs  = "Chasseur's Culottes +2"
 gear.EmpyreanFeet  = "Chasseur's Bottes +2"
 
-gear.EmpyreanEarring = "Chasseur's Earring"
-gear.DynamisNeck     = "Commodore Charm"    --  Have +2, needs to be upgraded
+gear.EmpyreanEarring = "Chasseur's Earring +1"
+gear.DynamisNeck     = "Commodore Charm +2"
 
 --  REMA Weapons
 gear.WeaponMythic   = "Death Penalty"   -- Not yet
