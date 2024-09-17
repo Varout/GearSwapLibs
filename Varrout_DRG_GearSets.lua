@@ -19,7 +19,7 @@ gear.EmpyreanHands     = "Peltast's Vambraces +1"
 gear.EmpyreanLegs      = "Peltast's Cuissots +1"
 gear.EmpyreanFeet      = "Peltast's Schynbalds +1"
 
-gear.EmpyreanEarring   = "Peltast's Earring"
+gear.EmpyreanEarring   = "Peltast's Earring +1"
 gear.DynamisNeck       = ""
 
 --  REMA Weapons

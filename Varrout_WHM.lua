@@ -206,7 +206,7 @@ end
 function user_status_change(newStatus, oldStatus)
     if newStatus == 'Engaged' then
         melee_equip_lock()
-    elseif oldStatus == 'Engaged' then
+    elseif oldStatus == 'Engaged' and player.sub_job ~= 'NIN' then
         melee_equip_unlock()
     end
 end
@@ -253,6 +253,13 @@ function select_default_macro_book()
     send_command('wait 2; input /lockstyleset 004')
 end
 
+function sub_job_change(newSubjob, oldSubjob)
+    if newSubjob == 'NIN' then
+        melee_equip_lock()
+    else
+        melee_equip_unlock()
+    end
+end
 
 --  ----------------------------------------------------------------------------------------------------
 --                      User defined functions
