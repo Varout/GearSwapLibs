@@ -16,6 +16,13 @@ Also has a table to keep track of your Salvage runs if you want to do that.
 ### SoA Progress
 
 Used to track progress towards getting Ygnas Trust and upgrading your ring to +1.
+- Tracks Seekers of Adoulin main story progress
+- Tracks Seekers of Adoulin and Mog Gardess quest progress
+- Tracks Coallition Assignment progress
+- Tracks Mog Garden Progress
+- Tracks monster rearing progress
+- Provides an overview of everything on main sheet
+- Includes a few examples of inputs to see how it works, which are easily removed
 
 ### Weather Gear
 
@@ -65,6 +72,14 @@ _none_
 
 Rework in progress
 
+### Red Mage (RDM)
+
+Rework in progress
+
+### Dark Knight (DRK)
+
+Rework in progress
+
 ## Manhoso
 
 ### Corsair (COR)
@@ -80,6 +95,10 @@ Rework in progress
 - `COR_Roll_Values.lua`
 - `common_functions.lua`
 - `common_lists.lua`
+
+### Thief (THF)
+
+Rework in progress
 
 ## Custom LUA filess
 
