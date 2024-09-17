@@ -396,3 +396,7 @@ end
 function check_spell_weather_day_match(spell)
     return spell.element == world.weather_element or spell.element == world.day_element
 end
+
+function check_spell_weather_match(spell)
+    return spell.element == world.weather_element
+end

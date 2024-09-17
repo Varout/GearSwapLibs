@@ -227,3 +227,17 @@ level_4_skillchains = S{
     'radiance',         --  Aero / Fire / Light / Thunder
     'umbra',            --  Blizard / Dark / Stone / Water
 }
+
+-------------------------------------------------------------------------------------------------------------------
+--  Elemental Weaknesses
+-------------------------------------------------------------------------------------------------------------------
+weak_to_element = {
+    ["Light"]    = "Darkness",
+    ["Darkness"] = "Light",
+    ["Earth"]    = "Wind",
+    ["Water"]    = "Thunder",
+    ["Wind"]     = "Ice",
+    ["Fire"]     = "Water",
+    ["Ice"]      = "Fire",
+    ["Thunder"]  = "Earth"
+}
