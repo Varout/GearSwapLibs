@@ -31,13 +31,7 @@ gear.DynamisNeck      = { name     = "Argute Stole",
 
 --  Ambuscade Capes
 gear.AmbuscadeCapeIdle = gear.AmbuscadeCapeMAB
-gear.AmbuscadeCapeMagicAccINT = gear.AmbuscadeCapeMAB
 gear.AmbuscadeCapeMAB = { name = "Lugh's Cape", augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
-gear.AmbuscadeCapeMagicAccMND = gear.AmbuscadeCapeMAB
-
---  ----------------------------------------------------------------------------------------------------
---   Town Sets
---  ----------------------------------------------------------------------------------------------------
 
 --  ----------------------------------------------------------------------------------------------------
 --   Idle Sets
@@ -80,6 +74,23 @@ sets.idle.Sublimation = {
 
 sets.idle.ToAU = {
     right_ring  = "Balrahn's Ring"
+}
+
+sets.idle.Town = {
+    main = "Daybreak",
+    sub = "Culminus",
+    head = gear.ArtefactHead,
+    body = gear.ArtefactBody,
+    hands = gear.ArtefactHands,
+    legs = gear.ArtefactLegs,
+    feet = gear.ArtefactFeet,
+    neck = "Incanter's Torque",
+    left_ear = "Moonshade Earring",
+    right_ear = gear.EmpyreanRightEar,
+    left_ring = "Stikini Ring +1",
+    right_ring = "Janniston Ring +1",
+    back = "Aurist's Cape +1",
+    waist = "Hachirin-no-Obi",
 }
 
 sets.resting = {
@@ -130,6 +141,13 @@ sets.precast.FC = {
     back        = "Perimede Cape",
 }
 
+sets.precast.FC.SixStepSc = set_combine(sets.precast.FC, {
+    main = "Twinned Blade",
+    sub="Genmei Shield",
+    right_ear = "Loquacious Earring",
+    back = "Solemnity Cape"
+})
+
 sets.precast["Healing Magic"] = set_combine(sets.precast.FC, {
     main        = "Vadose",
     sub         = "Calmius",
@@ -139,12 +157,12 @@ sets.precast["Healing Magic"] = set_combine(sets.precast.FC, {
 sets.precast["Cure"] = set_combine(sets.precast.FC, {
     main        = "Vadose Rod",
     sub         = "Sors Shield",
-    head        = { name        = "Vanya Hood",
-                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+    head        = { name     = "Vanya Hood",
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     body        = "Heka's Kalasiris",
     legs        = "Doyen Pants",
-    feet        = { name        = "Vanya Clogs",
-                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+    feet        = { name     = "Vanya Clogs",
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     right_ear   = "Mendi. Earring",
     back        = "Pahtli Cape",
 })
@@ -190,12 +208,12 @@ sets.midcast["Enhancing Magic"] = {
     ammo        = "Savant's Treatise",
     head        = "Befouled Crown",
     body        = gear.RelicHead,    --  Enh. Mag. eff. dur. +8%
-    hands       = { name        = "Telchine Gloves",
-                    augments    = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
-    legs        = { name        = "Telchine Braconi",
-                    augments    = {'Enh. Mag. eff. dur. +9',}},
-    feet        = { name        = "Telchine Pigaches",
-                    augments    = {'Enh. Mag. eff. dur. +6',}},
+    hands       = { name     = "Telchine Gloves",
+                    augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
+    legs        = { name     = "Telchine Braconi",
+                    augments = {'Enh. Mag. eff. dur. +9',}},
+    feet        = { name     = "Telchine Pigaches",
+                    augments = {'Enh. Mag. eff. dur. +6',}},
     neck        = "Colossus's Torque",
     waist       = "Olympus Sash",
     left_ear    = "Augment. Earring",
@@ -208,10 +226,9 @@ sets.midcast["Enhancing Magic"] = {
 sets.midcast["Barspell"] = set_combine(sets.midcast["Enhancing Magic"], {
     hands       = { name     = "Chironic Gloves",
                     augments = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
-    legs        = gear.ArtefactLegs,
-    --  legs        = limbus legs with barspell +15
+    legs        = "Shedir Seraweels",
     feet        = { name     = "Kaykaus Boots",
-                    augments    = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+                    augments = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
 })
 
 sets.midcast["Stoneskin"] = set_combine(sets.midcast["Enhancing Magic"], {
@@ -222,12 +239,12 @@ sets.midcast["Stoneskin"] = set_combine(sets.midcast["Enhancing Magic"], {
 })
 
 sets.midcast["Regen"] = set_combine(sets.midcast["Enhancing Magic"], {
-    main        = { name        = "Coeus",
-                    augments    = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
+    main        = { name     = "Coeus",
+                    augments = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
     sub         = "Fulcio Grip",
     head        = gear.EmpyreanHead,
-    legs        = { name        = "Telchine Braconi",
-                    augments    = {'"Regen" potency+3',}},
+    legs        = { name     = "Telchine Braconi",
+                    augments = {'"Regen" potency+3',}},
     back        = gear.AmbuscadeCapeMAB
 
 })
@@ -248,7 +265,7 @@ sets.midcast["Healing Magic"] = {
     hands       = gear.RelicHands,
     legs        = gear.ArtefactLegs,
     feet        = { name     = "Vanya Clogs",
-                    augments    = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     neck        = "Colossus's Torque",
     waist       = "Bishop's Sash",
     left_ear    = "Beatific Earring",
@@ -267,9 +284,46 @@ sets.midcast["Cursna"] = set_combine(sets.midcast["StatusRemoval"], {
     back        = "Oretan. Cape +1",
 })
 
-sets.midcast.Cure = {}
+sets.midcast.Cure = {
+    main        = "Daybreak",
+    sub         = "Ammurapi Shield",
+    ammo        = "Quartz Tathlum +1",
+    head        = { name     = "Vanya Hood", 
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+    body        = { name     = "Kaykaus Bliaut", 
+                    augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+    hands       = gear.RelicHands,
+    legs        = gear.ArtefactLegs,
+    feet        = { name     = "Vanya Clogs", 
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+    neck        = "Incanter's Torque",
+    waist       = "Bishop's Sash",
+    left_ear    = "Beatific Earring",
+    right_ear   = "Meili Earring",
+    left_ring   = "Jann. Ring +1",
+    right_ring  = "Sirona's Ring",
+    back        = "Altruistic Cape",
+}
 
-sets.midcast.CurePotency = {}
+sets.midcast.Rapture = {
+    main        = "Daybreak",
+    sub         = "Ammurapi Shield",
+    ammo        = "Quartz Tathlum +1",
+    head        = gear.EmpyreanHead,
+    body        = { name     = "Kaykaus Bliaut", 
+                    augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+    hands       = gear.RelicHands,
+    legs        = gear.ArtefactLegs,
+    feet        = { name     = "Vanya Clogs", 
+                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+    neck        = "Incanter's Torque",
+    waist       = "Bishop's Sash",
+    left_ear    = "Mendi. Earring",
+    right_ear   = "Meili Earring",
+    left_ring   = "Jann. Ring +1",
+    right_ring  = "Sirona's Ring",
+    back        = "Altruistic Cape",
+}
 
 sets.midcast["Enfeebling Magic"] = {
     main        = { name     = "Coeus",
@@ -287,11 +341,8 @@ sets.midcast["Enfeebling Magic"] = {
     right_ear   = "Psystorm Earring",
     left_ring   = "Stikini Ring +1",
     right_ring  = "Kishar Ring",
-    back        = gear.AmbuscadeCapeMAB,
+    back        = "Aurist's Cape",
 }
-
-sets.midcast.EnfeeblingMnd = set_combine(sets.midcast["Enfeebling Magic"], {})
-sets.midcast.EnfeeblingInt = set_combine(sets.midcast["Enfeebling Magic"], {})
 
 sets.midcast["Elemental Magic"] = {
     main        = { name     = "Akademos",
@@ -354,4 +405,4 @@ sets.precast["Enlightenment"] = { body  = gear.RelicBody }
 sets.TranquilityEquanimity    = { hands = gear.RelicHands }
 sets.precast["Tabula Rasa"]   = { legs  = gear.RelicLegs }
 sets.Stormsurge               = { feet  = gear.RelicFeet }
-
+sets.CelerityAlacrity         = { feet  = gear.RelicFeet }
