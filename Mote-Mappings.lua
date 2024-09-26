@@ -371,6 +371,8 @@ areas.Cities = S{
     "Kazham",
     "Rabao",
     "Chocobo Circuit",
+    "Mog House",
+    "Mog Garden",
 }
 
 -- Adoulin areas, where Ionis will grant special stat bonuses.

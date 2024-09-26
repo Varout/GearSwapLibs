@@ -216,13 +216,13 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function custom_instructions()
     add_to_chat(200, "Varrout's WHM Custom commands:")
-    add_to_chat(200, "* Windows Key + 1: Raise Target")
-    add_to_chat(200, "* Windows Key + 2: Reraise")
-    add_to_chat(200, "* Windows Key + C: Toggle Magic Burst Mode (Default off)")
-    add_to_chat(200, "* Windows Key + M: Show Map")
-    -- add_to_chat(200, "* Windows Key + X: Dynamis neck lock mode")
-
-    --  Self skillchains, toggle MB mode
+    add_to_chat(200, "* Windows Key + 3: Fragmentation")
+    add_to_chat(200, "* Windows Key + 4: Fusion")
+    add_to_chat(200, "* Windows Key + 5: Distortion")
+    add_to_chat(200, "* Windows Key + 6: Gravitation")
+    add_to_chat(200, "* Windows Key + 0: Solo Six-Step (80 seconds!)")
+    add_to_chat(200, "* Windows Key + B: Toggle Magic Burst Mode (Default off)")
+    add_to_chat(200, "* Windows Key + U: Unlock all equipment")
 end
 
 
@@ -242,25 +242,30 @@ function user_setup()
     --  Special states to track for White Mage
     -- state.DynamisLock = M(false, "Dynamis Neck Lock Mode")
     state.MagicBurst = M(false, "Magic Burst Mode")
+    state.SixStepSc = M(false, "SixStepSc")
 
 
     --  Where @ is the Windows Key
-    send_command('bind @c gs c MagicBurst')             --  Windows Key + C: Toggle Magic Burst mode
+    send_command('bind @b gs c toggle MagicBurst')      --  Windows Key + B: Toggle Magic Burst mode
     send_command('bind @m input /map')                  --  Windows Key + M: Show map, because I'm lazy af
-    -- send_command('bind @x gs c DynamisLock')            --  Windows Key + X: Activate Dynamis neck log mode
+    send_command('bind @u gs c enable-all')             --  Windows Key + U: Unlock all equipment slots
+    -- send_command('bind @x gs c toggle DynamisLock')  --  Windows Key + X: Activate Dynamis neck log mode
     send_command('bind @1 gs c raise')                  --  Windows Key + 1: Cast highest available Raise
     send_command('bind @2 gs c reraise')                --  Windows Key + 2: Cast highest available Reraise
     send_command('bind @3 gs c fragmentation')
     send_command('bind @4 gs c fusion')
     send_command('bind @5 gs c distortion')
     send_command('bind @6 gs c gravitation')
+    send_command('bind @0 gs c six-step')
+    
 
     custom_instructions()
 end
 
 function user_unload()
-    send_command('unbind @c')
+    send_command('unbind @b')
     send_command('unbind @m')
+    send_command('unbind @u')
     -- send_command('unbind @x')
     send_command('unbind @1')
     send_command('unbind @2')
@@ -268,6 +273,7 @@ function user_unload()
     send_command('unbind @4')
     send_command('unbind @5')
     send_command('unbind @6')
+    send_command('unbind @0')
 end
 
 function init_gear_sets()
@@ -318,6 +324,16 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             midcastSet = sets.midcast["Healing Magic"]
         end
 
+        if (not spells_cure:contains(spellMap)) then
+            if buffactive["Penury"] then
+                midcastSet = set_combine(midcastSet, sets.PenuryParsimony)
+            end
+
+            if buffactive["Celerity"] and check_spell_weather_match(spell) then
+                midcastSet = set_combine(midcastSet, sets.CelerityAlacrity)
+            end
+        end
+
     elseif (spell.skill == "Enhancing Magic") then
         if (spells_resistance:contains(spell.name)) then
             midcastSet = sets.midcast["Barspell"]
@@ -347,9 +363,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
         --  If Magic Burst mode is on
-        -- if () then
-        --     midcastSet = set_combine(midcastSet, sets.midcast.MagicBurst)
-        -- end
+        if (state.MagicBurst.value) then
+            midcastSet = set_combine(midcastSet, sets.midcast.MagicBurst)
+        end
 
         --  If Klimaform is active
         if (buffactive["Klimaform"]) then
@@ -372,9 +388,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
         --  If Magic Burst mode is on
-        -- if () then
-        --     midcastSet = set_combine(midcastSet, sets.midcast.MagicBurst)
-        -- end
+        if (state.MagicBurst.value) then
+            midcastSet = set_combine(midcastSet, sets.midcast.MagicBurst)
+        end
 
         --  If Klimaform is active
         if (buffactive["Klimaform"]) then
@@ -397,34 +413,14 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.idle.RefreshLatent)
     end
 
-    -- --  If in an assault or salvage zone, equip refresh ring
-    -- if zones_toau_ring:contains(world.area) then
-    --     idleSet = set_combine(idleSet, sets.idle.ToAU)
-    -- end
+    if not buffactive["Sublimation: Activated"] and areas.Cities:contains(world.area) then
+        idleSet = sets.idle.Town
+    end
 
-    -- --  If Sublimation is charging, equip gear to help charging
-    -- if buffactive["Sublimation: Activated"] then
-    --     idleSet = set_combine(idleSet, sets.idle.Sublimation)
-    -- end
-
-    -- return idleSet
     return get_custom_idle_set(idleSet)
 end
 
 function customize_resting_set(restingSet)
-    -- restingSet = sets.resting
-
-    -- --  If in an assault or salvage zone, equip refresh ring
-    -- if zones_toau_ring:contains(world.area) then
-    --     restingSet = set_combine(restingSet, sets.idle.ToAU)
-    -- end
-
-    -- --  If Sublimation is charging, equip gear to help charging
-    -- if buffactive["Sublimation: Activated"] then
-    --     restingSet = set_combine(restingSet, sets.idle.Sublimation)
-    -- end
-
-    -- return restingSet
     return get_custom_idle_set(sets.resting)
 end
 
@@ -467,10 +463,24 @@ function job_self_command(cmdParams, eventArgs)
         return
 
     --  Self skillchain
-    elseif level_2_skillchains:contains(cmdParams[1]:lower()) then
+    elseif level_2_skillchains:contains(cmdParams[1]:lower()) or cmdParams[1]:lower() == 'six-step' then
+        add_to_chat(123, "Self-Skillchain")
         self_skillchain(cmdParams[1]:lower())
         eventArgs.handled = true
         return
+
+    elseif cmdParams[1]:lower() == 'enable-all' then
+        add_to_chat(123, "Enabling all gear")
+        equipment_unlock_all()
+        equip(get_custom_idle_set(idleSet))
+        state.SixStepSc:set(false)
+        eventArgs.handled = true
+        return
+
+    else
+        if cmdParams[1]:lower() ~= 'toggle' then
+            add_to_chat(123, "Skipped")
+        end
     end
 end
 
@@ -481,7 +491,7 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 5)
-    -- send_command('wait 2; input /lockstyle 001')
+    send_command('wait 2; input /lockstyle 001')
 end
 
 
@@ -507,6 +517,7 @@ end
 --                      Self Skillchains
 --  ----------------------------------------------------------------------------------------------------
 function self_skillchain(skillchain_type)
+    add_to_chat(123, tostring(skillchain_type))
     if (skillchain_type == 'fragmentation') then
         self_skillchain_fragmentation()
     elseif (skillchain_type == 'fusion') then
@@ -515,6 +526,8 @@ function self_skillchain(skillchain_type)
         self_skillchain_distortion()
     elseif (skillchain_type == 'gravitation') then
         self_skillchain_gravitation()
+    elseif (skillchain_type == 'six-step') then
+        self_skillchain_6_step()
     end
 end
 
@@ -587,5 +600,59 @@ function self_skillchain_gravitation()
     'input /p Closing Gravitation;' ..
     'timer create "Skillchain Window Open" 8 down;'
 
-        send_command(input_str)
+    send_command(input_str)
+end
+
+--  Fire -> Stone -> Fire -> Stone -> Fire -> Stone
+function self_skillchain_6_step()
+    if not (buffactive["Dark Arts"] or buffactive["Addendum: Black"]) or state.SixStepSc.value then
+        return
+    end
+
+    equip(sets.precast.FC.SixStepSc)
+    equipment_lock_all()
+    add_to_chat(100, "Equipment locked!")
+
+    state.SixStepSc:set(true)
+    
+    local input_str = '' ..
+
+    'input /p Self-skillchain: 6-Step;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 32;' ..
+    'input /ma "Fire" <t>;' ..
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Stone" <t>;' ..
+    --  Skillchain 1: Scisson
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Fire" <t>;' ..
+    --  Skillchain 2: Liquefaction
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Stone" <t>;' ..
+    --  Skillchain 3: Scisson
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Fire" <t>;' ..
+    --  Skillchain 4: Liquefaction
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Stone" <t>;' ..
+    --  Skillchain 5: Scisson
+    'wait 5.5;' ..
+    'input /ja "Immanence" <me>;' ..
+    'wait 2;' ..
+    'input /ma "Fire" <t>;' ..
+    --  Skillchain 6: Liquefaction
+    'wait 4;' ..
+    'input /echo Push Windows Key + U to enable equipment;'
+
+    send_command(input_str)
 end

@@ -70,7 +70,25 @@ _none_
 
 ### Scholar (SCH)
 
-Rework in progress
+#### Custom GearSwap Commands
+
+- `Windows Key + B`: Toggle Magic Burst Mode
+- `Windows Key + M`: Brings up the map because I'm lazy
+- `Windows Key + U`: Unlock all equipment. Needed after Six-Step Skillchain
+- `Windows Key + 1`: Takes into account recasts and casts the highest available Raise spell on selected target
+- `Windows Key + 2`: Takes into account recasts and casts the highest available Reraise spell
+- `Windows Key + 3:` Self-Skillchain: Fragmentation
+- `Windows Key + 4:` Self-Skillchain: Fusion
+- `Windows Key + 5:` Self-Skillchain: Distortion
+- `Windows Key + 6:` Self-Skillchain: Gravitation
+- `Windows Key + 0:` Self-Skillchain Six-Step (Takes ~80 seconds)
+
+#### Dependencies
+
+- `Mote-Include.lua`
+- `Varrout_SCH_GearSets.lua`
+- `common_functions.lua`
+- `common_lists.lua`
 
 ### Red Mage (RDM)
 
