@@ -216,10 +216,12 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function custom_instructions()
     add_to_chat(200, "Varrout's WHM Custom commands:")
-    add_to_chat(200, "* Windows Key + 1: Raise Target")
-    add_to_chat(200, "* Windows Key + 2: Reraise")
+    add_to_chat(200, "* Windows Key + 3: Fragmentation")
+    add_to_chat(200, "* Windows Key + 4: Fusion")
+    add_to_chat(200, "* Windows Key + 5: Distortion")
+    add_to_chat(200, "* Windows Key + 6: Gravitation")
+    add_to_chat(200, "* Windows Key + 0: Solo Six-Step (80 seconds!)")
     add_to_chat(200, "* Windows Key + B: Toggle Magic Burst Mode (Default off)")
-    add_to_chat(200, "* Windows Key + M: Show Map")
     add_to_chat(200, "* Windows Key + U: Unlock all equipment")
 end
 
