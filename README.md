@@ -98,6 +98,40 @@ Rework in progress
 
 Rework in progress
 
+### Summoner (SMN)
+
+#### Custom Commands
+
+These were built in when I got the lua and are not my work. I can't remember where I got them as it was long ago, so I cannot give credit where credit is due. :(
+
+**Siphon**<br />
+Command: `gs c siphon`<br />
+Automatically run the process to: dismiss the current avatar; cast appropriate weather; summon the appropriate spirit; Elemental Siphon; release the spirit; and re-summon the avatar.
+
+**Pact**<br />
+Command: `gs c pact <PactType>`<br />
+Attempts to use the indicated pact type for the current avatar.<br />
+PactType can be one of:
+- cure
+- curaga
+- buffOffense
+- buffDefense
+- buffSpecial
+- debuff1
+- debuff2
+- sleep
+- nuke2
+- nuke4
+- bp70
+- bp75 (merits and lvl 75-80 pacts)
+- astralflow
+
+#### Dependencies
+
+- `Mote-Include.lua`
+- `common_functions.lua`
+- `common_lists.lua`
+
 ## Manhoso
 
 ### Corsair (COR)
