@@ -165,6 +165,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     equip(equipSet)
+    eventArgs.handled = true
+    return
 end
 
 
@@ -204,11 +206,11 @@ end
 --  STATUS CHANGE
 --  ----------------------------------------------------------------------------------------------------
 function user_status_change(newStatus, oldStatus)
-    if newStatus == 'Engaged' then
-        melee_equip_lock()
-    elseif oldStatus == 'Engaged' and player.sub_job ~= 'NIN' then
-        melee_equip_unlock()
-    end
+    -- if newStatus == 'Engaged' then
+    --     melee_equip_lock()
+    -- elseif oldStatus == 'Engaged' and player.sub_job ~= 'NIN' then
+    --     melee_equip_unlock()
+    -- end
 end
 
 

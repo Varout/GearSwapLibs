@@ -257,7 +257,7 @@ function user_setup()
     send_command('bind @5 gs c distortion')
     send_command('bind @6 gs c gravitation')
     send_command('bind @0 gs c six-step')
-    
+
 
     custom_instructions()
 end
@@ -346,13 +346,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
     elseif (spell.skill == "Enfeebling Magic") then
-        if (enfeebling_int:contains(spellMap)) then
-            midcastSet = sets.midcast.EnfeeblingInt
-        elseif (enfeebling_mnd:contains(spellMap)) then
-            midcastSet = set.midcast.EnfeeblingMnd
-        else
-            midcastSet = set.midcast["Enfeebling Magic"]
-        end
+        -- if (enfeebling_int:contains(spellMap)) then
+        --     midcastSet = sets.midcast.EnfeeblingInt
+        -- elseif (enfeebling_mnd:contains(spellMap)) then
+        --     midcastSet = set.midcast.EnfeeblingMnd
+        -- else
+            midcastSet = sets.midcast["Enfeebling Magic"]
+        -- end
 
     elseif (spell.skill == "Elemental Magic") then
         midcastSet = sets.midcast["Elemental Magic"]
@@ -614,7 +614,7 @@ function self_skillchain_6_step()
     add_to_chat(100, "Equipment locked!")
 
     state.SixStepSc:set(true)
-    
+
     local input_str = '' ..
 
     'input /p Self-skillchain: 6-Step;' ..

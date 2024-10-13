@@ -4,7 +4,7 @@
 gear.ArtefactHead  = "Academic's Mortarboard +3"
 gear.ArtefactBody  = "Academic's Gown +2"
 gear.ArtefactHands = "Academic's Bracers +2"
-gear.ArtefactLegs  = "Academic's Pants +2"
+gear.ArtefactLegs  = "Academic's Pants +3"
 gear.ArtefactFeet  = "Academic's Loafers +2"
 
 gear.RelicHead  = "Pedagogy Mortarboard +2"
@@ -288,13 +288,13 @@ sets.midcast.Cure = {
     main        = "Daybreak",
     sub         = "Ammurapi Shield",
     ammo        = "Quartz Tathlum +1",
-    head        = { name     = "Vanya Hood", 
+    head        = { name     = "Vanya Hood",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-    body        = { name     = "Kaykaus Bliaut", 
+    body        = { name     = "Kaykaus Bliaut",
                     augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
     hands       = gear.RelicHands,
     legs        = gear.ArtefactLegs,
-    feet        = { name     = "Vanya Clogs", 
+    feet        = { name     = "Vanya Clogs",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     neck        = "Incanter's Torque",
     waist       = "Bishop's Sash",
@@ -310,11 +310,11 @@ sets.midcast.Rapture = {
     sub         = "Ammurapi Shield",
     ammo        = "Quartz Tathlum +1",
     head        = gear.EmpyreanHead,
-    body        = { name     = "Kaykaus Bliaut", 
+    body        = { name     = "Kaykaus Bliaut",
                     augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
     hands       = gear.RelicHands,
     legs        = gear.ArtefactLegs,
-    feet        = { name     = "Vanya Clogs", 
+    feet        = { name     = "Vanya Clogs",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     neck        = "Incanter's Torque",
     waist       = "Bishop's Sash",
