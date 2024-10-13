@@ -13,7 +13,7 @@ gear.RelicFeet  = "Piety Duckbills +3"
 
 gear.EmpyreanHead  = "Ebers Cap +3"
 gear.EmpyreanBody  = "Ebers Bliaut +3"
-gear.EmpyreanHands = "Ebers Mitts +2"
+gear.EmpyreanHands = "Ebers Mitts +3"
 gear.EmpyreanLegs  = "Ebers Pantaloons +3"
 gear.EmpyreanFeet  = "Ebers Duckbills +2"
 
@@ -206,6 +206,7 @@ sets.midcast.Cure = {
 
 sets.midcast.CureBonus = {
     main        = "Chatoyant Staff",
+    sub         = "Curatio Grip",
     ammo        = "Quartz Tathlum +1",
     head        = { name = "Vanya Hood",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
