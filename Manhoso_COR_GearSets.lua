@@ -13,7 +13,7 @@ gear.RelicHands = "Launun Gants +3"
 gear.RelicLegs  = "Launun Trews +3"
 gear.RelicFeet  = "Launun Bottes +3"
 
-gear.EmpyreanHead  = "Chasseur's Tricorne +2"
+gear.EmpyreanHead  = "Chasseur's Tricorne +3"
 gear.EmpyreanBody  = "Chasseur's Frac +3"
 gear.EmpyreanHands = "Chasseur's Gants +3"
 gear.EmpyreanLegs  = "Chasseur's Culottes +2"
