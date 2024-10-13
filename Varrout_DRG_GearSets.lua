@@ -4,7 +4,7 @@
 gear.ArtefactHead      = "Vishap Armet +2"
 gear.ArtefactBody      = "Vishap Mail +2"
 gear.ArtefactHands     = "Vishap Finger Gauntlets +2"
-gear.ArtefactLegs      = "Vishap Brais +2"
+gear.ArtefactLegs      = "Vishap Brais +3"
 gear.ArtefactFeet      = "Vishap Greaves +2"
 
 gear.RelicHead         = "Pteroslaver Armet +3"
@@ -110,7 +110,7 @@ sets.engaged = {
     neck        = "Asperity Necklace",
     waist       = "Ioskeha Belt +1",
     left_ear    = "Sherida Earring",
-    right_ear   = "Digni. Earring",
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Niqmaddu Ring",
     right_ring  = "Regal Ring",
     back        = gear.AmbuscadeCapeTP,
@@ -122,7 +122,6 @@ sets.engaged = {
 --  ----------------------------------------------------------------------------------------------------
 sets.precast = {}
 sets.precast.JA = {}
-sets.precast.WS = {}
 
 sets.precast.JA['Ancient Circle'] = { legs = gear.ArtefactLegs, }
 sets.precast.JA['Call Wyvern']    = { body = gear.RelicBody, }
@@ -166,55 +165,57 @@ sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {
     legs        = gear.EmpyreanLegs,
 })
 
-sets.precast.WS['Stardiver'] = {
+sets.precast.WS = {
     ammo        = "Knobkierrie",
-    head        = "Flamma Zucchetto +2",
-    neck        = "Shadow Gorget",
-    left_ear    = "Sherida Earring",
-    right_ear   = "Dignitary's Earring",
-    body        = "Flamma Korazin +2",
-    hands       = "Flamma Manopolas +2",
-    left_ring   = "Niqmaddu Ring",
-    right_ring  = "Pyrosoul Ring",
-    back        = gear.AmbuscadeCapeWS,
-    waist       = "Fotia Belt",
-    legs        = gear.ArtefactLegs,
-    feet        = "Sulevia's Leggings +2"
-}
-
-sets.precast.WS['Camlann\'s Torment'] = {
-    ammo        = "Knobkierrie",
-    head        = "Flamma Zucchetto +2",
-    neck        = "Light Gorget",
-    left_ear    = "Sherida Earring",
+    head        = "Gleti's Mask",
+    neck        = "Sanctity Necklace",  --  Need something much better
+    left_ear    = "Thrud Earring",
     right_ear   = "Ishvara Earring",
-    body        = "Flamma Korazin +2",
-    hands       = "Sulevia's Gauntlets +2",
+    body        = "Gleti's Cuirass",
+    hands       = gear.RelicHands,
     left_ring   = "Niqmaddu Ring",
-    right_ring  = "Pyrosoul Ring",
+    right_ring  = "Regal Ring",
     back        = gear.AmbuscadeCapeWS,
-    waist       = "Fotia Belt",
+    waist       = "Sailfi Belt +1",
     legs        = gear.ArtefactLegs,
-    feet        = "Sulevia's Leggings +2"
+    feet        = "Sulevia's Leggings +2",
 }
 
-sets.precast.WS['Drakesbane'] = {
-    ammo        = "Knobkierrie",
-    head        = "Valorous Mask",
+sets.precast.WS.STR = set_combine(sets.precast.WS, {})
+
+sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS.STR, {
+    neck        = "Shadow Gorget",
+    waist       = "Fotia Belt",
+})
+
+sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS.STR, {
+    right_ear   = gear.EmpyreanEarring,
     neck        = "Light Gorget",
-    left_ear    = "Sherida Earring",
-    right_ear   = "Dignitary's Earring",
-    body        = "Flamma Korazin +2",
-    hands       = "Flamma Manopolas +2",
-    left_ring   = "Niqmaddu Ring",
-    right_ring  = "Rajas Ring",
-    back        = gear.AmbuscadeCapeWS,
     waist       = "Fotia Belt",
-    legs        = gear.ArtefactLegs,
-    feet        = "Sulevia's Leggings +2"
+})
+
+sets.precast.WS['Camlann\'s Torment'] = sets.precast.WS.STR
+sets.precast.WS['Impulse Drive'] = sets.precast.WS.STR
+
+sets.precast.WS.Acc = {
+    ammo        = "Voluspa Tathlum",
+    head        = "Sulevia's Mask +2",
+    body        = "Flamma Korazin +2",
+    hands       = "Flam. Manopolas +2",
+    legs        = "Flamma Dirs +2",
+    feet        = "Flam. Gambieras +2",
+    neck        = "Sanctity Necklace",
+    waist       = "Ioskeha Belt +1",
+    left_ear    = "Sherida Earring",
+    right_ear   = gear.EmpyreanEarring,
+    left_ring   = "Flamma Ring",
+    right_ring  = "Dreki Ring",
+    back        = gear.AmbuscadeCapeJump,
 }
 
-sets.precast.WS['Impulse Drive'] = {}
+sets.precast.WS['Leg Sweep'] = sets.precast.WS.Acc
+
+sets.precast.WS.Mab = {}
 
 sets.precast.FC = {
     ammo        = { name     = "Coiste Bodhar",
