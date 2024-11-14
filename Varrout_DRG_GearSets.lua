@@ -13,14 +13,14 @@ gear.RelicHands        = "Pteroslaver Finger Gauntlets +3"
 gear.RelicLegs         = "Pteroslaver Brais +3"
 gear.RelicFeet         = "Pteroslaver Geaves +3"
 
-gear.EmpyreanHead      = "Peltast's Mezail +1"
-gear.EmpyreanBody      = "Peltast's Plackart +1"
-gear.EmpyreanHands     = "Peltast's Vambraces +1"
-gear.EmpyreanLegs      = "Peltast's Cuissots +1"
-gear.EmpyreanFeet      = "Peltast's Schynbalds +1"
+gear.EmpyreanHead      = "Peltast's Mezail +3"
+gear.EmpyreanBody      = "Peltast's Plackart +2"
+gear.EmpyreanHands     = "Peltast's Vambraces +2"
+gear.EmpyreanLegs      = "Peltast's Cuissots +2"
+gear.EmpyreanFeet      = "Peltast's Schynbalds +2"
 
 gear.EmpyreanEarring   = "Peltast's Earring +1"
-gear.DynamisNeck       = ""
+gear.DynamisNeck       = "Dragoon's Collar +2"
 
 --  REMA Weapons
 gear.WeaponRelic       = "Gungnir"
@@ -36,6 +36,13 @@ gear.AmbuscadeCapeFC   = { name = "Brigantia's Mantle", augments = {'Eva.+20 /Ma
 gear.AmbuscadeCapeDT   = { name = "Brigantia's Mantle", augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Damage taken-5%',}}
 gear.AmbuscadeCapeJump = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
 
+
+--  Nyame
+-- gear.NyameHead         = { name = "Nyame Helm", augments = {'Path: B',}}
+gear.NyameBody         = { name = "Nyame Mail", augments = {'Path: B',}}
+-- gear.NyameHands        = { name = "Nyame Gauntlets", augments = {'Path: B',}}
+-- gear.NyameLegs         = { name = "Nyame Flanchard", augments = {'Path: B',}}
+gear.NyameFeet         = { name = "Nyame Sollerets", augments = {'Path: B',}}
 
 --  ----------------------------------------------------------------------------------------------------
 --   Town Sets
@@ -61,11 +68,11 @@ sets.idle = {
     feet        = "Gleti's Boots",
     neck        = "Bathy Choker +1",
     waist       = "Plat. Mog. Belt",
-    left_ear    = "Infused Earring",
-    right_ear   = { name     = "Odnowa Earring +1",
+    left_ear    = { name     = "Odnowa Earring +1",
                     augments = {'Path: A',}},
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Defending Ring",
-    right_ring  = "Sheltered Ring",
+    right_ring  = "Dreki Ring",
     back        = gear.AmbuscadeCapeDT,
 }
 
@@ -79,21 +86,23 @@ sets.idle.DT = {
     neck        = { name     = "Loricate Torque +1",
                     augments = {'Path: A',}},
     waist       = "Plat. Mog. Belt",
-    left_ear    = "Infused Earring",
-    right_ear   = { name     = "Odnowa Earring +1",
+    left_ear    = { name     = "Odnowa Earring +1",
                     augments = {'Path: A',}},
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Defending Ring",
-    right_ring  = "Sheltered Ring",
+    right_ring  = "Dreki Ring",
     back        = gear.AmbuscadeCapeDT,
 }
 
 sets.idle.Refresh = {
     head        = { name     = "Valorous Mask",
                     augments = {'VIT+4','DEX+2','"Refresh"+2','Mag. Acc.+11 "Mag.Atk.Bns."+11',}},
-    right_ear   = "Moonshade Earring"
+    left_ear    = "Moonshade Earring",
+    left_ring  = "Gurebu-Ogurebu's Ring",
 }
+
 sets.idle.RefreshToAU = {
-    right_ring  = "Balrahn's Ring"
+    right_ring  = "Balrahn's Ring",
 }
 
 
@@ -101,18 +110,18 @@ sets.idle.RefreshToAU = {
 --   Engaged Sets
 --  ----------------------------------------------------------------------------------------------------
 sets.engaged = {
-    ammo        = "Voluspa Tathlum",
+    ammo        = "Coiste Bodhar",
     head        = "Gleti's Mask",
     body        = "Gleti's Cuirass",
-    hands       = "Gleti's Gauntlets",
+    hands       = gear.EmpyreanHands,
     legs        = "Gleti's Breeches",
-    feet        = "Gleti's Boots",
-    neck        = "Asperity Necklace",
+    feet        = gear.EmpyreanFeet,
+    neck        = gear.DynamisNeck,
     waist       = "Ioskeha Belt +1",
     left_ear    = "Sherida Earring",
     right_ear   = gear.EmpyreanEarring,
     left_ring   = "Niqmaddu Ring",
-    right_ring  = "Regal Ring",
+    right_ring  = "Dreki Ring",
     back        = gear.AmbuscadeCapeTP,
 }
 
@@ -167,11 +176,11 @@ sets.precast.JA['Soul Jump'] = set_combine(sets.precast.JA['Jump'], {
 
 sets.precast.WS = {
     ammo        = "Knobkierrie",
-    head        = "Gleti's Mask",
-    neck        = "Sanctity Necklace",  --  Need something much better
+    head        = gear.EmpyreanHead,
+    neck        = gear.DynamisNeck,
     left_ear    = "Thrud Earring",
     right_ear   = "Ishvara Earring",
-    body        = "Gleti's Cuirass",
+    body        = gear.NyameBody,
     hands       = gear.RelicHands,
     left_ring   = "Niqmaddu Ring",
     right_ring  = "Regal Ring",
@@ -189,31 +198,47 @@ sets.precast.WS['Stardiver'] = set_combine(sets.precast.WS.STR, {
 })
 
 sets.precast.WS['Drakesbane'] = set_combine(sets.precast.WS.STR, {
+    body        = "Gleti's Cuirass",
     right_ear   = gear.EmpyreanEarring,
     neck        = "Light Gorget",
     waist       = "Fotia Belt",
 })
 
+sets.precast.WS['Wheeling Thrust'] = sets.precast.WS.STR
 sets.precast.WS['Camlann\'s Torment'] = sets.precast.WS.STR
 sets.precast.WS['Impulse Drive'] = sets.precast.WS.STR
 
 sets.precast.WS.Acc = {
     ammo        = "Voluspa Tathlum",
-    head        = "Sulevia's Mask +2",
-    body        = "Flamma Korazin +2",
-    hands       = "Flam. Manopolas +2",
-    legs        = "Flamma Dirs +2",
-    feet        = "Flam. Gambieras +2",
-    neck        = "Sanctity Necklace",
+    head        = gear.EmpyreanHead,
+    body        = gear.EmpyreanBody,
+    hands       = gear.EmpyreanHands,
+    legs        = gear.EmpyreanLegs,
+    feet        = gear.EmpyreanFeet,
+    neck        = gear.DynamisNeck,
     waist       = "Ioskeha Belt +1",
-    left_ear    = "Sherida Earring",
+    left_ear    = "Dignitary's Earring",
     right_ear   = gear.EmpyreanEarring,
-    left_ring   = "Flamma Ring",
+    left_ring   = "Varar Ring +1",
     right_ring  = "Dreki Ring",
     back        = gear.AmbuscadeCapeJump,
 }
 
-sets.precast.WS['Leg Sweep'] = sets.precast.WS.Acc
+sets.precast.WS['Leg Sweep'] = {
+    ammo        = "Pemphredo Tathlum",
+    head        = gear.EmpyreanHead,
+    body        = gear.EmpyreanBody,
+    hands       = gear.EmpyreanHands,
+    legs        = gear.EmpyreanLegs,
+    feet        = gear.EmpyreanFeet,
+    neck        = gear.DynamisNeck,
+    waist       = "Fotia Belt",
+    left_ear    = "Gwati Earring",
+    right_ear   = gear.EmpyreanEarring,
+    left_ring   = "Stikini Ring +1",
+    right_ring  = "Flamma Ring",
+    back        = gear.AmbuscadeCapeTP,
+}
 
 sets.precast.WS.Mab = {}
 
@@ -231,7 +256,7 @@ sets.precast.FC = {
     left_ear    = "Loquac. Earring",
     right_ear   = "Etiolation Earring",
     left_ring   = "Evanescence Ring",
-    right_ring  = "Medada's Ring",
+    right_ring  = "Defending Ring",
     back        = gear.AmbuscadeCapeFC,
 }
 
@@ -264,10 +289,10 @@ sets.Pet.WyvernHP = {
     hands       = "Despair Fin. Gaunt.",
     legs        = gear.ArtefactLegs,
     feet        = gear.RelicFeet,
-    neck        = "Lancer's Torque",
+    neck        = gear.DynamisNeck,
     waist       = "Glassblower's Belt",
-    left_ear    = "Infused Earring",
-    right_ear   = "Dragoon's Earring",
+    left_ear    = "Dragoon's Earring",
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Defending Ring",
     right_ring  = "Dreki Ring",
     back        = { name     = "Updraft Mantle",
