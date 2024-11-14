@@ -68,6 +68,7 @@ function user_setup()
     send_command('bind @m input /map')                  --  Windows Key + M: Show map, because I'm lazy af
     send_command('bind @1 gs c raise')                  --  Windows Key + 1: Cast highest available raise
     send_command('bind @2 gs c reraise')                --  Windows Key + 2: Cast highest available reraise
+    send_command('bind @0 gs c slept')                  --  Windows Key + 0: Cancels Stoneskin and equips Lorg Mor
 
     custom_instructions()
 end
@@ -78,6 +79,7 @@ function user_unload()
     send_command('unbind @m')
     send_command('unbind @1')
     send_command('unbind @2')
+    send_command('unbind @0')
 end
 
 
@@ -144,10 +146,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equipSet = sets.midcast.Cursna
                 --  By default single target is off
                 if state.CursnaSingle.current == 'on' then
-                    add_to_chat(200, "Cursna Single Target")
+                    -- add_to_chat(200, "Cursna Single Target")
                     equipSet = set_combine(equipSet, sets.CursnaSingle)
                 else
-                    add_to_chat(200, "Cursna AoE")
+                    -- add_to_chat(200, "Cursna AoE")
                     equipSet = set_combine(equipSet, sets.CursnaAoE)
                 end
             end
@@ -240,6 +242,17 @@ function job_self_command(cmdParams, eventArgs)
     --  Make Raise easy to handle
     elseif cmdParams[1]:lower() == 'raise' then
         cast_highest_available_raise()
+        eventArgs.handled = true
+        return
+
+    --  Wake if slept
+    elseif cmdParams[1]:lower() == 'slept' then
+        --  Cancel Stoneskin if active
+        if buffactive["Stoneskin"] then
+            send_command('cancel 37; cancel stoneskin')
+        end
+        --  Equip Prime club to wake
+        equip(sets.slept)
         eventArgs.handled = true
         return
     end
