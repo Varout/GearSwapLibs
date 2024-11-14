@@ -66,6 +66,26 @@ spells_resistance = S{
     "Baramnesra",                   --  Base: Fire
 }
 
+spells_barElement = S{
+    "Barstone",     "Barstonra",
+    "Barwater",     "Barwatera",
+    "Barareo",      "Baraera",
+    "Barfire",      "Barfira",
+    "Barblizzard",  "Barblizzara",
+    "Barthunder",   "Barthundra",
+}
+
+spells_barAilment = S{
+    "Barsleep",     "Barsleepra",   --  Base: Light
+    "Barpoison",    "Barpoisonra",  --  Base: Water
+    "Barparalyze",  "Barparalyzra", --  Base: Blizzard
+    "Barblind",     "Barblindra",   --  Base: Light
+    "Barsilence",   "Barsilencera", --  Base: Aero
+    "Barpetrify",   "Barpetra",     --  Base: Stone
+    "Barvirus",     "Barvira",      --  Base: Fire
+    "Baramnesra",                   --  Base: Fire
+}
+
 spells_na = S{
     "Poisona",
     "Paralyna",

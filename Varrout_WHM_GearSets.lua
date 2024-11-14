@@ -15,10 +15,19 @@ gear.EmpyreanHead  = "Ebers Cap +3"
 gear.EmpyreanBody  = "Ebers Bliaut +3"
 gear.EmpyreanHands = "Ebers Mitts +3"
 gear.EmpyreanLegs  = "Ebers Pantaloons +3"
-gear.EmpyreanFeet  = "Ebers Duckbills +2"
+gear.EmpyreanFeet  = "Ebers Duckbills +3"
 
 gear.EmpyreanEarring = "Ebers Earring +1"
 gear.DynamisNeck     = "Cleric's Torque +2"
+
+gear.AmbuscadeCapeIdle = { name     = "Alaunus's Cape",
+                           augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}}
+gear.AmbuscadeCapeFC   = { name     = "Alaunus's Cape",
+                           augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}}
+gear.AmbuscadeCapeCure = gear.AmbuscadeCapeIdle
+gear.AmbuscadeCapeTP   = { name     = "Alaunus's Cape",
+                           augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}}
+gear.AmbuscadeCapeWS = ""
 
 --  REMA Weapons
 gear.ClubRelic    = "Mjollnir"
@@ -28,18 +37,13 @@ gear.ClubAeonic   = "Tishtrya"
 gear.ClubPrime    = "Lorg Mor"
 
 --  Gear sets for specific conditions and commands
---  Neck equipment to lock in while in dynamis
-sets.JSENeck = {
-    neck       = gear.DynamisNeck
-}
-
 --  Equipment that enhances the charge rate of Sublimation
 sets.Sublimation = {
-    waist      = "Embla Sash"                       -- Sublimation +3
+    waist      = "Embla Sash"                       --  Sublimation +3
 }
 
 sets.ToAURing = {
-    right_ring = "Balrahn's Ring"
+    right_ring = "Balrahn's Ring"                   --  +1 Refresh when in Assault/Salvage area
 }
 
 --  Equipment only active during reives
@@ -82,10 +86,9 @@ sets.idle = {
     left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = gear.EmpyreanEarring,
-    left_ring   = "Stikini Ring +1",                -- Refresh +1
+    left_ring   = "Gurebu-Ogurebu's Ring",          -- Refresh +2, Regen +2
     right_ring  = "Defending Ring",
-    back        = { name = "Alaunus's Cape",
-                    augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
+    back        = gear.AmbuscadeCapeIdle,
 }
 
 sets.resting = {
@@ -107,6 +110,11 @@ sets.resting = {
     feet        = "Chelona Boots"        -- +5 (Nice to have +1)
 }
 
+sets.slept = {
+    main        = gear.ClubPrime,
+    sub         = "Genmei Shield",
+}
+
 --  Setting the base set: precast
 sets.precast = {}
 
@@ -122,17 +130,16 @@ sets.precast.FC = {
     main        = "Oranyan",                        -- FC +7%
     sub         = "Clerisy Strap",                  -- FC +2%
     ammo        = "Incantor Stone",                 -- FC +2%
-    head        = "Ebers Cap +2",                   -- FC +10%
+    head        = gear.EmpyreanHead,
     neck        = gear.DynamisNeck,                 -- FC +10%
     left_ear    = "Loquac. Earring",                -- FC +2%
     right_ear   = "Malignance Earring",             -- FC +4%
     body        = "Inyanga Jubbah +2",              -- FC +14%
     hands       = { name     = "Fanatic Gloves",    -- FC +7%
                     augments = {'MP+50','Healing magic skill +10','"Conserve MP"+7','"Fast Cast"+7',}},
-    left_ring   = "Evanescence Ring",               -- Spell Interruption Down 05%
+    left_ring   = "Freke Ring",                     -- Spell Interruption Down 10%
     right_ring  = "Kishar Ring",                    -- FC +4%
-    back        = { name     = "Alaunus's Cape",    -- FC +10%, Spell Interruption Down 10%
-                    augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}},
+    back        = gear.AmbuscadeCapeFC,             -- FC +10%, Spell Interruption Down 10%
     waist       = "Embla Sash",                     -- FC +5%
     legs        = { name     = "Kaykaus Tights",    -- FC +6%, Spell Interruption Down 10%
                     augments = {'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
@@ -188,20 +195,18 @@ sets.midcast.Cure = {
     ammo        = "Quartz Tathlum +1",
     head        = { name     = "Vanya Hood",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-    body        = "Theo. Bliaut +3",
+    body        = gear.ArtefactBody,
     hands       = gear.ArtefactHands,
-    legs        = "Ebers Pant. +2",
+    legs        = gear.EmpyreanLegs,
     feet        = { name     = "Vanya Clogs",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
     neck        = "Incanter's Torque",
     waist       = "Bishop's Sash",
     left_ear    = "Glorious Earring",
-    right_ear   = { name     = gear.EmpyreanEarring,
-                    augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Janniston Ring +1",
     right_ring  = "Menelaus's Ring",
-    back        = { name     = "Alaunus's Cape",
-                    augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
+    back        = gear.AmbuscadeCapeCure,
 }
 
 sets.midcast.CureBonus = {
@@ -210,21 +215,18 @@ sets.midcast.CureBonus = {
     ammo        = "Quartz Tathlum +1",
     head        = { name = "Vanya Hood",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-    body        = "Theo. Bliaut +3",
+    body        = gear.ArtefactBody,
     hands       = gear.ArtefactHands,
-    legs        = "Ebers Pant. +2",
+    legs        = gear.EmpyreanLegs,
     feet        = { name     = "Vanya Clogs",
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-    neck        = { name     = "Clr. Torque +2",
-                    augments = {'Path: A',}},
+    neck        = gear.DynamisNeck,
     waist       = "Hachirin-no-Obi",
     left_ear    = "Glorious Earring",
-    right_ear   = { name     = gear.EmpyreanEarring,
-                    augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
+    right_ear   = gear.EmpyreanEarring,
     left_ring   = "Janniston Ring +1",
     right_ring  = "Menelaus's Ring",
-    back        = { name     = "Alaunus's Cape",
-                    augments = {'MND+20','Eva.+20 /Mag. Eva.+20','MND+10','"Cure" potency +10%','Damage taken-5%',}},
+    back        = gear.AmbuscadeCapeCure,
 }
 
 --  Healing Magic: 700 (uncapped)
@@ -234,7 +236,7 @@ sets.midcast.NASpell = {
     ammo        = "Quartz Tathlum +1",              -- Healing Magic +00
     head        = { name     = "Vanya Hood",        -- Healing Magic +20
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-    body        = gear.EmpyreanBody,
+    body        = gear.EmpyreanBody,                -- Healing Magic +34
     hands       = gear.ArtefactHands,               -- Healing Magic +21
     legs        = gear.EmpyreanLegs,                -- Divine Benison +3
     feet        = { name     = "Vanya Clogs",       -- Healing Magic +40, Cursna +5
@@ -242,8 +244,7 @@ sets.midcast.NASpell = {
     neck        = "Incanter's Torque",              -- Healing Magic +10
     waist       = "Bishop's Sash",                  -- Healing Magic +05
     left_ear    = "Meili Earring",                  -- Healing Magic +10
-    right_ear   = { name     = "Ebers Earring",     -- Healing Magic +10
-                    augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
+    right_ear   = gear.EmpyreanEarring,             -- Healing Magic +11
     left_ring   = "Sirona's Ring",                  -- Healing Magic +10
     right_ring  = "Menelaus's Ring",                -- Cure +5%, Healing Magic +15, Cursna +20
     back        = "Altruistic Cape",                -- Healing Magic +05
@@ -266,8 +267,7 @@ sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
     hands       = "Fanatic Gloves",                 -- Healing Magic +10, Cursna +15
     left_ring   = "Haoma's Ring",                   -- Healing Magic +08, Cursna +15
     right_ring  = "Menelaus's Ring",                -- Healing Magic +15, Cursna +20
-    back        = { name     = "Alaunus's Cape",    -- Healing Magic +00, Cursna +25
-                    augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}},
+    back        = gear.AmbuscadeCapeFC,             -- Healing Magic +00, Cursna +25
     legs        = gear.ArtefactLegs,                -- Healing Magic +00, Cursna +21
     feet        = { name     = "Vanya Clogs",       -- Healing Magic +40, Cursna +5
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}        -- Gendewitha Galoshes +1: +10 Cursna.  Not sure if it'll be better than what I already have
@@ -288,17 +288,21 @@ sets.midcast['Enhancing Magic'] = {
     waist       = "Olympus Sash",                   -- Enhancing Maigc +5
     left_ear    = "Mimir Earring",                  -- Enhancing Maigc +10
     right_ear   = "Andoaa Earring",                 -- Enhancing Maigc +5
-    left_ring   = "Stikini Ring +1",                -- All magic +8
-    right_ring  = "Stikini Ring",                   -- All magic +5
+    left_ring   = "Stikini Ring",                   -- All magic +5
+    right_ring  = "Stikini Ring +1",                -- All magic +8
     back        = "Fi Follet Cape"                  -- Enhancing Maigc +8
 }
 
-sets.midcast.Barspell = set_combine(sets.midcast['Enhancing Magic'], {
+sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
     head        = gear.EmpyreanHead,                -- Set: Occationally negates damage with correct barpsell
     body        = gear.EmpyreanBody,                -- Set: Occationally negates damage with correct barpsell
     hands       = gear.EmpyreanHands,               -- Set: Occationally negates damage with correct barpsell
     legs        = gear.RelicLegs,                   -- Barspell +36
-    feet        = gear.EmpyreanFeet                 -- Set: Occationally negates damage with correct barpsell
+    feet        = gear.EmpyreanFeet,                -- Set: Occationally negates damage with correct barpsell
+})
+
+sets.midcast['BarAilment'] = set_combine(sets.midcast['Enhancing Magic'], {
+    neck        = "Sroda Necklace",                 --  Ailment Resistance Magic effect +20, Duration -50%
 })
 
 sets.midcast['Stoneskin'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -340,7 +344,7 @@ sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {
 
 sets.midcast['Erase'] = set_combine(sets.midcast['Enhancing Magic'], {
     main        = gear.ClubMythic,                  --  Grants area of effect
-    sub         = "Ammurapi Shield",                --  Enhancing magic duration +10%
+    sub         = "Genmei Shield",
     neck        = gear.DynamisNeck                  --  Erase +1
 })
 
@@ -358,12 +362,10 @@ sets.midcast.MagicAcc = {
     neck        = "Erra Pendant",                   -- +17 Magic Accuracy
     waist       = "Luminary Sash",                  -- +10 Magic Accuracy
     left_ear    = "Gwati Earring",                  -- +8 Magic Accuracy
-    right_ear   = { name     = "Ebers Earring",     -- +7 Magic Accuracy
-                    augments = {'System: 1 ID: 1676 Val: 0','Accuracy+7','Mag. Acc.+7',}},
-    left_ring   = "Stikini Ring +1",                -- +11 Magic Accuracy, +8 All magic
-    right_ring  = "Medada's Ring",                  -- +20 Magic Accuracy
-    back        = { name     = "Alaunus's Cape",    -- +20 Magic Accuracy
-                    augments = {'MND+20','Mag. Acc+20 /Mag. Dmg.+20','MND+10','"Fast Cast"+10','Spell interruption rate down-10%',}},
+    right_ear   = gear.EmpyreanEarring,             -- +11 Magic Accuracy
+    left_ring   = "Stikini Ring",                   -- +8 Magic Accuracy, +5 All magic
+    right_ring  = "Stikini Ring +1",                -- +11 Magic Accuracy, +8 All magic
+    back        = "Aurist's Cape +1",               -- +33 Magic Accuracy
 }
 
 sets.midcast['Enfeebling Magic'] = set_combine(sets.midcast.MagicAcc, {
@@ -394,19 +396,18 @@ sets.midcast['Holy'] = sets.midcast['Banish']
 --  Melee sets
 sets.engaged = {
     ammo        = "Oshasha's Treatise",
-    head        = gear.ArtefactHead,
-    body        = gear.ArtefactBody,
-    hands       = gear.ArtefactHands,
-    legs        = gear.ArtefactLegs,
-    feet        = gear.ArtefactFeet,
+    head        = gear.EmpyreanHead,
+    body        = gear.EmpyreanBody,
+    hands       = gear.EmpyreanHands,
+    legs        = gear.EmpyreanLegs,
+    feet        = gear.EmpyreanFeet,
     neck        = "Asperity Necklace",
     waist       = "Cornelia's Belt",
     left_ear    = "Dignitary's Earring",
     right_ear   = "Brutal Earring",
     left_ring   = "Rajas Ring",
     right_ring  = "K'ayres Ring",
-    back        = { name     = "Alaunus's Cape",
-                    augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10',}},
+    back        = gear.AmbuscadeCapeTP,
 }
 
 sets.precast.WS = {}

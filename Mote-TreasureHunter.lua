@@ -15,7 +15,7 @@
 --
 -- If you define TH gear sets for common actions (eg: Provoke, Box Step, etc),
 -- then make sure they are accounted for in a th_action_check function
--- (signature: th_action_check(category, param)) in the job file.  It's passed
+-- (signature: th_action_check(category, param)) in the job file.  It's passed 
 -- category and param value for actions the user takes, and if it returns true,
 -- that means that it's considered a valid tagging action.
 --
@@ -72,7 +72,7 @@ sets.TreasureHunter = {}
 function th_update(cmdParams, eventArgs)
     if (cmdParams and cmdParams[1] == 'user') or not cmdParams then
         TH_for_first_hit()
-
+    
         if _settings.debug_mode then
             print_set(info.tagged_mobs, 'Tagged mobs')
         end
@@ -133,7 +133,7 @@ end
 -- On engaging a mob, attempt to add TH gear.  For any other status change, unlock TH gear slots.
 function on_status_change_for_th(new_status_id, old_status_id)
     if gearswap.gearswap_disabled or T{2,3,4}:contains(old_status_id) or T{2,3,4}:contains(new_status_id) then return end
-
+    
     local new_status = gearswap.res.statuses[new_status_id].english
     local old_status = gearswap.res.statuses[old_status_id].english
 
@@ -183,7 +183,7 @@ function on_action_for_th(action)
                     end
                     info.tagged_mobs[target.id] = os.time()
                 end
-
+    
                 if state.th_gear_is_locked then
                     unlock_TH()
                 end
@@ -200,7 +200,7 @@ function on_action_for_th(action)
             end
         end
     end
-
+    
     cleanup_tagged_mobs()
 end
 
@@ -250,7 +250,7 @@ function job_state_change(stateField, newValue, oldValue)
             TH_for_first_hit()
         end
     end
-
+    
     if job_state_change_via_th then
         job_state_change_via_th(stateField, newValue, oldValue)
     end

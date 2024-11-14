@@ -4,19 +4,19 @@
 gear.ArtefactHead  = "Laksamana's Tricorne +3"
 gear.ArtefactBody  = "Laksamana's Frac +3"
 gear.ArtefactHands = "Laksamana's Gants +3"
-gear.ArtefactLegs  = "Laksamana's Trews +2"
+gear.ArtefactLegs  = "Laksamana's Trews +3"
 gear.ArtefactFeet  = "Laksamana's Bottes +3"
 
-gear.RelicHead  = "Launun Tricorne +3"
-gear.RelicBody  = "Launun Frac +3"
-gear.RelicHands = "Launun Gants +3"
-gear.RelicLegs  = "Launun Trews +3"
-gear.RelicFeet  = "Launun Bottes +3"
+gear.RelicHead  = "Lanun Tricorne +3"
+gear.RelicBody  = "Lanun Frac +3"
+gear.RelicHands = "Lanun Gants +3"
+gear.RelicLegs  = "Lanun Trews +3"
+gear.RelicFeet  = "Lanun Bottes +3"
 
 gear.EmpyreanHead  = "Chasseur's Tricorne +3"
 gear.EmpyreanBody  = "Chasseur's Frac +3"
 gear.EmpyreanHands = "Chasseur's Gants +3"
-gear.EmpyreanLegs  = "Chasseur's Culottes +2"
+gear.EmpyreanLegs  = "Chasseur's Culottes +3"
 gear.EmpyreanFeet  = "Chasseur's Bottes +3"
 
 gear.EmpyreanEarring = "Chasseur's Earring +1"
@@ -51,6 +51,13 @@ gear.AmbuscadeRangedWSMagic = { name     = "Camulus's Mantle",
 gear.AmbuscadeFC            = { name     = "Camulus's Mantle",
                                 augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Damage taken-5%',}}
 gear.AmbuscadeDT            = gear.AmbuscadeFC
+
+--  Herc Legs
+gear.HerculeanLegs = {}
+gear.HerculeanLegs.WsMAB    = { name     = "Herculean Trousers",
+                                augments = {'Mag. Acc.+11 "Mag.Atk.Bns."+11','Weapon skill damage +5%','STR+7','Mag. Acc.+8','"Mag.Atk.Bns."+6',}}
+gear.HerculeanLegs.WsPhys   = { name     = "Herculean Trousers",
+                                augments = {'Accuracy+27','Weapon skill damage +5%','AGI+8',}}
 
 --  Elemental Obis
 gear.ObiDark = { waist = "Anrin Obi" }
@@ -293,8 +300,7 @@ sets.precast.WS = {
                     augments = {'Attack+12','Weapon skill damage +5%',}},
     body        = gear.ArtefactBody,
     hands       = gear.EmpyreanHands,
-    legs        = { name     = "Herculean Trousers",
-                    augments = {'Accuracy+27','Weapon skill damage +5%','AGI+8',}},
+    legs        = gear.HerculeanLegs.WsPhys,
     feet        = gear.RelicFeet,
     neck        = { name     = "Commodore Charm",
                     augments = {'Path: A',}},
@@ -324,8 +330,7 @@ sets.precast.WS['Last Stand'] = set_combine(sets.precast.WS, {
     body        = gear.ArtefactBody,
     hands       = { name     = "Herculean Gloves",
                     augments = {'Weapon skill damage +5%','STR+7','Mag. Acc.+8','"Mag.Atk.Bns."+11',}},
-    legs        = { name     = "Herculean Trousers",
-                    augments = {'Mag. Acc.+11 "Mag.Atk.Bns."+11','Weapon skill damage +5%','STR+7','Mag. Acc.+8','"Mag.Atk.Bns."+6',}},
+    legs        = gear.HerculeanLegs.WsMAB,
     feet        = gear.RelicFeet,
     neck        = gear.DynamisNeck,     --"Elemental Gorget"
     waist       = "Kwahu Kachina Belt", --"Elemental Belt"
@@ -343,8 +348,7 @@ sets.precast.WS['Wildfire'] = {
                     augments = {'Attack+12','Weapon skill damage +5%',}},
     body        = gear.RelicBody,
     hands       = gear.EmpyreanHands,
-    legs        = { name     = "Herculean Trousers",
-                    augments = {'Mag. Acc.+11 "Mag.Atk.Bns."+11','Weapon skill damage +5%','STR+7','Mag. Acc.+8','"Mag.Atk.Bns."+6',}},
+    legs        = gear.HerculeanLegs.WsMAB,
     feet        = gear.RelicFeet,
     neck        = gear.DynamisNeck,
     waist       = "Eschan Stone",
@@ -360,16 +364,16 @@ sets.precast.WS['Wildfire'].Acc = set_combine(sets.precast.WS['Wildfire'], {})
 sets.precast.WS['Leaden Salute'] = {
     head        = "Pixie Hairpin +1",
     body        = gear.RelicBody,
-    hands       = gear.EmpyreanBody,
+    hands       = gear.EmpyreanHands,
     legs        = "Malignance Tights",
     feet        = gear.RelicFeet,
     neck        = gear.DynamisNeck,
-    waist       = "Svelt. Gouriz +1",
+    waist       = "Eschan Stone",
     left_ear    = "Friomisi Earring",
     right_ear   = { name     = "Moonshade Earring",
                     augments = {'Accuracy+4','TP Bonus +250',}},
     left_ring   = "Dingir Ring",
-    right_ring  = "Adoulin Ring",
+    right_ring  = "Archon Ring",
     back        = gear.AmbuscadeRangedWSMagic,
 }
 sets.precast.WS['Leaden Salute'].Acc = set_combine(sets.precast.WS['Leaden Salute'], {})

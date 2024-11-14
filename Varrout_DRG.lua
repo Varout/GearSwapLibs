@@ -109,7 +109,7 @@ function job_precast(spell, action, spellMap, eventArgs)
             equipSet = equipSet[spell.english]
         end
     elseif spell.action_type == 'Magic' then
-        add_to_chat(200, 'Magic')
+        -- add_to_chat(200, 'Magic')
         equipSet = sets.precast.FC
     end
     equip(equipSet)
@@ -211,9 +211,9 @@ function select_default_macro_book()
         set_macro_page(2, 6)
     end
 
-    equip(sets.lockstyle)
-    send_command('wait 2; input /lockstyle on')
-    -- send_command('wait 2; input /lockstyleset 006')
+    -- equip(sets.lockstyle)
+    -- send_command('wait 2; input /lockstyle on')
+    send_command('wait 2; input /lockstyleset 006')
 end
 
 

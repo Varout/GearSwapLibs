@@ -335,8 +335,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
     elseif (spell.skill == "Enhancing Magic") then
-        if (spells_resistance:contains(spell.name)) then
-            midcastSet = sets.midcast["Barspell"]
+        if (spells_barElement:contains(spell.name)) then
+            midcastSet = sets.midcast["BarElement"]
+        elseif (spells_barAilment:contains(spell.name)) then
+            midcastSet = sets.midcast['BarAilment']
         elseif (sets.midcast[spell.name]) then
             midcastSet = sets.midcast[spell.name]
         elseif (sets.midcast[spellMap]) then
@@ -491,7 +493,7 @@ end
 function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 5)
-    send_command('wait 2; input /lockstyle 001')
+    send_command('wait 2; input /lockstyleset 001')
 end
 
 
