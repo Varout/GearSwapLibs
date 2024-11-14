@@ -225,8 +225,8 @@ spell_maps = {
     --  Enhancing Magic
     ['Barfire'] = 'BarElement', ['Barstone'] = 'BarElement',  ['Barwater'] = 'BarElement',  ['Baraero'] = 'BarElement', ['Barblizzard'] = 'BarElement', ['Barthunder'] = 'BarElement',
     ['Barfira'] = 'BarElement', ['Barstonra'] = 'BarElement', ['Barwatera'] = 'BarElement', ['Baraera'] = 'BarElement', ['Barblizzara'] = 'BarElement', ['Barthundra'] = 'BarElement',
-    ['Barsleep'] = 'BarElement',   ['Barblind'] = 'BarElement',   ['Barvirus'] = 'BarElement', ['Baramnesia'] = 'BarElement', ['Barpetrify'] = 'BarElement', ['Barpoison'] = 'BarElement',   ['Barsilence'] = 'BarElement',   ['Barparalyze'] = 'BarElement',
-    ['Barsleepra'] = 'BarElement', ['Barblindra'] = 'BarElement', ['Barvira'] = 'BarElement',  ['Baramnesra'] = 'BarElement', ['Barpetra'] = 'BarElement',   ['Barpoisonra'] = 'BarElement', ['Barsilencera'] = 'BarElement', ['Barparalyzra'] = 'BarElement',
+    ['Barsleep'] = 'BarAilment',   ['Barblind'] = 'BarAilment',   ['Barvirus'] = 'BarAilment', ['Baramnesia'] = 'BarAilment', ['Barpetrify'] = 'BarAilment', ['Barpoison'] = 'BarAilment',   ['Barsilence'] = 'BarAilment',   ['Barparalyze'] = 'BarAilment',
+    ['Barsleepra'] = 'BarAilment', ['Barblindra'] = 'BarAilment', ['Barvira'] = 'BarAilment',  ['Baramnesra'] = 'BarAilment', ['Barpetra'] = 'BarAilment',   ['Barpoisonra'] = 'BarAilment', ['Barsilencera'] = 'BarAilment', ['Barparalyzra'] = 'BarAilment',
     ['Reraise'] = 'Reraise', ['Reraise II'] = 'Reraise', ['Reraise III'] = 'Reraise', ['Reraise IV'] = 'Reraise',
     ['Protect'] = 'Protect',     ['Protect II'] = 'Protect',     ['Protect III'] = 'Protect',     ['Protect IV'] = 'Protect',     ['Protect V'] = 'Protect',
     ['Protectra'] = 'Protectra', ['Protectra II'] = 'Protectra', ['Protectra III'] = 'Protectra', ['Protectra IV'] = 'Protectra', ['Protectra V'] = 'Protectra',
@@ -327,7 +327,7 @@ spell_maps = {
     ['Geo-Torpor'] = 'GeoSpell',     -- Evasion Down
     ['Geo-Vex'] = 'GeoSpell',        -- Magic Accuracy Down
     ['Geo-Languor'] = 'GeoSpell',    -- Magic Evasion Down
-    }
+}
 
 no_skill_spells_list = S{
     'Haste', 'Refresh', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',
