@@ -38,7 +38,7 @@ gear.AmbuscadeCapeMAB = { name = "Lugh's Cape", augments = {'INT+20','Mag. Acc+2
 --  ----------------------------------------------------------------------------------------------------
 sets.idle = {
     main        = { name     = "Mpaca's Staff",
-                    augments={'Path: A',}},
+                    augments = {'Path: A',}},
     sub         = "Enki Strap",
     ammo        = "Homiliary",
     head        = { name     = "Chironic Hat",
@@ -56,7 +56,7 @@ sets.idle = {
     left_ear    = { name     = "Moonshade Earring",
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = "Infused Earring",
-    left_ring   = "Stikini Ring +1",
+    left_ring   = "Gurebu-Ogurebu's Ring",
     right_ring  = "Defending Ring",
     back        = "Solemnity Cape",
 }
@@ -87,7 +87,7 @@ sets.idle.Town = {
     neck = "Incanter's Torque",
     left_ear = "Moonshade Earring",
     right_ear = gear.EmpyreanRightEar,
-    left_ring = "Stikini Ring +1",
+    left_ring = "Gurebu-Ogurebu's Ring",
     right_ring = "Janniston Ring +1",
     back = "Aurist's Cape +1",
     waist = "Hachirin-no-Obi",
@@ -107,7 +107,7 @@ sets.resting = {
     left_ear    = { name     = "Moonshade Earring",
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = "Infused Earring",
-    left_ring   = "Stikini Ring +1",
+    left_ring   = "Gurebu-Ogurebu's Ring",
     right_ring  = "Angha Ring",
     back        = "Felicitas Cape",
 }
@@ -136,16 +136,16 @@ sets.precast.FC = {
     waist       = "Embla Sash",
     left_ear    = "Malignance Earring",
     right_ear   = "Etiolation Earring",
-    left_ring   = "Medada's Ring",
-    right_ring  = "Kishar Ring",
+    left_ring   = "Kishar Ring",
+    right_ring  = "Freke Ring",
     back        = "Perimede Cape",
 }
 
 sets.precast.FC.SixStepSc = set_combine(sets.precast.FC, {
-    main = "Twinned Blade",
-    sub="Genmei Shield",
-    right_ear = "Loquacious Earring",
-    back = "Solemnity Cape"
+    main        = "Twinned Blade",
+    sub         = "Genmei Shield",
+    right_ear   = "Loquacious Earring",
+    back        = "Solemnity Cape"
 })
 
 sets.precast["Healing Magic"] = set_combine(sets.precast.FC, {
@@ -169,7 +169,7 @@ sets.precast["Cure"] = set_combine(sets.precast.FC, {
 sets.precast["Curaga"] = sets.precast["Cure"]
 
 sets.precast["Enhancing Magic"] = set_combine(sets.precast.FC, {
-    waist = "Siegel Sash",
+    waist       = "Siegel Sash",
 })
 
 sets.precast["Stoneskin"] = set_combine(sets.precast["Enhancing Magic"], {
@@ -223,12 +223,16 @@ sets.midcast["Enhancing Magic"] = {
     back        = "Fi Follet Cape",
 }
 
-sets.midcast["Barspell"] = set_combine(sets.midcast["Enhancing Magic"], {
+sets.midcast["BarElement"] = set_combine(sets.midcast["Enhancing Magic"], {
     hands       = { name     = "Chironic Gloves",
                     augments = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
     legs        = "Shedir Seraweels",
     feet        = { name     = "Kaykaus Boots",
                     augments = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+})
+
+sets.midcast['BarAilment'] = set_combine(sets.midcast['BarElement'], {
+    neck        = "Sroda Necklace",                 --  Ailment Resistance Magic effect +20, Duration -50%
 })
 
 sets.midcast["Stoneskin"] = set_combine(sets.midcast["Enhancing Magic"], {
@@ -358,13 +362,13 @@ sets.midcast["Elemental Magic"] = {
     waist       = "Aswang Sash",
     left_ear    = "Barkarole Earring",
     right_ear   = gear.EmpyreanRightEar,
-    left_ring   = "Medada's Ring",
+    left_ring   = "Resonance Ring",
     right_ring  = "Freke Ring",
     back        = gear.AmbuscadeCapeMAB,
 }
 
 sets.midcast["Helix"] = set_combine(sets.midcast["Elemental Magic"], {
-    neck=gear.DynamisNeck,
+    neck        = gear.DynamisNeck,
     -- back=""
 })
 
@@ -372,7 +376,7 @@ sets.midcast.MagicBurst = set_combine(sets.midcast["Elemental Magic"], {
     body        = gear.ArtefactBody,
     feet        = "Jhakri Pigaches +2",
     neck        = gear.DynamisNeck,
-    right_ring  = "Jhakri Ring",
+    left_ring   = "Jhakri Ring",
 })
 
 sets.midcast["Dark Magic"] = set_combine(sets.midcast["Elemental Magic"], {
