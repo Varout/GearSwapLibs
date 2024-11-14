@@ -236,11 +236,11 @@ function init_gear_sets()
     gear.ArtefactLegs  = "Convoker's Spats +2"
     gear.ArtefactFeet  = "Convoker's Pigaches +2"
 
-    gear.RelicHead  = "Glyphic Horn +1"
+    gear.RelicHead  = "Glyphic Horn +3"
     gear.RelicBody  = "Glyphic Doublet +1"
     gear.RelicHands = "Glyphic Bracers +1"
     gear.RelicLegs  = "Glyphic Spats +1"
-    gear.RelicFeet  = "Glyphic Pigaches +1"
+    gear.RelicFeet  = "Glyphic Pigaches +2"
 
     gear.EmpyreanHead  = "Beckoner's Horn +1"
     gear.EmpyreanBody  = "Beckoner's Doublet +1"
@@ -338,7 +338,7 @@ function init_gear_sets()
         body        = "Shomonjijoe +1",
         hands       = gear.ArtefactHands,
         legs        = "Assid. Pants +1",
-        feet        = gear.ApogeeFeetPhys,
+        feet        = gear.ArtefactFeet,
         neck        = "Caller's Pendant",
         waist       = "Isa Belt",
         left_ear    = "Lodurr Earring",
@@ -626,8 +626,7 @@ function init_gear_sets()
                         augments = {'Summoning magic skill +15','Pet: Mag. Acc.+30','Pet: Damage taken -4%',}},
         sub         = "Elan Strap",
         ammo        = "Sancus Sachet",
-        head        = { name     = "Apogee Crown +1",
-                        augments = {'Pet: Attack+25','Pet: "Mag.Atk.Bns."+25','Blood Pact Dmg.+8',}},
+        head        = gear.RelicHead,
         body        = gear.ArtefactBody,
         hands       = gear.MerlinicHandsMagicAtt,
         legs        = { name="Helios Spats", augments={'Pet: "Mag.Atk.Bns."+26','Pet: Crit.hit rate +3',}},
@@ -642,7 +641,7 @@ function init_gear_sets()
     }
 
     sets.midcast.Pet.MagicalBloodPactRage['Ifrit'] = set_combine(sets.midcast.Pet.MagicalBloodPactRage, {
-        ring2       = "Fervor Ring"
+        right_ring       = "Fervor Ring"
     })
 
     sets.midcast.Pet.MagicalBloodPactRage.Acc = sets.midcast.Pet.MagicalBloodPactRage
