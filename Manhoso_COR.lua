@@ -230,13 +230,13 @@ end
 function job_post_precast(spell, action, spellMap, eventArgs)
     -- Equip obi if weather/day matches for WS/Quick Draw.
     if spell.type == 'WeaponSkill' or spell.type == 'CorsairShot' then
-        -- if spell.english == 'Leaden Salute' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
-        --     equip(sets.DarkObi)
-        -- elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
-        --     equip(sets.Obi)
+        if spell.english == 'Leaden Salute' and (world.weather_element == 'Dark' or world.day_element == 'Dark') then
+            equip(gear.ObiDark)
+        elseif spell.english == 'Wildfire' and (world.weather_element == 'Fire' or world.day_element == 'Fire') then
+            equip(gear.ObiFire)
         -- elseif spell.type == 'CorsairShot' and (spell.element == world.weather_element or spell.element == world.day_element) then
         --     equip(sets.Obi)
-        -- end
+        end
     end
 end
 
