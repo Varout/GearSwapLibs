@@ -213,7 +213,7 @@ function select_default_macro_book()
 
     -- equip(sets.lockstyle)
     -- send_command('wait 2; input /lockstyle on')
-    send_command('wait 2; input /lockstyleset 006')
+    send_command('wait 2; input /lockstyleset 007')
 end
 
 
