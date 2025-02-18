@@ -89,7 +89,7 @@ sets.idle = {
                     augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
     neck        = { name     = "Loricate Torque +1",
                     augments = {'Path: A',}},
-    waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1
+    waist       = "Null Belt",
     left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1 (Not engaged, not resting)
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = gear.EmpyreanEarring,
@@ -307,7 +307,7 @@ sets.midcast['Enhancing Magic'] = {
     right_ear   = "Andoaa Earring",                 -- Enhancing Maigc +5
     left_ring   = "Stikini Ring",                   -- All magic +5
     right_ring  = "Stikini Ring +1",                -- All magic +8
-    back        = "Fi Follet Cape"                  -- Enhancing Maigc +8
+    back        = "Fi Follet Cape +1"               -- Enhancing Maigc +9
 }
 
 sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
