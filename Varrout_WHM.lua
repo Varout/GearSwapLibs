@@ -19,19 +19,6 @@ function job_setup()
 
     --  Make sure all equipment can be changed/updated
     equipment_unlock_all()
-
-    --  White mage specific
-    state.Buff["Divine Seal"]     = buffactive["Divine Seal"]     or false
-    state.Buff["Divine Caress"]   = buffactive["Divine Caress"]   or false
-    state.Buff["Afflatus Solace"] = buffactive["Afflatus Solace"] or false
-    state.Buff["Afflatus Misery"] = buffactive["Afflatus Misery"] or false
-
-    --  Scholar specific
-    state.Buff["Sublimation: Activated"] = buffactive["Sublimation: Activated"] or false
-    state.Buff["Sublimation: Complete"]  = buffactive["Sublimation: Complete"]  or false
-
-    --  Black Magic Specific
-    state.Buff.ElementalSeal = buffactive['Elemental Seal'] or false
 end
 
 
@@ -109,6 +96,10 @@ function job_precast(spell, action, spellMap, eventArgs)
         return
     elseif spell.type == "Trust" then
         equip(sets.Trust)
+    elseif spell.name == 'Cursna' then
+        equip(sets.precast['Healing Magic'])
+        eventArgs.handled = true
+        return
     end
 end
 
@@ -116,6 +107,22 @@ end
 --  ----------------------------------------------------------------------------------------------------
 --  MIDCAST
 --  ----------------------------------------------------------------------------------------------------
+-- function job_midcast(spell, action, spellMap, eventArgs)
+--     local equipSet = {}
+
+--     if spell.name == 'Cursna' then
+--         if state.CursnaSingle.current == 'on' then
+--             -- add_to_chat(200, "Cursna Single Target")
+--             equipSet = set_combine(equipSet, sets.CursnaSingle)
+--         else
+--             -- add_to_chat(200, "Cursna AoE")
+--             equipSet = set_combine(equipSet, sets.CursnaAoE)
+--         end
+--     end
+
+-- end
+
+
 function job_post_midcast(spell, action, spellMap, eventArgs)
     local equipSet = {}
 
@@ -137,20 +144,24 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equipSet = sets.midcast.NASpell
 
             --  If Divine Caress is active
-            if state.Buff.DivineCaress then
+            if buffactive["Divine Caress"] then
                 equipSet = set_combine(equipSet, sets.midcast.Caress)
             end
 
             --  Cursna removal gear is most important. Combine last
             if spell.name == 'Cursna' then
-                equipSet = sets.midcast.Cursna
-                --  By default single target is off
-                if state.CursnaSingle.current == 'on' then
-                    -- add_to_chat(200, "Cursna Single Target")
-                    equipSet = set_combine(equipSet, sets.CursnaSingle)
+                -- equipSet = sets.midcast.Cursna
+                if player.sub_job == 'NIN' then
+                    equipSet = sets.midcast.CursnaNIN
                 else
-                    -- add_to_chat(200, "Cursna AoE")
-                    equipSet = set_combine(equipSet, sets.CursnaAoE)
+                    --  By default single target is off
+                    if state.CursnaSingle.current == 'on' then
+                        -- add_to_chat(200, "Cursna Single Target")
+                        equipSet = set_combine(equipSet, sets.CursnaSingle)
+                    else
+                        -- add_to_chat(200, "Cursna AoE")
+                        equipSet = set_combine(equipSet, sets.CursnaAoE)
+                    end
                 end
             end
         elseif spell.name == "Erase" then
@@ -196,7 +207,7 @@ function customize_idle_set(idleSet)
     end
 
     --  Check if sublimation is active
-    if state.Buff["Sublimation: Activated"] then
+    if buffactive["Sublimation: Activated"] then
         idleSet = set_combine(idleSet, sets.Sublimation)
     end
 
@@ -221,7 +232,7 @@ end
 --  ----------------------------------------------------------------------------------------------------
 --  Job specific ability changes, mostly here to handy Sublimation
 function job_buff_change(buff, gain, eventArgs)
-    if state.Buff["Sublimation: Activated"] then
+    if buffactive["Sublimation: Activated"] then
         equip(sets.Sublimation)
     elseif buff == "Sublimation: Activated" and not gain then
         equip(sets.idle)
