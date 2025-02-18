@@ -139,7 +139,7 @@ function check_debuff_silenced(spell, eventArgs)
     if spell.action_type == 'Magic' and buffactive['Silence'] then
         -- If silenced, use what's available to remove it
         cancel_spell()
-        if player.inventory[''] ~= nil then
+        if player.inventory['Echo Drops'] ~= nil then
             send_command('input /item "Echo Drops" <me>')
             send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
         elseif player.inventory['Catholicon'] ~= nil then
