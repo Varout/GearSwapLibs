@@ -215,7 +215,7 @@ end
 --  Information about custom commands
 --  ----------------------------------------------------------------------------------------------------
 function custom_instructions()
-    add_to_chat(200, "Varrout's WHM Custom commands:")
+    add_to_chat(200, "Varrout's SCH Custom commands:")
     add_to_chat(200, "* Windows Key + 3: Fragmentation")
     add_to_chat(200, "* Windows Key + 4: Fusion")
     add_to_chat(200, "* Windows Key + 5: Distortion")
@@ -247,6 +247,7 @@ function user_setup()
 
     --  Where @ is the Windows Key
     send_command('bind @b gs c toggle MagicBurst')      --  Windows Key + B: Toggle Magic Burst mode
+    send_command('bind @h gs c help')                   --  Windows Key + H: Display custom options in chat
     send_command('bind @m input /map')                  --  Windows Key + M: Show map, because I'm lazy af
     send_command('bind @u gs c enable-all')             --  Windows Key + U: Unlock all equipment slots
     -- send_command('bind @x gs c toggle DynamisLock')  --  Windows Key + X: Activate Dynamis neck log mode
@@ -264,6 +265,7 @@ end
 
 function user_unload()
     send_command('unbind @b')
+    send_command('unbind @h')
     send_command('unbind @m')
     send_command('unbind @u')
     -- send_command('unbind @x')
@@ -412,7 +414,7 @@ function customize_idle_set(idleSet)
 
     --  If Player MP is less than 50%, equip latent refresh
     if player.mpp < 50 then
-        idleSet = set_combine(idleSet, sets.idle.RefreshLatent)
+        idleSet = set_combine(idleSet, sets.latent_refresh)
     end
 
     if not buffactive["Sublimation: Activated"] and areas.Cities:contains(world.area) then
@@ -476,6 +478,11 @@ function job_self_command(cmdParams, eventArgs)
         equipment_unlock_all()
         equip(get_custom_idle_set(idleSet))
         state.SixStepSc:set(false)
+        eventArgs.handled = true
+        return
+
+    elseif cmdParams[1]:lower() == 'help' then
+        custom_instructions()
         eventArgs.handled = true
         return
 
