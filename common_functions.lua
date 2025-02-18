@@ -133,18 +133,18 @@ end
 --  Common Shared Functions - Ailment Removal
 -------------------------------------------------------------------------------------------------------------------
 --  Checks if the player is silenced and trying to cast a spell
---  Remove silence using Catholicon, Echo Drops, then Remedy in that order
+--  Remove silence using Echo Drops, Catholicon, then Remedy in that order
 function check_debuff_silenced(spell, eventArgs)
     -- add_to_chat(060, spell.type .. ' | ' .. spell.action_type)
     if spell.action_type == 'Magic' and buffactive['Silence'] then
         -- If silenced, use what's available to remove it
         cancel_spell()
-        if player.inventory['Catholicon'] ~= nil then
-            send_command('input /item "Catholicon" <me>')
-            send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
-        elseif player.inventory['Echo Drops'] ~= nil then
+        if player.inventory[''] ~= nil then
             send_command('input /item "Echo Drops" <me>')
             send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
+        elseif player.inventory['Catholicon'] ~= nil then
+            send_command('input /item "Catholicon" <me>')
+            send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
         elseif player.inventory['Remedy'] ~= nil then
             send_command('input /item "Remedy" <me>')
             send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
