@@ -3,7 +3,7 @@
 --  ----------------------------------------------------------------------------------------------------
 gear.ArtefactHead      = "Vishap Armet +2"
 gear.ArtefactBody      = "Vishap Mail +2"
-gear.ArtefactHands     = "Vishap Finger Gauntlets +2"
+gear.ArtefactHands     = "Vishap Finger Gauntlets +3"
 gear.ArtefactLegs      = "Vishap Brais +3"
 gear.ArtefactFeet      = "Vishap Greaves +2"
 
@@ -14,10 +14,10 @@ gear.RelicLegs         = "Pteroslaver Brais +3"
 gear.RelicFeet         = "Pteroslaver Geaves +3"
 
 gear.EmpyreanHead      = "Peltast's Mezail +3"
-gear.EmpyreanBody      = "Peltast's Plackart +2"
-gear.EmpyreanHands     = "Peltast's Vambraces +2"
-gear.EmpyreanLegs      = "Peltast's Cuissots +2"
-gear.EmpyreanFeet      = "Peltast's Schynbalds +2"
+gear.EmpyreanBody      = "Peltast's Plackart +3"
+gear.EmpyreanHands     = "Peltast's Vambraces +3"
+gear.EmpyreanLegs      = "Peltast's Cuissots +3"
+gear.EmpyreanFeet      = "Peltast's Schynbalds +3"
 
 gear.EmpyreanEarring   = "Peltast's Earring +1"
 gear.DynamisNeck       = "Dragoon's Collar +2"
@@ -27,7 +27,7 @@ gear.WeaponRelic       = "Gungnir"
 gear.WeaponMythic      = "Ryunohige"
 gear.WeaponEmpyrean    = ""
 gear.WeaponAeonic      = "Trishula"
-gear.WeaponPrime       = ""
+-- gear.WeaponPrime       = "Gae Buide"
 
 --  Ambuscade Capes
 gear.AmbuscadeCapeTP   = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
@@ -64,7 +64,7 @@ sets.idle = {
     head        = "Hjarrandi Helm",
     body        = gear.ArtefactBody,
     hands       = "Sulev. Gauntlets +2",
-    legs        = "Gleti's Breeches",
+    legs        = gear.EmpyreanLegs,
     feet        = "Gleti's Boots",
     neck        = "Bathy Choker +1",
     waist       = "Plat. Mog. Belt",
@@ -81,7 +81,7 @@ sets.idle.DT = {
     head        = "Hjarrandi Helm",
     body        = gear.ArtefactBody,
     hands       = gear.RelicHands,
-    legs        = gear.RelicLegs,
+    legs        = gear.EmpyreanLegs,
     feet        = "Sulev. Leggings +2",
     neck        = { name     = "Loricate Torque +1",
                     augments = {'Path: A',}},
@@ -109,22 +109,57 @@ sets.idle.RefreshToAU = {
 --  ----------------------------------------------------------------------------------------------------
 --   Engaged Sets
 --  ----------------------------------------------------------------------------------------------------
+-- sets.engaged = {
+--     ammo        = "Coiste Bodhar",
+--     head        = gear.EmpyreanHead,
+--     body        = gear.EmpyreanBody,
+--     hands       = gear.EmpyreanHands,
+--     legs        = gear.EmpyreanLegs,
+--     feet        = gear.EmpyreanFeet,
+--     neck        = gear.DynamisNeck,
+--     waist       = "Ioskeha Belt +1",
+--     left_ear    = "Sherida Earring",
+--     right_ear   = gear.EmpyreanEarring,
+--     left_ring   = "Niqmaddu Ring",
+--     right_ring  = "Dreki Ring",
+--     back        = gear.AmbuscadeCapeTP,
+-- }
+
 sets.engaged = {
-    ammo        = "Coiste Bodhar",
-    head        = "Gleti's Mask",
-    body        = "Gleti's Cuirass",
-    hands       = gear.EmpyreanHands,
-    legs        = "Gleti's Breeches",
-    feet        = gear.EmpyreanFeet,
-    neck        = gear.DynamisNeck,
-    waist       = "Ioskeha Belt +1",
-    left_ear    = "Sherida Earring",
-    right_ear   = gear.EmpyreanEarring,
-    left_ring   = "Niqmaddu Ring",
-    right_ring  = "Dreki Ring",
-    back        = gear.AmbuscadeCapeTP,
+    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+    head="Hjarrandi Helm",
+    body={ name="Gleti's Cuirass", augments={'Path: A',}},
+    hands="Pel. Vambraces +3",
+    legs="Gleti's Breeches",
+    feet="Flam. Gambieras +2",
+    neck="Vim Torque +1",
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear="Sherida Earring",
+    right_ear="Sroda Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Dreki Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
 }
 
+sets.engaged['GlassCannon'] = {
+    ammo={ name="Coiste Bodhar", augments={'Path: A',}},
+    head="Hjarrandi Helm",
+    body={ name="Gleti's Cuirass", augments={'Path: A',}},
+    hands="Pel. Vambraces +3",
+    legs="Gleti's Breeches",
+    feet="Flam. Gambieras +2",
+    neck="Vim Torque +1",
+    waist={ name="Sailfi Belt +1", augments={'Path: A',}},
+    left_ear="Sherida Earring",
+    right_ear="Sroda Earring",
+    left_ring="Niqmaddu Ring",
+    right_ring="Dreki Ring",
+    back={ name="Brigantia's Mantle", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
+}
+
+sets.engaged['HighDT'] = sets.engaged
+
+sets.engaged['Naegling'] = sets.engaged
 
 --  ----------------------------------------------------------------------------------------------------
 --   Precast Sets
@@ -223,6 +258,8 @@ sets.precast.WS.Acc = {
     right_ring  = "Dreki Ring",
     back        = gear.AmbuscadeCapeJump,
 }
+
+sets.precast.WS['Geirskogul'] = sets.precast.WS.Acc
 
 sets.precast.WS['Leg Sweep'] = {
     ammo        = "Pemphredo Tathlum",

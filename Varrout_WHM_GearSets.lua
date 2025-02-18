@@ -36,6 +36,13 @@ gear.ClubEmpyrean = "Gambanteinn"
 gear.ClubAeonic   = "Tishtrya"
 gear.ClubPrime    = "Lorg Mor"
 
+--  Telchine Gear Set
+gear.TelchineHands = { name     = "Telchine Gloves",
+                       augments = {'Mag. Evasion+23','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
+gear.TelchineFeet  = { name     = "Telchine Pigaches",
+                       augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
+
+
 --  Gear sets for specific conditions and commands
 --  Equipment that enhances the charge rate of Sublimation
 sets.Sublimation = {
@@ -82,13 +89,18 @@ sets.idle = {
                     augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
     neck        = { name     = "Loricate Torque +1",
                     augments = {'Path: A',}},
-    waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1
-    left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
+    waist       = "Null Belt",
+    left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1 (Not engaged, not resting)
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = gear.EmpyreanEarring,
     left_ring   = "Gurebu-Ogurebu's Ring",          -- Refresh +2, Regen +2
     right_ring  = "Defending Ring",
     back        = gear.AmbuscadeCapeIdle,
+}
+
+sets.latent_refresh = {
+    sub         = "Oneiros Grip",                   -- Latent: Refresh +1 when MP <= 75%
+    waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1 when MP < 50%
 }
 
 sets.resting = {
@@ -97,9 +109,8 @@ sets.resting = {
     ammo        = "Mana Ampulla",        -- +2
     head        = "Orvail Corona +1",    -- +4
     neck        = "Eidolon Pendant +1",  -- +6
-    left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1
-                    augments = {'MP+25','Latent effect: "Refresh"+1',}},
-    right_ear   = "Infused Earring",     -- +0, Regen +1
+    left_ear    = "Infused Earring",     -- +0, Regen +1
+    right_ear   = gear.EmpyreanEarring,
     body        = "Chelona Blazer",      -- +8 (Nice to have +1)
     hands       = "Nares Cuffs",         -- +4
     left_ring   = "Star Ring",           -- +1
@@ -178,13 +189,14 @@ sets.precast['Cure'] = set_combine(sets.precast['Healing Magic'], {
 sets.midcast = {}
 
 sets.midcast.Caress = {
-    hands       = gear.EmpyreanHands                 -- Divine Caress +4
+    hands       = gear.EmpyreanHands,                -- Divine Caress +4
+    back        = "Mending Cape"                     -- Divine Caress +1
 }
 
 --  Equipment which increases spell potency when the day or weather match the spell element
 sets.midcast.WeatherBoost = {
-    back        = "Twilight Cape",                  -- Bonus +5%
-    waist       = "Hachirin-no-Obi"                 -- Bonus +10%
+    back        = "Twilight Cape",                   -- Bonus +5%
+    waist       = "Hachirin-no-Obi"                  -- Bonus +10%
 }
 
 --  Complete different sets for base cure potency, and set for day/weather match
@@ -232,7 +244,7 @@ sets.midcast.CureBonus = {
 --  Healing Magic: 700 (uncapped)
 sets.midcast.NASpell = {
     main        = gear.ClubMythic,                  -- AoE Status Removal
-    sub         = "Ammurapi Shield",
+    sub         = "Genmei Shield",
     ammo        = "Quartz Tathlum +1",              -- Healing Magic +00
     head        = { name     = "Vanya Hood",        -- Healing Magic +20
                     augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
@@ -260,28 +272,33 @@ sets.CursnaSingle = {
     main = gear.ClubEmpyrean,
 }
 
+--  Healing Magic: 639, Cursna: +221%
 sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
     main        = gear.ClubEmpyrean,                -- Cursna +100
-    sub         = "Ammurapi Shield",
+    sub         = "Genmei Shield",
+    ammo        = "Incantor Stone",
     neck        = "Debilis Medallion",              -- Healing Magic +00, Cursna +15
     hands       = "Fanatic Gloves",                 -- Healing Magic +10, Cursna +15
     left_ring   = "Haoma's Ring",                   -- Healing Magic +08, Cursna +15
     right_ring  = "Menelaus's Ring",                -- Healing Magic +15, Cursna +20
     back        = gear.AmbuscadeCapeFC,             -- Healing Magic +00, Cursna +25
     legs        = gear.ArtefactLegs,                -- Healing Magic +00, Cursna +21
-    feet        = { name     = "Vanya Clogs",       -- Healing Magic +40, Cursna +5
-                    augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}}        -- Gendewitha Galoshes +1: +10 Cursna.  Not sure if it'll be better than what I already have
+    feet        = "Gendewitha Galoshes +1",         -- Healing Magic +00, Cursna +10
+})
+
+sets.midcast.CursnaNIN = set_combine(sets.midcast.Cursna, {
+    main        = gear.ClubMythic,
+    sub         = gear.ClubEmpyrean,        -- Cursna +100
 })
 
 --  Enhancing Magic: 585
 sets.midcast['Enhancing Magic'] = {
     main        = "Beneficus",                      -- Enhancing Maigc +15
     sub         = "Ammurapi Shield",                -- Enhancing magic duration +10%
-    ammo        = "Quartz Tathlum +1",
+    ammo        = "Incantor Stone",
     head        = "Befouled Crown",                 -- Enhancing Maigc +16
     body        = "Anhur Robe",                     -- Enhancing Maigc +12
-    hands       = { name     = "Telchine Gloves",   -- Enhancing magic duration +8%
-                    augments = {'DEF+19','"Elemental Siphon"+35','Enh. Mag. eff. dur. +8',}},
+    hands       = gear.TelchineHands,               -- Enhancing Magic Duration +10%
     legs        = gear.RelicLegs,                   -- Enhancing Maigc +26
     feet        = gear.ArtefactFeet,                -- Enhancing Magic +21, Enhancing Magic Duration +10%
     neck        = "Incanter's Torque",              -- Enhancing Maigc +10
@@ -290,7 +307,7 @@ sets.midcast['Enhancing Magic'] = {
     right_ear   = "Andoaa Earring",                 -- Enhancing Maigc +5
     left_ring   = "Stikini Ring",                   -- All magic +5
     right_ring  = "Stikini Ring +1",                -- All magic +8
-    back        = "Fi Follet Cape"                  -- Enhancing Maigc +8
+    back        = "Fi Follet Cape +1"               -- Enhancing Maigc +9
 }
 
 sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -382,11 +399,12 @@ sets.midcast['Divine Magic'] = set_combine(sets.midcast.MagicAcc, {
 })
 
 sets.midcast['Banish'] = set_combine(sets.midcast['Divine Magic'], {
-    head        = "Ipoca Baret",                    -- Potency of Banish vs. Undead +25
+    main        = "Mes'yohi Rod",
+    sub         = "Culminus",
+    head        = "Ipoca Beret",                    -- Potency of Banish vs. Undead +25
     hands       = gear.RelicHands,                  -- Potency of Banish vs. Undead +30
     neck        = "Sanctity Necklace",              -- +10 Magic Accuracy, +10 Magic Attack Bonus
-    left_ear    = "Dignitary's Earring",            -- +10 Magic Accuracy
-    right_ear   = "Hecate's Earring",               -- +6 Magic Attack Bonus, +3% Magic Crit. Hit
+    left_ear    = "Hecate's Earring",               -- +6 Magic Attack Bonus, +3% Magic Crit. Hit
     back        = "Disperser's Cape",               -- Potency of Banish vs. Undead +7
     waist       = "Aswang Sash",                    -- +3 Magic Attack Bonus
 })
