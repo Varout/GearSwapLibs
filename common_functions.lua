@@ -139,24 +139,28 @@ function check_debuff_silenced(spell, eventArgs)
     if spell.action_type == 'Magic' and buffactive['Silence'] then
         -- If silenced, use what's available to remove it
         cancel_spell()
-        if player.inventory['Echo Drops'] ~= nil then
-            send_command('input /item "Echo Drops" <me>')
-            send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
-        elseif player.inventory['Catholicon'] ~= nil then
-            send_command('input /item "Catholicon" <me>')
-            send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
-        elseif player.inventory['Remedy'] ~= nil then
-            send_command('input /item "Remedy" <me>')
-            send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
-        else
-            send_command('input /echo *!! Silenced ~ No items to remove it !!*')
-        end
-
-        eventArgs.cancel = true
-        return
+        remove_silence()
     end
 end
 
+function remove_silence()
+    -- If silenced, use what's available to remove it
+    if player.inventory['Echo Drops'] ~= nil then
+        send_command('input /item "Echo Drops" <me>')
+        send_command('input /echo *!! Silenced ~ Using Echo Drops @ '..player.inventory['Echo Drops'].count..' Left !!*')
+    elseif player.inventory['Remedy'] ~= nil then
+        send_command('input /item "Remedy" <me>')
+        send_command('input /echo *!! Silenced ~ Using Remedy @ '..player.inventory['Remedy'].count..' Left !!*')
+    elseif player.inventory['Catholicon'] ~= nil then
+        send_command('input /item "Catholicon" <me>')
+        send_command('input /echo *!! Silenced ~ Using Catholicon @ '..player.inventory['Catholicon'].count..' Left !!*')
+    else
+        send_command('input /echo *!! Silenced ~ No items to remove it !!*')
+    end
+
+    -- eventArgs.cancel = true
+    return
+end
 
 -------------------------------------------------------------------------------------------------------------------
 --  Common Shared Functions - Ailment vs Job Ability Activation
@@ -399,4 +403,32 @@ end
 
 function check_spell_weather_match(spell)
     return spell.element == world.weather_element
+end
+
+
+-------------------------------------------------------------------------------------------------------------------
+-- BELOW IS FROM THE CANCEL ADDON
+-- ADDING DUE TO FACT SOME PEOPLE MAY NOT HAVE IT INSTALLED
+-- ALLOWS CANCELING OF BUFFS EASIER
+-------------------------------------------------------------------------------------------------------------------
+
+function cancel(...)
+    local command = table.concat({...},' ')
+    if not command then return end
+    local status_id_tab = command:split(',')
+    status_id_tab.n = 0
+    local ids = {}
+    local buffs = {}
+    for _,v in pairs(windower.ffxi.get_player().buffs) do
+        for _,r in pairs(status_id_tab) do
+            if windower.wc_match(res.buffs[v][Language],r) or windower.wc_match(tostring(v),r) then
+                cancel_buff(v)
+                break
+            end
+        end
+    end
+end
+
+function cancel_buff(id)
+    windower.packets.inject_outgoing(0xF1,string.char(0xF1,0x04,0,0,id%256,math.floor(id/256),0,0)) -- Inject the cancel packet
 end
