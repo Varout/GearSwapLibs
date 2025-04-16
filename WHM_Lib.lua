@@ -39,7 +39,7 @@ end
 --  User and job setup
 --  ----------------------------------------------------------------------------------------------------
 function user_setup()
-    --  Check if user has Lorg Mor (ideally stage 1)
+    --  Check if user has Lorg Mor (ideally stage 1 so it will take hp and wake you)
     LorgMor = false
     if player.inventory['Lorg Mor'] or player.wardrobe['Lorg Mor'] then
         LorgMor = true
@@ -237,9 +237,13 @@ end
 function customize_idle_set(idleSet)
     check_special_ring_equipped()
 
+    if player.mpp < 76 then
+        idleSet = set_combine(idleSet, sets.latentRefresh75)
+    end
+
     --  Checking player stats
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
+    if player.mpp < 50 then
+        idleSet = set_combine(idleSet, sets.latentRefresh50)
     end
 
     --  If in an assault or salvage zone, equip refresh ring

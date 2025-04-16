@@ -80,8 +80,6 @@ function init_gear_sets()
         feet       = gear.EmpyreanFeet
     }
 
-    sets.town = {}
-
     --  +15 Idle Refresh (+17 with latent effects)
     sets.idle = {
         main        = { name     = "Mpaca's Staff",     -- Refresh +2
@@ -123,9 +121,12 @@ function init_gear_sets()
         right_ring  = "Defending Ring",
     }
 
-    sets.latent_refresh = {
-        sub         = "Oneiros Grip",        -- Latent: Refresh +1 when MP <= 75%
+    sets.latentRefresh50 = {
         waist       = "Fucho-no-Obi",        -- Latent: Refresh +1 when MP < 50%
+    }
+
+    sets.latentRefresh75 = {
+        sub         = "Oneiros Grip",        -- Latent: Refresh +1 when MP <= 75%
     }
 
     sets.movement = {
@@ -459,11 +460,12 @@ function init_gear_sets()
     }
 
     sets.precast.WS = {
-        head = { name="Nyame Helm", augments={'Path: B',}},
-        body = { name="Nyame Mail", augments={'Path: B',}},
-        hands = { name="Nyame Gauntlets", augments={'Path: B',}},
-        legs = { name="Nyame Flanchard", augments={'Path: B',}},
-        feet = { name="Nyame Sollerets", augments={'Path: B',}},
+        ammo        = "Oshasha's Treatise",
+        head        = { name="Nyame Helm", augments={'Path: B',}},
+        body        = { name="Nyame Mail", augments={'Path: B',}},
+        hands       = { name="Nyame Gauntlets", augments={'Path: B',}},
+        legs        = { name="Nyame Flanchard", augments={'Path: B',}},
+        feet        = { name="Nyame Sollerets", augments={'Path: B',}},
     }
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
     sets.precast.WS['Dagan'] = set_combine(sets.precast.WS, {})         -- Empyrean WS: Max HP & MP [None]
@@ -471,4 +473,6 @@ function init_gear_sets()
     sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
     sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
     sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
+
+    sets.town = sets.midcast.Cursna['Potency']
 end
