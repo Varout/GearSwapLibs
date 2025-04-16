@@ -49,7 +49,7 @@ function init_gear_sets()
 
     --  Gear sets for specific conditions and commands
     --  Equipment that enhances the charge rate of Sublimation
-    sets.Sublimation = {
+    sets.sublimation = {
         waist      = "Embla Sash"                       --  Sublimation +3
     }
 
@@ -117,14 +117,15 @@ function init_gear_sets()
         neck        = { name     = "Loricate Torque +1",
                         augments = {'Path: A',}},
         waist       = "Null Belt",
+        left_ear    = "Etiolation Earring",
         right_ear   = gear.EmpyreanEarring,
         left_ring   = "Gurebu's Ring",
         right_ring  = "Defending Ring",
     }
 
     sets.latent_refresh = {
-        sub         = "Oneiros Grip",                   -- Latent: Refresh +1 when MP <= 75%
-        waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1 when MP < 50%
+        sub         = "Oneiros Grip",        -- Latent: Refresh +1 when MP <= 75%
+        waist       = "Fucho-no-Obi",        -- Latent: Refresh +1 when MP < 50%
     }
 
     sets.movement = {
@@ -248,7 +249,7 @@ function init_gear_sets()
         main        = "Chatoyant Staff",
         sub         = "Curatio Grip",
         ammo        = "Quartz Tathlum +1",
-        head        = { name = "Vanya Hood",
+        head        = { name     = "Vanya Hood",
                         augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         body        = gear.ArtefactBody,
         hands       = gear.ArtefactHands,
@@ -287,18 +288,18 @@ function init_gear_sets()
 
     --  Cursna AoE
     sets.CursnaAoE = {
-        main = gear.ClubMythic,
+        main        = gear.ClubMythic,
+        sub         = "Culminus",
     }
 
     --  Cursna Potency +100
     sets.CursnaPotency = {
-        main = gear.ClubEmpyrean,
+        main        = gear.ClubEmpyrean,
+        sub         = "Culminus",
     }
 
     --  Healing Magic: 639, Cursna: +221%
     sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
-        main        = gear.ClubEmpyrean,                -- Cursna +100
-        sub         = "Genmei Shield",
         ammo        = "Incantor Stone",
         neck        = "Debilis Medallion",              -- Healing Magic +00, Cursna +15
         hands       = "Fanatic Gloves",                 -- Healing Magic +10, Cursna +15
@@ -309,8 +310,11 @@ function init_gear_sets()
         feet        = "Gendewitha Galoshes +1",         -- Healing Magic +00, Cursna +10
     })
 
+    sets.midcast.Cursna['Potency'] = set_combine(sets.midcast.Cursna, sets.CursnaPotency)
+    sets.midcast.Cursna['AoE'] = set_combine(sets.midcast.Cursna, sets.CursnaAoE)
+
     sets.midcast.CursnaNIN = set_combine(sets.midcast.Cursna, {
-        main        = gear.ClubMythic,
+        main        = gear.ClubMythic,                  -- AoE (Only works if in main hand)
         sub         = gear.ClubEmpyrean,                -- Cursna +100
     })
 
@@ -454,10 +458,16 @@ function init_gear_sets()
         back        = gear.AmbuscadeCapeTP,
     }
 
-    sets.precast.WS = {}
+    sets.precast.WS = {
+        head = { name="Nyame Helm", augments={'Path: B',}},
+        body = { name="Nyame Mail", augments={'Path: B',}},
+        hands = { name="Nyame Gauntlets", augments={'Path: B',}},
+        legs = { name="Nyame Flanchard", augments={'Path: B',}},
+        feet = { name="Nyame Sollerets", augments={'Path: B',}},
+    }
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
     sets.precast.WS['Dagan'] = set_combine(sets.precast.WS, {})         -- Empyrean WS: Max HP & MP [None]
-    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Dope WS:     30% STR & MND [Fusion]
+    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Best WS:     30% STR & MND [Fusion]
     sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
     sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
     sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
