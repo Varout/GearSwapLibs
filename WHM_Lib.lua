@@ -1,8 +1,3 @@
-spell_maps_barailments = S{
-    'Barsleep',   'Barblind',   'Barvirus', 'Baramnesia', 'Barpetrify', 'Barpoison',   'Barsilence',   'Barparalyze',
-    'Barsleepra', 'Barblindra', 'Barvira',  'Baramnesra', 'Barpetra',   'Barpoisonra', 'Barsilencera', 'Barparalyzra',
-}
-
 --  ----------------------------------------------------------------------------------------------------
 -- Initialization function for this job file.
 --  ----------------------------------------------------------------------------------------------------
@@ -23,16 +18,6 @@ function job_setup()
 
     --  Make sure all equipment can be changed/updated
     equipment_unlock_all()
-end
-
---  ----------------------------------------------------------------------------------------------------
---  Information about custom commands
---  ----------------------------------------------------------------------------------------------------
-function custom_instructions()
-    add_to_chat(200, "Varrout's WHM Custom commands:")
-    add_to_chat(200, "* Windows Key + 1: Raise Target")
-    add_to_chat(200, "* Windows Key + 2: Reraise")
-    add_to_chat(200, "* Windows Key + X: Toggle Magic Evasion Mode")
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -104,6 +89,7 @@ end
 
 function gearswap_ui_text()
     output = ''
+
     output = output .. '           ' .. player.name ..': WHITE MAGE\n\n'
     output = output .. '(Win + x)  | Idle Mode           | \\cs(0,255,128)' .. state.IdleMode.current .. '\\cr\n'
     output = output .. '(Win + c)  | Cursna Mode Mode    | \\cs(0,255,128)' .. state.CursnaMode.current .. '\\cr\n'
@@ -117,22 +103,27 @@ function gearswap_ui_text()
 end
 
 gearswap_ui_config = {
-    pos={x=1755,y=988},--  This location lines up with the bottom of Equip Viewer in when ffxi is 2460 x 1300
-    padding=8,
-    text={
-        font='Lucida Console',
-        size=10,
-        stroke={width=2,alpha=255},
-        Fonts={
+    pos = {     --  This location lines up with the bottom of Equip Viewer in when ffxi is 2460 x 1300
+        x = 1755,
+        y = 988
+    },
+    padding = 8,
+    text = {
+        font = 'Lucida Console',
+        size = 10,
+        stroke = {
+            width = 2,
+            alpha = 255
+        },
+        Fonts = {
             'Lucida Console',
-            -- 'Cascadia Code',
-            -- 'Comic Mono',
-            -- 'Impact',
             -- 'sans-serif'
         },
     },
-    bg={alpha=100},
-    flags={}
+    bg = {
+        alpha = 100
+    }, --  Gives a nice transparency level for the background
+    flags = {}
 }
 
 gearswap_ui_box = texts.new(gearswap_ui_config)
@@ -237,11 +228,10 @@ end
 function customize_idle_set(idleSet)
     check_special_ring_equipped()
 
-    if player.mpp < 76 then
+    if player.mpp <= 75 then
         idleSet = set_combine(idleSet, sets.latentRefresh75)
     end
 
-    --  Checking player stats
     if player.mpp < 50 then
         idleSet = set_combine(idleSet, sets.latentRefresh50)
     end
@@ -336,7 +326,6 @@ function job_self_command(cmdParams, eventArgs)
         end
         --  Equip Prime club to wake
         equip(sets.slept)
-
     end
 end
 
