@@ -8,7 +8,6 @@ function get_sets()
     include('Mote-Include.lua')
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked
 --  ----------------------------------------------------------------------------------------------------
@@ -21,77 +20,120 @@ function job_setup()
     equipment_unlock_all()
 end
 
-
---  ----------------------------------------------------------------------------------------------------
---  Information about custom commands
---  ----------------------------------------------------------------------------------------------------
-function custom_instructions()
-    add_to_chat(200, "Varrout's WHM Custom commands:")
-    add_to_chat(200, "* Windows Key + 1: Raise Target")
-    add_to_chat(200, "* Windows Key + 2: Reraise")
-    add_to_chat(200, "* Windows Key + C: Toggle Cursna Single Target/AoE Mode (Default Single Target)")
-    add_to_chat(200, "* Windows Key + M: Show Map")
-    add_to_chat(200, "* Windows Key + X: Toggle Magic Evasion Mode")
-end
-
-
 --  ----------------------------------------------------------------------------------------------------
 --  User and job setup
 --  ----------------------------------------------------------------------------------------------------
 function user_setup()
-    --  Check if user has Lorg Mor (ideally stage 1)
+    --  Check if user has Lorg Mor (ideally stage 1 so it will take hp and wake you)
     LorgMor = false
     if player.inventory['Lorg Mor'] or player.wardrobe['Lorg Mor'] then
         LorgMor = true
     end
 
+    state.CursnaMode = M{['description'] = 'Cursna Mode'}
     --  Default states for automatic gear selection, needs to be defined for Mote-Include to run autonomously
-    state.OffenseMode:options('Normal')
-    state.HybridMode:options('Normal')
-    state.CastingMode:options('Normal')
-    state.IdleMode:options('Normal')
+    -- state.OffenseMode:options('Normal')
+    -- state.HybridMode:options('Normal')
+    -- state.CastingMode:options('Normal')
+    state.IdleMode:options('Refresh', 'MagicEvasion')
+    state.CursnaMode:options('Potency', 'AoE')
 
     --  Which macro book to default to when changing jobs
     select_default_macro_book()
 
     --  Special states to track for White Mage
-    state.CursnaPotency = M(true, "Cursna Single Target Mode")   --  If true, Cursna will use Gambanteinn for added potency
-    state.MagicEvasion = M(false, "Magic Evasion Mode")
+    state.AutoCancelRefresh = M(true, "Auto-Cancel Refresh Mode")
 
-    --  Where @ is the Windows Key
-    send_command('bind @c gs c toggle CursnaPotency')            --  Windows Key + C: Toggle Cursna Mode
-    send_command('bind @m input /map')                          --  Windows Key + M: Show map, because I'm lazy af
-    send_command('bind @x gs c toggle MagicEvasion')            --  Windows Key + X: Toggle Refresh/MagicEvasion
-    send_command('bind @z gs c slept')                          --  Windows Key + Z: Cancels Stoneskin and equips Lorg Mor
+	--Keybinds (! = ALT / @ = WIN / ^ = CTRL)
+    send_command('bind @c gs c cycle CursnaMode')               --  Windows Key + C: Cycle Cursna Modes
+    send_command('bind @x gs c cycle IdleMode')                 --  Windows Key + X: Cycle Idle Modes
+
+    send_command('bind @` gs c toggle AutoCancelRefresh')       --  Windows Key + `: Toggle Auto-Cancel Refresh
+
     send_command('bind @1 gs c raise')                          --  Windows Key + 1: Cast highest available raise
     send_command('bind @2 gs c reraise')                        --  Windows Key + 2: Cast highest available reraise
-    send_command('bind ^c input /ja "Divine Caress" <me>')      -- Ctrl + C: Divine Caress
+    send_command('bind @z gs c slept')                          --  Windows Key + Z: Cancels Stoneskin and equips Lorg Mor
 
-    custom_instructions()
+    send_command('bind @m input /map')                          --  Windows Key + M: Show map, because I'm lazy af
+    send_command('bind ^c input /ja "Divine Caress" <me>')      --  Ctrl + C: Divine Caress
+
+    display_ui()
 end
-
 
 function user_unload()
     send_command('unbind @c')
-    send_command('unbind @m')
     send_command('unbind @x')
-    send_command('unbind @z')
+
+    send_command('unbind @`')
+
     send_command('unbind @1')
     send_command('unbind @2')
-    send_command('unbind !c')
-end
+    send_command('unbind @z')
 
+    send_command('unbind @m')
+    send_command('unbind ^c')
+end
 
 function init_gear_sets()
     include('Varrout_WHM_GearSets.lua')
 end
 
+--  ----------------------------------------------------------------------------------------------------
+--                      Textbox functions & config
+--  ----------------------------------------------------------------------------------------------------
+--  Used to Display/Refresh UI
+function display_ui()
+    gearswap_ui_box:text(gearswap_ui_text())
+    gearswap_ui_box:show()
+end
+
+function gearswap_ui_text()
+    output = ''
+
+    output = output .. '           ' .. player.name ..': WHITE MAGE\n\n'
+    output = output .. '(Win + x)  | Idle Mode           | \\cs(0,255,128)' .. state.IdleMode.current .. '\\cr\n'
+    output = output .. '(Win + c)  | Cursna Mode Mode    | \\cs(0,255,128)' .. state.CursnaMode.current .. '\\cr\n'
+    output = output .. '(Win + `)  | Auto-Cancel Refresh | \\cs(0,255,128)' .. state.AutoCancelRefresh.current .. '\\cr\n\n'
+    output = output .. 'Shortcuts                                      \n'  --  Stupid long to keep the box from changing size
+    output = output .. '(Ctrl + C) | Divine Caress\n'
+    output = output .. '(Win  + 1) | Arise/Raise Target\n'
+    output = output .. '(Win  + 2) | Reraise'
+
+    return output
+end
+
+gearswap_ui_config = {
+    pos = {     --  This location lines up with the bottom of Equip Viewer in when ffxi is 2460 x 1300
+        x = 1755,
+        y = 988
+    },
+    padding = 8,
+    text = {
+        font = 'Lucida Console',
+        size = 10,
+        stroke = {
+            width = 2,
+            alpha = 255
+        },
+        Fonts = {
+            'Lucida Console',
+            -- 'sans-serif'
+        },
+    },
+    bg = {
+        alpha = 100
+    }, --  Gives a nice transparency level for the background
+    flags = {}
+}
+
+gearswap_ui_box = texts.new(gearswap_ui_config)
 
 --  ----------------------------------------------------------------------------------------------------
 --  Check before changing any equipment
 --  ----------------------------------------------------------------------------------------------------
 function job_handle_equipping_gear(playerStatus, eventArgs)
     check_special_ring_equipped()
+    display_ui()
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -115,26 +157,9 @@ function job_precast(spell, action, spellMap, eventArgs)
     end
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  MIDCAST
 --  ----------------------------------------------------------------------------------------------------
--- function job_midcast(spell, action, spellMap, eventArgs)
---     local equipSet = {}
-
---     if spell.name == 'Cursna' then
---         if state.CursnaPotency.current == 'on' then
---             -- add_to_chat(200, "Cursna Single Target")
---             equipSet = set_combine(equipSet, sets.CursnaPotency)
---         else
---             -- add_to_chat(200, "Cursna AoE")
---             equipSet = set_combine(equipSet, sets.CursnaAoE)
---         end
---     end
-
--- end
-
-
 function job_post_midcast(spell, action, spellMap, eventArgs)
     local equipSet = {}
 
@@ -162,18 +187,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
             --  Cursna removal gear is most important. Combine last
             if spell.name == 'Cursna' then
-                -- equipSet = sets.midcast.Cursna
-                if player.sub_job == 'NIN' then
+                if player.sub_job == 'NIN' and sets.midcast.CursnaNIN then
                     equipSet = sets.midcast.CursnaNIN
                 else
-                    --  By default single target is off
-                    if state.CursnaPotency.current == 'on' then
-                        -- add_to_chat(200, "Cursna Single Target")
-                        equipSet = set_combine(equipSet, sets.CursnaPotency)
-                    else
-                        -- add_to_chat(200, "Cursna AoE")
-                        equipSet = set_combine(equipSet, sets.CursnaAoE)
-                    end
+                    --  Equip Cursna set based on state.CursnaMode
+                    equipSet = sets.midcast.Cursna[state.CursnaMode.current]
                 end
             end
         elseif spell.name == "Erase" then
@@ -194,7 +212,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     return
 end
 
-
 function job_aftercast(spell, action, spellMap, eventArgs)
     if (spell == "Snenk" or spell == "Invisible") and not spell.interrupted then
        local tempIdle = customize_idle_set(sets.idle)
@@ -211,20 +228,22 @@ end
 function customize_idle_set(idleSet)
     check_special_ring_equipped()
 
-    -- idleSet = sets.idle
-
-    --  Checking player stats
-    if player.mpp < 51 then
-        idleSet = set_combine(idleSet, sets.latent_refresh)
+    if player.mpp <= 75 then
+        idleSet = set_combine(idleSet, sets.latentRefresh75)
     end
 
-    if state.MagicEvasion.current == 'on' then
-        idleSet = set_combine(idleSet, sets.idle.MagicEvasion)
+    if player.mpp < 50 then
+        idleSet = set_combine(idleSet, sets.latentRefresh50)
     end
 
     --  If in an assault or salvage zone, equip refresh ring
     if zones_toau_ring:contains(world.area) then
         idleSet = set_combine(idleSet, sets.ToAU)
+    end
+
+    --  If in town
+    if areas.Cities:contains(world.area) then
+        idleSet = set_combine(idleSet, sets.town)
     end
 
     --  If in an Adoulin zone, equip body piece if available
@@ -234,7 +253,7 @@ function customize_idle_set(idleSet)
 
     --  Check if sublimation is active
     if buffactive["Sublimation: Activated"] then
-        idleSet = set_combine(idleSet, sets.Sublimation)
+        idleSet = set_combine(idleSet, sets.sublimation)
     end
 
     if buffactive["Sneak"] or buffactive["Invisible"] then
@@ -244,18 +263,11 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  STATUS CHANGE
 --  ----------------------------------------------------------------------------------------------------
-function user_status_change(newStatus, oldStatus)
-    -- if newStatus == 'Engaged' then
-    --     melee_equip_lock()
-    -- elseif oldStatus == 'Engaged' and player.sub_job ~= 'NIN' then
-    --     melee_equip_unlock()
-    -- end
-end
-
+-- function user_status_change(newStatus, oldStatus)
+-- end
 
 --  ----------------------------------------------------------------------------------------------------
 --  JOB BUFF CHANGE
@@ -270,12 +282,12 @@ function job_buff_change(buff, gain, eventArgs)
     elseif buff == "sleep" and LorgMor then  --  The string 'sleep' needs to be completely in lower case
         if gain then
             equip(sets.slept)
-            melee_equip_lock("main")
+            melee_equip_lock()
             if buffactive["Stoneskin"] then
                 windower.ffxi.cancel_buff(37)  --  Cancels stoneskin
             end
         else
-            melee_equip_unlock("main")
+            melee_equip_unlock()
             equip(customize_idle_set(sets.idle))
         end
     elseif (buff == "Sneak" or buff == "Invisible") then
@@ -286,9 +298,13 @@ function job_buff_change(buff, gain, eventArgs)
         end
     elseif buff == 'silence' and gain then
         remove_silence()
+    elseif buff == 'Refresh' and player.sub_job == 'SCH' then
+        --  Salty whm/sch does not want your Refresh
+        if state.AutoCancelRefresh.current == 'on' and not buffactive['Weakness'] then
+            windower.ffxi.cancel_buff(43)
+        end
     end
 end
-
 
 --  ----------------------------------------------------------------------------------------------------
 --  JOB SELF COMMAND / CUSTOM COMMANDS
@@ -297,28 +313,21 @@ function job_self_command(cmdParams, eventArgs)
     --  Make Reraise easy to handle
     if (cmdParams[1]:lower() == 'reraise') then
         cast_highest_available_reraise()
-        eventArgs.handled = true
-        return
 
     --  Make Raise easy to handle
     elseif cmdParams[1]:lower() == 'raise' then
         cast_highest_available_raise()
-        eventArgs.handled = true
-        return
 
     --  Wake if slept
     elseif cmdParams[1]:lower() == 'slept' then
         --  Cancel Stoneskin if active
         if buffactive["Stoneskin"] then
-            windower.ffxi.cancel_buff(37)--[[Cancels stoneskin]]
+            windower.ffxi.cancel_buff(37)   --  Cancels stoneskin
         end
         --  Equip Prime club to wake
         equip(sets.slept)
-        eventArgs.handled = true
-        return
     end
 end
-
 
 --  ----------------------------------------------------------------------------------------------------
 --  SELECT MACRO BOOK
@@ -327,14 +336,6 @@ function select_default_macro_book()
     -- Default macro set/book
     set_macro_page(1, 4)    -- Jason
     send_command('wait 2; input /lockstyleset 003')
-end
-
-function sub_job_change(newSubjob, oldSubjob)
-    if newSubjob == 'NIN' then
-        melee_equip_lock()
-    else
-        melee_equip_unlock()
-    end
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -351,56 +352,13 @@ function melee_equip_unlock()
 end
 
 --  ----------------------------------------------------------------------------------------------------
---                      UI functions
---  ----------------------------------------------------------------------------------------------------
--- function setup_status_ui()
-
---     local default_settings = {}
---     default_settings.pos = {}
---     default_settings.pos.x = 1440
---     default_settings.pos.y = 720
---     default_settings.bg = {}
-
---     default_settings.bg.alpha = 200 -- a value of 0 (invisible) to 255 (no transparency at all)
---     default_settings.bg.red = 40
---     default_settings.bg.green = 40
---     default_settings.bg.blue = 55
---     default_settings.bg.visible = true
---     default_settings.flags = {}
---     default_settings.flags.right = false
---     default_settings.flags.bottom = false
---     default_settings.flags.bold = true
---     default_settings.flags.draggable = true
---     default_settings.flags.italic = false
---     default_settings.padding = hud_padding
---     default_settings.text = {}
---     default_settings.text.size = 10
---     default_settings.text.font = hud_font
---     default_settings.text.fonts = {}
---     default_settings.text.alpha = 255
---     default_settings.text.red = 147
---     default_settings.text.green = 161
---     default_settings.text.blue = 161
---     default_settings.text.stroke = {}
---     default_settings.text.stroke.width = 1
---     default_settings.text.stroke.alpha = 255
---     default_settings.text.stroke.red = 0
---     default_settings.text.stroke.green = 0
---     default_settings.text.stroke.blue = 0
-
---     --Creates the initial Text Object will use to create the different sections in
---     if not (main_text_hub == nil) then
---         texts.destroy(main_text_hub)
---     end
---     main_text_hub = texts.new('', default_settings, default_settings)
--- end
-
---  ----------------------------------------------------------------------------------------------------
 --                      Misc functions
 --  ----------------------------------------------------------------------------------------------------
-windower.register_event('zone change',
+--  Unlocks rings when zoning. The idea is that my lua locks specific rings when they are equipped
+windower.register_event(
+    'zone change',
     function()
         equipment_unlock_specific({"left_ring", "right_ring",})
-        equip(sets.idle)
+        equip(customize_idle_set(sets.idle))
     end
 )

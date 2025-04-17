@@ -49,7 +49,7 @@ function init_gear_sets()
 
     --  Gear sets for specific conditions and commands
     --  Equipment that enhances the charge rate of Sublimation
-    sets.Sublimation = {
+    sets.sublimation = {
         waist      = "Embla Sash"                       --  Sublimation +3
     }
 
@@ -80,8 +80,6 @@ function init_gear_sets()
         feet       = gear.EmpyreanFeet
     }
 
-    sets.town = {}
-
     --  +15 Idle Refresh (+17 with latent effects)
     sets.idle = {
         main        = { name     = "Mpaca's Staff",     -- Refresh +2
@@ -104,49 +102,56 @@ function init_gear_sets()
                         augments = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = gear.EmpyreanEarring,
         left_ring   = "Gurebu-Ogurebu's Ring",          -- Refresh +2, Regen +2
-        right_ring  = "Defending Ring",
+        right_ring  = "Stikini Ring +1",
         back        = gear.AmbuscadeCapeIdle,
     }
 
+    sets.idle.Refresh = sets.idle
+
     sets.idle.MagicEvasion = {
+        ammo        = "Staunch Tathlum +1",     --  -03% DT, +11 Ailment Resist
         head        = gear.EmpyreanHead,
         body        = gear.EmpyreanBody,
-        hands       = gear.EmpyreanHands,
-        legs        = gear.EmpyreanLegs,
-        feet        = gear.EmpyreanFeet,
-        neck        = { name     = "Loricate Torque +1",
-                        augments = {'Path: A',}},
+        hands       = gear.EmpyreanHands,       --  -11% DT
+        legs        = gear.EmpyreanLegs,        --  -13% DT
+        feet        = gear.EmpyreanFeet,        --  -11% DT
+        neck        = "Warder's Charm +1",      --  +20 Resist: Stone, Water, Fire, Aero, Blizard, Thunder
         waist       = "Null Belt",
-        right_ear   = gear.EmpyreanEarring,
-        left_ring   = "Gurebu's Ring",
-        right_ring  = "Defending Ring",
+        left_ear    = "Etiolation Earring",     --  +15 Resist Silence
+        right_ear   = gear.EmpyreanEarring,     --  -05% DT
+        left_ring   = "Gurebu's Ring",          --  +20 Ailment Resist
+        right_ring  = "Defending Ring",         --  -10% DT
+        back        = gear.AmbuscadeCapeIdle,   --  +10 Ailment Resist
     }
 
-    sets.latent_refresh = {
-        sub         = "Oneiros Grip",                   -- Latent: Refresh +1 when MP <= 75%
-        waist       = "Fucho-no-Obi",                   -- Latent: Refresh +1 when MP < 50%
+    sets.latentRefresh50 = {
+        waist       = "Fucho-no-Obi",           --  Latent: Refresh +1 when MP < 50%
+    }
+
+    sets.latentRefresh75 = {
+        sub         = "Oneiros Grip",           --  Latent: Refresh +1 when MP <= 75%
     }
 
     sets.movement = {
-        feet        = "Herald's Gaiters",
+        feet        = "Herald's Gaiters",       --  +12% Movement Speed
     }
 
     sets.resting = {
-        main        = "Boonwell Staff",      -- +18
-        sub         = "Ariesian Grip",       -- +1
-        ammo        = "Mana Ampulla",        -- +2
-        head        = "Orvail Corona +1",    -- +4
-        neck        = "Eidolon Pendant +1",  -- +6
-        left_ear    = "Infused Earring",     -- +0, Regen +1
+        main        = "Boonwell Staff",         -- +18
+        sub         = "Ariesian Grip",          -- +1
+        ammo        = "Mana Ampulla",           -- +2
+        head        = "Orvail Corona +1",       -- +4
+        neck        = "Eidolon Pendant +1",     -- +6
+        left_ear    = "Infused Earring",        -- +0, Regen +1
         right_ear   = gear.EmpyreanEarring,
-        body        = "Chelona Blazer",      -- +8 (Nice to have +1)
-        hands       = "Nares Cuffs",         -- +4
-        left_ring   = "Star Ring",           -- +1
-        right_ring  = "Angha Ring",          -- +2
-        back        = "Felicitas Cape",      -- +3
-        waist       = "Shinjutsu-no-Obi +1", -- +5
-        legs        = "Nisse Slacks",        -- +4
-        feet        = "Chelona Boots"        -- +5 (Nice to have +1)
+        body        = "Chelona Blazer",         -- +8 (Nice to have +1)
+        hands       = "Nares Cuffs",            -- +4
+        left_ring   = "Star Ring",              -- +1
+        right_ring  = "Angha Ring",             -- +2
+        back        = "Felicitas Cape",         -- +3
+        waist       = "Shinjutsu-no-Obi +1",    -- +5
+        legs        = "Nisse Slacks",           -- +4
+        feet        = "Chelona Boots"           -- +5 (Nice to have +1)
     }
 
     --  Setting the base set: precast
@@ -248,7 +253,7 @@ function init_gear_sets()
         main        = "Chatoyant Staff",
         sub         = "Curatio Grip",
         ammo        = "Quartz Tathlum +1",
-        head        = { name = "Vanya Hood",
+        head        = { name     = "Vanya Hood",
                         augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
         body        = gear.ArtefactBody,
         hands       = gear.ArtefactHands,
@@ -287,18 +292,18 @@ function init_gear_sets()
 
     --  Cursna AoE
     sets.CursnaAoE = {
-        main = gear.ClubMythic,
+        main        = gear.ClubMythic,
+        sub         = "Culminus",
     }
 
     --  Cursna Potency +100
     sets.CursnaPotency = {
-        main = gear.ClubEmpyrean,
+        main        = gear.ClubEmpyrean,
+        sub         = "Culminus",
     }
 
     --  Healing Magic: 639, Cursna: +221%
     sets.midcast.Cursna = set_combine(sets.midcast.NASpell, {
-        main        = gear.ClubEmpyrean,                -- Cursna +100
-        sub         = "Genmei Shield",
         ammo        = "Incantor Stone",
         neck        = "Debilis Medallion",              -- Healing Magic +00, Cursna +15
         hands       = "Fanatic Gloves",                 -- Healing Magic +10, Cursna +15
@@ -309,8 +314,11 @@ function init_gear_sets()
         feet        = "Gendewitha Galoshes +1",         -- Healing Magic +00, Cursna +10
     })
 
+    sets.midcast.Cursna['Potency'] = set_combine(sets.midcast.Cursna, sets.CursnaPotency)
+    sets.midcast.Cursna['AoE'] = set_combine(sets.midcast.Cursna, sets.CursnaAoE)
+
     sets.midcast.CursnaNIN = set_combine(sets.midcast.Cursna, {
-        main        = gear.ClubMythic,
+        main        = gear.ClubMythic,                  -- AoE (Only works if in main hand)
         sub         = gear.ClubEmpyrean,                -- Cursna +100
     })
 
@@ -454,11 +462,20 @@ function init_gear_sets()
         back        = gear.AmbuscadeCapeTP,
     }
 
-    sets.precast.WS = {}
+    sets.precast.WS = {
+        ammo        = "Oshasha's Treatise",
+        head        = { name="Nyame Helm", augments={'Path: B',}},
+        body        = { name="Nyame Mail", augments={'Path: B',}},
+        hands       = { name="Nyame Gauntlets", augments={'Path: B',}},
+        legs        = { name="Nyame Flanchard", augments={'Path: B',}},
+        feet        = { name="Nyame Sollerets", augments={'Path: B',}},
+    }
     sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
     sets.precast.WS['Dagan'] = set_combine(sets.precast.WS, {})         -- Empyrean WS: Max HP & MP [None]
-    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Dope WS:     30% STR & MND [Fusion]
+    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Best WS:     30% STR & MND [Fusion]
     sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
     sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
     sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
+
+    sets.town = set_combine(sets.midcast.Cursna['Potency'], sets.movement)
 end
