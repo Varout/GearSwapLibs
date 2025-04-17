@@ -102,53 +102,56 @@ function init_gear_sets()
                         augments = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = gear.EmpyreanEarring,
         left_ring   = "Gurebu-Ogurebu's Ring",          -- Refresh +2, Regen +2
-        right_ring  = "Defending Ring",
+        right_ring  = "Stikini Ring +1",
         back        = gear.AmbuscadeCapeIdle,
     }
 
+    sets.idle.Refresh = sets.idle
+
     sets.idle.MagicEvasion = {
+        ammo        = "Staunch Tathlum +1",     --  -03% DT, +11 Ailment Resist
         head        = gear.EmpyreanHead,
         body        = gear.EmpyreanBody,
-        hands       = gear.EmpyreanHands,
-        legs        = gear.EmpyreanLegs,
-        feet        = gear.EmpyreanFeet,
-        neck        = { name     = "Loricate Torque +1",
-                        augments = {'Path: A',}},
+        hands       = gear.EmpyreanHands,       --  -11% DT
+        legs        = gear.EmpyreanLegs,        --  -13% DT
+        feet        = gear.EmpyreanFeet,        --  -11% DT
+        neck        = "Warder's Charm +1",      --  +20 Resist: Stone, Water, Fire, Aero, Blizard, Thunder
         waist       = "Null Belt",
-        left_ear    = "Etiolation Earring",
-        right_ear   = gear.EmpyreanEarring,
-        left_ring   = "Gurebu's Ring",
-        right_ring  = "Defending Ring",
+        left_ear    = "Etiolation Earring",     --  +15 Resist Silence
+        right_ear   = gear.EmpyreanEarring,     --  -05% DT
+        left_ring   = "Gurebu's Ring",          --  +20 Ailment Resist
+        right_ring  = "Defending Ring",         --  -10% DT
+        back        = gear.AmbuscadeCapeIdle,   --  +10 Ailment Resist
     }
 
     sets.latentRefresh50 = {
-        waist       = "Fucho-no-Obi",        -- Latent: Refresh +1 when MP < 50%
+        waist       = "Fucho-no-Obi",           --  Latent: Refresh +1 when MP < 50%
     }
 
     sets.latentRefresh75 = {
-        sub         = "Oneiros Grip",        -- Latent: Refresh +1 when MP <= 75%
+        sub         = "Oneiros Grip",           --  Latent: Refresh +1 when MP <= 75%
     }
 
     sets.movement = {
-        feet        = "Herald's Gaiters",
+        feet        = "Herald's Gaiters",       --  +12% Movement Speed
     }
 
     sets.resting = {
-        main        = "Boonwell Staff",      -- +18
-        sub         = "Ariesian Grip",       -- +1
-        ammo        = "Mana Ampulla",        -- +2
-        head        = "Orvail Corona +1",    -- +4
-        neck        = "Eidolon Pendant +1",  -- +6
-        left_ear    = "Infused Earring",     -- +0, Regen +1
+        main        = "Boonwell Staff",         -- +18
+        sub         = "Ariesian Grip",          -- +1
+        ammo        = "Mana Ampulla",           -- +2
+        head        = "Orvail Corona +1",       -- +4
+        neck        = "Eidolon Pendant +1",     -- +6
+        left_ear    = "Infused Earring",        -- +0, Regen +1
         right_ear   = gear.EmpyreanEarring,
-        body        = "Chelona Blazer",      -- +8 (Nice to have +1)
-        hands       = "Nares Cuffs",         -- +4
-        left_ring   = "Star Ring",           -- +1
-        right_ring  = "Angha Ring",          -- +2
-        back        = "Felicitas Cape",      -- +3
-        waist       = "Shinjutsu-no-Obi +1", -- +5
-        legs        = "Nisse Slacks",        -- +4
-        feet        = "Chelona Boots"        -- +5 (Nice to have +1)
+        body        = "Chelona Blazer",         -- +8 (Nice to have +1)
+        hands       = "Nares Cuffs",            -- +4
+        left_ring   = "Star Ring",              -- +1
+        right_ring  = "Angha Ring",             -- +2
+        back        = "Felicitas Cape",         -- +3
+        waist       = "Shinjutsu-no-Obi +1",    -- +5
+        legs        = "Nisse Slacks",           -- +4
+        feet        = "Chelona Boots"           -- +5 (Nice to have +1)
     }
 
     --  Setting the base set: precast
@@ -474,5 +477,5 @@ function init_gear_sets()
     sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
     sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
 
-    sets.town = sets.midcast.Cursna['Potency']
+    sets.town = set_combine(sets.midcast.Cursna['Potency'], sets.movement)
 end
