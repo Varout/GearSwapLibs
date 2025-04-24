@@ -1,5 +1,7 @@
 include('Mote-Globals.lua')
-include('WHM_Lib.lua')
+include('Lib_WHM.lua')
+
+characterPocketMode = false
 
 function init_gear_sets()
     --  JSE Armour
@@ -39,13 +41,14 @@ function init_gear_sets()
     gear.ClubPrime    = "Lorg Mor"
 
     --  Telchine Gear Set
+    gear.TelchineHead  = { name     = "Telchine Cap",
+                           augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
     gear.TelchineHands = { name     = "Telchine Gloves",
                            augments = {'Mag. Evasion+23','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
     gear.TelchineLegs  = { name     = "Telchine Braconi",
                            augments = {'Mag. Evasion+22','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
     gear.TelchineFeet  = { name     = "Telchine Pigaches",
                            augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
-
 
     --  Gear sets for specific conditions and commands
     --  Equipment that enhances the charge rate of Sublimation
@@ -62,7 +65,7 @@ function init_gear_sets()
         neck       = "Arciela's Grace +1"
     }
 
-    --  Used to wake the player (assumes Stage 1)
+    --  Used to wake the player (assumes Stage 1 or 2)
     sets.slept = {
         main       = gear.ClubPrime,
         sub        = "Genmei Shield",
@@ -81,36 +84,54 @@ function init_gear_sets()
     }
 
     --  +15 Idle Refresh (+17 with latent effects)
-    sets.idle = {
-        main        = { name     = "Mpaca's Staff",     -- Refresh +2
+    sets.idle = {}
+
+    sets.idle['Refresh'] = {
+        main        = { name     = "Mpaca's Staff",     --  Refresh +2
                         augments = {'Path: A',}},
         sub         = "Enki Strap",
-        ammo        = "Homiliary",                      -- Refresh +1
-        head        = { name     = "Chironic Hat",      -- Refresh +2
+        ammo        = "Homiliary",                      --  Refresh +1
+        head        = { name     = "Chironic Hat",      --  Refresh +2
                         augments = {'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-        body        = gear.EmpyreanBody,                -- Refresh +3, Regen +4
-        hands       = { name     = "Chironic Gloves",   -- Refresh +2
+        body        = gear.EmpyreanBody,                --  Refresh +3, Regen +4
+        hands       = { name     = "Chironic Gloves",   --  Refresh +2
                         augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-        legs        = { name     = "Chironic Hose",     -- Refresh +2
+        legs        = { name     = "Chironic Hose",     --  Refresh +2
                         augments = {'Accuracy+7','CHR+5','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}},
-        feet        = { name     = "Chironic Slippers", -- Refresh +2
+        feet        = { name     = "Chironic Slippers", --  Refresh +2
                         augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}},
         neck        = { name     = "Loricate Torque +1",
                         augments = {'Path: A',}},
         waist       = "Null Belt",
-        left_ear    = { name     = "Moonshade Earring", -- Latent: Refresh +1 (Not engaged, not resting)
+        left_ear    = { name     = "Moonshade Earring", --  Latent: Refresh +1 (Not engaged, not resting)
                         augments = {'MP+25','Latent effect: "Refresh"+1',}},
         right_ear   = gear.EmpyreanEarring,
-        left_ring   = "Gurebu-Ogurebu's Ring",          -- Refresh +2, Regen +2
-        right_ring  = "Stikini Ring +1",
+        left_ring   = "Gurebu-Ogurebu's Ring",          --  Refresh +2, Regen +2
+        right_ring  = "Stikini Ring +1",                --  Refresh +1
         back        = gear.AmbuscadeCapeIdle,
-    }
+}
 
-    sets.idle.Refresh = sets.idle
+    sets.idle['Hybrid'] = set_combine(sets.idle.Refresh, {
+        legs        = gear.EmpyreanLegs,        --  -13% DT
+        feet        = gear.EmpyreanFeet,        --  -11% DT
+        right_ring  = "Defending Ring",         --  -10% DT
+    })
 
-    sets.idle.MagicEvasion = {
+    --  Damage Taken & Magic Evasion Set
+    -- * -50% DT,
+    -- * +744 Magic Evasion,
+    -- * +20 Fire/Aero/Thunder/Blizard/Earth/Water resist
+    -- * +41 Status Ailment Resistance
+    -- * +15 Resist Silence
+    -- * Occasionally absorbs magic damage taken (Warder's Charm +1) ~5%
+    -- * Occasionally annuls magic damage taken (Shadow Ring) ~12%
+    -- * +Resist Death ~25%
+    sets.idle['MagicEvasion'] = {
+        main        = { name     = "Mpaca's Staff",
+                        augments = {'Path: A',}},
+        sub         = "Enki Strap",
         ammo        = "Staunch Tathlum +1",     --  -03% DT, +11 Ailment Resist
-        head        = gear.EmpyreanHead,
+        head        = "Bunzi's Hat",            --  -07% DT
         body        = gear.EmpyreanBody,
         hands       = gear.EmpyreanHands,       --  -11% DT
         legs        = gear.EmpyreanLegs,        --  -13% DT
@@ -120,7 +141,7 @@ function init_gear_sets()
         left_ear    = "Etiolation Earring",     --  +15 Resist Silence
         right_ear   = gear.EmpyreanEarring,     --  -05% DT
         left_ring   = "Gurebu's Ring",          --  +20 Ailment Resist
-        right_ring  = "Defending Ring",         --  -10% DT
+        right_ring  = "Shadow Ring",
         back        = gear.AmbuscadeCapeIdle,   --  +10 Ailment Resist
     }
 
@@ -269,7 +290,7 @@ function init_gear_sets()
         back        = gear.AmbuscadeCapeCure,
     }
 
-    --  Healing Magic: 700 (uncapped)
+    --  Healing Magic: 707 at M50
     sets.midcast.NASpell = {
         main        = gear.ClubMythic,                  -- AoE Status Removal
         sub         = "Genmei Shield",
@@ -341,6 +362,16 @@ function init_gear_sets()
         back        = "Fi Follet Cape +1"               -- Enhancing Maigc +9
     }
 
+    sets.midcast['Duration'] = set_combine(sets.midcast['Enhancing Magic'], {
+        main        = "Beneficus",
+        sub         = "Ammurapi Shield",                -- Enhancing magic duration +10%
+        head        = gear.TelchineHead,                -- Enhancing magic duration +10%
+        hands       = gear.TelchineHands,               -- Enhancing magic duration +10%
+        legs        = gear.TelchineLegs,                -- Enhancing magic duration +10%
+        feet        = gear.ArtefactFeet,                -- Enhancing magic duration +10%
+        waist       = 'Embla Sash',                     -- Enhancing magic duration +10%
+    })
+
     sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
         head        = gear.EmpyreanHead,                -- Set: Occationally negates damage with correct barpsell
         body        = gear.EmpyreanBody,                -- Set: Occationally negates damage with correct barpsell
@@ -371,20 +402,18 @@ function init_gear_sets()
         feet        = gear.ArtefactFeet                 -- Enhancing Magic Duration +10%
     })
 
-    sets.midcast['Protect'] = set_combine(sets.midcast['Enhancing Magic'], {
-        hands       = gear.TelchineHands,               -- Enhancing Magic Duration +10%
-        legs        = gear.TelchineLegs,                -- Enhancing Magic Duration +10%
-        feet        = gear.ArtefactFeet,                -- Enhancing Magic Duration +10%
+    sets.midcast['Protect'] = set_combine(sets.midcast['Duration'], {
         left_ring   = "Sheltered Ring",                 -- Enhances Protect & Shell
     })
-
+    sets.midcast['Protectra'] = sets.midcast['Protect']
     sets.midcast['Shell'] = sets.midcast['Protect']
+    sets.midcast['Shellra'] = sets.midcast['Protect']
 
     sets.midcast['Auspice'] = set_combine(sets.midcast['Enhancing Magic'], {
         feet        = gear.EmpyreanFeet                 -- Auspice +17
     })
 
-    sets.midcast['Aquaveil'] = set_combine(sets.midcast['Enhancing Magic'], {
+    sets.midcast['Aquaveil'] = set_combine(sets.midcast['Duration'], {
         main        = "Vadose Rod",                     -- Aquaveil +1
         head        = { name     = "Chironic Hat",      -- Aquaveil +1
                         augments = {'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
@@ -450,7 +479,7 @@ function init_gear_sets()
         ammo        = "Oshasha's Treatise",
         head        = gear.EmpyreanHead,
         body        = gear.EmpyreanBody,
-        hands       = gear.EmpyreanHands,
+        hands       = { name="Bunzi's Gloves", augments={'Path: A',}},
         legs        = gear.EmpyreanLegs,
         feet        = gear.EmpyreanFeet,
         neck        = "Asperity Necklace",
