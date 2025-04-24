@@ -35,7 +35,7 @@ Used to track progress towards weather related gear with an end goal being the i
 Most luas have the ability to lock in certain rings to make sure they aren't unequipped when casting spells or buffs wear off.
 e.g. You've just finished an event, your buffs are on cooldown and you've got a Warp Ring on, as a buff wears off there is a check to see if you have a Warp Ring equipped and if so, it is locked in place until manually unequipped.
 
-## Varrout (Varout on Titan)
+## Varrout (Varout from Titan)
 
 The character I've been playing on and off since 2004. Mains are White Mage and Dragoon.
 
@@ -43,17 +43,28 @@ The character I've been playing on and off since 2004. Mains are White Mage and 
 
 #### Custom GearSwap Commands
 
-- `Windows Key + C`: Toggles the Cursna casting mode between single target (Gambanteinn[Potency]) & area of effect (Yagrush)
-- `Windows Key + M`: Brings up the map because I'm lazy
-- `Windows Key + 1`: Takes into account recasts and casts the highest available Raise spell on selected target
-- `Windows Key + 2`: Takes into account recasts and casts the highest available Reraise spell
+Modes
+- ` Windows Key + Z `: Cycles through location or off of UI
+- ` Windows Key + X `: Cycles through idle modes
+- ` Windows Key + C `: Toggles Cursna Mode
+- `` Windows Key + ` ``: Toggles Salty Auto-Cancel Refresh When Not Weakend-Mode
+
+Shortcuts
+- ` Ctrl + C `: Divine Caress
+- ` Windows Key + M `: Brings up the map because I'm lazy af
+- ` Windows Key + 1 `: Takes into account recasts and casts the highest available Raise spell on selected target
+- ` Windows Key + 2 `: Takes into account recasts and casts the highest available Reraise spell
 
 #### Dependencies
 
 - `Mote-Include.lua`
-- `Varrout_WHM_GearSets.lua`
+- `Lib_WHM.lua`
 - `common_functions.lua`
 - `common_lists.lua`
+
+#### UI Example
+
+![White Mage UI Example](images/whm-ui.png)
 
 ### Dragoon (DRG)
 
@@ -81,7 +92,6 @@ _none_
 - `Windows Key + 4:` Self-Skillchain: Fusion
 - `Windows Key + 5:` Self-Skillchain: Distortion
 - `Windows Key + 6:` Self-Skillchain: Gravitation
-- `Windows Key + 0:` Self-Skillchain Six-Step (Takes ~80 seconds)
 
 #### Dependencies
 
