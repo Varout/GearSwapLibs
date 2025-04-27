@@ -39,6 +39,10 @@ e.g. You've just finished an event, your buffs are on cooldown and you've got a 
 
 The character I've been playing on and off since 2004. Mains are White Mage and Dragoon.
 
+If you don't set `pocketMode` in your lua to `false`, then the UI will not be loaded by default.  You can still load it by using the mode shortcut below.
+
+- `Windows Key + M`: Brings up the map because I'm lazy
+
 ### White Mage (WHM)
 
 #### Custom GearSwap Commands
@@ -51,7 +55,6 @@ Modes
 
 Shortcuts
 - ` Ctrl + C `: Divine Caress
-- ` Windows Key + M `: Brings up the map because I'm lazy af
 - ` Windows Key + 1 `: Takes into account recasts and casts the highest available Raise spell on selected target
 - ` Windows Key + 2 `: Takes into account recasts and casts the highest available Reraise spell
 
@@ -64,7 +67,7 @@ Shortcuts
 
 #### UI Example
 
-![White Mage UI Example](images/whm-ui.png)
+![White Mage UI Example](images/ui_whm.png)
 
 ### Dragoon (DRG)
 
@@ -83,22 +86,42 @@ _none_
 
 #### Custom GearSwap Commands
 
-- `Windows Key + B`: Toggle Magic Burst Mode
-- `Windows Key + M`: Brings up the map because I'm lazy
-- `Windows Key + U`: Unlock all equipment. Needed after Six-Step Skillchain
+Modes
+- ` Windows Key + X `: Cycles through idle modes
+  - Refresh: Prioritise idle refresh
+  - Hybrid: About -30% DT on top of refresh set
+  - HybridMagEva: Base magic evasion set, but allows for full sublimation set when charging
+  - MagicEvasion: Magic Evasion and DT set, does not allow any Sublimation charging gear
+- ` Windows Key + C `: Cycles through Casting Moades
+  - Normal
+  - MagicBurst
+
+Shortcuts
+- `Ctrl + C`: Convert + Rapture (if in Light Arts) + Self Cure IV
 - `Windows Key + 1`: Takes into account recasts and casts the highest available Raise spell on selected target
 - `Windows Key + 2`: Takes into account recasts and casts the highest available Reraise spell
-- `Windows Key + 3:` Self-Skillchain: Fragmentation
-- `Windows Key + 4:` Self-Skillchain: Fusion
-- `Windows Key + 5:` Self-Skillchain: Distortion
-- `Windows Key + 6:` Self-Skillchain: Gravitation
+
+- `Windows Key + 5:` Self-Skillchain: Fragmentation
+- `Windows Key + 6:` Self-Skillchain: Fusion
+- `Windows Key + 7:` Self-Skillchain: Distortion
+- `Windows Key + 8:` Self-Skillchain: Gravitation
+
+- `Ctrl + F5:` Self-Skillchain: Fragmentation
+- `Ctrl + F6:` Self-Skillchain: Fusion
+- `Ctrl + F7:` Self-Skillchain: Distortion
+- `Ctrl + F8:` Self-Skillchain: Gravitation
 
 #### Dependencies
 
 - `Mote-Include.lua`
-- `Varrout_SCH_GearSets.lua`
+- `Lib_SCH.lua`
 - `common_functions.lua`
 - `common_lists.lua`
+
+#### UI Example
+
+![SCH UI Example](images/ui_sch.png)
+
 
 ### Red Mage (RDM)
 
