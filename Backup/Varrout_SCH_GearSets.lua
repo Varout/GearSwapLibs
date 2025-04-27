@@ -16,8 +16,8 @@ gear.RelicFeet  = "Pedagogy Loafers +3"
 gear.EmpyreanHead  = "Arbatel Bonnet +2"
 gear.EmpyreanBody  = "Arbatel Gown +3"
 gear.EmpyreanHands = "Arbatel Bracers +2"
-gear.EmpyreanLegs  = "Arbatel Pants +2"
-gear.EmpyreanFeet  = "Arbatel Loavers +3"
+gear.EmpyreanLegs  = "Arbatel Pants +3"
+gear.EmpyreanFeet  = "Arbatel Loavers +2"
 
 gear.EmpyreanEarring = "Arbatel Earring +1"
 gear.DynamisNeck      = { name     = "Argute Stole",
@@ -30,11 +30,15 @@ gear.DynamisNeck      = { name     = "Argute Stole",
 -- gear.WeaponPrime    = ""
 
 --  Ambuscade Capes
-gear.AmbuscadeCapeIdle = gear.AmbuscadeCapeMAB
-gear.AmbuscadeCapeMAB = { name = "Lugh's Cape", augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+gear.AmbuscadeCapeIdle = { name     = "Lugh's Cape",
+                           augments = {'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Occ. inc. resist. to stat. ailments+10',}}
+gear.AmbuscadeCapeMAB  = { name     = "Lugh's Cape",
+                           augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
 
 gear.BookwormCape = "Bookworm Cape"
 
+gear.TelchineHead  = { name     = "Telchine Cap",
+                       augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
 gear.TelchineHands = { name     = "Telchine Gloves",
                        augments = {'Mag. Evasion+23','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
 gear.TelchineLegs  = { name     = "Telchine Braconi",
@@ -54,7 +58,10 @@ gear.ChironicFeetRefresh  = { name     = "Chironic Slippers",
 --  ----------------------------------------------------------------------------------------------------
 --   Idle Sets
 --  ----------------------------------------------------------------------------------------------------
-sets.idle = {
+--
+sets.idle = {}
+
+sets.idle['Refresh'] = {
     main        = { name     = "Mpaca's Staff",
                     augments = {'Path: A',}},
     sub         = "Enki Strap",
@@ -64,15 +71,56 @@ sets.idle = {
     hands       = gear.ChironicHandsRefresh,
     legs        = gear.ChironicLegsRefresh,
     feet        = gear.ChironicFeetRefresh,
-    neck        = { name     = "Loricate Torque +1",
-                    augments = {'Path: A',}},
-    waist       = "Plat. Mog. Belt",
+    neck        = "Warder's Charm +1",
+    waist       = "Null Belt",
     left_ear    = { name     = "Moonshade Earring",
                     augments = {'MP+25','Latent effect: "Refresh"+1',}},
     right_ear   = "Etiolation Earring",
-    left_ring   = "Gurebu-Ogurebu's Ring",
-    right_ring  = "Defending Ring",
-    back        = "Solemnity Cape",
+    left_ring   = "Gurebu's Ring",
+    right_ring  = "Stikini Ring +1",
+    back        = gear.AmbuscadeCapeIdle,
+}
+
+-- sets.idle['Hybrid'] = {
+--     main={ name="Mpaca's Staff", augments={'Path: A',}},
+--     sub="Enki Strap",
+--     ammo="Homiliary",
+--     head=gear.ChironicHeadRefresh,
+--     body=gear.EmpyreanBody,
+--     hands=gear.ChironicHandsRefresh,
+--     legs=gear.EmpyreanLegs,
+--     feet=gear.ChironicFeetRefresh,
+--     neck="Elite Royal Collar",
+--     waist="Null Belt",
+--     left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+--     right_ear="Etiolation Earring",
+--     left_ring="Gurebu's Ring",
+--     right_ring="Defending Ring",
+--     back=gear.AmbuscadeCapeIdle,
+-- }
+
+sets.idle['Hybrid'] = set_combine(sets.idle['Refresh'], {
+    body=gear.EmpyreanBody,
+    hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+    legs=gear.EmpyreanLegs,
+})
+
+sets.idle['MagicEvasion'] = {
+    main={ name="Mpaca's Staff", augments={'Path: A',}},
+    sub="Enki Strap",
+    ammo="Staunch Tathlum +1",
+    head=gear.EmpyreanHead,
+    body=gear.EmpyreanBody,
+    hands={ name="Nyame Gauntlets", augments={'Path: B',}},
+    legs=gear.EmpyreanLegs,
+    feet={ name="Nyame Sollerets", augments={'Path: B',}},
+    neck="Warder's Charm +1",
+    waist="Null Belt",
+    left_ear={ name="Moonshade Earring", augments={'MP+25','Latent effect: "Refresh"+1',}},
+    right_ear="Etiolation Earring",
+    left_ring="Gurebu's Ring",
+    right_ring="Shadow Ring",
+    back=gear.AmbuscadeCapeIdle,
 }
 
 sets.latent_refresh = {
@@ -85,6 +133,7 @@ sets.idle.Sublimation = {
     body        = gear.RelicBody,
     waist       = "Embla Sash",
     right_ear   = "Savant's Earring",
+    right_ring  = "Defending Ring",
 }
 
 sets.idle.ToAU = {
@@ -237,12 +286,23 @@ sets.midcast["Enhancing Magic"] = {
 }
 
 sets.midcast["BarElement"] = set_combine(sets.midcast["Enhancing Magic"], {
-    hands       = { name     = "Chironic Gloves",
-                    augments = {'AGI+4','Crit.hit rate+1','"Refresh"+1','Accuracy+1 Attack+1',}},
-    legs        = "Shedir Seraweels",
-    feet        = { name     = "Kaykaus Boots",
-                    augments = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+    main="Oranyan",
+    sub="Fulcio Grip",
+    ammo="Savant's Treatise",
+    head=gear.TelchineHead,
+    body=gear.RelicBody,
+    hands=gear.TelchineHands,
+    legs="Shedir Seraweels",
+    feet=gear.TelchineFeet,
+    neck="Incanter's Torque",
+    waist="Embla Sash",
+    left_ear="Mimir Earring",
+    right_ear="Andoaa Earring",
+    left_ring="Stikini Ring +1",
+    right_ring="Stikini Ring",
+    back="Fi Follet Cape +1",
 })
+
 
 sets.midcast['BarAilment'] = set_combine(sets.midcast['BarElement'], {
     neck        = "Sroda Necklace",                 --  Ailment Resistance Magic effect +20, Duration -50%
@@ -394,6 +454,7 @@ sets.midcast["Helix"] = set_combine(sets.midcast["Elemental Magic"], {
 })
 
 sets.midcast.MagicBurst = set_combine(sets.midcast["Elemental Magic"], {
+    head        = gear.RelicHead,
     body        = gear.ArtefactBody,
     hands       = gear.EmpyreanHands,
     feet        = gear.EmpyreanFeet,
