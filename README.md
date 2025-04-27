@@ -50,7 +50,12 @@ If you don't set `pocketMode` in your lua to `false`, then the UI will not be lo
 Modes
 - ` Windows Key + Z `: Cycles through location or off of UI
 - ` Windows Key + X `: Cycles through idle modes
+  - Refresh: Prioritise idle refresh
+  - Hybrid: About -30% DT on top of refresh set
+  - MagicEvasion: Full DT and magic evasion set
 - ` Windows Key + C `: Toggles Cursna Mode
+  - Potency: Uses Gambanteinn
+  - AoE: Uses Yagrush
 - `` Windows Key + ` ``: Toggles Salty Auto-Cancel Refresh When Not Weakend-Mode
 
 Shortcuts

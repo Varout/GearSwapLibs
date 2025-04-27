@@ -44,9 +44,11 @@ function user_setup()
         pocketMode = characterPocketMode
     end
 
-    --  Check if user has Lorg Mor (ideally stage 1 so it will take hp and wake you)
+    --  Check if user has Lorg Mor (ideally stage 2 so it will take hp and wake you)
+    --  If you only have the stage 1 version, update it here and in your gear sets
     LorgMor = false
-    if player.inventory['Lorg Mor'] or player.wardrobe['Lorg Mor'] then
+    if player.inventory['Prime Club'] or player.wardrobe['Prime Club'] or
+       player.inventory['Lorg Mor'] or player.wardrobe['Lorg Mor'] then
         LorgMor = true
     end
 
@@ -109,7 +111,9 @@ function user_setup()
     }
 
     gearswap_ui_box = texts.new(get_ui_config())
-    display_ui()
+    if not pocketMode then
+        display_ui()
+    end
 end
 
 function user_unload()
@@ -164,10 +168,12 @@ end
 function get_ui_config()
     return {
         pos = ui_box_positions[state.ScreenRes.current],
+        -- pos = {x = 0, y = 0},    --  If you prefer to have just one set location
         padding = 8,
         text = {
             font = 'Lucida Console',    --  Mono-spaced font looks much nicer
             size = ui_box_font_sizes[state.ScreenRes.current],
+            -- size = 10,   --  If you prefer to have just one set font
             stroke = {
                 width = 2,
                 alpha = 255
@@ -178,7 +184,9 @@ function get_ui_config()
             },
         },
         bg = {
-            alpha = 75     --  Gives a nice transparency level for the background
+            --  75-100 Gives a nice transparency level for the background. Higher is darker
+            --  75 is similar transparency to the default for EquipViewer
+            alpha = 75
         },
         flags = {}
     }
@@ -188,9 +196,6 @@ end
 --  Check before changing any equipment
 --  ----------------------------------------------------------------------------------------------------
 function job_handle_equipping_gear(playerStatus, eventArgs)
-    -- if not pocketMode then
-    --     check_special_ring_equipped()
-    -- end
     reset_ui()
 end
 
@@ -205,14 +210,10 @@ function job_precast(spell, action, spellMap, eventArgs)
     if spell.name == "Addendum: White" then
         --  No need to waste a strategem on this
         cancel_spell()
-        -- eventArgs.cancel = true
-        -- return
     elseif spell.type == "Trust" then
         equip(sets.Trust)
     elseif spell.name == 'Cursna' then
         equip(sets.precast['Healing Magic'])
-        -- eventArgs.handled = true
-        -- return
     elseif buffactive["Refresh"] and spell.name:contains("Sublimation") and not buffactive["Weakened"] then
         windower.ffxi.cancel_buff(43)
     elseif spell.name == "Stoneskin" and buffactive["Stoneskin"] then
@@ -298,10 +299,6 @@ end
 -- function customize_idle_set(idleSet)
 function customize_idle_set()
     local idleSet = sets.idle[state.IdleMode.current]
-
-    -- if not pocketMode then
-    --     check_special_ring_equipped()
-    -- end
 
     if player.mpp <= 75 then
         idleSet = set_combine(idleSet, sets.latentRefresh75)
@@ -432,10 +429,6 @@ end
 windower.register_event(
     'zone change',
     function()
-        -- if not pocketMode then
-        --     add_to_chat(123, 'zone change')
-        --     equipment_unlock_specific({"left_ring", "right_ring",})
-        -- end
         equip(customize_idle_set())
     end
 )
