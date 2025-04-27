@@ -1,5 +1,6 @@
 include('Mote-Globals.lua')
 include('Lib_SCH.lua')
+include('Universal-Gear-Sets_Varrout.lua')
 
 characterPocketMode = false
 
@@ -26,8 +27,7 @@ function init_gear_sets()
     gear.EmpyreanFeet  = "Arbatel Loavers +3"
 
     gear.EmpyreanEarring = "Arbatel Earring +1"
-    gear.DynamisNeck     = { name     = "Argute Stole",
-                             augments = {'Path: A',}}
+    gear.DynamisNeck     = { name = "Argute Stole", augments = {'Path: A',}}
 
     --  REMA Weapons
     -- gear.WeaponMythic   = ""
@@ -35,38 +35,14 @@ function init_gear_sets()
     -- gear.WeaponAeonic   = ""
     gear.WeaponPrime    = "Opashoro"    --  Stage 2
 
-    gear.MPacasStaff    = { name     = "Mpaca's Staff",
-                            augments = {'Path: A',}}
-
     --  Moonshade Earring
-    gear.Moonshade = { name     = "Moonshade Earring",
-                       augments = {'MP+25','Latent effect: "Refresh"+1',}}
+    gear.Moonshade = { name = "Moonshade Earring", augments = {'MP+25','Latent effect: "Refresh"+1',}}
 
     --  Ambuscade Capes
-    gear.AmbuscadeCapeIdle = { name     = "Lugh's Cape",
-                               augments = {'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Occ. inc. resist. to stat. ailments+10',}}
-    gear.AmbuscadeCapeMAB  = { name     = "Lugh's Cape",
-                               augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
+    gear.AmbuscadeCapeIdle = { name = "Lugh's Cape", augments = {'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Occ. inc. resist. to stat. ailments+10',}}
+    gear.AmbuscadeCapeMAB  = { name = "Lugh's Cape", augments = {'INT+20','Mag. Acc+20 /Mag. Dmg.+20','"Mag.Atk.Bns."+10',}}
 
     gear.BookwormCape = "Bookworm Cape"
-
-    gear.TelchineHead  = { name     = "Telchine Cap",
-                           augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
-    gear.TelchineHands = { name     = "Telchine Gloves",
-                           augments = {'Mag. Evasion+23','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
-    gear.TelchineLegs  = { name     = "Telchine Braconi",
-                           augments = {'Mag. Evasion+22','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
-    gear.TelchineFeet  = { name     = "Telchine Pigaches",
-                           augments = {'Mag. Evasion+25','"Elemental Siphon"+35','Enh. Mag. eff. dur. +10',}}
-
-    gear.ChironicHeadRefresh  = { name     = "Chironic Hat",
-                                  augments = {'Pet: Phys. dmg. taken -1%','"Dbl.Atk."+3','"Refresh"+2','Accuracy+11 Attack+11','Mag. Acc.+5 "Mag.Atk.Bns."+5',}}
-    gear.ChironicHandsRefresh = { name     = "Chironic Gloves",
-                                  augments = {'Pet: MND+10','Attack+5','"Refresh"+2','Mag. Acc.+5 "Mag.Atk.Bns."+5',}}
-    gear.ChironicLegsRefresh  = { name     = "Chironic Hose",
-                                  augments = {'Accuracy+7','CHR+5','"Refresh"+2','Mag. Acc.+1 "Mag.Atk.Bns."+1',}}
-    gear.ChironicFeetRefresh  = { name     = "Chironic Slippers",
-                                  augments = {'Pet: DEX+15','VIT+8','"Refresh"+2','Accuracy+12 Attack+12',}}
 
     --  ----------------------------------------------------------------------------------------------------
     --   Idle Sets
@@ -74,14 +50,14 @@ function init_gear_sets()
     sets.idle = {}
 
     sets.idle['Refresh'] = {
-        main        = gear.MPacasStaff,
+        main        = Oddy.MpacaStaff,
         sub         = "Enki Strap",
         ammo        = "Homiliary",
-        head        = gear.ChironicHeadRefresh,
+        head        = Chi.Head,
         body        = gear.EmpyreanBody,
-        hands       = gear.ChironicHandsRefresh,
-        legs        = gear.ChironicLegsRefresh,
-        feet        = gear.ChironicFeetRefresh,
+        hands       = Chi.Hands,
+        legs        = Chi.Legs,
+        feet        = Chi.Feet,
         neck        = "Warder's Charm +1",
         waist       = "Null Belt",
         left_ear    = gear.Moonshade,
@@ -92,27 +68,27 @@ function init_gear_sets()
     }
 
     sets.idle['Hybrid'] = set_combine(sets.idle['Refresh'], {
-        body=gear.EmpyreanBody,
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs=gear.EmpyreanLegs,
+        body        = gear.EmpyreanBody,
+        hands       = Nyame.Hands,
+        legs        = gear.EmpyreanLegs,
     })
 
     sets.idle['MagicEvasion'] = {
-        main=gear.MPacasStaff,
-        sub="Enki Strap",
-        ammo="Staunch Tathlum +1",
-        head=gear.EmpyreanHead,
-        body=gear.EmpyreanBody,
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs=gear.EmpyreanLegs,
-        feet={ name="Nyame Sollerets", augments={'Path: B',}},
-        neck="Warder's Charm +1",
-        waist="Null Belt",
-        left_ear=gear.Moonshade,
-        right_ear="Etiolation Earring",
-        left_ring="Gurebu's Ring",
-        right_ring="Shadow Ring",
-        back=gear.AmbuscadeCapeIdle,
+        main        = Oddy.MpacaStaff,
+        sub         = "Enki Strap",
+        ammo        = "Staunch Tathlum +1",
+        head        = gear.EmpyreanHead,
+        body        = gear.EmpyreanBody,
+        hands       = Nyame.Hands,
+        legs        = gear.EmpyreanLegs,
+        feet        = Nyame.Feet,
+        neck        = "Warder's Charm +1",
+        waist       = "Null Belt",
+        left_ear    = gear.Moonshade,
+        right_ear   = "Etiolation Earring",
+        left_ring   = "Gurebu's Ring",
+        right_ring  = "Shadow Ring",
+        back        = gear.AmbuscadeCapeIdle,
     }
 
     sets.idle['HybridMagEva'] = sets.idle['MagicEvasion']
@@ -150,7 +126,7 @@ function init_gear_sets()
         legs        = gear.ArtefactLegs,
         feet        = gear.ArtefactFeet,
         neck        = "Incanter's Torque",
-        left_ear    = "Moonshade Earring",
+        left_ear    = gear.Moonshade,
         right_ear   = gear.EmpyreanEarring,
         left_ring   = "Gurebu-Ogurebu's Ring",
         right_ring  = "Janniston Ring +1",
@@ -187,13 +163,13 @@ function init_gear_sets()
     sets.precast = {}
     --  FC +41% (40% cap), Grimoire spellcast time -23%, Spell interruption -25%
     sets.precast.FC = {
-        main        = gear.MPacasStaff,
+        main        = Oddy.MpacaStaff,
         sub         = "Clerisy Strap",
         ammo        = "Incantor Stone",
         head        = gear.RelicHead,
         body        = "Zendik Robe",
         hands       = gear.ArtefactHands,
-        legs        = { name = "Kaykaus Tights", augments = {'MP+60','Spell interruption rate down +10%','"Cure" spellcasting time -5%',}},
+        legs        = Kay.Legs,
         feet        = gear.ArtefactFeet,
         neck        = "Baetyl Pendant",
         waist       = { name = "Shinjutsu-no-Obi +1", augments = {'Path: A',}},
@@ -221,12 +197,10 @@ function init_gear_sets()
     sets.precast["Cure"] = set_combine(sets.precast.FC, {
         main        = "Vadose Rod",
         sub         = "Sors Shield",
-        head        = { name     = "Vanya Hood",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        head        = Van.Head,
         body        = "Heka's Kalasiris",
         legs        = "Doyen Pants",
-        feet        = { name     = "Vanya Clogs",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        feet        = Van.Feet,
         right_ear   = "Mendi. Earring",
         back        = "Pahtli Cape",
     })
@@ -248,7 +222,7 @@ function init_gear_sets()
     sets.precast["Dark Magic"]       = set_combine(sets.precast.FC, {})
 
     sets.precast["Trust"] = {
-        main        = gear.MPacasStaff,
+        main        = Oddy.MpacaStaff,
         sub         = "Clerisy Strap",
         head        = gear.ArtefactHead,
         body        = gear.ArtefactBody,
@@ -273,10 +247,9 @@ function init_gear_sets()
         ammo        = "Savant's Treatise",
         head        = "Befouled Crown",
         body        = gear.RelicBody,
-        hands       = gear.TelchineHands,
+        hands       = Tel.Hands,
         legs        = gear.ArtefactLegs,
-        feet        = { name     = "Kaykaus Boots",
-                        augments = {'Mag. Acc.+15','"Cure" potency +5%','"Fast Cast"+3',}},
+        feet        = Kay.Feet,
         neck        = "Incanter's Torque",
         waist       = "Embla Sash",
         left_ear    = "Mimir Earring",
@@ -291,25 +264,25 @@ function init_gear_sets()
         sub         = "Fulcio Grip",
         head        = gear.TeclhineHead,    --  +10% Duration
         body        = gear.RelicBody,       --  +12% Duration
-        hands       = gear.TelchineHands,   --  +10% Duration
-        legs        = gear.TelchineLegs,    --  +10% Duration
-        feet        = gear.TelchineFeet,    --  +10% Duration
+        hands       = Tel.Hands,   --  +10% Duration
+        legs        = Tel.Legs,    --  +10% Duration
+        feet        = Tel.Feet,    --  +10% Duration
     })
 
 
     sets.midcast["BarElement"] = set_combine(sets.midcast["Enhancing Magic"], {
-        head=gear.TeclhineHead,
-        body=gear.RelicBody,
-        hands=gear.TelchineHands,
-        legs="Shedir Seraweels",
-        feet=gear.TelchineFeet,
-        neck="Incanter's Torque",
-        waist="Embla Sash",
-        left_ear="Mimir Earring",
-        right_ear="Etiolation Earring",
+        head        = gear.TeclhineHead,
+        body        = gear.RelicBody,
+        hands       = Tel.Hands,
+        legs        = "Shedir Seraweels",
+        feet        = Tel.Feet,
+        neck        = "Incanter's Torque",
+        waist       = "Embla Sash",
+        left_ear    = "Mimir Earring",
+        right_ear   = "Etiolation Earring",
         left_ring   = "Gurebu-Ogurebu's Ring",
-        right_ring="Stikini Ring +1",
-        back="Fi Follet Cape +1",
+        right_ring  = "Stikini Ring +1",
+        back        = "Fi Follet Cape +1",
     })
 
     sets.midcast['BarAilment'] = set_combine(sets.midcast['BarElement'], {
@@ -333,19 +306,17 @@ function init_gear_sets()
     })
 
     sets.midcast["Refresh"] = set_combine(sets.midcast["Duration"], {
-        head        = { name     = "Amalric Coif +1",
-                        augments = {'INT+12','Mag. Acc.+25','Enmity-6',}},
+        head        = Ama.Head,
     })
 
     sets.RefreshSelfDuration = {
-        feet = "Inspirited Boots",
+        feet        = "Inspirited Boots",
     }
 
     sets.midcast["Aquaveil"] = set_combine(sets.midcast["Duration"], {
         main        = "Vadose Rod",
         sub         = "Culminus",
-        head        = { name     = "Amalric Coif +1",
-                        augments = {'INT+12','Mag. Acc.+25','Enmity-6',}},
+        head        = Ama.Head,
         legs        = "Shedir Seraweels",
         waist       = "Emphatikos Rope",
     })
@@ -354,21 +325,19 @@ function init_gear_sets()
         right_ring   = "Sheltered Ring",                 -- Enhances Protect & Shell
     })
     sets.midcast["Protectra"] = sets.midcast["Protect"]
-    sets.midcast["Shell"] = sets.midcast["Protect"]
-    sets.midcast["Shellra"] = sets.midcast["Protect"]
+    sets.midcast["Shell"]     = sets.midcast["Protect"]
+    sets.midcast["Shellra"]   = sets.midcast["Protect"]
 
     sets.midcast["Healing Magic"] = {
         main        = { name     = "Coeus",
                         augments = {'Mag. Acc.+50','"Mag.Atk.Bns."+10','"Fast Cast"+5',}},
         sub         = "Clerisy Strap",
         ammo        = "Incantor Stone",
-        head        = { name     = "Vanya Hood",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        head        = Van.Head,
         body        = gear.RelicBody,
         hands       = gear.RelicHands,
         legs        = gear.ArtefactLegs,
-        feet        = { name     = "Vanya Clogs",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        feet        = Van.Feet,
         neck        = "Colossus's Torque",
         waist       = "Bishop's Sash",
         left_ear    = "Beatific Earring",
@@ -392,14 +361,11 @@ function init_gear_sets()
         main        = "Daybreak",
         sub         = "Ammurapi Shield",
         ammo        = "Quartz Tathlum +1",
-        head        = { name     = "Vanya Hood",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
-        body        = { name     = "Kaykaus Bliaut",
-                        augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+        head        = Van.Head,
+        body        = Kay.Body,
         hands       = gear.RelicHands,
         legs        = gear.ArtefactLegs,
-        feet        = { name     = "Vanya Clogs",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        feet        = Van.Feet,
         neck        = "Incanter's Torque",
         waist       = "Bishop's Sash",
         left_ear    = "Beatific Earring",
@@ -414,12 +380,10 @@ function init_gear_sets()
         sub         = "Ammurapi Shield",
         ammo        = "Quartz Tathlum +1",
         head        = gear.EmpyreanHead,
-        body        = { name     = "Kaykaus Bliaut",
-                        augments = {'MP+60','"Cure" potency +5%','"Conserve MP"+6',}},
+        body        = Kay.Body,
         hands       = gear.RelicHands,
         legs        = gear.ArtefactLegs,
-        feet        = { name     = "Vanya Clogs",
-                        augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
+        feet        = Van.Feet,
         neck        = "Incanter's Torque",
         waist       = "Bishop's Sash",
         left_ear    = "Mendi. Earring",
