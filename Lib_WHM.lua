@@ -93,8 +93,8 @@ function user_setup()
         --  FFXI Resolution: 1820 x 920 (Big laptop, Small Desktop)
         --  Location lines up with the right hand side of the text boxes
         ['1820'] = {
-            x = 989,
-            y = 610
+            x = 1030,
+            y = 608
         },
         --  FFXI Resolution: 1366 x 736 (Small Laptop)
         --  Location lines up with the right hand side of the text boxes
