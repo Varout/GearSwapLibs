@@ -78,14 +78,32 @@ Shortcuts
 
 #### Custom GearSwap Commands
 
-_none_
+Modes
+- `Ctrl + F9 `: Idle Mode
+  - Normal: Prioritises idle TP
+  - DT: Prioritises reducing idle damage taken
+- `Ctrl + F10`: Engaged Mode
+  - Normal: Standard engaged mode
+  - GlassCannon: Glasscannon mode
+  - DT: Full DT mode
+  - Fencer: For using /war and Naegling
+- `Ctrl + F11`: Weapon Skill Mode
+  - Normal: For normal condidions
+  - HighBuff: If you have a high buff situation
+- `Ctrl + F12`: Movement Mode
+  - Normal
+  - Fast: Equips Carmine Cuisses +1 on top of the current equip
 
 #### Dependencies
 
 - `Mote-Include.lua`
-- `Varrout_DRG_GearSets.lua`
+- `Lib_DRG.lua`
 - `common_functions.lua`
 - `common_lists.lua`
+
+#### UI Example
+
+![Dragoon UI Example](images/ui_drg.png)
 
 ### Scholar (SCH)
 
