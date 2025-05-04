@@ -1,3 +1,5 @@
+--  Varrout GitHub: https://github.com/Varout/GearSwapLibs
+
 polearm_ws = {
     ['Gungnir']   = 'Geirskogul',
     ['Gae Buide'] = 'Diarmuid',
@@ -14,7 +16,6 @@ function get_sets()
     -- Load and initialize the include file.
     include('Mote-Include.lua')
 end
-
 
 --  ----------------------------------------------------------------------------------------------------
 -- Setup vars that are user-independent.  state.Buff vars initialized here will automatically be tracked
@@ -171,7 +172,6 @@ function job_precast(spell, action, spellMap, eventArgs)
     equip(equipSet)
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  MIDCAST
 --  ----------------------------------------------------------------------------------------------------
@@ -235,7 +235,6 @@ function customize_idle_set()
     return idleSet
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  Checks before equipping new gear
 --  ----------------------------------------------------------------------------------------------------
@@ -243,13 +242,11 @@ function job_handle_equipping_gear(playerStatus, eventArgs)
     reset_ui()
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  STATUS CHANGE
 --  ----------------------------------------------------------------------------------------------------
 -- function user_status_change(newStatus, oldStatus)
 -- end
-
 
 --  ----------------------------------------------------------------------------------------------------
 --  JOB BUFF CHANGE
@@ -265,7 +262,6 @@ function job_buff_change(buff, gain, eventArgs)
     end
 end
 
-
 --  ----------------------------------------------------------------------------------------------------
 --  JOB SELF COMMAND / CUSTOM COMMANDS
 --  ----------------------------------------------------------------------------------------------------
@@ -278,7 +274,6 @@ function job_self_command(cmdParams, eventArgs)
         send_command(doWeaponskill)
     end
 end
-
 
 --  ----------------------------------------------------------------------------------------------------
 --  SELECT MACRO BOOK
@@ -297,7 +292,6 @@ function select_default_macro_book()
 
     send_command('wait 2; input /lockstyleset 008')
 end
-
 
 --  ----------------------------------------------------------------------------------------------------
 --                      User defined functions

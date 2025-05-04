@@ -152,9 +152,9 @@ function get_ui_text()
 
     output = output .. '           ' .. player.name ..': WHITE MAGE\n\n'
     --  Mode states
-    output = output .. '(Win + x)  | Idle Mode      | \\cs(0,255,128)' .. state.IdleMode.current .. '\\cr\n'
-    output = output .. '(Win + c)  | Cursna Mode    | \\cs(0,255,128)' .. state.CursnaMode.current .. '\\cr\n'
-    output = output .. '(Win + `)  | Cancel Refresh | \\cs(0,255,128)' .. state.AutoCancelRefresh.current .. '\\cr\n\n'
+    output = output .. '(Win + x)  | Idle Mode      | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.IdleMode.current) .. '\\cr\n'
+    output = output .. '(Win + c)  | Cursna Mode    | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.CursnaMode.current) .. '\\cr\n'
+    output = output .. '(Win + `)  | Cancel Refresh | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.AutoCancelRefresh.current) .. '\\cr\n\n'
     --  Shortcut information
     output = output .. 'Shortcuts                                 \n'  --  Stupid long to keep the box from changing size
     output = output .. '(Ctrl + C) | Divine Caress\n'
