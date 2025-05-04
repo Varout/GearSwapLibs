@@ -79,7 +79,6 @@ elements.perpetuance_staff_of = {
     ['Earth'] = 'Vishrava III', ['Lightning'] = 'Apamajas III', ['Water'] = 'Haoma III', ['Thunder'] = 'Apamajas III'
 }
 
-
 -- Elements for skillchain names
 skillchain_elements = {}
 skillchain_elements.Light         = S{'Light','Fire','Wind','Lightning'}
@@ -328,6 +327,11 @@ spell_maps = {
     ['Geo-Vex'] = 'GeoSpell',        -- Magic Accuracy Down
     ['Geo-Languor'] = 'GeoSpell',    -- Magic Evasion Down
 }
+
+-- spell_maps_barailments = S{
+--     ['Barsleep'] = 'BarAilment',   ['Barblind'] = 'BarAilment',   ['Barvirus'] = 'BarAilment', ['Baramnesia'] = 'BarAilment', ['Barpetrify'] = 'BarAilment', ['Barpoison'] = 'BarAilment',   ['Barsilence'] = 'BarAilment',   ['Barparalyze'] = 'BarAilment',
+--     ['Barsleepra'] = 'BarAilment', ['Barblindra'] = 'BarAilment', ['Barvira'] = 'BarAilment',  ['Baramnesra'] = 'BarAilment', ['Barpetra'] = 'BarAilment',   ['Barpoisonra'] = 'BarAilment', ['Barsilencera'] = 'BarAilment', ['Barparalyzra'] = 'BarAilment',
+-- }
 
 no_skill_spells_list = S{
     'Haste', 'Refresh', 'Regen', 'Protect', 'Protectra', 'Shell', 'Shellra',
