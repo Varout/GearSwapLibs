@@ -2,6 +2,7 @@ polearm_ws = {
     ['Gungnir']   = 'Geirskogul',
     ['Gae Buide'] = 'Diarmuid',
     ['Naegling']  = 'Savage Blade',
+    ['Shining One'] = 'Impulse Drive'
 }
 
 --  ----------------------------------------------------------------------------------------------------
@@ -83,11 +84,10 @@ function get_ui_text()
     output = output .. '               ' .. player.name ..': Dragoon\n'
     output = output .. '                                             \n'
     --  Mode states
-    output = output .. '(Ctrl + F9)  | Idle Mode        | \\cs(0,255,128)' .. state.IdleMode.current .. '\\cr\n'
-    output = output .. '(Ctrl + F10) | Offense Mode     | \\cs(0,255,128)' .. state.OffenseMode.current .. '\\cr\n'
-    output = output .. '(Ctrl + F11) | Weaponskill Mode | \\cs(0,255,128)' .. state.WeaponskillMode.current .. '\\cr\n'
-    -- state.MovementMode
-    output = output .. '(Ctrl + F12) | Movement Mode    | \\cs(0,255,128)' .. state.MovementMode.current .. '\\cr\n'
+    output = output .. '(Ctrl + F9)  | Idle Mode        | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.IdleMode.current) .. '\\cr\n'
+    output = output .. '(Ctrl + F10) | Offense Mode     | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.OffenseMode.current) .. '\\cr\n'
+    output = output .. '(Ctrl + F11) | Weaponskill Mode | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.WeaponskillMode.current) .. '\\cr\n'
+    output = output .. '(Ctrl + F12) | Movement Mode    | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.MovementMode.current) .. '\\cr\n'
 
     return output
 end
@@ -143,7 +143,6 @@ function job_precast(spell, action, spellMap, eventArgs)
         cast_delay(0.2)
         send_command('cancel Sneak')
     elseif spell.type == 'Waltz' then
-        -- refine_waltz(spell, action)
         -- equip(sets.precast.Waltz)
     elseif wyv_breath_spells:contains(spell.english) and pet.isvalid then
         if HB_Mage_SubJob:contains(player.sub_job) then
@@ -242,7 +241,6 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function job_handle_equipping_gear(playerStatus, eventArgs)
     reset_ui()
-    -- check_special_ring_equipped()
 end
 
 
@@ -272,9 +270,6 @@ end
 --  JOB SELF COMMAND / CUSTOM COMMANDS
 --  ----------------------------------------------------------------------------------------------------
 function job_self_command(cmdParams, eventArgs)
-    -- add_to_chat(100, player.equipment.main)
-    -- add_to_chat(100, polearm_ws['Gungnir'])
-
     local param = cmdParams[1]:lower()
 
     if (param == 'uniquews' and polearm_ws[player.equipment.main]) then
@@ -312,4 +307,3 @@ windower.register_event('zone change',
         equip(customize_idle_set())
     end
 )
-
