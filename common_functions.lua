@@ -432,3 +432,7 @@ end
 function cancel_buff(id)
     windower.packets.inject_outgoing(0xF1,string.char(0xF1,0x04,0,0,id%256,math.floor(id/256),0,0)) -- Inject the cancel packet
 end
+
+function capitaliseLeadingLetter(str)
+    return str:gsub("^%l", string.upper)
+end
