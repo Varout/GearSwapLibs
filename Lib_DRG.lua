@@ -49,6 +49,10 @@ function user_setup()
     send_command('bind ^f11 gs c cycle WeaponskillMode')
     send_command('bind ^f12 gs c cycle MovementMode')
 
+    --  Make sure the box transparency doesn't get darker on Subjob change
+    if gearswap_ui_box then
+        gearswap_ui_box:hide()
+    end
     gearswap_ui_box = texts.new(get_ui_config())
     display_ui()
 end
@@ -280,7 +284,6 @@ end
 --  ----------------------------------------------------------------------------------------------------
 function sub_job_change(newSubjob, oldSubjob)
     select_default_macro_book()
-    reset_ui()
 end
 
 function select_default_macro_book()
