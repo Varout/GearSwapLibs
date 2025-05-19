@@ -76,6 +76,8 @@ Shortcuts
 
 ### Dragoon (DRG)
 
+There's a great DRG guide here on BG-Wiki: ![Dragoon Guide By Kaius](https://www.bg-wiki.com/ffxi/Dragoon_Guide_By_Kaius)
+
 #### Custom GearSwap Commands
 
 Modes
