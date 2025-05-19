@@ -110,6 +110,10 @@ function user_setup()
         ['1366'] = 9
     }
 
+    --  Make sure the box transparency doesn't get darker on Subjob change
+    if gearswap_ui_box then
+        gearswap_ui_box:hide()
+    end
     gearswap_ui_box = texts.new(get_ui_config())
     if not pocketMode then
         display_ui()
@@ -399,6 +403,12 @@ function job_self_command(cmdParams, eventArgs)
         equip(sets.slept)
     end
 end
+
+--  ----------------------------------------------------------------------------------------------------
+--  SUBJOB CHANGE
+--  ----------------------------------------------------------------------------------------------------
+-- function sub_job_change(newSubjob, oldSubjob)
+-- end
 
 --  ----------------------------------------------------------------------------------------------------
 --  SELECT MACRO BOOK

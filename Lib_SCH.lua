@@ -82,6 +82,10 @@ function user_setup()
     send_command('bind ^F8 gs c 3gravitation')          --  Ctrl + F8: 3-Step Gravitation
 
     --  UI Box-Related
+    --  Make sure the box transparency doesn't get darker on Subjob change
+    if gearswap_ui_box then
+        gearswap_ui_box:hide()
+    end
     ui_box_positions = {
         --  FFXI Resolution: 2460 x 1300
         --  Location lines up with the bottom of Equip Viewer
