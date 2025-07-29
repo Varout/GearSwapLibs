@@ -32,7 +32,7 @@ gear.WeaponTPBonus  = { name = "Ataktos",     augments = {'Delay:+60','TP Bonus 
 gear.WeaponPhantom  = { name = "Compensator", augments = {'DMG:+15','Rng.Atk.+15','"Mag.Atk.Bns."+15',}}    -- Phantom Roll Duration +20
 
 --  Special Ammo
-gear.BulletMA = "Chrono Bullet"
+gear.BulletMA = "Devastating Bullet"
 gear.BulletQD = "Animikii Bullet"
 gear.BulletRA = "Chrono Bullet"
 gear.BulletWS = "Chrono Bullet"
@@ -48,6 +48,7 @@ gear.AmbuscadeRangedWSPhys  = { name     = "Camulus's Mantle",
                                 augments = {'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Weapon skill damage +10%',}}
 gear.AmbuscadeRangedWSMagic = { name     = "Camulus's Mantle",
                                 augments = {'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}}
+gear.AmbuscadeMagicAcc      = gear.AmbuscadeRangedAcc   --  No magic acc yet, needs to be made
 gear.AmbuscadeFC            = { name     = "Camulus's Mantle",
                                 augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Damage taken-5%',}}
 gear.AmbuscadeDT            = gear.AmbuscadeFC
@@ -111,15 +112,11 @@ sets.idle.refresh = set_combine(sets.idle, {
 -- No Magic Haste (72% DW to cap)
 sets.engaged = {
     ammo        = gear.RAbullet,
-    head        = { name = "Adhemar Bonnet +1",
-                    augments = {'DEX+12','AGI+12','Accuracy+20',}},
-    body        = { name = "Adhemar Jacket +1",
-                    augments = {'DEX+12','AGI+12','Accuracy+20',}},
-    hands       = { name = "Adhemar Wrist. +1",
-                    augments = {'DEX+12','AGI+12','Accuracy+20',}},
-    legs        = "Malignance Tights",
-    feet        = { name     = "Herculean Boots",
-                    augments = {'Accuracy+19','"Triple Atk."+4','Attack+4',}},
+    head        = gear.EmpyreanHead,
+    body        = gear.EmpyreanBody,
+    hands       = gear.EmpyreanHands,
+    legs        = gear.EmpyreanLegs,
+    feet        = gear.EmpyreanFeet,
     neck        = "Asperity Necklace",
     waist       = { name     = "Sailfi Belt +1",
                     augments = {'Path: A',}},
@@ -196,13 +193,14 @@ sets.precast.JA['Wild Card']   = { feet  = gear.RelicFeet}
 sets.precast.FoldDoubleBust    = { hands = gear.RelicHands}
 
 sets.precast.RA = {
+    ammo        = gear.BulletRA,
     head        = gear.EmpyreanHead,
     body        = "Malignance Tabard",
     hands       = "Malignance Gloves",
     legs        = gear.EmpyreanLegs,
     feet        = "Malignance Boots",
     neck        = gear.DynamisNeck,
-    waist       = "Kwahu Kachina Belt",
+    waist       = "Ponente Sash",
     left_ear    = "Beyla Earring",
     right_ear   = "Enervating Earring",
     left_ring   = "Dingir Ring",
@@ -237,6 +235,7 @@ sets.precast["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, { body 
 
 --  Quickdraw
 sets.precast.CorsairShot = {
+    ammo        = gear.BulletMA,
     head        = gear.ArtefactHead,
     body        = gear.RelicBody,
     hands       = gear.EmpyreanHands,
@@ -248,9 +247,16 @@ sets.precast.CorsairShot = {
     right_ear   = gear.EmpyreanEarring,
     left_ring   = "Dingir Ring",
     right_ring  = "Adoulin Ring",
-    back        = { name     = "Camulus's Mantle",
-                    augments = {'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
+    back        = gear.AmbuscadeMagicAcc,
 }
+
+sets.precast.CorsairShot["Light Shot"] = set_combine(sets.precast.CorsairShot, {
+    body        = gear.EmpyreanBody,
+    left_ear    = "Beyla Earring",
+    left_ring   = "Mummu Ring",
+})
+
+sets.precast.CorsairShot["Dark Shot"] = sets.precast.CorsairShot["Light Shot"]
 
 sets.precast.FC = {
     head        = { name     = "Herculean Helm",
@@ -383,6 +389,10 @@ sets.precast.WS['Leaden Salute'].Acc = set_combine(sets.precast.WS['Leaden Salut
 --   Midcast Sets
 --  ----------------------------------------------------------------------------------------------------
 sets.midcast = {}
+
+sets.midcast.RA = set_combine(sets.precast.RA, {
+    waist       = "Kwahu Kachina Belt",
+})
 
 --  ----------------------------------------------------------------------------------------------------
 --   Misc Sets
