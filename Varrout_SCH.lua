@@ -389,7 +389,7 @@ function init_gear_sets()
     })
 
     sets.midcast.Cure = {
-        main        = "Daybreak",
+        main        = "Raetic Rod +1",
         sub         = "Ammurapi Shield",
         ammo        = "Quartz Tathlum +1",
         head        = { name     = "Vanya Hood",

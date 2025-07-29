@@ -10,14 +10,14 @@ function init_gear_sets()
     gear.ArtefactHead      = "Vishap Armet +2"
     gear.ArtefactBody      = "Vishap Mail +2"
     gear.ArtefactHands     = "Vishap Finger Gauntlets +3"
-    gear.ArtefactLegs      = "Vishap Brais +3"
+    gear.ArtefactLegs      = "Vishap Brais +4"
     gear.ArtefactFeet      = "Vishap Greaves +2"
 
     gear.RelicHead         = "Pteroslaver Armet +3"
     gear.RelicBody         = "Pteroslaver Mail +3"
-    gear.RelicHands        = "Pteroslaver Finger Gauntlets +3"
+    gear.RelicHands        = "Pteroslaver Finger Gauntlets +4"
     gear.RelicLegs         = "Pteroslaver Brais +3"
-    gear.RelicFeet         = "Pteroslaver Geaves +3"
+    gear.RelicFeet         = "Pteroslaver Geaves +4"
 
     gear.EmpyreanHead      = "Peltast's Mezail +3"
     gear.EmpyreanBody      = "Peltast's Plackart +3"
@@ -25,8 +25,8 @@ function init_gear_sets()
     gear.EmpyreanLegs      = "Peltast's Cuissots +3"
     gear.EmpyreanFeet      = "Peltast's Schynbalds +3"
 
+    gear.RelicNeck         = "Dragoon's Collar +2"
     gear.EmpyreanEarring   = "Peltast's Earring +1"
-    gear.DynamisNeck       = "Dragoon's Collar +2"
 
     --  REMA Weapons
     gear.WeaponRelic       = "Gungnir"
@@ -36,11 +36,12 @@ function init_gear_sets()
     gear.WeaponPrime       = "Gae Buide"
 
     --  Ambuscade Capes
-    gear.AmbuscadeCapeTP   = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
-    gear.AmbuscadeCapeWS   = { name = "Brigantia's Mantle", augments = {'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%',}}
-    gear.AmbuscadeCapeFC   = { name = "Brigantia's Mantle", augments = {'Eva.+20 /Mag. Eva.+20','"Fast Cast"+10',}}
-    gear.AmbuscadeCapeDT   = { name = "Brigantia's Mantle", augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Damage taken-5%',}}
-    gear.AmbuscadeCapeJump = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+    gear.AmbuscadeCapeTP       = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dbl.Atk."+10','Damage taken-5%',}}
+    gear.AmbuscadeCapeWSSTR    = { name = "Brigantia's Mantle", augments = {'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}}
+    gear.AmbuscadeCapeWSCrit   = { name = "Brigantia's Mantle", augments = {'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}}
+    gear.AmbuscadeCapeFC       = { name = "Brigantia's Mantle", augments = {'Eva.+20 /Mag. Eva.+20','"Fast Cast"+10',}}
+    gear.AmbuscadeCapeDT       = { name = "Brigantia's Mantle", augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Damage taken-5%',}}
+    gear.AmbuscadeCapeJump     = { name = "Brigantia's Mantle", augments = {'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
 
     --  Nyame
     gear.NyameHead         = { name = "Nyame Helm", augments = {'Path: B',}}
@@ -50,11 +51,11 @@ function init_gear_sets()
     gear.NyameFeet         = { name = "Nyame Sollerets", augments = {'Path: B',}}
 
     --  Gleti's
-    gear.GletiHead = "Gleti's Mask"
-    gear.GletiBody = { name="Gleti's Cuirass", augments={'Path: A',}}
+    gear.GletiHead  = "Gleti's Mask"
+    gear.GletiBody  = { name="Gleti's Cuirass", augments={'Path: A',}}
     gear.GletiHands = "Gleti's Gauntlets"
-    gear.GletiLegs = "Gleti's Breeches"
-    gear.GletiFeet = "Gleti's Boots"
+    gear.GletiLegs  = "Gleti's Breeches"
+    gear.GletiFeet  = "Gleti's Boots"
 
     --  ----------------------------------------------------------------------------------------------------
     --   Town Sets
@@ -78,7 +79,7 @@ function init_gear_sets()
         head        = { name     = "Valorous Mask",
                         augments = {'VIT+4','DEX+2','"Refresh"+2','Mag. Acc.+11 "Mag.Atk.Bns."+11',}},
         left_ear    = "Moonshade Earring",
-        left_ring="Gurebu's Ring",
+        left_ring   ="Gurebu's Ring",
     }
 
     sets.RefreshToAU = {
@@ -87,35 +88,35 @@ function init_gear_sets()
 
     sets.idle = {}
     sets.idle["Normal"] = {
-        ammo={ name="Coiste Bodhar", augments={'Path: A',}},
-        head="Gleti's Mask",
-        body={ name="Gleti's Cuirass", augments={'Path: A',}},
-        hands="Gleti's Gauntlets",
-        legs="Gleti's Breeches",
-        feet="Gleti's Boots",
-        neck="Bathy Choker +1",
-        waist="Null Belt",
-        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-        right_ear={ name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
-        left_ring="Gurebu's Ring",
-        right_ring="Defending Ring",
-        back={ name="Brigantia's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Damage taken-5%',}},
+        ammo        = { name="Coiste Bodhar", augments={'Path: A',}},
+        head        = gear.GletiHead,
+        body        = gear.GletiBody,
+        hands       = "Gleti's Gauntlets",
+        legs        = "Gleti's Breeches",
+        feet        = "Gleti's Boots",
+        neck        = "Bathy Choker +1",
+        waist       = "Null Belt",
+        left_ear    = { name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear   = { name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
+        left_ring   = "Gurebu's Ring",
+        right_ring  = "Defending Ring",
+        back        = gear.AmbuscadeCapeDT,
     }
 
     sets.idle["DT"] = {
-        ammo="Staunch Tathlum +1",
-        head="Hjarrandi Helm",
-        body="Hjarrandi Breast.",
-        hands={ name="Nyame Gauntlets", augments={'Path: B',}},
-        legs="Gleti's Breeches",
-        feet="Gleti's Boots",
-        neck={ name="Dgn. Collar +2", augments={'Path: A',}},
-        waist="Null Belt",
-        left_ear={ name="Odnowa Earring +1", augments={'Path: A',}},
-        right_ear={ name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
-        left_ring="Gurebu's Ring",
-        right_ring="Defending Ring",
-        back={ name="Brigantia's Mantle", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Damage taken-5%',}},
+        ammo        = "Staunch Tathlum +1",
+        head        = "Hjarrandi Helm",
+        body        = "Hjarrandi Breast.",
+        hands       = { name="Nyame Gauntlets", augments={'Path: B',}},
+        legs        = "Gleti's Breeches",
+        feet        = "Gleti's Boots",
+        neck        = { name="Dgn. Collar +2", augments={'Path: A',}},
+        waist       = "Null Belt",
+        left_ear    = { name="Odnowa Earring +1", augments={'Path: A',}},
+        right_ear   = { name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
+        left_ring   = "Gurebu's Ring",
+        right_ring  = "Defending Ring",
+        back        = gear.AmbuscadeCapeDT,
     }
 
     --  ----------------------------------------------------------------------------------------------------
@@ -126,7 +127,7 @@ function init_gear_sets()
     sets.engaged["Normal"] = {
         ammo={ name="Coiste Bodhar", augments={'Path: A',}},
         head="Hjarrandi Helm",
-        body={ name="Gleti's Cuirass", augments={'Path: A',}},
+        body=gear.GletiBody,
         hands="Pel. Vambraces +3",
         legs="Gleti's Breeches",
         feet="Flam. Gambieras +2",
@@ -144,7 +145,7 @@ function init_gear_sets()
         head="Flam. Zucchetto +2",
         body="Pelt. Plackart +3",
         hands="Gleti's Gauntlets",
-        legs={ name="Ptero. Brais +3", augments={'Enhances "Strafe" effect',}},
+        legs=gear.RelicLegs,
         feet="Flam. Gambieras +2",
         neck={ name="Vim Torque +1", augments={'Path: A',}},
         waist={ name="Sailfi Belt +1", augments={'Path: A',}},
@@ -174,7 +175,7 @@ function init_gear_sets()
     sets.engaged['Fencer'] = {
         ammo={ name="Coiste Bodhar", augments={'Path: A',}},
         head="Flam. Zucchetto +2",
-        body={ name="Gleti's Cuirass", augments={'Path: A',}},
+        body=gear.GletiBody,
         hands="Pel. Vambraces +3",
         legs="Gleti's Breeches",
         feet="Flam. Gambieras +2",
@@ -204,7 +205,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
         head="Peltast's Mezail +3",
         body={ name="Nyame Mail", augments={'Path: B',}},
-        hands="Pel. Vambraces +3",
+        hands=gear.RelicHands,
         legs="Vishap Brais +3", --  Nyame Flanchard
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
         neck=gear.DynamisNeck,
@@ -224,8 +225,8 @@ function init_gear_sets()
         -- left_Ring = "Sroda Ring",
     })
 
-    sets.precast.WS['Drakesbane'] = {}
-    sets.precast.WS['Drakesbane']['Normal'] = {
+    sets.precast.WS['Crit'] = {}
+    sets.precast.WS['Crit']['Normal'] = {
         ammo="Knobkierrie",
         -- head="Blistering Sallet +1",
         head=gear.GletiHead,
@@ -241,7 +242,7 @@ function init_gear_sets()
         right_ring="Niqmaddu Ring",
         back={ name="Brigantia's Mantle", augments={'STR+20','Accuracy+20 Attack+20','Attack+10','Weapon skill damage +10%',}}, --  Crit %
     }
-    sets.precast.WS['Drakesbane']['HighBuff'] = set_combine(sets.precast.WS['Drakesbane']['Normal'], {
+    sets.precast.WS['Crit']['HighBuff'] = set_combine(sets.precast.WS['Crit']['Normal'], {
         head = gear.GletiHead,
         body = gear.GletiBody,
         hands = gear.GletiHands,
@@ -250,12 +251,24 @@ function init_gear_sets()
         -- left_Ring = "Sroda Ring",
     })
 
+    sets.precast.WS['Vorpal Thrust'] = {}
+    sets.precast.WS['Vorpal Thrust']['Normal'] = sets.precast.WS['Crit']['Normal']
+    sets.precast.WS['Vorpal Thrust']['HighBuff'] = sets.precast.WS['Crit']['HighBuff']
+
+    sets.precast.WS['Skewer'] = {}
+    sets.precast.WS['Skewer']['Normal'] = sets.precast.WS['Crit']['Normal']
+    sets.precast.WS['Skewer']['HighBuff'] = sets.precast.WS['Crit']['HighBuff']
+
+    sets.precast.WS['Drakesbane'] = {}
+    sets.precast.WS['Drakesbane']['Normal'] = sets.precast.WS['Crit']['Normal']
+    sets.precast.WS['Drakesbane']['HighBuff'] = sets.precast.WS['Crit']['HighBuff']
+
     sets.precast.WS['Camlann\'s Torment'] = {}
     sets.precast.WS['Camlann\'s Torment']['Normal'] = {
         ammo="Knobkierrie",
         head="Peltast's Mezail +3",
         body={ name="Nyame Mail", augments={'Path: B',}},
-        hands={ name="Ptero. Fin. G. +3", augments={'Enhances "Angon" effect',}},   --  Nyame
+        hands=gear.RelicHands,   --  Nyame
         legs="Vishap Brais +3", --  Nyame
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
         neck={ name="Dgn. Collar +2", augments={'Path: A',}},
@@ -300,7 +313,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
         head="Peltast's Mezail +3",
         body={ name="Nyame Mail", augments={'Path: B',}},
-        hands={ name="Ptero. Fin. G. +3", augments={'Enhances "Angon" effect',}},   --  Nyame
+        hands=gear.RelicHands,   --  Nyame
         legs="Vishap Brais +3", --  Nyame
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
         neck="Light Gorget",    --  Fotia Gorget
@@ -323,7 +336,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
         head="Peltast's Mezail +3",
         body={ name="Nyame Mail", augments={'Path: B',}},
-        hands={ name="Ptero. Fin. G. +3", augments={'Enhances "Angon" effect',}},   --  Nyame
+        hands=gear.RelicHands,   --  Nyame
         legs="Vishap Brais +3", --  Nyame
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
         neck={ name="Dgn. Collar +2", augments={'Path: A',}},
@@ -360,7 +373,7 @@ function init_gear_sets()
         ammo="Knobkierrie",
         head="Peltast's Mezail +3",
         body="Pelt. Plackart +3",
-        hands={ name="Ptero. Fin. G. +3", augments={'Enhances "Angon" effect',}},   --  Nyame
+        hands=gear.RelicHands,   --  Nyame
         legs="Vishap Brais +3", --  Nyame
         feet={ name="Nyame Sollerets", augments={'Path: B',}},
         neck={ name="Dgn. Collar +2", augments={'Path: A',}},
@@ -489,7 +502,7 @@ function init_gear_sets()
     sets.Pet.ElementalBreath = {
         ammo        = "Voluspa Tathlum",
         head        = gear.RelicHead,
-        body        = "Gleti's Cuirass",
+        body        = gear.GletiBody,
         hands       = gear.ArtefactHands,
         legs        = "Gleti's Breeches",
         feet        = "Gleti's Boots",

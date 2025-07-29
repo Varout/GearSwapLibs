@@ -126,15 +126,39 @@ end
 
 -- Define sets and vars used by this job file.
 function init_gear_sets()
+	--	Ignominy Attire
+	AF = {}
+	AF.head  = "Ignominy Burgeonet +2"
+	AF.body  = "Ignominy Cuirass +2"
+	AF.hands = "Ignominy Gauntlets +2"
+	AF.legs  = "Ignominy Flanchard +1"
+	AF.feet  = "Ignominy Sollerets +2"
+
+	--	Fallen's Attire
+	RF = {}
+	RF.head  = "Fallen's Burgeonet +2"
+	RF.body  = "Fallen's Cuirass +1"
+	RF.hands = "Fallen's Finger Gauntlets +1"
+	RF.legs  = "Fallen's Flanchard"
+	RF.feet  = "Fallen's Sollerets +1"
+
+	--	Heathen's Attire
+	EF = {}
+	EF.head  = "Heathen's Burgeonet +2"
+	EF.body  = "Heathen's Cuirass +2"
+	EF.hands = "Heathen's Finger Gauntlets +2"
+	EF.legs  = "Heathen's Flanchard +2"
+	EF.feet  = "Heathen's Sollerets +2"
+
 -- Precast sets
-    sets.precast.JA['Diabolic Eye'] = {hands="Fallen's Finger Gauntlets"}
-    sets.precast.JA['Arcane Circle'] = {feet="Ignominy Sollerets +3"}
-    sets.precast.JA['Nether Void'] = {legs="Heathen's Flanchard +1"}
-    sets.precast.JA['Souleater'] = {head="Ignominy Burgonet +1"}
-    sets.precast.JA['Last Resort'] = {feet="Fallen's Sollerets +1", back=Ank_STP}
-    sets.precast.JA['Weapon Bash'] = {hands="Ignominy Gauntlets +2"}
-    sets.precast.JA['Blood Weapon'] = {body="Fallen's Cuirass +1"}
-	sets.precast.JA['Dark Seal']    = {head="Fallen's Burgeonet +1"}
+    sets.precast.JA['Diabolic Eye'] = {hands=RF.hands}
+    sets.precast.JA['Arcane Circle'] = {feet=AF.feet}
+    sets.precast.JA['Nether Void'] = {legs=EF.legs}
+    sets.precast.JA['Souleater'] = {head=AF.head}
+    sets.precast.JA['Last Resort'] = {feet=RF.feet, back=Ank_STP}
+    sets.precast.JA['Weapon Bash'] = {hands=AF.hands}
+    sets.precast.JA['Blood Weapon'] = {body=RF.body}
+	sets.precast.JA['Dark Seal']    = {head=RF.head}
 
 -- Waltz set (chr and vit)
     sets.precast.Waltz = {
@@ -492,7 +516,7 @@ function init_gear_sets()
 		ring1="Petrov Ring",
 		ring2="Niqmaddu Ring",
 		ear1="Dignitary's Earring",
-		ear2="Brutal Earring",
+		ear2="Heathen's Earring +1",
 		}
 
 	--1103acc
@@ -618,20 +642,34 @@ function init_gear_sets()
 -- Anguta - Need 26stp for 5 hit. 72stp for 4 hit.
 	--1093acc 73stp 23da 8ta 6qa 22haste
 	sets.engaged.Anguta = {
-		ammo="Ginsen",
-		head="Flamma Zucchetto +2",
-		body=Val_QA_body,
-		back=Ank_STP,
-		neck="Ainia Collar",
-		hands=Arg_HQ_hands,
-		waist="Windbuffet Belt +1",
-		legs=Ody_STP_legs,
-		feet=Arg_HQ_feet,
-		ring1="Niqmaddu Ring",
-		ring2="Hetairoi Ring",
-		ear1="Telos Earring",
-		ear2="Brutal Earring",
-		}
+		-- ammo="Ginsen",
+		-- head="Flamma Zucchetto +2",
+		-- body=Val_QA_body,
+		-- back=Ank_STP,
+		-- neck="Ainia Collar",
+		-- hands=Arg_HQ_hands,
+		-- waist="Windbuffet Belt +1",
+		-- legs=Ody_STP_legs,
+		-- feet=Arg_HQ_feet,
+		-- ring1="Niqmaddu Ring",
+		-- ring2="Hetairoi Ring",
+		-- ear1="Telos Earring",
+		-- ear2="Brutal Earring",
+
+		ammo="Coiste Bodhar",			-- +3 STP
+		head="Flamma Zucchetto +2", 	-- +6 STP
+		body="Sakpata's Breastplate", 	-- +8 DA
+		hands="Flamma Manopolas +2",	-- +6 STP
+		legs="Flamma Dirs +2",			-- +8 STP
+		feet="Flamma Gambieras +2",		-- +6 STP, +6 DA
+		neck="Vim Torque +1",			-- +10 STP
+		left_ear="Telos Earring",		-- +5 STP
+		right_ear="Heathen's Earring +1",
+		left_ring="Niqmaddu Ring",		--
+		right_ring="Regal Ring",
+		back="",
+		waist="Sailfi Belt +1",
+	}
 
 	--1155acc 73stp 27da 2ta 6qa 24haste
 	sets.engaged.Anguta.LowAcc = {
@@ -882,8 +920,8 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Brutal Earring",
-		ear2="Moonshade Earring",
+		ear1="Thrud Earring",
+		ear2="Heathen's Earring +1",
 		}
 
 	sets.precast.WS.Acc = set_combine(sets.precast.WS, {
@@ -893,7 +931,7 @@ function init_gear_sets()
 		legs="Ignominy Flanchard +3",
 		ring1="Ramuh ring +1",
 		ring2="Regal ring",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		})
 
 -- Insurgency - FTP 0.5, 3.25, 6.0 - STR 20%, INT 20% -- Fusion/Compression
@@ -909,13 +947,13 @@ function init_gear_sets()
 		feet="Flamma Gambieras +1",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Brutal Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Brutal Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Insurgency'].Acc = set_combine(sets.precast.WS['Insurgency'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		})
 
 -- Entropy - FTP 0.75, 1.25, 2.0, - INT 85% -- Gravitation/Reverberation
@@ -931,13 +969,13 @@ function init_gear_sets()
 		feet="Flamma Gambieras +2",
 		ring1="Shiva Ring +1",
 		ring2="Shiva Ring +1",
-		ear1="Brutal Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Brutal Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Entropy'].Acc = set_combine(sets.precast.WS['Entropy'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		ring1="Ramuh ring +1",
 		ring2="Regal ring",
 		})
@@ -955,13 +993,13 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Ishvara Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Ishvara Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Catastrophe'].Acc = set_combine(sets.precast.WS['Catastrophe'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		head="Ignominy Burgonet +3",
 		legs="Ignominy Flanchard +3",
 		})
@@ -979,13 +1017,13 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Ishvara Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Ishvara Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Cross Reaper'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		head="Ignominy Burgonet +3",
 		legs="Ignominy Flanchard +3",
 		})
@@ -1003,13 +1041,13 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Ishvara Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Ishvara Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Quietus'].Acc = set_combine(sets.precast.WS['Quietus'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		head="Ignominy Burgonet +3",
 		legs="Ignominy Flanchard +3",
 		})
@@ -1027,8 +1065,8 @@ function init_gear_sets()
 		feet="Sulev. Leggings +2",
 		ring1="Karieyh Ring",
 		ring2="Regal Ring",
-		ear1="Thrud Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Thrud Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Resolution'].Acc = set_combine(sets.precast.WS['Resolution'], {
@@ -1036,7 +1074,7 @@ function init_gear_sets()
 		head="Ignominy Burgonet +3",
 		feet="Flamma Gambieras +2",
 		hands="Ignominy Gauntlets +2",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		})
 
 -- Torcleaver - FTP 4.75, 7.5, 10, - VIT 80% -- Light/Distortion
@@ -1052,8 +1090,8 @@ function init_gear_sets()
 		feet="Sulev. Leggings +2",
 		ring1="Neqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Thrud Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Thrud Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Torcleaver'].Acc = set_combine(sets.precast.WS['Torcleaver'], {
@@ -1061,7 +1099,7 @@ function init_gear_sets()
 		head="Ignominy Burgonet +3",
 		feet="Flamma Gambieras +2",
 		hands="Ignominy Gauntlets +2",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		})
 
 -- Scourge - FTP 3.0, - STR 40% VIT 40% -- Light/Fusion
@@ -1080,13 +1118,13 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Karieyh Ring",
 		ring2="Regal Ring",
-		ear1="Thrud Earring",
-		ear2="Moonshade Earring"
+		-- ear1="Thrud Earring",
+		-- ear2="Moonshade Earring"
 		}
 
 	sets.precast.WS['Savage Blade'].Acc = set_combine(sets.precast.WS['Savage Blade'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		head="Ignominy Burgonet +3",
 		legs="Ignominy Flanchard +3",
 		})
@@ -1104,13 +1142,13 @@ function init_gear_sets()
 		feet="Sulevia's Leggings +2",
 		ring1="Niqmaddu Ring",
 		ring2="Regal Ring",
-		ear1="Ishvara Earring",
-		ear2="Moonshade Earring",
+		-- ear1="Ishvara Earring",
+		-- ear2="Moonshade Earring",
 		}
 
 	sets.precast.WS['Judgment'].Acc = set_combine(sets.precast.WS['Cross Reaper'], {
 		ammo="Seething Bomblet +1",
-		ear1="Mache Earring",
+		-- ear1="Mache Earring",
 		head="Ignominy Burgonet +3",
 		legs="Ignominy Flanchard +3",
 		})

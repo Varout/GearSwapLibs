@@ -7,7 +7,7 @@ function init_gear_sets()
     --  JSE Armour
     gear.ArtefactHead  = "Theophany Cap +3"
     gear.ArtefactBody  = "Theophany Bliaut +3"
-    gear.ArtefactHands = "Theophany Mitts +3"
+    gear.ArtefactHands = "Theophany Mitts +4"
     gear.ArtefactLegs  = "Theophany Pantaloons +3"
     gear.ArtefactFeet  = "Theophany Duckbills +3"
 
@@ -15,7 +15,7 @@ function init_gear_sets()
     gear.RelicBody  = "Piety Bliaut +3"
     gear.RelicHands = "Piety Mitts +3"
     gear.RelicLegs  = "Piety Pantaloons +3"
-    gear.RelicFeet  = "Piety Duckbills +3"
+    gear.RelicFeet  = "Piety Duckbills +4"
 
     gear.EmpyreanHead  = "Ebers Cap +3"
     gear.EmpyreanBody  = "Ebers Bliaut +3"
@@ -181,8 +181,13 @@ function init_gear_sets()
     --  --------------------
     --  AF/Relic JA Sets
     --  --------------------
-    sets.precast["Devotion"]    = { head = gear.RelicHead }
-    sets.precast["Benediction"] = { body = gear.RelicBody }
+    sets.precast.JA = {
+        main        = gear.ClubEmpyrean,
+        sub         = "Diamond Aspis",
+    }
+
+    sets.precast.JA["Devotion"]    = set_combine(sets.precast.JA, { head = gear.RelicHead })
+    sets.precast.JA["Benediction"] = set_combine(sets.precast.JA, { body = gear.RelicBody })
 
     --  Total fast cast for this set is: 83%.  Not sure what the cap is.
     --  Extra Spell Interruption Down is: 54%
@@ -251,8 +256,8 @@ function init_gear_sets()
     --  Complete different sets for base cure potency, and set for day/weather match
     --  Calculated in personalised Cure spreadsheet taking into account day/weather
     sets.midcast.Cure = {
-        main        = "Raetic Rod",
-        sub         = "Sors Shield",
+        main        = "Raetic Rod +1",
+        sub         = "Ammurapi Shield",
         ammo        = "Quartz Tathlum +1",
         head        = { name     = "Vanya Hood",
                         augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
@@ -270,9 +275,13 @@ function init_gear_sets()
         back        = gear.AmbuscadeCapeCure,
     }
 
+    --  Use Chatoyant Staff if not lightsday and potency = 2 (i.e. from x2 weather)
+
     sets.midcast.CureBonus = {
-        main        = "Chatoyant Staff",
-        sub         = "Curatio Grip",
+        -- main        = "Chatoyant Staff",
+        -- sub         = "Curatio Grip",
+        main        = "Raetic Rod +1",
+        sub         = "Ammurapi Shield",
         ammo        = "Quartz Tathlum +1",
         head        = { name     = "Vanya Hood",
                         augments = {'Healing magic skill +20','"Cure" spellcasting time -7%','Magic dmg. taken -3',}},
@@ -373,11 +382,14 @@ function init_gear_sets()
     })
 
     sets.midcast['BarElement'] = set_combine(sets.midcast['Enhancing Magic'], {
+        main        = "Beneficus",                      -- Barspells +5 MDB
+        sub         = "Ammurapi Shield",                -- Enhancing magic duration +10%
         head        = gear.EmpyreanHead,                -- Set: Occationally negates damage with correct barpsell
-        body        = gear.EmpyreanBody,                -- Set: Occationally negates damage with correct barpsell
+        body        = gear.EmpyreanBody,                -- Set: Occationally negates damage with correct barpsell, Barspells +18 MDB
         hands       = gear.EmpyreanHands,               -- Set: Occationally negates damage with correct barpsell
-        legs        = gear.RelicLegs,                   -- Barspell +36
+        legs        = gear.RelicLegs,                   -- Barspells +36 Potency
         feet        = gear.EmpyreanFeet,                -- Set: Occationally negates damage with correct barpsell
+        back        = gear.AmbuscadeCapeIdle,           -- Barspells +10 MDB
     })
 
     sets.midcast['BarAilment'] = set_combine(sets.midcast['Enhancing Magic'], {
@@ -499,12 +511,16 @@ function init_gear_sets()
         legs        = { name="Nyame Flanchard", augments={'Path: B',}},
         feet        = { name="Nyame Sollerets", augments={'Path: B',}},
     }
-    sets.precast.WS['Black Halo'] = set_combine(sets.precast.WS, {})    -- WS Quest:    30% STR, 70% MND [Fragmentation / Compression]
-    sets.precast.WS['Dagan'] = set_combine(sets.precast.WS, {})         -- Empyrean WS: Max HP & MP [None]
-    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Best WS:     30% STR & MND [Fusion]
-    sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND [None]
-    sets.precast.WS['Randgrith'] = set_combine(sets.precast.WS, {})     -- Relic WS:    40% STR & MND [Light / Fragmentation]
-    sets.precast.WS['Realmrazer'] = set_combine(sets.precast.WS, {})    -- Aeonic WS:   85% MND [Light / Fusion / Impaction]
+    sets.precast.WS['Black Halo']  = set_combine(sets.precast.WS, {})   -- WS Quest:    30% STR, 70% MND    [Fragmentation / Compression]
+    sets.precast.WS['Dagan']       = set_combine(sets.precast.WS, {})   -- Empyrean WS: Max HP & MP         [None]
+    sets.precast.WS['Hexa Strike'] = set_combine(sets.precast.WS, {})   -- Best WS:     30% STR & MND       [Fusion]
+    sets.precast.WS['Mystic Boon'] = set_combine(sets.precast.WS, {})   -- Mythic WS:   30% STR, 70% MND    [None]
+    sets.precast.WS['Randgrith']   = set_combine(sets.precast.WS, {})   -- Relic WS:    40% STR & MND       [Light / Fragmentation]
+    sets.precast.WS['Realmrazer']  = set_combine(sets.precast.WS, {})   -- Aeonic WS:   85% MND             [Light / Fusion / Impaction]
 
-    sets.town = set_combine(sets.midcast.Cursna['Potency'], sets.movement)
+    sets.town = set_combine(
+        sets.midcast.Cursna['Potency'],
+        sets.precast.JA,
+        sets.movement
+    )
 end

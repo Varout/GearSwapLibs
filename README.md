@@ -60,6 +60,7 @@ Modes
 
 Shortcuts
 - ` Ctrl + C `: Divine Caress
+- ` Windows Key + B `: Benediction
 - ` Windows Key + 1 `: Takes into account recasts and casts the highest available Raise spell on selected target
 - ` Windows Key + 2 `: Takes into account recasts and casts the highest available Reraise spell
 
@@ -117,7 +118,7 @@ Modes
   - Hybrid: About -30% DT on top of refresh set
   - HybridMagEva: Base magic evasion set, but allows for full sublimation set when charging
   - MagicEvasion: Magic Evasion and DT set, does not allow any Sublimation charging gear
-- ` Windows Key + C `: Cycles through Casting Moades
+- ` Windows Key + C `: Cycles through Casting Modes
   - Normal
   - MagicBurst
 
