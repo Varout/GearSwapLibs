@@ -120,7 +120,7 @@ function init_gear_sets()
     gear.EmpyreanBody  = "Skulker's Vest +2"
     gear.EmpyreanHands = "Skulker's Armlets +2"
     gear.EmpyreanLegs  = "Skulker's Culottes +2"
-    gear.EmpyreanFeet  = "Skulker's Poulaines +2"
+    gear.EmpyreanFeet  = "Skulker's Poulaines +3"
 
     gear.EmpyreanEarring = { name="Skulk. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Store TP"+3',}}
     gear.DynamisNeck     = ""
@@ -615,7 +615,7 @@ function init_gear_sets()
         ring2="Epona's Ring",
         back=gear.AmbuscadeCape.StoreTP,
         waist="Sailfi Belt +1",
-        legs="Samnuha Tights",
+        legs=gear.EmpyreanLegs,
         feet={ name="Herculean Boots", augments={'Accuracy+19','"Triple Atk."+4','Attack+4',}},
     }
     sets.engaged.Mid = set_combine(sets.engaged, {
