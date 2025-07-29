@@ -52,6 +52,9 @@ function user_setup()
         LorgMor = true
     end
 
+    --  Special states to track for White Mage
+    state.AutoCancelRefresh = M(false, "Auto-Cancel Refresh")
+
     state.CursnaMode = M{['description'] = 'Cursna Mode'}
     state.ScreenRes  = M{['description'] = 'UI Screen Resolution'}
 
@@ -63,11 +66,13 @@ function user_setup()
         state.ScreenRes:set('off')
     end
 
+    --  Automatically set AutoCancelRefresh to true if Subjob is SCH
+    if player.sub_job == 'SCH' then
+        state.AutoCancelRefresh:set(true)
+    end
+
     --  Which macro book to default to when changing jobs
     select_default_macro_book()
-
-    --  Special states to track for White Mage
-    state.AutoCancelRefresh = M(true, "Auto-Cancel Refresh")
 
 	--Keybinds (! = ALT / @ = WIN / ^ = CTRL)
     send_command('bind @c gs c cycle CursnaMode')               --  Windows Key + C: Cycle Cursna Modes
@@ -81,6 +86,7 @@ function user_setup()
 
     send_command('bind @m input /map')                          --  Windows Key + M: Show map, because I'm lazy af
     send_command('bind ^c input /ja "Divine Caress" <me>')      --  Ctrl + C: Divine Caress
+    send_command('bind @b input /ja "Benediction" <me>')        --  Windows Key + B: For those "oh shit, benediction!" moments
 
     --  UI Box-Related
     ui_box_positions = {
@@ -88,7 +94,7 @@ function user_setup()
         --  Location fits between chat boxes and EquipViewer, giving enough space for PartyBuffs
         ['2460'] = {
             x = 1725,
-            y = 1102
+            y = 1086
         },
         --  FFXI Resolution: 1820 x 920 (Big laptop, Small Desktop)
         --  Location lines up with the right hand side of the text boxes
@@ -132,6 +138,9 @@ function user_unload()
 
     send_command('unbind @m')
     send_command('unbind ^c')
+    send_command('unbind @b')
+
+    gearswap_ui_box:hide()
 end
 
 --  ----------------------------------------------------------------------------------------------------
@@ -156,12 +165,13 @@ function get_ui_text()
 
     output = output .. '           ' .. player.name ..': WHITE MAGE\n\n'
     --  Mode states
-    output = output .. '(Win + x)  | Idle Mode      | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.IdleMode.current) .. '\\cr\n'
-    output = output .. '(Win + c)  | Cursna Mode    | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.CursnaMode.current) .. '\\cr\n'
+    output = output .. '(Win + X)  | Idle Mode      | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.IdleMode.current) .. '\\cr\n'
+    output = output .. '(Win + C)  | Cursna Mode    | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.CursnaMode.current) .. '\\cr\n'
     output = output .. '(Win + `)  | Cancel Refresh | \\cs(0,255,128)' .. capitaliseLeadingLetter(state.AutoCancelRefresh.current) .. '\\cr\n\n'
     --  Shortcut information
     output = output .. 'Shortcuts                                 \n'  --  Stupid long to keep the box from changing size
     output = output .. '(Ctrl + C) | Divine Caress\n'
+    output = output .. '(Win  + B) | Benediction\n'
     output = output .. '(Win  + 1) | Arise/Raise Target\n'
     output = output .. '(Win  + 2) | Reraise'
     --  Debug information here?
@@ -288,7 +298,7 @@ end
 --  AFTERCAST
 --  ----------------------------------------------------------------------------------------------------
 function job_aftercast(spell, action, spellMap, eventArgs)
-    if (spell == "Snenk" or spell == "Invisible") and not spell.interrupted then
+    if (spell == "Sneak" or spell == "Invisible") and not spell.interrupted then
        local tempIdle = customize_idle_set()
        tempIdle = set_combine(tempIdle, sets.movement)
        equip(tempIdle)
