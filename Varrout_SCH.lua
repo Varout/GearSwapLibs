@@ -134,7 +134,7 @@ function init_gear_sets()
         body        = gear.RelicBody,
         waist       = "Embla Sash",
         right_ear   = "Savant's Earring",
-        right_ring  = "Defending Ring",
+        right_ring  = "Murky Ring",
     }
 
     sets.ToAU = {

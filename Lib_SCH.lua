@@ -59,7 +59,7 @@ function user_setup()
     --  Which macro book to default to when changing jobs
     select_default_macro_book()
 
-	--Keybinds (! = ALT / @ = WIN / ^ = CTRL)
+    --Keybinds (! = ALT / @ = WIN / ^ = CTRL)
     send_command('bind @c gs c cycle CastingMode')      --  Windows Key + C: Cycle Casting Modes
     send_command('bind @x gs c cycle IdleMode')         --  Windows Key + X: Cycle Idle Modes
     send_command('bind @z gs c cycle ScreenRes')        --  Windows Key + Z: Cycle ScreenRes Modes - Where to show the UI, or turn it off

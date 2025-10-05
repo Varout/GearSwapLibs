@@ -12,6 +12,18 @@ spell_maps_no_skill_spells = S{
     'Rainstorm', 'Windstorm', 'Hailstorm', 'Thunderstorm',
 }
 
+degrade_array = {
+    ['Regen'] = {'Regen', 'Regen II', 'Regen III', 'Regen IV'},
+    ['Cure']  = {'Cure', 'Cure II', 'Cure III', 'Cure IV', 'Cure V', 'Cure VI'},
+    ['Curaga']  = {'Curaga', 'Curaga II', 'Curaga III', 'Curaga IV', 'Curaga V'},
+    ['Cura'] = {'Cura', 'Cura II', 'Cura III'},
+}
+
+--  Order: Cure, Cure II, Cure III, Cure IV, Cure V, Cure VI
+cure_recast_ids = S{ 1, 2, 3, 4, 5, 6 }
+--  Order: Curaga, Curaga II, Curaga III, Curaga IV, Curaga V
+curaga_recast_ids = S{ 7, 8, 9, 10, 11 }
+
 --  ----------------------------------------------------------------------------------------------------
 -- Initialization function for this job file.
 --  ----------------------------------------------------------------------------------------------------
@@ -52,16 +64,15 @@ function user_setup()
         LorgMor = true
     end
 
+    player_asleep = buffactive['sleep'] or false
+
     --  Special states to track for White Mage
     state.AutoCancelRefresh = M(false, "Auto-Cancel Refresh")
 
-    state.CursnaMode = M{['description'] = 'Cursna Mode'}
-    state.ScreenRes  = M{['description'] = 'UI Screen Resolution'}
-
     --  Default states for automatic gear selection, needs to be defined for Mote-Include to run autonomously
     state.IdleMode:options('Refresh', 'Hybrid', 'MagicEvasion')
-    state.CursnaMode:options('Potency', 'AoE')
-    state.ScreenRes:options('2460', '1820', '1366', 'off')
+    state.CursnaMode = M{['description'] = 'Cursna Mode', 'Potency', 'AoE'}
+    state.ScreenRes  = M{['description'] = 'UI Screen Resolution', '2460', '1820', '1366', 'off'}
     if pocketMode then
         state.ScreenRes:set('off')
     end
@@ -74,7 +85,7 @@ function user_setup()
     --  Which macro book to default to when changing jobs
     select_default_macro_book()
 
-	--Keybinds (! = ALT / @ = WIN / ^ = CTRL)
+    --  Keybinds (! = ALT / @ = WIN / ^ = CTRL)
     send_command('bind @c gs c cycle CursnaMode')               --  Windows Key + C: Cycle Cursna Modes
     send_command('bind @x gs c cycle IdleMode')                 --  Windows Key + X: Cycle Idle Modes
     send_command('bind @z gs c cycle ScreenRes')                --  Windows Key + Z: Cycle ScreenRes Modes - Where to show the UI, or turn it off
@@ -100,20 +111,13 @@ function user_setup()
         --  Location lines up with the right hand side of the text boxes
         ['1820'] = {
             x = 1030,
-            y = 608
-        },
-        --  FFXI Resolution: 1366 x 736 (Small Laptop)
-        --  Location lines up with the right hand side of the text boxes
-        ['1366'] = {
-            x = 803,
-            y = 465
+            y = 595
         },
     }
 
     ui_box_font_sizes = {
         ['1440p'] = 10,
         ['1820'] = 10,
-        ['1366'] = 9
     }
 
     --  Make sure the box transparency doesn't get darker on Subjob change
@@ -125,6 +129,7 @@ function user_setup()
         display_ui()
     end
 end
+
 
 function user_unload()
     send_command('unbind @c')
@@ -152,6 +157,7 @@ function display_ui()
     gearswap_ui_box:show()
 end
 
+
 function reset_ui()
     gearswap_ui_box:hide()
     if state.ScreenRes.current ~= 'off' then
@@ -159,6 +165,7 @@ function reset_ui()
         display_ui()
     end
 end
+
 
 function get_ui_text()
     output = ''
@@ -178,6 +185,7 @@ function get_ui_text()
 
     return output
 end
+
 
 function get_ui_config()
     return {
@@ -217,9 +225,17 @@ end
 --  PRECAST
 --  ----------------------------------------------------------------------------------------------------
 function job_precast(spell, action, spellMap, eventArgs)
+    if (player_asleep) then
+        wake_me_up()
+    else
+        melee_equip_unlock()
+    end
+
     -- check_special_ring_equipped()
     check_debuff_silenced(spell, eventArgs)
     check_weakened_sublimation(spell, eventArgs)
+
+    refine_spell(spell, spellMap, eventArgs)
 
     if spell.name == "Addendum: White" then
         --  No need to waste a strategem on this
@@ -314,6 +330,10 @@ end
 function customize_idle_set()
     local idleSet = sets.idle[state.IdleMode.current]
 
+    if buffactive["Sleep"] then
+        wake_me_up()
+    end
+
     if player.mpp <= 75 then
         idleSet = set_combine(idleSet, sets.latentRefresh75)
     end
@@ -366,11 +386,7 @@ function job_buff_change(buff, gain, eventArgs)
         equip(customize_idle_set())
     elseif buff == "sleep" and LorgMor then  --  The string 'sleep' needs to be completely in lower case
         if gain then
-            equip(sets.slept)
-            melee_equip_lock()
-            if buffactive["Stoneskin"] then
-                windower.ffxi.cancel_buff(37)  --  Cancels stoneskin
-            end
+            wake_me_up()
         else
             melee_equip_unlock()
             equip(customize_idle_set())
@@ -437,9 +453,40 @@ function melee_equip_lock()
     equipment_lock_specific({'main', 'sub',})
 end
 
+
 --  Unlock weapon and sub slots
 function melee_equip_unlock()
     equipment_unlock_specific({'main', 'sub',})
+end
+
+function wake_me_up()
+    --  Wake me up inside!
+    equip(sets.slept)
+    melee_equip_lock()
+    if buffactive["Stoneskin"] then
+        windower.ffxi.cancel_buff(37)  --  Cancels stoneskin
+    end
+end
+
+
+function refine_spell(spell, spellMap, eventArgs)
+    local newSpell = spell.english
+    local spell_recasts = windower.ffxi.get_spell_recasts()
+
+    if spell.recast_id == 5 and spell_recasts[5] > 0 and spell_recasts[6] == 0 then
+        --  If the spell is Cure V and it is on cooldown, and Cure VI has no cooldown, go to Cure VI
+        newSpell = degrade_array[spellMap][6]
+        send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+        eventArgs.cancel = true
+    elseif degrade_array[spellMap] and spell_recasts[spell.recast_id] > 0 then
+        --  Otherwise follow normal rules
+        spell_index = table.find(degrade_array[spellMap], spell.name)
+        if spell_index > 1 then
+            newSpell = degrade_array[spellMap][spell_index - 1]
+            send_command('@input /ma '..newSpell..' '..tostring(spell.target.raw))
+            eventArgs.cancel = true
+        end
+    end
 end
 
 --  ----------------------------------------------------------------------------------------------------

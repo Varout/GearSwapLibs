@@ -114,7 +114,7 @@ function init_gear_sets()
     sets.idle['Hybrid'] = set_combine(sets.idle.Refresh, {
         legs        = gear.EmpyreanLegs,        --  -13% DT
         feet        = gear.EmpyreanFeet,        --  -11% DT
-        right_ring  = "Defending Ring",         --  -10% DT
+        right_ring  = "Murky Ring",         --  -10% DT
     })
 
     --  Damage Taken & Magic Evasion Set
@@ -138,7 +138,7 @@ function init_gear_sets()
         feet        = gear.EmpyreanFeet,        --  -11% DT
         neck        = "Warder's Charm +1",      --  +20 Resist: Stone, Water, Fire, Aero, Blizard, Thunder
         waist       = "Null Belt",
-        left_ear    = "Etiolation Earring",     --  +15 Resist Silence
+        left_ear    = "Hearty Earring",         --  +05% Resistance to all status ailments
         right_ear   = gear.EmpyreanEarring,     --  -05% DT
         left_ring   = "Gurebu's Ring",          --  +20 Ailment Resist
         right_ring  = "Shadow Ring",

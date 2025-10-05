@@ -7,6 +7,10 @@ polearm_ws = {
     ['Shining One'] = 'Impulse Drive'
 }
 
+polearm_ws_no_go = {
+    ['Stardiver'] = S{'Ghatjot', 'Dhartok'} --  The bain of my Sortie experience while on DRG
+}
+
 --  ----------------------------------------------------------------------------------------------------
 -- Initialization function for this job file.
 --  ----------------------------------------------------------------------------------------------------
@@ -44,6 +48,7 @@ function user_setup()
     --  Which macro book to default to when changing jobs
     select_default_macro_book()
 
+    --  Keybinds (! = ALT / @ = WIN / ^ = CTRL)
     send_command('bind ^f9 gs c cycle IdleMode')
     send_command('bind ^f10 gs c cycle OffenseMode')
     send_command('bind ^f11 gs c cycle WeaponskillMode')
@@ -123,14 +128,20 @@ function get_ui_config()
     }
 end
 
-function init_gear_sets()
-    include('Varrout_DRG_GearSets.lua')
-end
 
 --  ----------------------------------------------------------------------------------------------------
 --  PRECAST
 --  ----------------------------------------------------------------------------------------------------
 function job_precast(spell, action, spellMap, eventArgs)
+    --  Make sure not to use specific weapon skills on certain mobs due to their ws properties
+    local target = windower.ffxi.get_mob_by_target('t')
+    local target_name = target and target.valid_target and target.name or ''
+    if polearm_ws_no_go[spell.english] and polearm_ws_no_go[spell.english]:contains(target_name) then
+        cancel_spell()
+        eventArgs.cancel = true
+        return
+    end
+
     -- check_special_ring_equipped()
     check_debuff_silenced(spell, eventArgs)
 

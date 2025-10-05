@@ -1,17 +1,17 @@
 --  ----------------------------------------------------------------------------------------------------
 --   Job Specific Armour
 --  ----------------------------------------------------------------------------------------------------
-gear.ArtefactHead  = "Laksamana's Tricorne +3"
-gear.ArtefactBody  = "Laksamana's Frac +3"
-gear.ArtefactHands = "Laksamana's Gants +3"
-gear.ArtefactLegs  = "Laksamana's Trews +3"
-gear.ArtefactFeet  = "Laksamana's Bottes +3"
+gear.ArtefactHead  = "Laksamana's Tricorne +4"
+gear.ArtefactBody  = "Laksamana's Frac +4"
+gear.ArtefactHands = "Laksamana's Gants +4"
+gear.ArtefactLegs  = "Laksamana's Trews +4"
+gear.ArtefactFeet  = "Laksamana's Bottes +4"
 
-gear.RelicHead  = "Lanun Tricorne +3"
+gear.RelicHead  = "Lanun Tricorne +4"
 gear.RelicBody  = "Lanun Frac +3"
-gear.RelicHands = "Lanun Gants +3"
+gear.RelicHands = "Lanun Gants +4"
 gear.RelicLegs  = "Lanun Trews +3"
-gear.RelicFeet  = "Lanun Bottes +3"
+gear.RelicFeet  = "Lanun Bottes +4"
 
 gear.EmpyreanHead  = "Chasseur's Tricorne +3"
 gear.EmpyreanBody  = "Chasseur's Frac +3"
@@ -23,19 +23,22 @@ gear.EmpyreanEarring = "Chasseur's Earring +1"
 gear.DynamisNeck     = "Commodore Charm +2"
 
 --  REMA Weapons
-gear.WeaponMythic   = "Death Penalty"   -- Not yet
-gear.WeaponEmpyrean = "Armageddon"      -- Not completed
+gear.WeaponMythic   = "Death Penalty"   -- Not Completed
+gear.WeaponEmpyrean = "Armageddon"
 gear.WeaponAeonic   = "Fomalhaut"
 gear.WeaponPrime    = "Earp"            -- Not yet
+
 --  Other Weapons
 gear.WeaponTPBonus  = { name = "Ataktos",     augments = {'Delay:+60','TP Bonus +1000',}}
 gear.WeaponPhantom  = { name = "Compensator", augments = {'DMG:+15','Rng.Atk.+15','"Mag.Atk.Bns."+15',}}    -- Phantom Roll Duration +20
 
 --  Special Ammo
-gear.BulletMA = "Devastating Bullet"
-gear.BulletQD = "Animikii Bullet"
-gear.BulletRA = "Chrono Bullet"
-gear.BulletWS = "Chrono Bullet"
+gear.BulletRA       = "Chrono Bullet"
+gear.BulletWSAttack = "Chrono Bullet"
+gear.BulletWSMagic  = "Devastating Bullet"
+gear.BulletQDAcc    = "Devastating Bullet"
+gear.BulletQDAtt    = "Animikii Bullet"
+gear.DoNotShoot     = S{"Animikii Bullet", "Hauksbok Bullet"}
 
 --  Ambuscade Back Pieces
 gear.AmbuscadeMeleeAcc      = { name     = "Camulus's Mantle",
@@ -52,6 +55,10 @@ gear.AmbuscadeMagicAcc      = gear.AmbuscadeRangedAcc   --  No magic acc yet, ne
 gear.AmbuscadeFC            = { name     = "Camulus's Mantle",
                                 augments = {'VIT+20','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','"Fast Cast"+10','Damage taken-5%',}}
 gear.AmbuscadeDT            = gear.AmbuscadeFC
+
+--  Other Capes
+gear.GunslingerCape         = { name     = "Gunslinger's Cape",
+                                augments = {'Enmity-3','"Mag.Atk.Bns."+1','"Phantom Roll" ability delay -5','Weapon skill damage +1%',}}
 
 --  Herc Legs
 gear.HerculeanLegs = {}
@@ -80,8 +87,6 @@ gear.GorgetAll  = { neck = "Fotia Gorget" }
 --  ----------------------------------------------------------------------------------------------------
 --   Idle Sets
 --  ----------------------------------------------------------------------------------------------------
-sets.resting = {}
-
 -- Idle sets
 sets.idle = {
     ammo        =  gear.RAbullet,
@@ -94,7 +99,7 @@ sets.idle = {
     waist       = "Platinum Moogle Belt",
     left_ear    = "Infused Earring",
     right_ear   = "Odnowa Earring +1",
-    left_ring   = "Defending Ring",
+    left_ring   = "Murky Ring",
     right_ring  = "Sheltered Ring",
     back        = gear.AmbuscadeDT,
 }
@@ -104,6 +109,30 @@ sets.idle.refresh = set_combine(sets.idle, {
     legs        = { name     = "Rawhide Trousers",
                     augments = {'MP+50','"Fast Cast"+5','"Refresh"+1',}},
 })
+
+sets.idle = {}
+sets.idle['Normal'] = {
+    ammo        =  gear.RAbullet,
+    head        = "Malignance Chapeau",
+    body        = "Malignance Tabard",
+    hands       = "Malignance Gloves",
+    legs        = "Malignance Tights",
+    feet        = "Malignance Boots",
+    neck        = "Elite Royal Collar",
+    waist       = "Platinum Moogle Belt",
+    left_ear    = "Infused Earring",
+    right_ear   = "Odnowa Earring +1",
+    left_ring   = "Murky Ring",
+    right_ring  = "Sheltered Ring",
+    back        = gear.AmbuscadeDT,
+}
+sets.idle['Refresh']  = set_combine(sets.idle['Normal'],{
+    head        = "Rawhide Mask",
+    legs        = { name     = "Rawhide Trousers",
+                    augments = {'MP+50','"Fast Cast"+5','"Refresh"+1',}},
+})
+sets.idle['Hybrid']   = {}
+sets.idle['MagicEva'] = {}
 
 
 --  ----------------------------------------------------------------------------------------------------
@@ -142,7 +171,7 @@ sets.engaged = {
 --     left_ear    = "Cessance Earring",
 --     right_ear   = { name     = "Odnowa Earring +1",
 --                     augments = {'Path: A',}},
---     left_ring   = "Defending Ring",
+--     left_ring   = "Murky Ring",
 --     right_ring  = "Epona's Ring",
 --     back        = gear.AmbuscadeMeleeAcc,
 -- }
@@ -186,11 +215,109 @@ sets.engaged = {
 sets.precast = {}
 
 sets.precast.JA = {}
-sets.precast.JA['Random Deal'] = { body  = gear.RelicBody}
-sets.precast.JA['Snake Eye']   = { legs  = gear.RelicLegs}
-sets.precast.JA['Triple Shot'] = { body  = gear.EmpyreanBody}
-sets.precast.JA['Wild Card']   = { feet  = gear.RelicFeet}
-sets.precast.FoldDoubleBust    = { hands = gear.RelicHands}
+sets.precast.JA['Random Deal'] = { body  = gear.RelicBody }
+sets.precast.JA['Snake Eye']   = { legs  = gear.RelicLegs }
+sets.precast.JA['Triple Shot'] = { body  = gear.EmpyreanBody }
+sets.precast.JA['Wild Card']   = { feet  = gear.RelicFeet }
+sets.precast.FoldDoubleBust    = { hands = gear.RelicHands }
+
+sets.precast.CorsairRoll.Base = {
+    legs={ name="Desultor Tassets", augments={'"Phantom Roll" ability delay -5','"Waltz" TP cost -5',}},
+    left_ring="Luzaf's Ring",
+    back=gear.GunslingerCape,
+}
+sets.precast.CorsairRoll = set_combine(sets.precast.CorsairRoll.Base, {
+    head=gear.RelicHead,-- Duration +50
+    hands=gear.EmpyreanHands,-- Duration +55
+    legs={ name="Desultor Tassets", augments={'"Phantom Roll" ability delay -5','"Waltz" TP cost -5',}},
+    neck="Regal Necklace",
+    left_ring="Luzaf's Ring",
+    back=gear.AmbuscadeDT,
+})
+
+-- sets.precast.CorsairRoll = {
+--     head        = gear.RelicHead,           -- Duration +50
+--     body        = gear.EmpyreanBody,
+--     hands       = gear.EmpyreanHands,       -- Duration +55
+--     legs        = { name     = "Desultor Tassets",
+--                     augments = {'"Phantom Roll" ability delay -5','"Waltz" TP cost -5',}},
+--     feet        = "Malignance Boots",
+--     neck        = "Elite Royal Collar",
+--     waist       = "Plat. Mog. Belt",
+--     left_ear    = { name     = "Odnowa Earring +1",
+--                     augments = {'Path: A',}},
+--     right_ear   = gear.EmpyreanEarring,
+--     left_ring   = "Barataria Ring",         -- Phantom Roll effect +5
+--     right_ring  = "Luzaf's Ring",           -- AoE Radius Increase
+--     back        = { name     = "Gunslinger's Cape",
+--                     augments = {'Enmity-3','"Mag.Atk.Bns."+1','"Phantom Roll" ability delay -5','Weapon skill damage +1%',}},
+-- }
+
+sets.precast["Allies' Roll"]     = set_combine(sets.precast.CorsairRoll, { hand = gear.EmpyreanHands})
+sets.precast["Blitzer's Roll"]   = set_combine(sets.precast.CorsairRoll, { head = gear.EmpyreanHead})
+sets.precast["Caster's Roll"]    = set_combine(sets.precast.CorsairRoll, { legs = gear.EmpyreanLegs})
+sets.precast["Courser's Roll"]   = set_combine(sets.precast.CorsairRoll, { feet = gear.EmpyreanFeet})
+sets.precast["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, { body = gear.EmpyreanBody})
+sets.precast["Bolter's Roll"]    = sets.precast.CorsairRoll.Base
+
+--  Quickdraw
+sets.precast.CorsairShot = {
+    -- ammo        = gear.BulletMA,
+    -- head        = gear.ArtefactHead,
+    -- body        = gear.RelicBody,
+    -- hands       = gear.EmpyreanHands,
+    -- legs        = gear.EmpyreanLegs,
+    -- feet        = gear.EmpyreanFeet,
+    -- neck        = gear.DynamisNeck,
+    -- waist       = "Eschan Stone",
+    -- left_ear    = "Friomisi Earring",
+    -- right_ear   = gear.EmpyreanEarring,
+    -- left_ring   = "Dingir Ring",
+    -- right_ring  = "Adoulin Ring",
+    -- back        = gear.AmbuscadeMagicAcc,
+}
+
+sets.precast.CorsairShot["Accuracy"] = {
+    ammo=gear.BulletQDAcc
+    head=gear.ArtefactHead,
+    body="Malignance Tabard",   --  Ikenga's
+    hands=gear.ArtefactHands,
+    legs="Malignance Tights",
+    feet=gear.ArtefactFeet,
+    neck=gear.DynamisNeck,
+    waist="Kwahu Kachina Belt",
+    left_ear="Dedition Earring", -- Crespecular Earring
+    right_ear=gear.EmpyreanEarring,
+    left_ring="Mummu Ring",
+    right_ring="Stikini Ring",
+    back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}},
+}
+
+--  Nyame Path C
+sets.precast.CorsairShot["Damage"] = {
+    ammo=gear.BulletQDAtt,
+    head="Nyame Helm",  -- Ikenga
+    body=gear.RelicBody,
+    hands="Nyame Gauntlets",    --  Carmine Finger Gauntlets +1
+    legs="Nyame Flanchard",
+    feet=gear.RelicFeet,
+    neck=gear.DynamisNeck,
+    waist="Eschan Stone",   --  Skrymir Cord +1
+    left_ear="Friomisi Earring",
+    right_ear="Hecate's Earring",   --  Crematio Earring
+    left_ring="Dingir Ring",
+    right_ring="Adoulin Ring", --  Fenrir Ring +1 (maybe a new limbus ring?)
+    back={ name="Camulus's Mantle", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%',}}, --   AGI, Magic Acc, MAB
+
+}
+
+sets.precast.CorsairShot["Light Shot"] = set_combine(sets.precast.CorsairShot, {
+    body        = gear.EmpyreanBody,
+    left_ear    = "Beyla Earring",
+    left_ring   = "Mummu Ring",
+})
+
+sets.precast.CorsairShot["Dark Shot"] = sets.precast.CorsairShot["Light Shot"]
 
 sets.precast.RA = {
     ammo        = gear.BulletRA,
@@ -207,56 +334,6 @@ sets.precast.RA = {
     right_ring  = "Ephramad's Ring",
     back        = gear.AmbuscadeRangedAcc,
 }
-sets.precast.RA.Acc = sets.precast.RA
-
-sets.precast.CorsairRoll = {
-    head        = gear.RelicHead,           -- Duration +50
-    body        = gear.EmpyreanBody,
-    hands       = gear.EmpyreanHands,       -- Duration +55
-    legs        = { name     = "Desultor Tassets",
-                    augments = {'"Phantom Roll" ability delay -5','"Waltz" TP cost -5',}},
-    feet        = "Malignance Boots",
-    neck        = "Elite Royal Collar",
-    waist       = "Plat. Mog. Belt",
-    left_ear    = { name     = "Odnowa Earring +1",
-                    augments = {'Path: A',}},
-    right_ear   = gear.EmpyreanEarring,
-    left_ring   = "Barataria Ring",         -- Phantom Roll effect +5
-    right_ring  = "Luzaf's Ring",           -- AoE Radius Increase
-    back        = { name     = "Gunslinger's Cape",
-                    augments = {'Enmity-3','"Mag.Atk.Bns."+1','"Phantom Roll" ability delay -5','Weapon skill damage +1%',}},
-}
-
-sets.precast["Allies' Roll"]     = set_combine(sets.precast.CorsairRoll, { hand = gear.EmpyreanHands})
-sets.precast["Blitzer's Roll"]   = set_combine(sets.precast.CorsairRoll, { head = gear.EmpyreanHead})
-sets.precast["Caster's Roll"]    = set_combine(sets.precast.CorsairRoll, { legs = gear.EmpyreanLegs})
-sets.precast["Courser's Roll"]   = set_combine(sets.precast.CorsairRoll, { feet = gear.EmpyreanFeet})
-sets.precast["Tactician's Roll"] = set_combine(sets.precast.CorsairRoll, { body = gear.EmpyreanBody})
-
---  Quickdraw
-sets.precast.CorsairShot = {
-    ammo        = gear.BulletMA,
-    head        = gear.ArtefactHead,
-    body        = gear.RelicBody,
-    hands       = gear.EmpyreanHands,
-    legs        = gear.EmpyreanLegs,
-    feet        = gear.EmpyreanFeet,
-    neck        = gear.DynamisNeck,
-    waist       = "Eschan Stone",
-    left_ear    = "Friomisi Earring",
-    right_ear   = gear.EmpyreanEarring,
-    left_ring   = "Dingir Ring",
-    right_ring  = "Adoulin Ring",
-    back        = gear.AmbuscadeMagicAcc,
-}
-
-sets.precast.CorsairShot["Light Shot"] = set_combine(sets.precast.CorsairShot, {
-    body        = gear.EmpyreanBody,
-    left_ear    = "Beyla Earring",
-    left_ring   = "Mummu Ring",
-})
-
-sets.precast.CorsairShot["Dark Shot"] = sets.precast.CorsairShot["Light Shot"]
 
 sets.precast.FC = {
     head        = { name     = "Herculean Helm",
@@ -272,7 +349,7 @@ sets.precast.FC = {
                     augments = {'Path: A',}},
     left_ear    = "Infused Earring",
     right_ear   = "Loquac. Earring",
-    left_ring   = "Defending Ring",
+    left_ring   = "Murky Ring",
     right_ring  = "Kishar Ring",
     back        = gear.AmbuscadeFC,
 }
@@ -290,7 +367,7 @@ sets.precast.Waltz = {
     left_ear    = { name     = "Odnowa Earring +1",
                     augments = {'Path: A',}},
     right_ear   = "Tuisto Earring",
-    left_ring   = "Defending Ring",
+    left_ring   = "Murky Ring",
     right_ring  = "Petrov Ring",
     back        = gear.AmbuscadeFC,
 }
@@ -409,7 +486,7 @@ sets.defense.PDT = {
     left_ear    = "Infused Earring",                -- 0/0, Regen +1
     right_ear   = { name     = "Odnowa Earring +1", -- 3/5
                     augments = {'Path: A',}},
-    left_ring   = "Defending Ring",                 -- 10/10
+    left_ring   = "Murky Ring",                 -- 10/10
     right_ring  = "Sheltered Ring",                 -- 0/0, Regen +1
     back        = gear.AmbuscadeDT,                 -- 5/5
 }
