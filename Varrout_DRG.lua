@@ -7,11 +7,11 @@ function init_gear_sets()
     --  ----------------------------------------------------------------------------------------------------
     --   Job Specific Armour
     --  ----------------------------------------------------------------------------------------------------
-    gear.ArtefactHead      = "Vishap Armet +2"
-    gear.ArtefactBody      = "Vishap Mail +2"
+    gear.ArtefactHead      = "Vishap Armet +4"
+    gear.ArtefactBody      = "Vishap Mail +3"
     gear.ArtefactHands     = "Vishap Finger Gauntlets +3"
     gear.ArtefactLegs      = "Vishap Brais +4"
-    gear.ArtefactFeet      = "Vishap Greaves +2"
+    gear.ArtefactFeet      = "Vishap Greaves +3"
 
     gear.RelicHead         = "Pteroslaver Armet +3"
     gear.RelicBody         = "Pteroslaver Mail +3"
@@ -99,7 +99,7 @@ function init_gear_sets()
         left_ear    = { name="Odnowa Earring +1", augments={'Path: A',}},
         right_ear   = { name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
         left_ring   = "Gurebu's Ring",
-        right_ring  = "Defending Ring",
+        right_ring  = "Murky Ring",
         back        = gear.AmbuscadeCapeDT,
     }
 
@@ -115,7 +115,7 @@ function init_gear_sets()
         left_ear    = { name="Odnowa Earring +1", augments={'Path: A',}},
         right_ear   = { name="Pel. Earring +1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','Crit.hit rate+4',}},
         left_ring   = "Gurebu's Ring",
-        right_ring  = "Defending Ring",
+        right_ring  = "Murky Ring",
         back        = gear.AmbuscadeCapeDT,
     }
 
@@ -452,7 +452,7 @@ function init_gear_sets()
         left_ear    = "Loquac. Earring",
         right_ear   = "Etiolation Earring",
         left_ring   = "Evanescence Ring",
-        right_ring  = "Defending Ring",
+        right_ring  = "Murky Ring",
         back        = gear.AmbuscadeCapeFC,
     }
 
@@ -489,7 +489,7 @@ function init_gear_sets()
         waist       = "Glassblower's Belt",
         left_ear    = "Dragoon's Earring",
         right_ear   = gear.EmpyreanEarring,
-        left_ring   = "Defending Ring",
+        left_ring   = "Murky Ring",
         right_ring  = "Dreki Ring",
         back        = { name     = "Updraft Mantle",
                         augments = {'STR+4','Pet: Breath+10','Pet: Damage taken -2%','Weapon skill damage +2%',}},
@@ -510,7 +510,7 @@ function init_gear_sets()
         waist       = "Glassblower's Belt",
         left_ear    = "Infused Earring",
         right_ear   = "Dragoon's Earring",
-        left_ring   = "Defending Ring",
+        left_ring   = "Murky Ring",
         right_ring  = "Dreki Ring",
         back        = gear.AmbuscadeCapeWS,
     }
