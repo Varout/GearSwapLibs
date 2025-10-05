@@ -44,7 +44,7 @@ function user_setup()
     --  Special states to track for White Mage
     state.AutoCancelRefresh = M(true, "Auto-Cancel Refresh Mode")
 
-	--Keybinds (! = ALT / @ = WIN / ^ = CTRL)
+    --Keybinds (! = ALT / @ = WIN / ^ = CTRL)
     send_command('bind @c gs c cycle CursnaMode')               --  Windows Key + C: Cycle Cursna Modes
     send_command('bind @x gs c cycle IdleMode')                 --  Windows Key + X: Cycle Idle Modes
 
